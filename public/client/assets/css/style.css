@@ -99,6 +99,8 @@ html {
 }
 
 .footer-info {
+    margin-top: 18px;
+    margin-left: 10px;
     color: rgba(19, 19, 19, 0.6);
 }
 
