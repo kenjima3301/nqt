@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('index');
+Route::get('/ve-nqt', [HomeController::class, 'nqt'])->name('nqt');
 
 Route::get('/login', [Usercontroller::class, 'login']);
 Route::post('/login', [Usercontroller::class, 'validate_login']);

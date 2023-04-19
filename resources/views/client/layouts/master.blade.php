@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('client/assets/img/logo.png') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('client/assets/img/icon.png') }}"/>
     <link rel="stylesheet" href="{{ asset('client/assets/fonts/font-awesome-6-pro-main/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap-4.6.2-dist 2/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/nqt.css') }}">
 </head>
 <body>
     <div class="wrapper">
