@@ -125,7 +125,7 @@ class Admincontroller extends Controller
   }
   
   public function trucktyres() {
-    $tyres = Tyre::where('model_id', 1)->get();
+    $tyres = Tyre::where('model_id', 1)->orderBy("id", "desc")->get();
     return view('admin.trucktyres.index', ['tyres' => $tyres]);
   }
   

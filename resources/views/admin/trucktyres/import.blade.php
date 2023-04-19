@@ -7,8 +7,10 @@
         <div class="col-lg-7">
           <div class="card bg-gradient-white">
             <div class="row">
-              <img class="col-2 w-15 mt-n7 mt-lg-n8 d-none d-md-block mx-auto z-index-1" src="{{asset($tyre->images[0]->image)}}" alt="car image">
-              <h4 class="col-10 opacity-9 text-start text-dark">{{$tyre->name}}</h4>
+              @foreach ($tyre->images as $image)
+              <img class="col-1 w-15 mt-n7 mt-lg-n8 d-none d-md-block mx-auto z-index-1" src="{{asset($image->image)}}" alt="car image">
+              @endforeach
+              <h4 class="col-{{10 - count($tyre->images)}} opacity-9 text-start text-dark">{{$tyre->name}}</h4>
             </div>
             <div class="card-body px-5 z-index-1 bg-cover overflow-hidden pb-2">
               <div class="row">
@@ -124,6 +126,9 @@
         <tr>
           <td class='p-0'>
             @foreach ($dimention->madeins as $country) 
+            @if(count($dimention->madeins) ==1 && $country->country->name == 'Thailand')
+              &nbsp;&nbsp;
+            @endif
             <img src="{{asset($country->country->flag)}}" width='10'>
             @endforeach
           </td>
