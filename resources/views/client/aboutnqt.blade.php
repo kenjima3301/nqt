@@ -1,6 +1,7 @@
 @extends ('client.layouts.master')
 @section('title', 'NQT - Trang chủ')
 @section('content')
+ <section id="hero">
 <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
@@ -352,6 +353,8 @@
         </div>
 
       </div>
+      </section><!-- End Contact Section -->
+  </main><!-- End #main -->
   <script src="https://bootstrapmade.com/assets/js/demo.js?v=5.0"></script>
   <script src="https://bootstrapmade.com/assets/vendor/aos/aos.js"></script>
   <script src="https://bootstrapmade.com/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
