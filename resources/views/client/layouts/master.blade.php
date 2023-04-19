@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title')</title>
+
+    <link rel="icon" type="image/png" href="{{ asset('client/assets/img/logo.png') }}"/>
+    <link rel="stylesheet" href="{{ asset('client/assets/fonts/font-awesome-6-pro-main/css/all.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap-4.6.2-dist 2/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- header -->
+        @include('client.layouts.header')
+        <!-- end header  -->
+        
+        <div class="main-content">
+            @yield('content')
+        </div>
+
+        @include('client.layouts.footer')
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('client/assets/js/bootstrap.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+</body>
+</html>

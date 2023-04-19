@@ -1,0 +1,109 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 1200px) {
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+      max-width: 1440px;
+    }
+  }
+
+.text-color {
+    color: #90A3BF;
+}
+
+.header-site {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 177px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    display: inline-block;
+    line-height: 177px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    height: 44px;
+    font-size: 1rem;
+    color: #fff;
+    line-height: 44px;
+    padding: 0px 20px;
+    margin: 0px 10px;
+    border-radius: 5px;
+    background-color: #35A25B;
+}
+
+/* search */
+
+.has-search .form-control {
+    width: 500px;
+    height: 44px;
+    padding-left: 2.375rem;
+    font-size: 14px;
+    border: 1px solid #35A25B;
+    border-radius: 70px;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.8rem;
+    text-align: center;
+    pointer-events: none;
+    color: #35A25B;
+    font-size: 14px;
+}
+
+.main-content {
+    margin-top: 177px;
+    background-color: #F6F7F9;
+}
+
+.slider img{
+    width: 100%;
+    height: auto;
+    margin: 32px 0px;
+}
+
+.product {
+    background-color: #fff;
+}
+
+.card-text {
+    font-size: 14px;
+    color: #90A3BF;
+}
+
+.sub-desc .col-lg-4 {
+    padding-right: 0;
+    color: #90A3BF;
+    font-size: 14px;
+}
+
+.menu-footer li a {
+    color: rgba(19, 19, 19, 0.6);
+    padding: 0.5rem 0rem;
+}
+
+.menu-footer li a:hover {
+    color: #35A25B;
+}
+
+.footer-info {
+    color: rgba(19, 19, 19, 0.6);
+}
+
+.footer-info i {
+    color: #35A25B;
+}
+
+
