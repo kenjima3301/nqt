@@ -8,6 +8,10 @@ html {
     }
   }
 
+.wrapper {
+    background-color: #F6F7F9;
+}
+
 .text-color {
     color: #90A3BF;
 }
