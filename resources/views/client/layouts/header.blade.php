@@ -36,7 +36,10 @@
                 <div class="row mt-4">
                     <div class="form-group has-search offset-lg-2">
                         <span class="form-control-feedback"><i class="fa-light fa-magnifying-glass"></i></span>
-                        <input type="text" class="form-control" placeholder="Tìm kiếm mã gai hoặc size lốp">
+                        <form method="POST" action="{{url('tim-lop-xe')}}" enctype="multipart/form-data">
+                          @csrf
+                        <input type="text" name="search" class="form-control" placeholder="Tìm kiếm mã gai hoặc size lốp">
+                        </form>
                     </div>
                 </div>
             </div>
