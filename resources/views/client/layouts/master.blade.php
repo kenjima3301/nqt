@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap-4.6.2-dist 2/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/nqt.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/trazano.css') }}">
 </head>
 <body>
     <div class="wrapper">
