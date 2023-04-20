@@ -29,7 +29,7 @@
         <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
             <ul class="list-group pull-down scrollbar" id="contact-list">
               @foreach ($dealers as $key => $dealer)
-                <li class="list-group-item {{ $key % 2 == 0 ? "bg-light" : ""}}" id="{{$key}}">
+                <li class="list-group-item" id="{{$key}}">
                     <div class="row w-100">
                         <div class="col-12 col-sm-6 col-md-3 px-0">
                             <img src="{{asset($dealer->image)}}" alt="Mike Anamendolla" class="mx-auto d-block img-fluid mw-20">
@@ -182,9 +182,20 @@ function initMap() {
                 infowindow.open(map, marker);
                 //map.setZoom(9);
                 //map.setCenter(marker.getPosition());	
+                hightlightdealer(i);
             }
         })(marker, i));
+        
+        google.maps.event.addListener(marker, 'mouseout', (function (marker, i) {
 
+            return function () {
+                infowindow.close(map, marker);
+                //map.setZoom(9);
+                //map.setCenter(marker.getPosition());	
+                removehightlightdealer(i);
+            }
+        })(marker, i));
+        
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
 
             return function () {
@@ -192,6 +203,7 @@ function initMap() {
                 infowindow.open(map, marker);
                 map.setZoom(11);
                 map.setCenter(marker.getPosition());
+//                hightlightdealer(i);
             }
         })(marker, i));
 
@@ -221,6 +233,13 @@ function autoCenter() {
     map.fitBounds(bounds);
 }
 
+function hightlightdealer(id){
+  $( "#contact-list #"+id ).css("background-color","#35A25B");
+}
+
+function removehightlightdealer(id){
+  $( "#contact-list #"+id ).css("background-color","");
+}
 </script>
 <script>
     $('#selectprovince').bind('change', function () { // bind change event to select
