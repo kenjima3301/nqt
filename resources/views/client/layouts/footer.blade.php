@@ -15,7 +15,7 @@
             <div class="menu-footer col-lg-4 col-md-6">
                 <h5>About</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="nav-link">Về Ngọc Quyết Thắng</a></li>
+                    <li><a href="{{url('/ve-nqt')}}" class="nav-link">Về Ngọc Quyết Thắng</a></li>
                     <li><a href="#" class="nav-link">Hợp tác với chúng tôi</a></li>
                 </ul>
             </div>

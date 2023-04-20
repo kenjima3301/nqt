@@ -15,13 +15,13 @@
                                 <a class="nav-link" href="#">Sản phẩm <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Dịch vụ</a>
+                                <a class="nav-link" href="{{url('/dich-vu')}}">Dịch vụ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tìm đại lý</a>
+                                <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Trazano</a>
+                                <a class="nav-link" href="{{url('/ve-trazano')}}">Trazano</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Thông tin</a>

@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Lốp xe tải</h5>
+              <h5 class="mb-0">Lốp xe tải ({{count($tyres)}})</h5>
             </div>
             <div class="col-12 text-end">
               <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/lop-xe-tai-add')}}"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Thêm Lốp xe tải</a>

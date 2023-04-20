@@ -21,6 +21,10 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('index');
 Route::get('/list-product', [HomeController::class, 'listProduct'])->name('list-product');
+Route::get('/ve-nqt', [HomeController::class, 'nqt'])->name('nqt');
+Route::get('/tim-dai-ly', [HomeController::class, 'finddealer'])->name('finddealer');
+Route::get('/dich-vu', [HomeController::class, 'services'])->name('services');
+Route::get('/ve-trazano', [HomeController::class, 'trazano'])->name('trazano');
 
 Route::get('/login', [Usercontroller::class, 'login']);
 Route::post('/login', [Usercontroller::class, 'validate_login']);
