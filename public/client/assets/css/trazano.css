@@ -472,7 +472,7 @@ section {
   margin: 0 auto;
   width: 64px;
   height: 64px;
-  background: #1977cc;
+  background: #35A25B;
   border-radius: 5px;
   transition: all 0.3s ease-out 0s;
   display: flex;
@@ -517,8 +517,8 @@ section {
 }
 
 .services .icon-box:hover {
-  background: #1977cc;
-  border-color: #1977cc;
+  background: #35A25B;
+  border-color: #35A25B;
 }
 
 .services .icon-box:hover .icon {
