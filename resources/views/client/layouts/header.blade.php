@@ -11,16 +11,16 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item active">
+                            <li class="nav-item  {{ Request::path() == 'san-pham' ? 'active' : ''}}">
                                 <a class="nav-link" href="#">Sản phẩm <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item  {{ Request::path() == 'dich-vu' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/dich-vu')}}">Dịch vụ</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item  {{ Request::path() == 'tim-dai-ly' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item  {{ Request::path() == 've-trazano' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/ve-trazano')}}">Trazano</a>
                             </li>
                             <li class="nav-item">

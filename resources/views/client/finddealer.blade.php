@@ -10,26 +10,26 @@
         <div class="row col-12 m-0">
           <div class="col-6 p-0 pr-1 mt-2">
                 <select id="selectarea" class="form-control">
-                  <option @if($dealers[0]->area == 'Miền Bắc') selected @endif >Miền Bắc</option>
-                  <option @if($dealers[0]->area == 'Miền Trung') selected @endif >Miền Trung</option>
-                  <option @if($dealers[0]->area == 'Miền Nam') selected @endif >Miền Nam</option>
+                  <option value="{{strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', "Miền Bắc")))}}" @if($dealers[0]->area == 'Miền Bắc') selected @endif >Miền Bắc</option>
+                  <option value="{{strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', "Miền Trung")))}}" @if($dealers[0]->area == 'Miền Trung') selected @endif >Miền Trung</option>
+                  <option value="{{strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', "Miền Nam")))}}" @if($dealers[0]->area == 'Miền Nam') selected @endif >Miền Nam</option>
                 </select>
           </div>
           <div class="col-6 p-0 mt-2">
                 <select class="form-control" id='selectprovince'>
                   @foreach ($provinces as $province)
-                  <option class="{{$province->id}}" @if($province->province == $provincename) selected @endif value="{{url('tim-dai-ly?province=').$province->province}}">{{$province->province}}</option>
+                  <option class="{{strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $province->area)))}}" class="{{$province->id}}" @if($province->province == $provincename) selected @endif value="{{url('tim-dai-ly?province=').$province->province}}">{{$province->province}}</option>
                   @endforeach
                 </select>
           </div>
         </div>
         <div class="col-12" data-spy="scroll">
-          <h6 class="text-start">Có {{count($dealers)}} đại lý tại {{$provincename}}</h6>
+          <h6 class="text-center mt-1">Có {{count($dealers)}} đại lý tại {{$provincename}}</h6>
           <div class="card card-default" id="card_contacts">
         <div id="contacts" class="panel-collapse collapse show" aria-expanded="true" style="">
-            <ul class="list-group pull-down" id="contact-list">
+            <ul class="list-group pull-down scrollbar" id="contact-list">
               @foreach ($dealers as $dealer)
-                <li class="list-group-item">
+                <li class="list-group-item" id="{{$dealer->id}}">
                     <div class="row w-100">
                         <div class="col-12 col-sm-6 col-md-3 px-0">
                             <img src="{{asset($dealer->image)}}" alt="Mike Anamendolla" class="mx-auto d-block img-fluid mw-20">
@@ -63,6 +63,10 @@
   </div>
 </div>
 <style>
+.scrollbar {
+  height:500px;
+  overflow-y: scroll;
+}
 .map-responsive{
     overflow:hidden;
     padding-bottom:50%;
@@ -163,21 +167,12 @@ function initMap() {
     title: "{{$dealer->name}}",
     icon: svgMarker{{$dealer->id}}
   });
-    google.maps.event.addListenerOnce(marker{{$dealer->id}}, 'mouseover', function() {
-      infowindow{{$dealer->id}}.open({
-          anchor: marker{{$dealer->id}},
-          map,
-        });
-    });
-  google.maps.event.addListener(marker{{$dealer->id}}, 'mouseout', function () {
-    infowindow{{$dealer->id}}.close();
-  });
-    marker{{$dealer->id}}.addListener("click", () => {
-      infowindow{{$dealer->id}}.open({
-        anchor: marker{{$dealer->id}},
-        map,
+      google.maps.event.addListener(marker{{$dealer->id}}, 'mouseover', function() {
+          infowindow{{$dealer->id}}.open( map, marker{{$dealer->id}} );
       });
-    });
+      google.maps.event.addListener(marker{{$dealer->id}}, 'mouseout', function() {
+          infowindow{{$dealer->id}}.close();
+      });
   
   <?php } ?>
 }
@@ -194,6 +189,17 @@ window.initMap = initMap;
     });
     $('#selectarea').bind('change', function () { // bind change event to select
         var value = $(this).val(); // get selected value
+        $("#selectprovince").children().hide();
+         $("#selectprovince ."+value).show();
+    });
+    $("#contact-list").on("mouseover", "li", function () {
+        var id = $(this).attr('id');
+        window.initMap = initMap;
+        google.maps.event.addListener(marker1, 'mouseover', function() {
+
+			infowindow1.open( map, marker1 );
+
+		});
     });
 </script>
 @endsection
