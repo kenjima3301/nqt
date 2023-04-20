@@ -12,4 +12,8 @@ class HomeController extends Controller
       $best_products = Tyre::select('*')->take(8)->get();
       return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products] );
     }
+
+    public function listProduct() {
+        return view('client.list-product');
+    }
 }

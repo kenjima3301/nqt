@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('index');
+Route::get('/list-product', [HomeController::class, 'listProduct'])->name('list-product');
 
 Route::get('/login', [Usercontroller::class, 'login']);
 Route::post('/login', [Usercontroller::class, 'validate_login']);

@@ -112,4 +112,7 @@ html {
     color: #35A25B;
 }
 
+.parent, .collapse .list-group-item {
+    border: 0;
+}
 

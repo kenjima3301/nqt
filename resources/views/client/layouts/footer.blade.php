@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mt-4 mb">
       <div class="col-lg-6">
-        <img src="{{ asset('client/assets/img/logo.png') }}" alt="Your logo" class="img-fluid" width="15%">
+        <a href="{{route('index')}}"><img src="{{ asset('client/assets/img/logo.png') }}" alt="Your logo" class="img-fluid" width="15%"></a>
         <div class="footer-info">
           <p><i class="fa-light fa-location-dot"></i> Địa chỉ: 164 Khuất Duy Tiến, quận Thanh Xuân, phường Nhân Chính, Hà Nội</p>
           <p><i class="fa-light fa-rectangle-code"></i> MST: 11022000</p>
