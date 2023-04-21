@@ -20,11 +20,23 @@
                             <li class="nav-item  {{ Request::path() == 'tim-dai-ly' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
                             </li>
-                            <li class="nav-item  {{ Request::path() == 've-trazano' ? 'active' : ''}}">
-                                <a class="nav-link" href="{{url('/ve-trazano')}}">Trazano</a>
+                            <li class="nav-item dropdown {{ Request::path() == 've-trazano' ? 'active' : ''}}">
+                                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trazano</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <a href="{{url('/ve-trazano')}}"  class="dropdown-item-header" type="button">Giới thiệu</a>
+                                  <a class="dropdown-item-header" type="button">Điểm nổi bật</a>
+                                  <a class="dropdown-item-header" type="button">Các dòng lốp</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Thông tin</a>
+                            <li class="nav-item dropdown">
+                                 <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Thông tin
+                                </a>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <a class="dropdown-item-header" type="button">Khuyến mãi</a>
+                                  <a class="dropdown-item-header" type="button">Trải nghiệm khách hàng</a>
+                                  <a class="dropdown-item-header" type="button">Bí quyết chọn lốp</a>
+                                  <a class="dropdown-item-header" type="button">Thông số lốp xe</a>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Hỗ trợ</a>

@@ -51,17 +51,17 @@
                     <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">{{$tyre->name}}</h5>
-                          <p class="card-text">LONGHAUL</p>
-                          <img class="card-img-top" src="{{asset('client/assets/img/car.png') }}" alt="Product 1">
+                          <p class="card-text">{{$tyre->drive->name}}</p>
+                          <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt="{{$tyre->drive->name}}">
                           <div class="sub-desc row mt-3">
                             <div class="col-lg-4">
-                              <p>Xe tải</p>
+                              <p>{{$tyre->model->name}}</p>
                             </div>
                             <div class="col-lg-4">
-                              <p><i class="fa-solid fa-user-group"></i> Trazano</p>
+                              <p>{{$tyre->brand->name}}</p>
                             </div>
                             <div class="col-lg-4">
-                              <p> Steer/Trailler</p>
+                              <p> {{$tyre->tyre_structure}}</p>
                             </div>
                           </div>
                           <div class="row mt">
