@@ -5,40 +5,40 @@
 	<div class="row">
          <!-- Left Navbar -->
         <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
-            <h4 class="text-center mt-4">Tìm Lốp</h4>
-            <ul class="list-group mt-3">
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem1">Loại xe <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem1" class="collapse">
-                <div class="input-group mt-3 mb-3 ml-3">
-                    <!-- <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-primary">search</button> -->
-                </div>
-                </div>
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem2">Hãng lốp <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem2" class="collapse">
-                <ul class="list-group">
-                    <li class="list-group-item">Sub-item 2-1</li>
-                    <li class="list-group-item">Sub-item 2-2</li>
-                    <li class="list-group-item">Sub-item 2-3</li>
-                </ul>
-                </div>
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem3">Mã gai <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem3" class="collapse">
-                <ul class="list-group">
-                    <li class="list-group-item">Sub-item 3-1</li>
-                    <li class="list-group-item">Sub-item 3-2</li>
-                    <li class="list-group-item">Sub-item 3-3</li>
-                </ul>
-                </div>
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem4">Size <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem4" class="collapse">
-                <ul class="list-group">
-                    <li class="list-group-item">Sub-item 4-1</li>
-                    <li class="list-group-item">Sub-item 4-2</li>
-                    <li class="list-group-item">Sub-item 4-3</li>
-                </ul>
-                </div>
-            </ul>
+            <form>
+      <h4 class="text-center mt-4">Tìm Lốp</h4>
+        <div class="row">
+          <div class="col-lg-12">
+            <label>Loại xe</label>
+            <select class="js-select2">
+              <option>-- Loại xe --</option>
+              @foreach($models as $model)
+              <option>{{$model->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          
+          <div class="col-lg-12">
+            <label>Hãng lốp</label>
+            <select class="js-select2">
+              <option>-- Hãng lốp --</option>
+              @foreach($brands as $brand)
+              <option>{{$brand->name}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-lg-12">
+            <label>Size lốp</label>
+            <select class="js-select2">
+              <option>-- Size lốp --</option>
+              @foreach($sizes as $size)
+              <option>{{$size->size}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+      </form>
         </div>
 
         <!-- Right Product Detail -->
@@ -128,7 +128,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                              @foreach($sizes as $size)
+                              @foreach($tyre_sizes as $size)
                                   <td>@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
@@ -203,4 +203,19 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+  $(document).ready(function() {
+    $(".js-select2").select2();
+  
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    $(".parent").click(function(){
+      $(this).find(".arrow").toggleClass("fa-light fa-caret-down fa-light fa-caret-up");
+    });
+  });
+</script>
 @endsection
