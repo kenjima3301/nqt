@@ -14,7 +14,7 @@
                             <li class="nav-item dropdown {{ Request::path() == 'san-pham' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                                 <div class="dropdown-menu dropright" aria-labelledby="dropdownMenu2">  
-                                   <a class="nav-link dropdown-toggle" type="button" id="submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lốp xe tải Trazano</a>
+                                   <a class="nav-link-sub dropdown-toggle" type="button" id="submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lốp xe tải Trazano</a>
                                     <div class="dropdown-menu">
                                     <a class="dropdown-item-header" href="{{url('ve-trazano')}}">Về Trazano</a>
                                     <a class="dropdown-item-header" href="#">Điểm nổi bật</a>
