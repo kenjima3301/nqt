@@ -62,7 +62,11 @@ class HomeController extends Controller
           'sizes' => $sizes
       ]);
     }
-    
+
+    public function productDetail() {
+      return view('client.product-detail');
+    }
+
     public function nqt() {
       return view('client.aboutnqt');
     }

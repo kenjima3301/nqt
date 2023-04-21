@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('index');
+Route::get('chi-tiet-san-pham', [HomeController::class, 'productDetail'])->name('product-detail');
 Route::get('/tim-lop-xe', [HomeController::class, 'listProduct'])->name('list-product');
 Route::post('/tim-lop-xe', [HomeController::class, 'listProductpost']);
 Route::get('/ve-nqt', [HomeController::class, 'nqt'])->name('nqt');
