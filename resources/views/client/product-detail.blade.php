@@ -34,6 +34,17 @@
               @endforeach
             </select>
           </div>
+          <div class="col-lg-12">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="chinacheck" value="option2">
+              <label class="form-check-label" for="inlineCheckbox2"><img src="{{asset('client/assets/img/china.jpg') }}" width="15px" alt=""> China ({{$china}})</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="thailandcheck" value="option1">
+              <label class="form-check-label" for="inlineCheckbox1"><img src="{{asset('client/assets/img/thailan.jpg') }}" width="15px" alt=""> Thailand ({{$thailand}})</label>
+            </div>
+            
+          </div>
         </div>
       </form>
         </div>
@@ -123,8 +134,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            
                               @foreach($tyre_sizes as $size)
+                              <tr class="@if(count($size->madeins) == 2){{'bothflag'}}@elseif($size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif($size->madeins[0]->country->name == 'China'){{'china'}}@endif">
                                   <td class="text-left">@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
@@ -204,7 +216,30 @@
 <script>
   $(document).ready(function() {
     $(".js-select2").select2();
-  
+    $("#chinacheck").change(function() {
+        if($(this).prop('checked')) {
+            $(".china").show();  // checked
+            $(".bothflag").show();  
+            $(".thailand").hide();  
+          }
+        else{
+            $(".china").hide();  // checked
+            $(".bothflag").hide();  
+            $(".thailand").show(); 
+          }
+    });
+    $("#thailandcheck").change(function() {
+        if($(this).prop('checked')) {
+            $(".china").hide();  // checked
+            $(".bothflag").show();  
+            $(".thailand").show();  
+          }
+        else{
+            $(".china").show();  // checked
+            $(".bothflag").hide();  
+            $(".thailand").hide(); 
+          }
+    });
   });
 </script>
 <script>

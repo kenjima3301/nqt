@@ -9,6 +9,7 @@ use App\Models\Dealer;
 use App\Models\Modelcar;
 use App\Models\Brand;
 use App\Models\TyreDimention;
+use App\Models\TyreMadein;
 
 class HomeController extends Controller
 {
@@ -71,6 +72,15 @@ class HomeController extends Controller
       $sizes = TyreDimention::select('size')->distinct('size')->get();
       $tyre = Tyre::find($id);
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
+//      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
+      $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
+              ->where('tyre_dimentions.tyre_id', $tyre->id)
+              ->where('tyre_countries.madecountry_id', 1)
+                ->count();
+      $china = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
+              ->where('tyre_dimentions.tyre_id', $tyre->id)
+              ->where('tyre_countries.madecountry_id', 2)
+                ->count();      
       $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(3)->get();
       return view('client.product-detail', [
           'tyre' => $tyre, 
@@ -78,7 +88,9 @@ class HomeController extends Controller
           'relatedtypres' => $relatedtypres,
           'models' => $models,
           'brands' => $brands,
-          'tyre_sizes' => $tyre_sizes
+          'tyre_sizes' => $tyre_sizes,
+          'thailand' => $thailand,
+          'china' => $china
           ]);
     }
 
