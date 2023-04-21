@@ -64,10 +64,22 @@ class HomeController extends Controller
     }
 
     public function productDetail($id) {
+      $models = Modelcar::all();
+      $model = Modelcar::take(1)->first();
+      $brands = Brand::all();
+      $brand = Brand::take(1)->first();
+      $sizes = TyreDimention::select('size')->distinct('size')->get();
       $tyre = Tyre::find($id);
-      $sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
-      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->take(3)->get();
-      return view('client.product-detail', ['tyre' => $tyre, 'sizes' => $sizes, 'relatedtypres' => $relatedtypres]);
+      $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
+      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(3)->get();
+      return view('client.product-detail', [
+          'tyre' => $tyre, 
+          'sizes' => $sizes, 
+          'relatedtypres' => $relatedtypres,
+          'models' => $models,
+          'brands' => $brands,
+          'tyre_sizes' => $tyre_sizes
+          ]);
     }
 
     public function nqt() {

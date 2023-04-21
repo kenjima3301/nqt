@@ -5,69 +5,37 @@
 	<div class="row">
          <!-- Left Navbar -->
         <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
-            <h4 class="text-center mt-4">Tìm Lốp</h4>
-            <div class="col-lg-12">
-                <label>Loại xe</label>
-                <select class="js-select2">
-                    <option>Select A</option>
-                    <option>Select B</option>
-                    <option>Select C</option>
-                    <option>Select D</option>
-                </select>
-            </div>
+            <form>
+      <h4 class="text-center mt-4">Tìm Lốp</h4>
+        <div class="row">
+          <div class="col-lg-12">
+            <label>Loại xe</label>
+            <select class="js-select2">
+              @foreach($models as $model)
+              <option>{{$model->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          
+          <div class="col-lg-12">
+            <label>Hãng lốp</label>
+            <select class="js-select2">
+              @foreach($brands as $brand)
+              <option>{{$brand->name}}</option>
+              @endforeach
+            </select>
+          </div>
 
-            <div class="col-lg-12">
-                <label>Hãng lốp</label>
-                <select class="js-select2">
-                    <option>Select A</option>
-                    <option>Select B</option>
-                    <option>Select C</option>
-                    <option>Select D</option>
-                </select>
-            </div>
-
-            <div class="col-lg-12">
-                <label>Size lốp</label>
-                <select class="js-select2">
-                    <option>Select A</option>
-                    <option>Select B</option>
-                    <option>Select C</option>
-                    <option>Select D</option>
-                </select>
-            </div>
-            <!-- <ul class="list-group mt-3">
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem1">Loại xe <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem1" class="collapse">
-                <div class="input-group mt-3 mb-3 ml-3">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-primary">search</button>
-                </div>
-                </div>
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem2">Hãng lốp <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem2" class="collapse">
-                <ul class="list-group">
-                    <li class="list-group-item">Sub-item 2-1</li>
-                    <li class="list-group-item">Sub-item 2-2</li>
-                    <li class="list-group-item">Sub-item 2-3</li>
-                </ul>
-                </div>
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem3">Mã gai <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem3" class="collapse">
-                <ul class="list-group">
-                    <li class="list-group-item">Sub-item 3-1</li>
-                    <li class="list-group-item">Sub-item 3-2</li>
-                    <li class="list-group-item">Sub-item 3-3</li>
-                </ul>
-                </div>
-                <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem4">Size <i class="arrow float-right fa-light fa-caret-down"></i></li>
-                <div id="subitem4" class="collapse">
-                <ul class="list-group">
-                    <li class="list-group-item">Sub-item 4-1</li>
-                    <li class="list-group-item">Sub-item 4-2</li>
-                    <li class="list-group-item">Sub-item 4-3</li>
-                </ul>
-                </div>
-            </ul> -->
+          <div class="col-lg-12">
+            <label>Size lốp</label>
+            <select class="js-select2">
+              @foreach($sizes as $size)
+              <option>{{$size->size}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+      </form>
         </div>
 
         <!-- Right Product Detail -->
@@ -76,7 +44,7 @@
                 <div class="col-lg-6">
                     <!-- Main product image -->
                     <div class="row">
-                        <img src="{{asset($tyre->images[0]->image)}}" width="400px" class="img-fluid mx-auto bg-white">
+                        <img src="{{asset($tyre->images[0]->image)}}" width="400px" class="img-fluid mx-auto">
                     </div>
                     <div class="row mt-3">
                       @foreach ($tyre->images as $image)
@@ -115,7 +83,7 @@
                     <div class="row mt">
                         <div class="col-lg-6">
                             <p>1.000.000Đ / Lốp</p>
-                            <p class="discount">1.500.000</p>
+                            <p>1.500.000</p>
                         </div>
                         <div class="col-lg-6 text-center">
                             <a href="#" class="btn btn-success">Mua hàng</a>
@@ -126,18 +94,17 @@
             
             <div class="row mt-3 bg-white ml-2">
                 
-                    <h5 class="ml-3 mt-3">Các size mẫu {{$tyre->name}}</h5>
-                    <table class="size table table-bordered table-responsive text-center mt-2">
+                    <table class="table-bordered table-responsive text-center">
                         <thead>
                             <tr>
-                                <th rowspan="3"></th>
+                              <th rowspan="3" width="3%"></th>
                                 <th rowspan="3">Size</th>
                                 <th rowspan="3">LR / PR</th>
                                 <th rowspan="3">Service index</th>
-                                <th rowspan="3">Tread Depth (mm)</th>
+                                <th rowspan="3">Tread Depth<br/> (mm)</th>
                                 <th rowspan="3">Standard Rim</th>
-                                <th rowspan="3">Overall Diameter (mm)</th>
-                                <th rowspan="3">Section Width (mm)</th>
+                                <th rowspan="3">Overall Diameter<br/> (mm)</th>
+                                <th rowspan="3">Section Width<br/> (mm)</th>
                                 <th colspan="8">Max. Load Capacity at Cold Inflation Pressure</th>
                             </tr>
                             <tr>
@@ -157,13 +124,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                              @foreach($sizes as $size)
-                                  <td>
-                                    @foreach ($size->madeins as $country) 
+                              @foreach($tyre_sizes as $size)
+                                  <td class="text-left">@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
                                       @endif
-                                        <img src="{{asset($country->country->flag)}}" class="img-fluid" width="20%">
+                                      <img src="{{asset($country->country->flag)}}" width='10'>
                                       @endforeach
                                   </td>
                                   <td>{{$size->size}}</td>
@@ -206,19 +172,19 @@
                             <p class="card-text">{{$relatedtypre->drive->name}}</p>
                             <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
                             <div class="sub-desc row mt-3">
-                                <div class="col-lg-3">
+                                <div class="col-lg-4">
                                     <p>{{$relatedtypre->model->name}}</p>
                                 </div>
-                                <div class="col-lg-3">
+                                <div class="col-lg-4">
                                     <p>{{$relatedtypre->brand->name}}</p>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <p>{{$relatedtypre->tyre_structure}}</p>
                                 </div>
                             </div>
                             <div class="row mt">
                                 <div class="col-lg-6">
-                                    <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
+                                    <p>1.000.000Đ / Lốp 1.500.00Đ</p>
                                 </div>
                                 <div class="col-lg-6 text-center">
                                     <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" class="btn btn-success">Chi tiết</a>
@@ -239,6 +205,13 @@
   $(document).ready(function() {
     $(".js-select2").select2();
   
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    $(".parent").click(function(){
+      $(this).find(".arrow").toggleClass("fa-light fa-caret-down fa-light fa-caret-up");
+    });
   });
 </script>
 @endsection

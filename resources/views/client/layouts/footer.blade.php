@@ -17,15 +17,20 @@
                 <ul class="list-unstyled">
                     <li><a href="{{url('/ve-nqt')}}" class="nav-link">Về Ngọc Quyết Thắng</a></li>
                     <li><a href="#" class="nav-link">Hợp tác với chúng tôi</a></li>
+                    <li><a href="#" class="nav-link">Trải nghiệm khách hàng</a></li>
                 </ul>
             </div>
             <div class="menu-footer col-lg-4 col-md-6">
                 <h5>Thông tin</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="nav-link">Khuyến mãi</a></li>
-                    <li><a href="#" class="nav-link">Trải nghiệm khách hàng</a></li>
-                    <li><a href="#" class="nav-link">Bí quyết chọn lốp</a></li>
-                    <li><a href="#" class="nav-link">Thông số lốp xe</a></li>
+                    <li><a href="#" class="nav-link">Bí quyết chọn lốp xe</a></li>
+                    <li><a href="#" class="nav-link">Phân loại các dòng xe</a></li>
+                    <li><a href="#" class="nav-link">Đánh giá hiệu quả lốp xe</a></li>
+                    <li><a href="#" class="nav-link">Kiểm tra lốp định kỳ</a></li>
+                    <li><a href="#" class="nav-link">Cách tìm mua lốp xe an toàn, hiệu quả</a></li>
+                    <li><a href="#" class="nav-link">An toàn đường dài</a></li>
+                    <li><a href="#" class="nav-link">Lốp xe tải: kinh nghiệm mua và bảo dưỡng</a></li>
+                    <li><a href="#" class="nav-link">Cách đọc thông số lốp xe</a></li>
                 </ul>
             </div>
             <div class="menu-footer col-lg-4 col-md-6">

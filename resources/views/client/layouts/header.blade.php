@@ -11,35 +11,50 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item  {{ Request::path() == 'san-pham' ? 'active' : ''}}">
-                                <a class="nav-link" href="#">Sản phẩm <span class="sr-only">(current)</span></a>
+                            <li class="nav-item dropdown {{ Request::path() == 'san-pham' ? 'active' : ''}}">
+                                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
+                                <div class="dropdown-menu dropright" aria-labelledby="dropdownMenu2">  
+                                   <a class="nav-link dropdown-toggle" type="button" id="submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lốp xe tải Trazano</a>
+                                    <div class="dropdown-menu">
+                                    <a class="dropdown-item-header" href="{{url('ve-trazano')}}">Về Trazano</a>
+                                    <a class="dropdown-item-header" href="#">Điểm nổi bật</a>
+                                    <a class="dropdown-item-header" href="{{url('tim-lop-xe')}}">Các dòng lốp</a>
+                                  </div>
+                                  <a class="dropdown-item-header" type="button">Lốp xe du lịch</a>
+                                </div>
                             </li>
-                            <li class="nav-item  {{ Request::path() == 'dich-vu' ? 'active' : ''}}">
-                                <a class="nav-link" href="{{url('/dich-vu')}}">Dịch vụ</a>
+                            <li class="nav-item dropdown {{ Request::path() == 'dich-vu' ? 'active' : ''}}">
+                                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dịch vụ</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">  
+                                   <a href="{{url('/ve-trazano')}}"  class="dropdown-item-header" type="button">Tư vấn chọn lốp xe hiệu quả</a>
+                                  <a class="dropdown-item-header" type="button">Cứu hộ xe</a>
+                                  <a class="dropdown-item-header" type="button">Kiểm tra kỹ thuật</a>
+                                  <a class="dropdown-item-header" type="button">Chạy thử</a>
+                                  <a class="dropdown-item-header" type="button">Dịch vụ cao cấp</a>
+                                </div>
                             </li>
-                            <li class="nav-item  {{ Request::path() == 'tim-dai-ly' ? 'active' : ''}}">
-                                <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
-                            </li>
-                            <li class="nav-item dropdown {{ Request::path() == 've-trazano' ? 'active' : ''}}">
-                                <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Trazano</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                  <a href="{{url('/ve-trazano')}}"  class="dropdown-item-header" type="button">Giới thiệu</a>
-                                  <a class="dropdown-item-header" type="button">Điểm nổi bật</a>
-                                  <a class="dropdown-item-header" type="button">Các dòng lốp</a>
-                            </li>
+                           
                             <li class="nav-item dropdown">
                                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Thông tin
                                 </a>
-                                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                  <a class="dropdown-item-header" type="button">Khuyến mãi</a>
-                                  <a class="dropdown-item-header" type="button">Trải nghiệm khách hàng</a>
-                                  <a class="dropdown-item-header" type="button">Bí quyết chọn lốp</a>
-                                  <a class="dropdown-item-header" type="button">Thông số lốp xe</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <a class="dropdown-item-header" type="button">Bí quyết chọn lốp xe</a>
+                                  <a class="dropdown-item-header" type="button">Phân loại các dòng xe</a>
+                                  <a class="dropdown-item-header" type="button">Đánh giá hiệu quả lốp xe</a>
+                                  <a class="dropdown-item-header" type="button">Kiểm tra lốp định kỳ</a>
+                                  <a class="dropdown-item-header" type="button">Cách tìm mua lốp xe an toàn, hiệu quả</a>
+                                  <a class="dropdown-item-header" type="button">An toàn đường dài</a>
+                                  <a class="dropdown-item-header" type="button">Lốp xe tải: kinh nghiệm mua và bảo dưỡng</a>
+                                  <a class="dropdown-item-header" type="button">Cách đọc thông số lốp xe</a>
                                 </div>
                             </li>
+                            
+                            <li class="nav-item  {{ Request::path() == 'tim-dai-ly' ? 'active' : ''}}">
+                                <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Hỗ trợ</a>
+                                <a class="nav-link" href="#">Khuyến mại</a>
                             </li>
                         </ul>
                     </div>
