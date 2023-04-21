@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/nqt.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/trazano.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/select2.min.css') }}">
 </head>
 <body>
     <div class="wrapper">
@@ -29,6 +30,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('client/assets/js/bootstrap.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script src="{{asset('client/assets/js/select2.min.js')}}"></script>
     @yield('script')
 </body>
 </html>
