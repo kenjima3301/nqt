@@ -87,10 +87,15 @@ html {
     color: #90A3BF;
 }
 
-.sub-desc .col-lg-4 {
+.sub-desc {
     padding-right: 0;
     color: #90A3BF;
-    font-size: 14px;
+    font-size: 12px;
+}
+
+.discount {
+  text-decoration: line-through;
+  color: #90A3BF;
 }
 
 .menu-footer li a {
