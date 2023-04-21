@@ -94,18 +94,17 @@
             
             <div class="row mt-3 bg-white ml-2">
                 
-                    <h5 class="ml-3 mt-3">Các size mẫu {{$tyre->name}}</h5>
-                    <table class="table table-bordered table-responsive text-center mt-2">
+                    <table class="table-bordered table-responsive text-center">
                         <thead>
                             <tr>
-                                <th rowspan="3"></th>
+                              <th rowspan="3" width="3%"></th>
                                 <th rowspan="3">Size</th>
                                 <th rowspan="3">LR / PR</th>
                                 <th rowspan="3">Service index</th>
-                                <th rowspan="3">Tread Depth (mm)</th>
+                                <th rowspan="3">Tread Depth<br/> (mm)</th>
                                 <th rowspan="3">Standard Rim</th>
-                                <th rowspan="3">Overall Diameter (mm)</th>
-                                <th rowspan="3">Section Width (mm)</th>
+                                <th rowspan="3">Overall Diameter<br/> (mm)</th>
+                                <th rowspan="3">Section Width<br/> (mm)</th>
                                 <th colspan="8">Max. Load Capacity at Cold Inflation Pressure</th>
                             </tr>
                             <tr>
@@ -126,7 +125,7 @@
                         <tbody>
                             <tr>
                               @foreach($tyre_sizes as $size)
-                                  <td>@foreach ($size->madeins as $country) 
+                                  <td class="text-left">@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
                                       @endif
