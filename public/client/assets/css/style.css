@@ -103,6 +103,8 @@ html {
 }
 
 .footer-info {
+    margin-top: 18px;
+    margin-left: 10px;
     color: rgba(19, 19, 19, 0.6);
 }
 
@@ -110,4 +112,37 @@ html {
     color: #35A25B;
 }
 
+.parent, .collapse .list-group-item {
+    border: 0;
+}
 
+.navbar button {
+  border: none;
+}
+
+.navbar .dropdown-menu {
+  background-color: #35A25B;
+}
+
+.navbar .dropdown.show a { 
+  background-color: #35A25B;
+  color: #fff;
+}
+
+.navbar .dropdown-menu.show a:hover {
+    background-image: none;
+    background-color: #000;
+}
+
+.dropdown-item-header {
+  display: block;
+    width: 200px;
+    padding: 0.25rem 1.5rem 0rem 0rem;
+    clear: both;
+    font-weight: 400;
+    color: #ffffff; 
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}

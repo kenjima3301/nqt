@@ -21,10 +21,10 @@
                 <img class="card-img-top" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}">
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">
-                    <p><i class="fa-regular fa-gas-pump"></i> {{$new->model->name}} </p>
+                    <p>{{$new->model->name}} </p>
                     </div>
                     <div class="col-lg-4">
-                    <p><i class="fa-solid fa-user-group"></i> {{$new->brand->name}}</p>
+                    <p>{{$new->brand->name}}</p>
                     </div>
                     <div class="col-lg-4">
                     <p> {{$new->tyre_structure}}</p>
@@ -59,10 +59,10 @@
                 <img class="card-img-top" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}">
                 <div class="sub-desc row mt-3">
                 <div class="col-lg-4">
-                    <p><i class="fa-regular fa-gas-pump"></i> Xe tải</p>
+                    <p>Xe tải</p>
                 </div>
                 <div class="col-lg-4">
-                    <p><i class="fa-solid fa-user-group"></i> Trazano</p>
+                    <p>Trazano</p>
                 </div>
                 <div class="col-lg-4">
                     <p> Steer/Trailler</p>
