@@ -18,7 +18,11 @@ class HomeController extends Controller
     public function listProduct() {
         return view('client.list-product');
     }
-    
+
+    public function productDetail() {
+      return view('client.product-detail');
+    }
+
     public function nqt() {
       return view('client.aboutnqt');
     }
