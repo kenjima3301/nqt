@@ -35,7 +35,7 @@
                     <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
                     </div>
                     <div class="col-lg-6 text-center">
-                    <a href="#" class="btn btn-success">Chi tiết</a>
+                    <a href="{{url('lop-xe-tai/'.$new->id)}}" class="btn btn-success">Chi tiết</a>
                     </div>
                 </div>
                 </div>
@@ -58,22 +58,22 @@
                 <p class="card-text">{{$best->drive->name}}</p>
                 <img class="card-img-top" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}">
                 <div class="sub-desc row mt-3">
-                <div class="col-lg-4">
-                    <p>Xe tải</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>Trazano</p>
-                </div>
-                <div class="col-lg-4">
-                    <p> Steer/Trailler</p>
-                </div>
+                    <div class="col-lg-4">
+                    <p>{{$best->model->name}} </p>
+                    </div>
+                    <div class="col-lg-4">
+                    <p>{{$best->brand->name}}</p>
+                    </div>
+                    <div class="col-lg-4">
+                    <p> {{$best->tyre_structure}}</p>
+                    </div>
                 </div>
                 <div class="row mt">
                 <div class="col-lg-6">
                     <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
                 </div>
                 <div class="col-lg-6 text-center">
-                    <a href="#" class="btn btn-success">Chi tiết</a>
+                    <a href="{{url('lop-xe-tai/'.$best->id)}}" class="btn btn-success">Chi tiết</a>
                 </div>
                 </div>
             </div>

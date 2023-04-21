@@ -66,7 +66,7 @@
                               <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
                             </div>
                             <div class="col-lg-6 text-center">
-                              <a href="#" class="btn btn-success">Chi tiết</a>
+                              <a href="{{url('lop-xe-tai/'.$tyre->id)}}" class="btn btn-success">Chi tiết</a>
                             </div>
                           </div>
                         </div>
