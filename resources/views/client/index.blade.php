@@ -32,7 +32,7 @@
                 </div>
                 <div class="row mt">
                     <div class="col-lg-6">
-                    <p>1.000.000Đ / Lốp 1.500.00Đ</p>
+                    <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
                     </div>
                     <div class="col-lg-6 text-center">
                     <a href="#" class="btn btn-success">Chi tiết</a>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="row mt">
                 <div class="col-lg-6">
-                    <p>1.000.000Đ / Lốp 1.500.00Đ</p>
+                    <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
                 </div>
                 <div class="col-lg-6 text-center">
                     <a href="#" class="btn btn-success">Chi tiết</a>
