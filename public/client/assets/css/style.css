@@ -98,6 +98,11 @@ html {
   color: #90A3BF;
 }
 
+.size th,
+.size td {
+  padding: 0.25rem;
+}
+
 .menu-footer li a {
     color: rgba(19, 19, 19, 0.6);
     padding: 0.5rem 0rem;
