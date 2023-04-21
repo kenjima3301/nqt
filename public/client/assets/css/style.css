@@ -87,10 +87,20 @@ html {
     color: #90A3BF;
 }
 
-.sub-desc .col-lg-4 {
+.sub-desc {
     padding-right: 0;
     color: #90A3BF;
-    font-size: 14px;
+    font-size: 12px;
+}
+
+.discount {
+  text-decoration: line-through;
+  color: #90A3BF;
+}
+
+.size th,
+.size td {
+  padding: 0.25rem;
 }
 
 .menu-footer li a {
@@ -127,11 +137,14 @@ html {
 .navbar .dropdown.show a { 
   background-color: #35A25B;
   color: #fff;
+  padding: 5px;
+  width: 100%;
 }
 
 .navbar .dropdown-menu.show a:hover {
     background-image: none;
     background-color: #000;
+    color: #fff;
 }
 
 .dropdown-item-header {
@@ -145,6 +158,11 @@ html {
     white-space: nowrap;
     background-color: transparent;
     border: 0;
+}
+
+.navbar .submenu {
+  background-color: #35A25B;
+  color: #fff;
 }
 
 .select2.select2-container {
