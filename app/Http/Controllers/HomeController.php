@@ -63,8 +63,11 @@ class HomeController extends Controller
       ]);
     }
 
-    public function productDetail() {
-      return view('client.product-detail');
+    public function productDetail($id) {
+      $tyre = Tyre::find($id);
+      $sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
+      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->take(3)->get();
+      return view('client.product-detail', ['tyre' => $tyre, 'sizes' => $sizes, 'relatedtypres' => $relatedtypres]);
     }
 
     public function nqt() {
