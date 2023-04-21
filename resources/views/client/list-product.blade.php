@@ -7,40 +7,37 @@
     <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
       <form>
       <h4 class="text-center mt-4">Tìm Lốp</h4>
-      <ul class="list-group mt-3">
-        <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem1">Loại xe <i class="arrow float-right fa-light fa-caret-down"></i></li>
-        <div id="subitem1" class="collapse">
-          <ul class="list-group">
-            @foreach($models as $model)
-            <li class="list-group-item">{{$model->name}}</li>
-            @endforeach
-          </ul>
+        <div class="row">
+          <div class="col-lg-12">
+            <label>Loại xe</label>
+            <select class="js-select2">
+              <option>-- Loại xe --</option>
+              @foreach($models as $model)
+              <option>{{$model->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          
+          <div class="col-lg-12">
+            <label>Hãng lốp</label>
+            <select class="js-select2">
+              <option>-- Hãng lốp --</option>
+              @foreach($brands as $brand)
+              <option>{{$brand->name}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-lg-12">
+            <label>Size lốp</label>
+            <select class="js-select2">
+              <option>-- Size lốp --</option>
+              @foreach($sizes as $size)
+              <option>{{$size->size}}</option>
+              @endforeach
+            </select>
+          </div>
         </div>
-        <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem2">Hãng lốp <i class="arrow float-right fa-light fa-caret-down"></i></li>
-        <div id="subitem2" class="collapse">
-          <ul class="list-group">
-            @foreach($brands as $brand)
-            <li class="list-group-item">{{$brand->name}}</li>
-            @endforeach
-          </ul>
-        </div>
-<!--        <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem3">Mã gai <i class="arrow float-right fa-light fa-caret-down"></i></li>
-        <div id="subitem3" class="collapse">
-          <select class="list-group" id="selecttyre">
-            @foreach($tyres as $tyre)
-            <option class="list-group-item">{{$tyre->name}}</option>
-            @endforeach
-          </select>
-        </div>-->
-        <li class="parent list-group-item" data-toggle="collapse" data-target="#subitem4">Size <i class="arrow float-right fa-light fa-caret-down"></i></li>
-        <div id="subitem4" class="collapse">
-          <select class="list-group" id="selecttyresize">
-            @foreach($sizes as $size)
-            <option class="list-group-item">{{$size->size}}</option>
-            @endforeach
-          </select>
-        </div>
-      </ul>
       </form>
     </div>
         <!-- Right Product List -->
@@ -87,15 +84,17 @@
 </style>
 @endsection
 @section('script')
-<link href="{{asset('assets/css/select2.min.css')}}" rel="stylesheet" />
-<script src="{{asset('assets/js/select2.min.js')}}"></script>
+<script>
+  $(document).ready(function() {
+    $(".js-select2").select2();
+  
+  });
+</script>
 <script>
   $(document).ready(function(){
     $(".parent").click(function(){
       $(this).find(".arrow").toggleClass("fa-light fa-caret-down fa-light fa-caret-up");
     });
-    $('#selecttyre').select2();
-    $('#selecttyresize').select2();
   });
 </script>
 @endsection
