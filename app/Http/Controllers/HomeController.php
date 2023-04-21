@@ -71,7 +71,7 @@ class HomeController extends Controller
       $sizes = TyreDimention::select('size')->distinct('size')->get();
       $tyre = Tyre::find($id);
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
-      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->take(3)->get();
+      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(3)->get();
       return view('client.product-detail', [
           'tyre' => $tyre, 
           'sizes' => $sizes, 

@@ -11,7 +11,6 @@
           <div class="col-lg-12">
             <label>Loại xe</label>
             <select class="js-select2">
-              <option>-- Loại xe --</option>
               @foreach($models as $model)
               <option>{{$model->name}}</option>
               @endforeach
@@ -21,7 +20,6 @@
           <div class="col-lg-12">
             <label>Hãng lốp</label>
             <select class="js-select2">
-              <option>-- Hãng lốp --</option>
               @foreach($brands as $brand)
               <option>{{$brand->name}}</option>
               @endforeach
@@ -31,7 +29,6 @@
           <div class="col-lg-12">
             <label>Size lốp</label>
             <select class="js-select2">
-              <option>-- Size lốp --</option>
               @foreach($sizes as $size)
               <option>{{$size->size}}</option>
               @endforeach
