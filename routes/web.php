@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/bai-viet', [Admincontroller::class, 'blog']);
   Route::get('/bai-viet-add', [Admincontroller::class, 'addblog']);
   Route::post('/bai-viet-add', [Admincontroller::class, 'addblogpost']);
+  Route::get('/bai-viet-edit/{id}', [Admincontroller::class, 'editblog']);
+  Route::post('/bai-viet-edit/{id}', [Admincontroller::class, 'editblogpost']);
   
   Route::get('/quan-ly-khac', [Admincontroller::class, 'groupmanagement']);
   

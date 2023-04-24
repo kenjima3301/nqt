@@ -333,10 +333,7 @@ class Admincontroller extends Controller
            
            $image->removeAttribute('src');
            $image->setAttribute('src', $image_name);
-        }
- 
-//       $content = $dom->saveHTML();
-       
+        }       
        Posts::create([
             'type_id' => $request->type,
             'title' => $request->title,
@@ -344,6 +341,50 @@ class Admincontroller extends Controller
             'content' => $content,
             'status' => 'public'
        ]);
+ 
+       return redirect('admin/bai-viet');
+    }
+    
+    public function editblog($id) {
+    $post = Posts::find($id);
+    $types = PostType::all();
+    return view('admin.blog.edit', ['types' => $types,'post' => $post]);
+  }
+  
+    public function editblogpost($id, Request $request)
+    {
+        $post = Posts::find($id);
+        $this->validate($request, [
+             'title' => 'required',
+             'content' => 'required'
+        ]);
+ 
+       $content = $request->content;
+       $dom = new \DomDocument();
+       @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+       $imageFile = $dom->getElementsByTagName('img');
+ 
+       foreach($imageFile as $item => $image){
+           $data = $image->getAttribute('src');
+           list($type, $data) = explode(';', $data);
+           list(, $data)      = explode(',', $data);
+           $imgeData = base64_decode($data);
+           $path = public_path().'/uploads/';
+            if (!file_exists($path)) {
+              mkdir($path, 0775, true);
+            }
+           $image_name= "/uploads/" . time().$item.'.png';
+           $path = public_path() . $image_name;
+           file_put_contents($path, $imgeData);
+           
+           $image->removeAttribute('src');
+           $image->setAttribute('src', $image_name);
+        }  
+       $post->type_id = $request->type;
+       $post->title = $request->title;
+       $post->slug = Str::slug($request->title);
+       $post->content = $content;
+       $post->save();
  
        return redirect('admin/bai-viet');
     }

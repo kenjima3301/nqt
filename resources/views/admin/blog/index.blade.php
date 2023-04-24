@@ -26,6 +26,7 @@
                       <tr>
                         <td class="text-sm font-weight-normal">{{$blog->type->name}}</td>
                         <td class="text-sm font-weight-normal">{{$blog->title}}</td>
+                        <td><a href="{{url('admin/bai-viet-edit/'.$blog->id)}}"><i class="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Edit Card">edit</i></a></td>
                       </tr>
                       @endforeach
                     </tbody>
