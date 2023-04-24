@@ -225,26 +225,26 @@
             $(".china").show();  // checked
             $(".bothflag").show();  
             if($('#thailandcheck').is(":checked")){
-              $(".thailand").show();  
+              $(".thai").show();  
             }else {
-              $(".thailand").hide();  
+              $(".thai").hide();  
             }
           }
         else{
             $(".china").hide();  // checked
             if($('#thailandcheck').is(":checked")){
                $(".bothflag").show();  
-                $(".thailand").show(); 
+                $(".thai").show(); 
             }else {
                $(".bothflag").hide();  
-                $(".thailand").hide(); 
+                $(".thai").hide(); 
             }
           }
     });
     $("#thailandcheck").change(function() {
         if($(this).prop('checked')) {
             $(".bothflag").show();  
-            $(".thailand").show();  
+            $(".thai").show();  
             if($('#chinacheck').is(":checked")){
                $(".china").show();  // checked
             }else {
@@ -259,7 +259,7 @@
                $(".china").hide();  // checked
                $(".bothflag").hide();
             }
-            $(".thailand").hide(); 
+            $(".thai").hide(); 
           }
     });
   });
