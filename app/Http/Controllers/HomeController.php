@@ -64,6 +64,27 @@ class HomeController extends Controller
           'sizes' => $sizes
       ]);
     }
+    
+    public function listProductpostfilter(Request $request) {
+      $models = Modelcar::all();
+      $brands = Brand::all();
+      $tyres = Tyre::join('tyre_dimentions', 'tyres.id', '=', 'tyre_dimentions.tyre_id')
+              ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%')
+              ->where('tyres.model_id', $request->model)
+              ->where('tyres.brand_id', $request->brand)
+              ->distinct('tyres.id')
+              ->get('tyres.*');
+      $sizes = TyreDimention::select('size')->distinct('size')->get();
+      return view('client.list-product', [
+          'models' => $models,
+          'brands' => $brands,
+          'tyres' => $tyres,
+          'sizes' => $sizes,
+          'sizeselected' => $request->size,
+          'model' => $request->model,
+          'brand' => $request->brand
+      ]);
+    }
 
     public function productDetail($id) {
       $models = Modelcar::all();
