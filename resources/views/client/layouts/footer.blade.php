@@ -23,7 +23,7 @@
             <div class="menu-footer col-lg-4 col-md-6">
                 <h5>Thông tin</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="nav-link">Bí quyết chọn lốp xe</a></li>
+                    <li><a href="{{url('blog/bi-quyet-chon-lop-xe')}}" class="nav-link">Bí quyết chọn lốp xe</a></li>
                     <li><a href="#" class="nav-link">Phân loại các dòng xe</a></li>
                     <li><a href="#" class="nav-link">Đánh giá hiệu quả lốp xe</a></li>
                     <li><a href="#" class="nav-link">Kiểm tra lốp định kỳ</a></li>

@@ -72,6 +72,10 @@
                         </div>
                       </div>
                 </div>
+                 <div class="form-group col-12 col-md-8">
+                  <label for="exampleInputname">Giá sản phẩm</label>
+                  <input type="name" name="price" value="{{ $errors->first('price')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Đơn giá đồng" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
                 <br/>
                 <div class="form-group col-md-8">
                   <label for="exampleInputname">Đăng ảnh kiểu xe và vị trí lắp đặt</label>

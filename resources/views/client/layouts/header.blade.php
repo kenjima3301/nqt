@@ -39,7 +39,7 @@
                                   Thông tin
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                  <a class="dropdown-item-header" type="button">Bí quyết chọn lốp xe</a>
+                                  <a href="{{url('blog/bi-quyet-chon-lop-xe')}}" class="dropdown-item-header" type="button">Bí quyết chọn lốp xe</a>
                                   <a class="dropdown-item-header" type="button">Phân loại các dòng xe</a>
                                   <a class="dropdown-item-header" type="button">Đánh giá hiệu quả lốp xe</a>
                                   <a class="dropdown-item-header" type="button">Kiểm tra lốp định kỳ</a>
@@ -54,7 +54,7 @@
                                 <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Khuyến mại</a>
+                                <a class="nav-link" href="{{url('/khuyen-mai')}}">Khuyến mại</a>
                             </li>
                         </ul>
                     </div>

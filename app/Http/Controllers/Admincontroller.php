@@ -157,6 +157,7 @@ class Admincontroller extends Controller
           'tyre_structure'   => $request->tyre_structure,
           'tyre_features'   => json_encode($request->features),
           'install_position_image'   => 'tyre/install/'.$imageName,
+          'price' => $request->price
       ]);
       $images = $request->filenames;
       foreach ($images as $key => $image){
@@ -334,7 +335,7 @@ class Admincontroller extends Controller
            $image->setAttribute('src', $image_name);
         }
  
-       $content = $dom->saveHTML();
+//       $content = $dom->saveHTML();
        
        Posts::create([
             'type_id' => $request->type,

@@ -10,6 +10,7 @@ use App\Models\Modelcar;
 use App\Models\Brand;
 use App\Models\TyreDimention;
 use App\Models\TyreMadein;
+use App\Models\Posts;
 
 class HomeController extends Controller
 {
@@ -114,5 +115,14 @@ class HomeController extends Controller
       $dealers = Dealer::where('province', $province)->get();
       $provinces = Dealer::select('area','province')->distinct('province')->get();
       return view('client.finddealer', ['dealers' => $dealers, 'provinces' => $provinces, 'provincename' => $province]);
+    }
+    
+    public function posts($slug) {
+      $post = Posts::where('slug', $slug)->first();
+      return view('client.post', ['post' => $post]);
+    }
+    
+    public function promotion() {
+      return view('client.promotion');
     }
 }

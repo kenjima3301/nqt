@@ -27,6 +27,8 @@ Route::get('/ve-nqt', [HomeController::class, 'nqt'])->name('nqt');
 Route::get('/tim-dai-ly', [HomeController::class, 'finddealer'])->name('finddealer');
 Route::get('/dich-vu', [HomeController::class, 'services'])->name('services');
 Route::get('/ve-trazano', [HomeController::class, 'trazano'])->name('trazano');
+Route::get('/khuyen-mai', [HomeController::class, 'promotion'])->name('promotion');
+Route::get('/blog/{slug}', [HomeController::class, 'posts'])->name('posts');
 
 Route::get('/login', [Usercontroller::class, 'login']);
 Route::post('/login', [Usercontroller::class, 'validate_login']);
