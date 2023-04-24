@@ -334,10 +334,22 @@ class Admincontroller extends Controller
            $image->removeAttribute('src');
            $image->setAttribute('src', $image_name);
         }       
+        $slug = Str::slug($request->title);
+        $post = Posts::where('slug', 'like', '%'.$slug.'%')->orderBy('id', 'desc')->first();
+        if($post){
+          $slugarray = explode('-', $post->slug);
+          $endslug = end($slugarray);
+          if(is_numeric($endslug)){
+            $endslug = $endslug +1;
+          }else {
+            $endslug = 1;
+          }
+          $slug = Str::slug($request->title).'-'.$endslug;
+        }
        Posts::create([
             'type_id' => $request->type,
             'title' => $request->title,
-            'slug' => Str::slug($request->title),
+            'slug' => $slug,
             'content' => $content,
             'status' => 'public'
        ]);
@@ -381,8 +393,22 @@ class Admincontroller extends Controller
            $image->setAttribute('src', $image_name);
         }  
        $post->type_id = $request->type;
-       $post->title = $request->title;
-       $post->slug = Str::slug($request->title);
+       if($request->title != $post->title){
+          $post->title = $request->title;
+          $slug = Str::slug($request->title);
+          $post = Posts::where('slug', 'like', '%'.$slug.'%')->orderBy('id', 'desc')->first();
+          if($post){
+                $slugarray = explode('-', $post->slug);
+                $endslug = end($slugarray);
+                if(is_numeric($endslug)){
+                  $endslug = $endslug +1;
+                }else {
+                  $endslug = 1;
+                }
+                $slug = Str::slug($request->title).'-'.$endslug;
+            }
+            $post->slug = $slug;
+       }
        $post->content = $content;
        $post->save();
  
