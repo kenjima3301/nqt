@@ -36,11 +36,11 @@
           </div>
           <div class="col-lg-12">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="chinacheck" value="option2">
+              <input class="form-check-input" type="checkbox" id="chinacheck" value="option2" checked="checked">
               <label class="form-check-label" for="inlineCheckbox2"><img src="{{asset('client/assets/img/china.jpg') }}" width="15px" alt=""> China ({{$china}})</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="thailandcheck" value="option1">
+              <input class="form-check-input" type="checkbox" id="thailandcheck" value="option1" checked="checked">
               <label class="form-check-label" for="inlineCheckbox1"><img src="{{asset('client/assets/img/thailan.jpg') }}" width="15px" alt=""> Thailand ({{$thailand}})</label>
             </div>
             
