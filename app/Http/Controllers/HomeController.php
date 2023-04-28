@@ -9,6 +9,8 @@ use App\Models\Dealer;
 use App\Models\Modelcar;
 use App\Models\Brand;
 use App\Models\TyreDimention;
+use App\Models\TyreMadein;
+use App\Models\Posts;
 
 class HomeController extends Controller
 {
@@ -62,6 +64,27 @@ class HomeController extends Controller
           'sizes' => $sizes
       ]);
     }
+    
+    public function listProductpostfilter(Request $request) {
+      $models = Modelcar::all();
+      $brands = Brand::all();
+      $tyres = Tyre::join('tyre_dimentions', 'tyres.id', '=', 'tyre_dimentions.tyre_id')
+              ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%')
+              ->where('tyres.model_id', $request->model)
+              ->where('tyres.brand_id', $request->brand)
+              ->distinct('tyres.id')
+              ->get('tyres.*');
+      $sizes = TyreDimention::select('size')->distinct('size')->get();
+      return view('client.list-product', [
+          'models' => $models,
+          'brands' => $brands,
+          'tyres' => $tyres,
+          'sizes' => $sizes,
+          'sizeselected' => $request->size,
+          'model' => $request->model,
+          'brand' => $request->brand
+      ]);
+    }
 
     public function productDetail($id) {
       $models = Modelcar::all();
@@ -71,6 +94,15 @@ class HomeController extends Controller
       $sizes = TyreDimention::select('size')->distinct('size')->get();
       $tyre = Tyre::find($id);
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
+//      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
+      $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
+              ->where('tyre_dimentions.tyre_id', $tyre->id)
+              ->where('tyre_countries.madecountry_id', 1)
+                ->count();
+      $china = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
+              ->where('tyre_dimentions.tyre_id', $tyre->id)
+              ->where('tyre_countries.madecountry_id', 2)
+                ->count();      
       $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(3)->get();
       return view('client.product-detail', [
           'tyre' => $tyre, 
@@ -78,7 +110,9 @@ class HomeController extends Controller
           'relatedtypres' => $relatedtypres,
           'models' => $models,
           'brands' => $brands,
-          'tyre_sizes' => $tyre_sizes
+          'tyre_sizes' => $tyre_sizes,
+          'thailand' => $thailand,
+          'china' => $china
           ]);
     }
 
@@ -102,5 +136,14 @@ class HomeController extends Controller
       $dealers = Dealer::where('province', $province)->get();
       $provinces = Dealer::select('area','province')->distinct('province')->get();
       return view('client.finddealer', ['dealers' => $dealers, 'provinces' => $provinces, 'provincename' => $province]);
+    }
+    
+    public function posts($slug) {
+      $post = Posts::where('slug', $slug)->first();
+      return view('client.post', ['post' => $post]);
+    }
+    
+    public function promotion() {
+      return view('client.promotion');
     }
 }

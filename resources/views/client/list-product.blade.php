@@ -5,34 +5,38 @@
 	<div class="row">
     <!-- Left Navbar -->
     <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
-      <form>
+      <form method="POST" action="{{url('tim-lop-xe-filter')}}" enctype="multipart/form-data">
+      @csrf
       <h4 class="text-center mt-4">Tìm Lốp</h4>
         <div class="row">
           <div class="col-lg-12">
             <label>Loại xe</label>
-            <select class="js-select2">
+            <select class="js-select2" name="model">
               @foreach($models as $model)
-              <option>{{$model->name}}</option>
+              <option value="{{$model->id}}">{{$model->name}}</option>
               @endforeach
             </select>
           </div>
           
           <div class="col-lg-12">
             <label>Hãng lốp</label>
-            <select class="js-select2">
+            <select class="js-select2" name="brand">
               @foreach($brands as $brand)
-              <option>{{$brand->name}}</option>
+              <option value="{{$brand->id}}">{{$brand->name}}</option>
               @endforeach
             </select>
           </div>
 
           <div class="col-lg-12">
             <label>Size lốp</label>
-            <select class="js-select2">
+            <select class="js-select2" name="size">
               @foreach($sizes as $size)
-              <option>{{$size->size}}</option>
+              <option value="{{$size->size}}" @if(isset($sizeselected) && $size->size == $sizeselected) selected @endif >{{$size->size}}</option>
               @endforeach
             </select>
+          </div>
+          <div class="col-lg-12 align-items-center">
+          <button class="btn btn-success text-center btn-sm btn-block">Tìm</button>
           </div>
         </div>
       </form>

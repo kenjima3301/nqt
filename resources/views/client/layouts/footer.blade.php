@@ -23,7 +23,7 @@
             <div class="menu-footer col-lg-4 col-md-6">
                 <h5>Thông tin</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="nav-link">Bí quyết chọn lốp xe</a></li>
+                    <li><a href="{{url('blog/bi-quyet-chon-lop-xe')}}" class="nav-link">Bí quyết chọn lốp xe</a></li>
                     <li><a href="#" class="nav-link">Phân loại các dòng xe</a></li>
                     <li><a href="#" class="nav-link">Đánh giá hiệu quả lốp xe</a></li>
                     <li><a href="#" class="nav-link">Kiểm tra lốp định kỳ</a></li>
@@ -48,4 +48,7 @@
       </div>
     </div>
   </div>
+  <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="300" data-height="300"> </div> 
+
+<script src="https://sp.zalo.me/plugins/sdk.js"> </script> 
 </footer>
