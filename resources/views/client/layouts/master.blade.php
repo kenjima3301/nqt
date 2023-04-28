@@ -8,7 +8,7 @@
 
     <link rel="icon" type="image/png" href="{{ asset('client/assets/img/icon.png') }}"/>
     <link rel="stylesheet" href="{{ asset('client/assets/fonts/font-awesome-6-pro-main/css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap-4.6.2-dist 2/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap-4.6.2-dist 2/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/nqt.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/trazano.css') }}">

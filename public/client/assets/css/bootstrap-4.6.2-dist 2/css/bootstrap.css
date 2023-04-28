@@ -552,7 +552,7 @@ pre code {
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .container, .container-sm {
     max-width: 540px;
   }
@@ -850,7 +850,7 @@ pre code {
   margin-left: 91.666667%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .col-sm {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -2451,7 +2451,7 @@ textarea.form-control {
   width: 100%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .form-inline label {
     display: -ms-flexbox;
     display: flex;
@@ -3261,7 +3261,7 @@ input[type="button"].btn-block {
   left: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .dropdown-menu-sm-left {
     right: auto;
     left: 0;
@@ -4466,7 +4466,7 @@ input[type="button"].btn-block {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .navbar-expand-sm {
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
@@ -4918,7 +4918,7 @@ input[type="button"].btn-block {
   margin-bottom: 15px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .card-deck {
     display: -ms-flexbox;
     display: flex;
@@ -4940,7 +4940,7 @@ input[type="button"].btn-block {
   margin-bottom: 15px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .card-group {
     display: -ms-flexbox;
     display: flex;
@@ -4986,7 +4986,7 @@ input[type="button"].btn-block {
   margin-bottom: 0.75rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .card-columns {
     -webkit-column-count: 3;
     -moz-column-count: 3;
@@ -5318,7 +5318,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   border-radius: 0.3rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .jumbotron {
     padding: 4rem 2rem;
   }
@@ -5647,7 +5647,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   border-left-width: 1px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .list-group-horizontal-sm {
     -ms-flex-direction: row;
     flex-direction: row;
@@ -6164,7 +6164,7 @@ a.close.disabled {
   overflow: scroll;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .modal-dialog {
     max-width: 500px;
     margin: 1.75rem auto;
@@ -7035,7 +7035,7 @@ button.bg-dark:focus {
   display: inline-flex !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .d-sm-none {
     display: none !important;
   }
@@ -7408,7 +7408,7 @@ button.bg-dark:focus {
   align-self: stretch !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .flex-sm-row {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
@@ -7976,7 +7976,7 @@ button.bg-dark:focus {
   float: none !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .float-sm-left {
     float: left !important;
   }
@@ -8631,7 +8631,7 @@ button.bg-dark:focus {
   margin-left: auto !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .m-sm-0 {
     margin: 0 !important;
   }
@@ -10057,7 +10057,7 @@ button.bg-dark:focus {
   text-align: center !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   .text-sm-left {
     text-align: left !important;
   }

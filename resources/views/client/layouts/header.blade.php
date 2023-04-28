@@ -2,11 +2,11 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="col-lg-2 col-md-2 col-sm-2">
-                <a href="{{route('index')}}" class="navbar-brand"><img src="{{ asset('client/assets/img/logo.png') }}" alt=""></a>
+                <a href="{{route('index')}}" class="navbar-brand logo"><img src="{{ asset('client/assets/img/logo.png') }}" alt=""></a>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10">
                 <div class="row mt-4">
-                    <div class="col-lg-10 col-sm-10 float-right">
+                    <div class="col-lg-12 col-sm-12 float-right">
                         <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
