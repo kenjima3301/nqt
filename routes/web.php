@@ -15,11 +15,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
-});
-
-Route::get('/home', [HomeController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/lop-xe-tai/{id}', [HomeController::class, 'productDetail'])->name('product-detail');
 Route::get('/tim-lop-xe', [HomeController::class, 'listProduct'])->name('list-product');
 Route::post('/tim-lop-xe', [HomeController::class, 'listProductpost']);
