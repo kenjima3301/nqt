@@ -1,14 +1,16 @@
 <header class="header-site">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light ">
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-md-2 col-sm-2">
                 <a href="{{route('index')}}" class="navbar-brand"><img src="{{ asset('client/assets/img/logo.png') }}" alt=""></a>
             </div>
-            <div class="col-lg-10">
+            <div class="col-lg-10 col-md-10 col-sm-10">
                 <div class="row mt-4">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <div class="col-lg-10 col-sm-10 float-right">
+                        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown {{ Request::path() == 'san-pham' ? 'active' : ''}}">
@@ -60,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-4">
+                <div class="row mt-4 d-none d-lg-block">
                     <div class="form-group has-search offset-lg-2">
                         <span class="form-control-feedback"><i class="fa-light fa-magnifying-glass"></i></span>
                         <form method="POST" action="{{url('tim-lop-xe')}}" enctype="multipart/form-data">

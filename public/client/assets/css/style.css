@@ -331,3 +331,9 @@ html {
   select[readonly].select2-hidden-accessible + .select2-container .select2-selection__clear {
     display: none;
   }
+
+  @media (min-width: 375px) and  (max-width: 575px){
+    .logo img {
+      width: 100px;
+    }
+  }
