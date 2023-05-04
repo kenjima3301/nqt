@@ -1,2 +1,7 @@
 User-agent: *
 Disallow:
+/ve-trazano
+/blog/bi-quyet-chon-lop-xe
+/ve-nqt
+/khuyen-mai
+/dich-vu
