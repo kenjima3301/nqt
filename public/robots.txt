@@ -1,7 +1,6 @@
 User-agent: *
-Disallow:
-/ve-trazano
-/blog/bi-quyet-chon-lop-xe
-/ve-nqt
-/khuyen-mai
-/dich-vu
+Disallow: /ve-trazano
+Disallow: /blog/bi-quyet-chon-lop-xe
+Disallow: /ve-nqt
+Disallow: /khuyen-mai
+Disallow: /dich-vu
