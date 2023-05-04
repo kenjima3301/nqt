@@ -31,7 +31,7 @@
           <div class="col-lg-7 position-relative about-img" style="background-image: url({{asset('trazano/hero-bg.jpg')}}) ;" data-aos="fade-up" data-aos-delay="150">
             <div class="call-us position-absolute">
               <h4>Liên hệ chi tiết</h4>
-              <p>+84 5589 55488 55</p>
+              <p>(+84) 934.54.13.13</p>
             </div>
           </div>
           <div class="col-lg-5 d-flex align-items-lg-start" data-aos="fade-up" data-aos-delay="300">

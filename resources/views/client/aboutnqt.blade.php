@@ -193,21 +193,21 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Địa chỉ:</h4>
-                <p>164 Khuất Duy Tiến, quận Thanh Xuân, phường Nhân Chính, Hà Nội</p>
+                <p>79/5A DT743 - Phường Tân Đông Hiệp - TP. Dĩ An - Tỉnh Bình Dương</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>ngocquyetthang@gmail.com</p>
+                <p>nqt3999@gmail.com</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Điện thoại:</h4>
-                <p>0904408453</p>
+                <p> (+84) 934.54.13.13</p>
               </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7633717667172!2d105.8097269!3d21.0021204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ac99a3b80125%3A0xb01f364cb2e725fd!2zMTY0IEtodeG6pXQgRHV5IFRp4bq_biwgVOG7lSAzNSwgVGhhbmggWHXDom4sIEjDoCBO4buZaQ!5e0!3m2!1sen!2s!4v1681891038133!5m2!1sen!2s" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.517855388182!2d106.741649!3d10.924199799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d9c94916fadf%3A0xbb6ff70818f161ad!2zNzkgxJBUNzQzLCBLaHUgUGjhu5EsIFRodeG6rW4gQW4sIELDrG5oIETGsMahbmc!5e0!3m2!1sen!2s!4v1683176185483!5m2!1sen!2s" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
             </div>
 
           </div>

@@ -4,10 +4,10 @@
       <div class="col-lg-6">
         <a href="{{route('index')}}"><img src="{{ asset('client/assets/img/logo.png') }}" alt="Your logo" class="img-fluid" width="15%"></a>
         <div class="footer-info">
-          <p><i class="fa-light fa-location-dot"></i> Địa chỉ: 164 Khuất Duy Tiến, quận Thanh Xuân, phường Nhân Chính, Hà Nội</p>
-          <p><i class="fa-light fa-rectangle-code"></i> MST: 11022000</p>
-          <p><i class="fa-light fa-envelope"></i> Email: ngocquyetthang@gmail.com</p>
-          <p><i class="fa-light fa-phone"></i> Điện thoại: 0904408453</p>
+          <p><i class="fa-light fa-location-dot"></i> Địa chỉ: 79/5A DT743 - Phường Tân Đông Hiệp - TP. Dĩ An - Tỉnh Bình Dương</p>
+          <p><i class="fa-light fa-rectangle-code"></i> MST: 0314168571</p>
+          <p><i class="fa-light fa-envelope"></i> Email: nqt3999@gmail.com</p>
+          <p><i class="fa-light fa-phone"></i> Điện thoại: (+84) 934.54.13.13</p>
         </div>
       </div>
       <div class="col-lg-6">
