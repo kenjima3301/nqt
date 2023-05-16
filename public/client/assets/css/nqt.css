@@ -146,13 +146,13 @@ h6 {
   padding: 0;
 }
 
-.navbar ul {
+/* .navbar ul {
   margin: 0;
   padding: 0;
   display: flex;
   list-style: none;
   align-items: center;
-}
+} */
 
 .navbar li {
   position: relative;
@@ -252,7 +252,7 @@ h6 {
 /**
 * Mobile Navigation 
 */
-.mobile-nav-toggle {
+/* .mobile-nav-toggle {
   color: #364146;
   font-size: 28px;
   cursor: pointer;
@@ -263,16 +263,6 @@ h6 {
 
 .mobile-nav-toggle.bi-x {
   color: #fff;
-}
-
-@media (max-width: 991px) {
-  .mobile-nav-toggle {
-    display: block;
-  }
-
-  .navbar ul {
-    display: none;
-  }
 }
 
 .navbar-mobile {
@@ -356,7 +346,7 @@ h6 {
 
 .navbar-mobile .dropdown>.dropdown-active {
   display: block;
-}
+} */
 
 /*--------------------------------------------------------------
 # Hero Section
