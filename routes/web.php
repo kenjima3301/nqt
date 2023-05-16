@@ -26,6 +26,7 @@ Route::get('/dich-vu', [HomeController::class, 'services'])->name('services');
 Route::get('/ve-trazano', [HomeController::class, 'trazano'])->name('trazano');
 Route::get('/khuyen-mai', [HomeController::class, 'promotion'])->name('promotion');
 Route::get('/blog/{slug}', [HomeController::class, 'posts'])->name('posts');
+Route::get('/lien-he', [HomeController::class, 'contactus'])->name('contactus');
 
 Route::get('/login', [Usercontroller::class, 'login']);
 Route::post('/login', [Usercontroller::class, 'validate_login']);

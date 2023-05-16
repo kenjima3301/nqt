@@ -146,4 +146,8 @@ class HomeController extends Controller
     public function promotion() {
       return view('client.promotion');
     }
+    
+    public function contactus() {
+      return view('client.contactus');
+    }
 }

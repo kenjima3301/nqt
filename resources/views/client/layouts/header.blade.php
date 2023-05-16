@@ -97,6 +97,9 @@
                     </div>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                         <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('')}}">Trang chủ</a>
+                            </li>
                             <li class="nav-item dropdown {{ Request::path() == 'san-pham' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                                 <div class="dropdown-menu dropright" aria-labelledby="dropdownMenu2">  
@@ -139,8 +142,11 @@
                             <li class="nav-item  {{ Request::path() == 'tim-dai-ly' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item {{ Request::path() == 'khuyen-mai' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/khuyen-mai')}}">Khuyến mại</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('lien-he')}}">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
