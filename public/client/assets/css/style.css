@@ -50,10 +50,21 @@ html {
 
 .navbar-light .navbar-nav .nav-link-sub.tranzano{
   background: #e69c2f;
-  color: #fff;
+  color: #000;
+}
+
+.navbar-light .navbar-nav .dropdown-item-header.tranzano{
+  background: #e69c2f;
+  color: #000;
+}
+
+.navbar-light .navbar-nav .nav-link-sub.golden-crown{
+  background: #000;
+  color: #f08300;
 }
 
 .navbar-light .navbar-nav .dropdown-item-header.golden-crown{
+  background: #000;
   color: #f08300;
 }
 

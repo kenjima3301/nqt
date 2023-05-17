@@ -105,9 +105,9 @@
                                 <div class="dropdown-menu dropright" aria-labelledby="dropdownMenu2">  
                                    <a class="nav-link-sub dropdown-toggle tranzano" type="button" id="submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lốp xe tải Trazano</a>
                                     <div class="dropdown-menu">
-                                    <a class="dropdown-item-header" href="{{url('ve-trazano')}}">Về Trazano</a>
-                                    <a class="dropdown-item-header" href="#">Điểm nổi bật</a>
-                                    <a class="dropdown-item-header" href="{{url('tim-lop-xe')}}">Các dòng lốp</a>
+                                    <a class="dropdown-item-header tranzano" href="{{url('ve-trazano')}}">Về Trazano</a>
+                                    <a class="dropdown-item-header tranzano" href="#">Điểm nổi bật</a>
+                                    <a class="dropdown-item-header tranzano" href="{{url('tim-lop-xe')}}">Các dòng lốp</a>
                                 </div>
                                 <a class="dropdown-item-header golden-crown" type="button">Lốp Xe tải Golden Crown</a>
                                 <a class="dropdown-item-header" type="button">Lốp xe tải các nhãn hiệu khác</a>
