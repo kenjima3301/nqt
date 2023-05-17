@@ -32,7 +32,7 @@
                                         <a class="dropdown-item-header" href="#">Điểm nổi bật</a>
                                         <a class="dropdown-item-header" href="{{url('tim-lop-xe')}}">Các dòng lốp</a>
                                     </div>
-                                    <a class="dropdown-item-header" type="button">Lốp xe du lịch</a>
+                                    <a class="dropdown-item-header" type="button">Lốp Xe tải Golden Crown</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown {{ Request::path() == 'dich-vu' ? 'active' : ''}}">
@@ -103,13 +103,15 @@
                             <li class="nav-item dropdown {{ Request::path() == 'san-pham' ? 'active' : ''}}">
                                 <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                                 <div class="dropdown-menu dropright" aria-labelledby="dropdownMenu2">  
-                                   <a class="nav-link-sub dropdown-toggle" type="button" id="submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lốp xe tải Trazano</a>
+                                   <a class="nav-link-sub dropdown-toggle tranzano" type="button" id="submenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lốp xe tải Trazano</a>
                                     <div class="dropdown-menu">
                                     <a class="dropdown-item-header" href="{{url('ve-trazano')}}">Về Trazano</a>
                                     <a class="dropdown-item-header" href="#">Điểm nổi bật</a>
                                     <a class="dropdown-item-header" href="{{url('tim-lop-xe')}}">Các dòng lốp</a>
-                                  </div>
-                                  <a class="dropdown-item-header" type="button">Lốp xe du lịch</a>
+                                </div>
+                                <a class="dropdown-item-header golden-crown" type="button">Lốp Xe tải Golden Crown</a>
+                                <a class="dropdown-item-header" type="button">Lốp xe tải các nhãn hiệu khác</a>
+
                                 </div>
                             </li>
                             <li class="nav-item dropdown {{ Request::path() == 'dich-vu' ? 'active' : ''}}">
@@ -120,6 +122,8 @@
                                   <a class="dropdown-item-header" type="button">Kiểm tra kỹ thuật</a>
                                   <a class="dropdown-item-header" type="button">Chạy thử</a>
                                   <a class="dropdown-item-header" type="button">Dịch vụ cao cấp</a>
+                                  <a class="dropdown-item-header" type="button">Quy trình bảo hành lốp</a>
+                                  <a class="dropdown-item-header" type="button">NỘI BỘ NQT</a>
                                 </div>
                             </li>
                            

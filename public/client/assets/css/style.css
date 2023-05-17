@@ -48,6 +48,15 @@ html {
     padding: 10px 30px;
 }
 
+.navbar-light .navbar-nav .nav-link-sub.tranzano{
+  background: #e69c2f;
+  color: #fff;
+}
+
+.navbar-light .navbar-nav .dropdown-item-header.golden-crown{
+  color: #f08300;
+}
+
 .navbar-light .navbar-nav a:hover{
     color: #fff;
     background-color: #35A25B;
