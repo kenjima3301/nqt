@@ -123,7 +123,7 @@
                                   <a class="dropdown-item-header" type="button">Chạy thử</a>
                                   <a class="dropdown-item-header" type="button">Dịch vụ cao cấp</a>
                                   <a class="dropdown-item-header" type="button">Quy trình bảo hành lốp</a>
-                                  <a class="dropdown-item-header" type="button">NỘI BỘ NQT</a>
+                                  <a href="{{url('/staff')}}" class="dropdown-item-header" type="button">NỘI BỘ NQT</a>
                                 </div>
                             </li>
                            
@@ -132,6 +132,7 @@
                                   Thông tin
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <a href="{{url('/khuyen-mai')}}" class="dropdown-item-header" type="button">Khuyến mại</a>
                                   <a href="{{url('blog/bi-quyet-chon-lop-xe')}}" class="dropdown-item-header" type="button">Bí quyết chọn lốp xe</a>
                                   <a class="dropdown-item-header" type="button">Phân loại các dòng xe</a>
                                   <a class="dropdown-item-header" type="button">Đánh giá hiệu quả lốp xe</a>
@@ -145,9 +146,6 @@
                             
                             <li class="nav-item  {{ Request::path() == 'tim-dai-ly' ? 'active' : ''}}">
                                 <a class="nav-link" href="{{url('/tim-dai-ly')}}">Tìm đại lý</a>
-                            </li>
-                            <li class="nav-item {{ Request::path() == 'khuyen-mai' ? 'active' : ''}}">
-                                <a class="nav-link" href="{{url('/khuyen-mai')}}">Khuyến mại</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('lien-he')}}">Liên hệ</a>
