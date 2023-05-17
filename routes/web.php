@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usercontroller;
 use App\Http\Controllers\Admincontroller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StaffController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,3 +74,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   
 })->middleware('auth');
 
+Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
+  Route::get('/', function () {
+    return redirect('staff/bang-quan-tri');
+  });
+  Route::get('/bang-quan-tri', [StaffController::class, 'dashboard']);
+})->middleware('auth');

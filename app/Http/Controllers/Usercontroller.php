@@ -34,7 +34,11 @@ class Usercontroller extends Controller
 
         if(Auth::attempt($credentials))
         {
+          if(Auth::user()->hasRole('admin')){
             return redirect('admin');
+          }else if (Auth::user()->hasRole('staff')){
+            return redirect('staff');
+          }
         }
 
         return redirect('login')->with('success', 'Login details are not valid');
