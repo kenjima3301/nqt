@@ -81,8 +81,8 @@ class HomeController extends Controller
           'tyres' => $tyres,
           'sizes' => $sizes,
           'sizeselected' => $request->size,
-          'model' => $request->model,
-          'brand' => $request->brand
+          'model_selected' => $request->model,
+          'brand_selected' => $request->brand
       ]);
     }
 

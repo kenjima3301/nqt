@@ -79,4 +79,12 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     return redirect('staff/bang-quan-tri');
   });
   Route::get('/bang-quan-tri', [StaffController::class, 'dashboard']);
+  Route::get('/trazano', [StaffController::class, 'trazano']);
+  Route::post('/trazano', [StaffController::class, 'trazanosearch']);
+  Route::get('/trazano/{id}', [StaffController::class, 'trazanobyid']);
+  Route::post('/xuat-lop-xe-tai', [StaffController::class, 'truckoutput']);
+  Route::get('/goldencrown', [StaffController::class, 'goldencrown']);
+  Route::post('/goldencrown', [StaffController::class, 'goldencrownsearch']);
+  Route::get('/othertyre', [StaffController::class, 'othertyre']);
+  
 })->middleware('auth');

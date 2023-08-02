@@ -13,7 +13,7 @@
             <label>Loại xe</label>
             <select class="js-select2" name="model">
               @foreach($models as $model)
-              <option value="{{$model->id}}">{{$model->name}}</option>
+              <option value="{{$model->id}}" @if(isset($model_selected) && $model->id == $model_selected) selected @endif>{{$model->name}}</option>
               @endforeach
             </select>
           </div>
@@ -22,7 +22,7 @@
             <label>Hãng lốp</label>
             <select class="js-select2" name="brand">
               @foreach($brands as $brand)
-              <option value="{{$brand->id}}">{{$brand->name}}</option>
+              <option value="{{$brand->id}}" @if(isset($brand_selected) && $brand->id == $brand_selected) selected @endif>{{$brand->name}}</option>
               @endforeach
             </select>
           </div>
@@ -64,7 +64,7 @@
                           </div>
                           <div class="row mt">
                             <div class="col-lg-6">
-                              <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
+                              <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
                             </div>
                             <div class="col-lg-6 text-center">
                               <a href="{{url('lop-xe-tai/'.$tyre->id)}}" class="btn btn-success">Chi tiết</a>

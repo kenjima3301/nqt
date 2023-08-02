@@ -69,29 +69,7 @@
                                     <a class="nav-link" href="{{url('/khuyen-mai')}}">Khuyến mại</a>
                                 </li>
                                 <!-- login -->
-                                <li class="nav-item mt-3">
-                                @guest
-                                    @if (Route::has('login'))
-                                    <a class="nav-link" href="{{ route('login') }}">Đăng nhập</a>
-                                    @endif
-                                    <!-- @if (Route::has('register'))
-                                    <a class="nav-link" href="{{ route('register') }}">Đăng kí</a>
-                                    @endif -->
-                                @else
-                                <div class="dropdown">
-                                    <a class="dropbtn nav-link dropdown-toggle">{{ Auth::user()->name }}</a>
-                                    <div class="dropdown-content">
-                                        <a href="{{ route('user.profile') }}">Hồ sơ của tôi</a>
-                                        <a href="{{ route('user.purchase') }}">Đơn mua</a>
-                                        <a  href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">Đăng xuất</a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                    </div>
-                                    @endguest
-                                </li>
+                                
                             </ul>
                         </nav>
                     </div>

@@ -32,7 +32,7 @@
                 </div>
                 <div class="row mt">
                     <div class="col-lg-6">
-                    <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
+                    <p>{{number_format($new->price, 0, '', ',')}}đ / Lốp</p>
                     </div>
                     <div class="col-lg-6 text-center">
                     <a href="{{url('lop-xe-tai/'.$new->id)}}" class="btn btn-success">Chi tiết</a>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="row mt">
                 <div class="col-lg-6">
-                    <p>1.000.000Đ / Lốp <span class="discount">1.500.00Đ</span></p>
+                    <p>{{number_format($best->price, 0, '', ',')}}đ / Lốp</p>
                 </div>
                 <div class="col-lg-6 text-center">
                     <a href="{{url('lop-xe-tai/'.$best->id)}}" class="btn btn-success">Chi tiết</a>
