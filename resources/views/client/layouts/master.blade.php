@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/trazano.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/promotion.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/checkout.css') }}">
 </head>
 <body>
     <div class="wrapper">

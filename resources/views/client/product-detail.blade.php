@@ -101,7 +101,7 @@
                             <p>1.500.000</p>
                         </div>
                         <div class="col-lg-6 text-center">
-                            <a href="#" class="btn btn-success">Mua hàng</a>
+                            <a href="{{ route('checkout')}}" class="btn btn-success">Mua hàng</a>
                         </div>
                     </div>
                 </div>
