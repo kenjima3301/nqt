@@ -45,7 +45,7 @@
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="thailandcheck" value="option1" checked="checked">
-              <label class="form-check-label" for="inlineCheckbox1"><img src="{{asset('client/assets/img/thailan.jpg') }}" width="15px" alt=""> Thailand ({{$thailand}})</label>
+              <label class="form-check-label" for="inlineCheckbox1"><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> Thailand ({{$thailand}})</label>
             </div>
             
           </div>
@@ -97,11 +97,11 @@
 
                     <div class="row mt">
                         <div class="col-lg-6">
-                            <p>1.000.000Đ / Lốp</p>
-                            <p>1.500.000</p>
+                            <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
                         </div>
                         <div class="col-lg-6 text-center">
                             <a href="{{ route('checkout')}}" class="btn btn-success">Mua hàng</a>
+                            <a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                         <tbody>
                             
                               @foreach($tyre_sizes as $size)
-                              <tr class="@if(count($size->madeins) == 2){{'bothflag'}}@elseif($size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif($size->madeins[0]->country->name == 'China'){{'china'}}@endif">
+                              <tr class="@if(isset($size->madeins[0]) && count($size->madeins) == 2){{'bothflag'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'China'){{'china'}}@endif">
                                   <td class="text-left">@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
@@ -172,7 +172,7 @@
                         <p><img src="{{asset('client/assets/img/china.jpg') }}" width="15px" alt=""> Made in China</p>
                     </div>
                     <div class="col-lg-3">
-                        <p><img src="{{asset('client/assets/img/thailan.jpg') }}" width="15px" alt=""> Made in ThaiLand</p>
+                        <p><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> Made in ThaiLand</p>
                     </div>
                 
             </div>
@@ -200,7 +200,7 @@
                             </div>
                             <div class="row mt">
                                 <div class="col-lg-6">
-                                    <p>1.000.000Đ / Lốp 1.500.00Đ</p>
+                                    <p>{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
                                 </div>
                                 <div class="col-lg-6 text-center">
                                     <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" class="btn btn-success">Chi tiết</a>
