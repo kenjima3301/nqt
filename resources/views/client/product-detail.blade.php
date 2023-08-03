@@ -100,6 +100,7 @@
                             <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
                         </div>
                         <div class="col-lg-6 text-center">
+                            <a href="{{ route('checkout')}}" class="btn btn-success">Mua hàng</a>
                             <a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>
                         </div>
                     </div>

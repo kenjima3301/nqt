@@ -150,4 +150,37 @@ class HomeController extends Controller
     public function contactus() {
       return view('client.contactus');
     }
+
+    public function checkout(){
+      $file_name = 'tinh_tp';
+      $tinh = $this->readJson($file_name);
+
+      return view('client.checkout', compact('tinh'));
+    } 
+
+    public function readJson($file_name,$folder = null){
+
+      if($folder){
+          $path = storage_path() . "/json/$folder/$file_name.json";
+      }else{
+          $path = storage_path() . "/json/$file_name.json";
+      }
+
+      $json = json_decode(file_get_contents($path), true);
+      return $json;
+  }
+
+  public function getSubData( Request $request) {
+      $folder_name = $request->folder_name;
+      $file_name = $request->id;
+      $html = ' <option value=""> -- Lựa Chọn --  </option>';
+      if($file_name != 0 ){
+          $data = $this->readJson($file_name,$folder_name);
+
+          foreach($data as $key => $value){
+              $html .= '<option value="'.$key.'">'.$value['name'].'</option>';
+          }
+      }
+      return $html;
+  }
 }
