@@ -69,7 +69,9 @@
                                     <a class="nav-link" href="{{url('/khuyen-mai')}}">Khuyến mại</a>
                                 </li>
                                 <!-- login -->
-                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{url('/login')}}">Đăng nhập</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -128,6 +130,26 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('lien-he')}}">Liên hệ</a>
                             </li>
+                            @if( auth()->check() )
+                                <li class="nav-item dropdown">
+                                 <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Tài khoản
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <a href="@if(Auth::user()->hasRole('admin')) {{url('admin')}} @elseif (Auth::user()->hasRole('staff')) {{url('staff')}} @elseif (Auth::user()->hasRole('client')) {{url('client/profile')}} @elseif (Auth::user()->hasRole('dealer')) {{url('dealer/bang-quan-tri')}} @endif" class="dropdown-item-header" type="button">{{ auth()->user()->name }}</a>
+                                 <a href="{{url('/logout')}}" class="dropdown-item-header" type="button" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">Đăng xuất</a>
+                                  <form id="logout-form" action="{{ url('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                                </div>
+                            </li>
+                            @else 
+                            <li class="nav-item">
+                                    <a class="nav-link" href="{{url('/login')}}">Đăng nhập</a>
+                                </li>
+                            @endif
+                            
                         </ul>
                     </div>
                 </div>

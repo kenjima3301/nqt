@@ -33,6 +33,7 @@
                         <td class="text-sm font-weight-normal">{{$dealer->address}} - {{$dealer->province}}</td>
                         <td class="text-sm font-weight-normal">{{$dealer->email}}</td>
                         <td class="text-sm font-weight-normal">{{$dealer->phone}}</td>
+                        <td class="text-sm font-weight-normal"><a href="{{url('admin/dai-ly/edit/'.$dealer->id)}}">Edit</a></td>
                       </tr>
                       @endforeach
                     </tbody>

@@ -5,6 +5,8 @@ use App\Http\Controllers\Usercontroller;
 use App\Http\Controllers\Admincontroller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\DealerController;
+use App\Http\Controllers\ClientController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +37,13 @@ Route::post('/get-subdata', [HomeController::class, 'getSubData'])->name('user.g
 Route::get('/login', [Usercontroller::class, 'login']);
 Route::post('/login', [Usercontroller::class, 'validate_login']);
 Route::post('/logout', [Usercontroller::class, 'logout']);
+Route::get('dang-ky-tai-khoan', [Usercontroller::class, 'register']);
+Route::post('register', [Usercontroller::class, 'registerpost']);
+Route::get('email/verify/{id}/{token}', [Usercontroller::class, 'verifyemail']);
+Route::get('quen-mat-khau', [Usercontroller::class, 'forgotpass']);
+Route::post('forgotpass', [Usercontroller::class, 'forgotpasspost']);
+Route::get('email/changepass/{id}/{token}', [Usercontroller::class, 'changepass']);
+Route::post('changepass', [Usercontroller::class, 'changepasspost']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/', function () {
@@ -66,6 +75,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/dai-ly', [Admincontroller::class, 'dealer']);
   Route::get('/dai-ly-add', [Admincontroller::class, 'adddealer']);
   Route::post('/dai-ly-add', [Admincontroller::class, 'adddealerpost']);
+  Route::get('/dai-ly/edit/{id}', [Admincontroller::class, 'editdealer']);
+  Route::post('/dai-ly-edit', [Admincontroller::class, 'editdealerpost']);
+  Route::post('register-dealer', [Admincontroller::class, 'adddealeruser']);
   
   Route::get('/bai-viet', [Admincontroller::class, 'blog']);
   Route::get('/bai-viet-add', [Admincontroller::class, 'addblog']);
@@ -90,4 +102,26 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::post('/goldencrown', [StaffController::class, 'goldencrownsearch']);
   Route::get('/othertyre', [StaffController::class, 'othertyre']);
   
+})->middleware('auth');
+
+Route::group(['prefix' => 'client', 'as' => 'client'], function () {
+  Route::get('/', function () {
+    return redirect('client/profile');
+  });
+  Route::get('/profile', [ClientController::class, 'profile']);
+  
+})->middleware('auth');
+
+Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
+  Route::get('/', function () {
+    return redirect('dealer/bang-quan-tri');
+  });
+  Route::get('/bang-quan-tri', [DealerController::class, 'dashboard']);
+  Route::get('/trazano', [DealerController::class, 'trazano']);
+  Route::post('/trazano', [DealerController::class, 'trazanosearch']);
+  Route::get('/trazano/{id}', [DealerController::class, 'trazanobyid']);
+  Route::post('/xuat-lop-xe-tai', [DealerController::class, 'truckoutput']);
+  Route::get('/goldencrown', [DealerController::class, 'goldencrown']);
+  Route::post('/goldencrown', [DealerController::class, 'goldencrownsearch']);
+  Route::get('/othertyre', [DealerController::class, 'othertyre']);
 })->middleware('auth');

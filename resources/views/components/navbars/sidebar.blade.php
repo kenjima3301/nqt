@@ -4,7 +4,9 @@
   class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-primary"
   id="sidenav-main">
   <div class="sidenav-header align-items-center text-center mt-2 mb-4">
+    <a href="{{url('')}}">
     <img src="{{asset('assets/images/logo/NGOCQUYETTHANG_Logo.png')}}" alt="NQT logo" height="100">
+    </a>
   </div>
   <hr class="horizontal light mt-0 mb-2">
   <div id="sidenav-collapse-main">

@@ -11,12 +11,12 @@
             <div class="col-lg-12">
               <div class="card-body p-md-5 mx-md-4">
 
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/forgotpass') }}">
                         {{ csrf_field() }}
-                  <p>Đăng nhập:</p>
+                  <p>Lấy lại mật khẩu:</p>
 
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example11">Nhập email/ số điện thoại</label>
+                    <label class="form-label" for="form2Example11">Nhập email</label>
                     <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('username'))
@@ -27,21 +27,9 @@
                     
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example22">Nhập mật khẩu</label>
-                    <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                    
-                  </div>
-
                   <div class="text-center pt-1 pb-1">
                     <button class="btn btn-block fa-lg gradient-custom-2 mb-3 text-white" style="background-color: #35A25B" type="submit">
-                      Đăng nhập
+                      Yêu cầu đổi mật khẩu
                     </button>
                   </div>
                   

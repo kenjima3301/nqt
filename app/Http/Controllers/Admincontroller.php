@@ -19,6 +19,9 @@ use App\Models\Posts;
 use Shuchkin\SimpleXLSXGen;
 use Shuchkin\SimpleXLSX;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use App\Models\RoleUser;
 
 class Admincontroller extends Controller
 {
@@ -284,6 +287,43 @@ class Admincontroller extends Controller
     return redirect('admin/dai-ly');
   }
   
+  public function editdealer($id) {
+    $dealer = Dealer::find($id);
+    if($dealer->user_id != NULL){
+      $dealeraccount = User::find($dealer->user_id);
+    }else {
+      $dealeraccount = NULL;
+    }
+    $provinces = Province::all();
+    return view('admin.dealer.edit', ['provinces' => $provinces, 'dealer'=> $dealer, 'dealeraccount' => $dealeraccount]);
+    
+  }
+  
+  public function editdealerpost(Request $request) {
+   
+    $dealer = Dealer::find($request->dealer_id);
+    if($request->image != ''){
+       $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('dealer/image'), $imageName);
+        $path = public_path().'/dealer/image/';
+          if (!file_exists($path)) {
+            mkdir($path, 0775, true);
+          }
+        $dealer->image = 'dealer/image/'.$imageName;
+    }
+    
+         $dealer->name  = $request->name;
+         $dealer->area   = $request->area;
+         $dealer->province   = $request->province;
+         $dealer->address  = $request->address;
+         $dealer->lat   = $request->lat;
+         $dealer->lng   = $request->lng;
+         $dealer->email   = $request->email;
+         $dealer->phone  = $request->phone;
+         $dealer->save();
+    return redirect('admin/dai-ly/edit/'.$dealer->id);
+  }
+  
   public function groupmanagement() {
     $models = Modelcar::all();
     $madeins = Madein::all();
@@ -317,24 +357,24 @@ class Admincontroller extends Controller
        $content = $request->content;
        $dom = new \DomDocument();
        @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-       $imageFile = $dom->getElementsByTagName('img');
- 
-       foreach($imageFile as $item => $image){
-           $data = $image->getAttribute('src');
-           list($type, $data) = explode(';', $data);
-           list(, $data)      = explode(',', $data);
-           $imgeData = base64_decode($data);
-           $path = public_path().'/uploads/';
-            if (!file_exists($path)) {
-              mkdir($path, 0775, true);
-            }
-           $image_name= "/uploads/" . time().$item.'.png';
-           $path = public_path() . $image_name;
-           file_put_contents($path, $imgeData);
-           
-           $image->removeAttribute('src');
-           $image->setAttribute('src', $image_name);
-        }       
+//       $imageFile = $dom->getElementsByTagName('img');
+// 
+//       foreach($imageFile as $item => $image){
+//           $data = $image->getAttribute('src');
+//           list($type, $data) = explode(';', $data);
+//           list(, $data)      = explode(',', $data);
+//           $imgeData = base64_decode($data);
+//           $path = public_path().'/uploads/';
+//            if (!file_exists($path)) {
+//              mkdir($path, 0775, true);
+//            }
+//           $image_name= "/uploads/" . time().$item.'.png';
+//           $path = public_path() . $image_name;
+//           file_put_contents($path, $imgeData);
+//           
+//           $image->removeAttribute('src');
+//           $image->setAttribute('src', $image_name);
+//        }       
         $slug = Str::slug($request->title);
         $post = Posts::where('slug', 'like', '%'.$slug.'%')->orderBy('id', 'desc')->first();
         if($post){
@@ -375,24 +415,24 @@ class Admincontroller extends Controller
        $content = $request->content;
        $dom = new \DomDocument();
        @$dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-       $imageFile = $dom->getElementsByTagName('img');
- 
-       foreach($imageFile as $item => $image){
-           $data = $image->getAttribute('src');
-           list($type, $data) = explode(';', $data);
-           list(, $data)      = explode(',', $data);
-           $imgeData = base64_decode($data);
-           $path = public_path().'/uploads/';
-            if (!file_exists($path)) {
-              mkdir($path, 0775, true);
-            }
-           $image_name= "/uploads/" . time().$item.'.png';
-           $path = public_path() . $image_name;
-           file_put_contents($path, $imgeData);
-           
-           $image->removeAttribute('src');
-           $image->setAttribute('src', $image_name);
-        }  
+//       $imageFile = $dom->getElementsByTagName('img');
+// 
+//       foreach($imageFile as $item => $image){
+//           $data = $image->getAttribute('src');
+//           list($type, $data) = explode(';', $data);
+//           list(, $data)      = explode(',', $data);
+//           $imgeData = base64_decode($data);
+//           $path = public_path().'/uploads/';
+//            if (!file_exists($path)) {
+//              mkdir($path, 0775, true);
+//            }
+//           $image_name= "/uploads/" . time().$item.'.png';
+//           $path = public_path() . $image_name;
+//           file_put_contents($path, $imgeData);
+//           
+//           $image->removeAttribute('src');
+//           $image->setAttribute('src', $image_name);
+//        }  
        $post->type_id = $request->type;
        if($request->title != $post->title){
           $post->title = $request->title;
@@ -414,5 +454,31 @@ class Admincontroller extends Controller
        $post->save();
  
        return redirect('admin/bai-viet');
+    }
+    
+    public function adddealeruser(Request $request) {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+        
+        $user = User::create([
+            'name'=> $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password)
+        ]);
+        $user->email_verified_at = now();
+        $user->save();
+        RoleUser::create([
+            'role_id' => 4,
+            'user_id' => $user->id
+        ]);
+        $dealer = Dealer::find($request->dealer_id);
+        $dealer->user_id = $user->id;
+        $dealer->save();
+        return back()->with('successaccount','Thêm mới thành công tài khoản cho đại lý');
     }
 }

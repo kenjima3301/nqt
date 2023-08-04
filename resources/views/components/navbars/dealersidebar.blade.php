@@ -13,7 +13,7 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link text-white {{ $activePage == 'bang-quan-tri' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/bang-quan-tri')}}">
+           href="{{url('dealer/bang-quan-tri')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>
@@ -25,7 +25,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link text-white {{ $activePage == 'staff/trazano' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/trazano')}}">
+           href="{{url('dealer/trazano')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>
@@ -34,7 +34,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link text-white {{ $activePage == 'staff/goldencrown' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/goldencrown')}}">
+           href="{{url('dealer/goldencrown')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>
@@ -43,7 +43,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link text-white {{ $activePage == 'staff/othertyre' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/othertyre')}}">
+           href="{{url('dealer/othertyre')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>

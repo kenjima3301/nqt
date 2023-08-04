@@ -11,22 +11,12 @@
             <div class="col-lg-12">
               <div class="card-body p-md-5 mx-md-4">
 
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/changepass') }}">
                         {{ csrf_field() }}
-                  <p>Đăng nhập:</p>
-
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="form2Example11">Nhập email/ số điện thoại</label>
-                    <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('username'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                    
-                  </div>
-
+                        <input type="hidden" name="id" value="{{$id}}">
+                        <input type="hidden" name="tocken" value="{{$token}}">
+                  <p>Đổi mật khẩu:</p>
+                  
                   <div class="form-outline mb-4">
                     <label class="form-label" for="form2Example22">Nhập mật khẩu</label>
                     <input id="password" type="password" class="form-control" name="password" required>
@@ -38,19 +28,26 @@
                                 @endif
                     
                   </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example22">Xác nhận lại mật khẩu</label>
+                    <input id="password_confirm" type="password" class="form-control" name="password_confirm" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirm') }}</strong>
+                                    </span>
+                                @endif
+                    
+                  </div>
 
                   <div class="text-center pt-1 pb-1">
                     <button class="btn btn-block fa-lg gradient-custom-2 mb-3 text-white" style="background-color: #35A25B" type="submit">
-                      Đăng nhập
-                    </button>
+                      Đăng ký</button>
                   </div>
                   
                 </form>
                   <div class="text-right">
-                    <a href="{{url('dang-ky-tai-khoan')}}" style="color:#35A25B">Đăng ký tài khoản</a>
-                  </div>
-                  <div class="text-right">
-                    <a href="{{url('quen-mat-khau')}}" style="color:#35A25B">Quên mật khẩu?</a>
+                    <a href="{{url('login')}}" style="color:#35A25B">Đăng nhập</a>
                   </div>
               </div>
             </div>
