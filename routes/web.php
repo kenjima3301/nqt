@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\DealerController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AjaxController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -101,7 +102,12 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::get('/goldencrown', [StaffController::class, 'goldencrown']);
   Route::post('/goldencrown', [StaffController::class, 'goldencrownsearch']);
   Route::get('/othertyre', [StaffController::class, 'othertyre']);
-  
+  Route::post('/findtyre', [StaffController::class, 'findtyre']);
+  Route::get('/xuat-hang-dai-ly', [StaffController::class, 'outputtodealer']);
+  Route::get('/xuat-hang-dai-ly/{id}', [StaffController::class, 'outputtyretodealer']);
+  Route::get('/xoa-nhap-dai-ly/{id}', [StaffController::class, 'deteleoutput']);
+  Route::get('/xac-nhan-xuat-hang-dai-ly/{id}', [StaffController::class, 'confirmoutput']);
+  Route::get('/huy-xuat-hang-dai-ly/{id}', [StaffController::class, 'canceloutput']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'client', 'as' => 'client'], function () {
@@ -124,4 +130,10 @@ Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
   Route::get('/goldencrown', [DealerController::class, 'goldencrown']);
   Route::post('/goldencrown', [DealerController::class, 'goldencrownsearch']);
   Route::get('/othertyre', [DealerController::class, 'othertyre']);
+   Route::post('/findtyre', [DealerController::class, 'findtyre']);
 })->middleware('auth');
+
+// Ajax 
+Route::post('get_get_size_list_by_tyre_id', [AjaxController::class, 'get_get_size_list_by_tyre_id'])->name('get_get_size_list_by_tyre_id');
+Route::post('add_temp_output', [AjaxController::class, 'add_temp_output'])->name('add_temp_output');
+

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class TyreDimention extends Model
 {
@@ -31,5 +32,9 @@ class TyreDimention extends Model
   
   public function madeins(): HasMany {
         return $this->hasMany(TyreMadein::class, 'tyre_dimention_id', 'id');
+  }
+  
+  public function tyre(): HasOne {
+      return $this->hasOne(Tyre::class, 'id', 'tyre_id');
   }
 }

@@ -11,12 +11,14 @@ class TyreOutput extends Model
   protected $table = 'tyre_outputs';
   
   protected  $fillable = [
-          'tyre_id',
+          'dimention_id',
           'user_id',
-          'quantity'
+          'dealer_id',
+          'quantity',
+          'status'
       ];
   
-  public function tyre(): HasOne {
-      return $this->hasOne(Tyre::class, 'id', 'tyre_id');
+  public function dimention(): HasOne {
+      return $this->hasOne(TyreDimention::class, 'id', 'dimention_id');
   }
 }
