@@ -9,6 +9,24 @@
             <div class="card-header">
               <h5 class="mb-0">Số lượng xuất kho trong kỳ (ngày)</h5>
             </div>
+            @if (\Session::has('success'))
+                <div class="alert alert-danger">
+                        <span>{!! \Session::get('success') !!}</span>
+                </div>
+              @endif
+             <div class="d-sm-flex p-2 my-4">
+              <form method="POST" action="{{url('dealer/findtyre')}}" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                  <div class="col-md-6">
+                <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-1 p-2" placeholder="Tìm theo mã gai" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  </div>
+                  <div class="col-md-3">
+                <button type="submit" class="btn bg-gradient-primary">Tìm</button>
+                  </div>
+                </div>
+              </form>
+            </div>
             <div class="table-responsive">
     <table class="table align-items-center mb-0">
       <thead>
@@ -21,36 +39,26 @@
       </thead>
       <tbody>
         @foreach ($outputs as $output)
-                @php
-                  $total = 0;
-                @endphp
-            @foreach ($output as $tyre)
-                @php
-                  $total = $total + $tyre->quantity;
-                @endphp
-                @if($loop->last)
                 <tr>
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-xs">{{$tyre->tyre->name}}</h6>
-                        <p class="text-xs text-secondary mb-0">{{$tyre->tyre->brand->name}}
-                        - {{$tyre->tyre->drive->name}}</p>
+                        <h6 class="mb-0 text-xs">{{$output->dimention->tyre->name}}</h6>
+                        <p class="text-xs text-secondary mb-0">{{$output->dimention->tyre->brand->name}}
+                        - {{$output->dimention->tyre->drive->name}}</p>
                       </div>
                     </div>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-success">{{$tyre->tyre->quantity + $total}}</span>
+                    <span class="badge badge-sm badge-success">{{$output->dimention->tyre->quantity + $output->quantity}}</span>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-danger">{{$total}}</span>
+                    <span class="badge badge-sm badge-danger">{{$output->quantity}}</span>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-warning">{{$tyre->tyre->quantity}}</span>
+                    <span class="badge badge-sm badge-warning">{{$output->dimention->tyre->quantity}}</span>
                   </td>
                 </tr>
-                @endif
-            @endforeach
         @endforeach
          </tbody>
     </table>

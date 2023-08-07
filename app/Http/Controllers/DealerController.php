@@ -17,7 +17,7 @@ class DealerController extends Controller
     }
     
   public function dashboard() {
-    $outputs = TyreOutput::whereDate('created_at', '=', Carbon::today())->get()->groupBy('tyre_id');
+    $outputs = TyreOutput::where('user_id', Auth::user()->id)->whereDate('created_at', '=', Carbon::today())->get();
     return view('dealer.dashboard', ['outputs' => $outputs]);
     
   }
@@ -82,5 +82,22 @@ class DealerController extends Controller
     return view('dealer.othertyre', [
         'othertyres' => $othertyres
     ]);
+  }
+  
+  public function findtyre(Request $request) {
+    $name = $request->name;
+    $tyre = Tyre::where('name', $name)->first();
+    if(!$tyre){
+      return redirect('dealer/bang-quan-tri')->with('success', 'Mã gai ('.$name.') không đúng vui lòng nhập lại');
+    }
+    $tyre_dimentions = TyreDimention::where('tyre_id', $tyre->id)->get();
+    if($tyre->brand_id == 1){
+      $template = 'dealer.trazano-detail';
+    }else if ($tyre_dimentions->brand_id == 3){
+      $template = 'dealer.goldencrown-detail';
+    }else if ($tyre->brand_id == 4){
+      
+    }
+    return view($template, ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions]);
   }
 }

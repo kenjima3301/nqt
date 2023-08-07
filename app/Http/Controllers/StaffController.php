@@ -8,7 +8,7 @@ use App\Models\Tyre;
 use App\Models\TyreDimention;
 use App\Models\TyreOutput;
 use Illuminate\Support\Carbon;
-use DB;
+use App\Models\DealerTyre;
 
 class StaffController extends Controller
 {
@@ -18,7 +18,7 @@ class StaffController extends Controller
     }
     
   public function dashboard() {
-    $outputs = TyreOutput::whereDate('created_at', '=', Carbon::today())->get()->groupBy('tyre_id');
+    $outputs = TyreOutput::whereDate('created_at', '=', Carbon::today())->get();
     return view('staff.dashboard', ['outputs' => $outputs]);
   }
   
@@ -84,4 +84,72 @@ class StaffController extends Controller
     ]);
   }
   
+  public function findtyre(Request $request) {
+    $name = $request->name;
+    $tyre = Tyre::where('name', $name)->first();
+    if(!$tyre){
+      return redirect('staff/bang-quan-tri')->with('success', 'Mã gai ('.$name.') không đúng vui lòng nhập lại');
+    }
+    $tyre_dimentions = TyreDimention::where('tyre_id', $tyre->id)->get();
+    if($tyre->brand_id == 1){
+      $template = 'staff.trazano-detail';
+    }else if ($type->brand_id == 3){
+      $template = 'staff.goldencrown-detail';
+    }else if ($type->brand_id == 4){
+      
+    }
+    return view($template, ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions]);
+  }
+  
+  public function outputtodealer() {
+    $dealers = \App\Models\Dealer::all();
+    return view('staff.outputtodealer', [
+        'dealers' => $dealers
+    ]);
+  }
+  
+  public function outputtyretodealer($id) {
+    $tyres = Tyre::all();
+    $dealer = \App\Models\Dealer::find($id);
+    $outputs = TyreOutput::where('dealer_id', $id)->where('status', 'pending')->get();
+    return view('staff.outputtyretodealer', [
+        'tyres' => $tyres,
+        'dealer' => $dealer,
+        'outputs' => $outputs
+    ]);
+  }
+  
+  public function deteleoutput($id) {
+    $tyreoutput = TyreOutput::find($id);
+    $dealer_id = $tyreoutput->dealer_id;
+    $tyreoutput->delete();
+    return redirect('staff/xuat-hang-dai-ly/'.$dealer_id);
+  }
+  
+  public function canceloutput($id) {
+    TyreOutput::where('dealer_id', $id)->where('status', 'pending')->delete();
+    return redirect('staff/xuat-hang-dai-ly/'.$id);
+  }
+  
+  public function confirmoutput($id) {
+    $outputs = TyreOutput::where('dealer_id', $id)->where('status', 'pending')->get();
+    foreach ($outputs as $output){
+      $output->status = 'confirm';
+      $output->save();
+      $dimetion = DealerTyre::where('dealer_id', $output->dealer_id)->where('dimention_id', $output->dimention_id)->first();
+      if($dimetion){
+        $dimetion->total = $dimetion->total + $output->quantity;
+        $dimetion->save();
+      }else {
+        DealerTyre::create([
+            'dealer_id' => $output->dealer_id,
+            'dimention_id' => $output->dimention_id,
+            'total' => $output->quantity,
+            'status' => 'public'
+        ]);
+      }
+      
+    }
+    return redirect('staff/xuat-hang-dai-ly/'.$id);
+  }
 }
