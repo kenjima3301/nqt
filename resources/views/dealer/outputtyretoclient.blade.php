@@ -1,13 +1,13 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-  <x-navbars.staffsidebar activePage='xuat-hang-dai-ly'></x-navbars.staffsidebar>
+  <x-navbars.dealersidebar activePage='xuat-hang-khach-le'></x-navbars.dealersidebar>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <x-navbars.navs.auth titlePage="Xuất hàng cho đại lý"></x-navbars.navs.auth>
+    <x-navbars.navs.auth titlePage="Xuất hàng cho khách lẻ"></x-navbars.navs.auth>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Xuất hàng cho đại lý - {{$dealer->name}}</h5>
+              <h5 class="mb-0">Xuất hàng cho khách lẻ</h5>
             </div>
             <div class="card-body p-3 position-relative bg-gradient-light">
               <div class="row">
@@ -15,17 +15,17 @@
                   <h5 class="font-weight-bolder mb-0">
                     Mã đơn hàng: {{$output->output_code}}
                   </h5>
-                  <form action="{{url('staff/updateoutput')}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{url('dealer/updateoutput')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="output_id" value="{{$output->id}}">
-                    <div class="form-group col-12 col-md-10">  
+                    <div class="form-group col-12 col-md-10 pl-4">  
                   <label for="exampleInputname">Ghi chú: </label>
-                  <textarea style="border-block: revert;" class=" form-control form-control-sm h-auto" name="note">{{$output->note}}</textarea>
+                    <textarea  style="border-block: revert;" class=" form-control form-control-sm h-auto" name="note">{{$output->note}}</textarea>
                     </div>
                     <div class="form-group col-12 col-md-10">  
                       <label for="exampleInputname">Upload file</label> 
                       @if($output->file != NULL)
-                      <a class="btn bg-light mb-0 text-end" href="{{url('staff/downloadoutput/'.$output->id)}}">Tải file</a>
+                      <a class="btn bg-light mb-0 text-end" href="{{url('dealer/downloadoutput/'.$output->id)}}">Tải file</a>
                       @endif
                       <input type="file" class="form-control  border-radius-lg" name="outputfile" id="exampleInputFile">
                     </div>
@@ -49,15 +49,15 @@
                         <td>{{$dimention->dimention->tyre->name}}</td>
                         <td>{{$dimention->dimention->size}}</td>
                         <td>{{$dimention->quantity}}</td>
-                        <td><a href="{{url("staff/xoa-nhap-dai-ly/".$dimention->id)}}">Xóa</a></td>
+                        <td><a href="{{url("dealer/xoa-nhap-dai-ly/".$dimention->id)}}">Xóa</a></td>
                       </tr>
                       @endforeach
                       <tr>
                         <td>
                           <select name="tyre_id" id="tyre_id">
                             <option>--Chọn mã gai--</option>
-                            @foreach ($tyres as $key => $tyre)
-                            <option value="{{$tyre->id}}">{{$tyre->name}}</option>
+                            @foreach ($tyres as $tyre)
+                            <option value="{{$tyre->dimention->tyre->id}}">{{$tyre->dimention->tyre->name}}</option>
                             @endforeach
                           </select>
                         </td>
@@ -72,8 +72,8 @@
                   </table></div>
                 @if(count($output->dimentions) >0)
                   <div class="d-sm-flex p-2 my-4">
-                    <a href="{{url('staff/xac-nhan-xuat-hang-dai-ly/'.$output->id)}}" class="btn bg-gradient-primary">Xác nhận xuất hàng</a>
-                    <a href="{{url('staff/huy-xuat-hang-dai-ly/'.$output->id)}}" class="btn">Hủy xuất hàng</a>
+                    <a href="{{url('dealer/xac-nhan-xuat-hang-khach-le/'.$output->id)}}" class="btn bg-gradient-primary">Xác nhận xuất hàng</a>
+                    <a href="{{url('dealer/huy-xuat-hang-khach-le/'.$output->id)}}" class="btn">Hủy xuất hàng</a>
                   </div>
                 @endif
               </div>
@@ -89,7 +89,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Đơn đã xuất cho - {{$dealer->name}}</h5>
+              <h5 class="mb-0">Đơn đã xuất cho khách lẻ</h5>
             </div>
             <div class="table-responsive">
               <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-height fixed-columns">
@@ -109,7 +109,7 @@
                                   <td>
                                     <div class="d-flex px-2 py-1">
                                       <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">{{$ed->output_code}}</h6>
+                                        <h6 class="mb-0 text-xs"><a href="{{url('staff/xuat-hang-chi-tiet/'.$ed->id)}}">{{$ed->output_code}}</a></h6>
                                       </div>
                                     </div>
                                   </td>
@@ -117,7 +117,7 @@
                                   </td>
                                   <td class="align-middle text-sm">
                                     @if($ed->file != NULL)
-                                    <a href="{{url('staff/downloadoutput/'.$ed->id)}}"><span class="badge badge-sm badge-success">Tải file</span></a>
+                                    <a href="{{url('dealer/downloadoutput/'.$ed->id)}}"><span class="badge badge-sm badge-success">Tải file</span></a>
                                     @endif
                                   </td>
                                   <td class="align-middle text-sm">
@@ -127,7 +127,7 @@
                                     @if($ed->status == 'nhap')
                                     <span class="badge badge-sm badge-success">Đã nhận hàng </span>
                                     @else
-                                    <a href="{{url('staff/da-nhan-hang-tu-nqt/'.$ed->id)}}"><span class="badge badge-sm badge-danger">Xác nhận</span></a></td>
+                                    <a href="{{url('dealer/khach-le-da-nhan-hang-tu-nqt/'.$ed->id)}}"><span class="badge badge-sm badge-danger">Xác nhận</span></a></td>
                                     @endif
                                 </tr>
                         @endforeach
@@ -156,7 +156,7 @@
     });
     function get_size_list_by_tyre(tyre_id) {
             $.ajax({
-                  url:'{{url("get_get_size_list_by_tyre_id")}}',
+                  url:'{{url("get_get_size_list_by_tyre_id_and_dealer")}}',
                   type:'post',
                   data:'tyre_id=' + tyre_id + '&_token={{csrf_token()}}',
                   success:function(result){

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\TyreDimention;
 use App\Models\TyreOutput;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DealerTyre;
 
 class AjaxController extends Controller
 {
@@ -22,16 +23,30 @@ class AjaxController extends Controller
         echo $html;
     }
     
+    public function get_get_size_list_by_tyre_id_and_dealer(Request $request) {
+        $tyre_id = $request->post('tyre_id');
+        $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+        $dimention_ids = DealerTyre::where('dealer_id', $dealer->id)->where('status', 'public')->pluck('dimention_id')->toArray();
+        $sizes = TyreDimention::where('tyre_id',$tyre_id)->whereIn('id', $dimention_ids)->get();
+        
+        $html = '<select class="form-control" name="size_id" id="select_size">';
+        foreach ($sizes as $size) {
+                  $html .='<option value="'.$size->id.'">'.$size->size.' - '.$size->sevice_index.'</option>';
+          }
+        $html .= '</select>';
+          
+        echo $html;
+    }
+    
      public function add_temp_output(Request $request) {
-        $dealer_id = $request->post('dealer_id');
+        $output_id = $request->post('output_id');
         $size_id = $request->post('size_id');
         $number = $request->post('number');
         TyreOutput::create([
+            'output_id' => $output_id,
             'dimention_id' => $size_id,
-            'user_id' => Auth::user()->id,
-            'dealer_id' => $dealer_id,
             'quantity' => $number,
-            'status' => 'pending'
+            'status' => 'new'
         ]);
     }
 }

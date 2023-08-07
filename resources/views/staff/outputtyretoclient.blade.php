@@ -1,13 +1,13 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-  <x-navbars.staffsidebar activePage='xuat-hang-dai-ly'></x-navbars.staffsidebar>
+  <x-navbars.staffsidebar activePage='xuat-hang-khach-le'></x-navbars.staffsidebar>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <x-navbars.navs.auth titlePage="Xuất hàng cho đại lý"></x-navbars.navs.auth>
+    <x-navbars.navs.auth titlePage="Xuất hàng cho khách lẻ"></x-navbars.navs.auth>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Xuất hàng cho đại lý - {{$dealer->name}}</h5>
+              <h5 class="mb-0">Xuất hàng cho khách lẻ</h5>
             </div>
             <div class="card-body p-3 position-relative bg-gradient-light">
               <div class="row">
@@ -18,9 +18,9 @@
                   <form action="{{url('staff/updateoutput')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="output_id" value="{{$output->id}}">
-                    <div class="form-group col-12 col-md-10">  
+                    <div class="form-group col-12 col-md-10 pl-4">  
                   <label for="exampleInputname">Ghi chú: </label>
-                  <textarea style="border-block: revert;" class=" form-control form-control-sm h-auto" name="note">{{$output->note}}</textarea>
+                    <textarea  style="border-block: revert;" class=" form-control form-control-sm h-auto" name="note">{{$output->note}}</textarea>
                     </div>
                     <div class="form-group col-12 col-md-10">  
                       <label for="exampleInputname">Upload file</label> 
@@ -72,8 +72,8 @@
                   </table></div>
                 @if(count($output->dimentions) >0)
                   <div class="d-sm-flex p-2 my-4">
-                    <a href="{{url('staff/xac-nhan-xuat-hang-dai-ly/'.$output->id)}}" class="btn bg-gradient-primary">Xác nhận xuất hàng</a>
-                    <a href="{{url('staff/huy-xuat-hang-dai-ly/'.$output->id)}}" class="btn">Hủy xuất hàng</a>
+                    <a href="{{url('staff/xac-nhan-xuat-hang-khach-le/'.$output->id)}}" class="btn bg-gradient-primary">Xác nhận xuất hàng</a>
+                    <a href="{{url('staff/huy-xuat-hang-khach-le/'.$output->id)}}" class="btn">Hủy xuất hàng</a>
                   </div>
                 @endif
               </div>
@@ -89,7 +89,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Đơn đã xuất cho - {{$dealer->name}}</h5>
+              <h5 class="mb-0">Đơn đã xuất cho khách lẻ</h5>
             </div>
             <div class="table-responsive">
               <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-height fixed-columns">
@@ -109,7 +109,7 @@
                                   <td>
                                     <div class="d-flex px-2 py-1">
                                       <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-xs">{{$ed->output_code}}</h6>
+                                        <h6 class="mb-0 text-xs"><a href="{{url('staff/xuat-hang-chi-tiet/'.$ed->id)}}">{{$ed->output_code}}</a></h6>
                                       </div>
                                     </div>
                                   </td>
@@ -127,7 +127,7 @@
                                     @if($ed->status == 'nhap')
                                     <span class="badge badge-sm badge-success">Đã nhận hàng </span>
                                     @else
-                                    <a href="{{url('staff/da-nhan-hang-tu-nqt/'.$ed->id)}}"><span class="badge badge-sm badge-danger">Xác nhận</span></a></td>
+                                    <a href="{{url('staff/khach-le-da-nhan-hang-tu-nqt/'.$ed->id)}}"><span class="badge badge-sm badge-danger">Xác nhận</span></a></td>
                                     @endif
                                 </tr>
                         @endforeach

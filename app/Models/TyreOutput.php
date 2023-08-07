@@ -11,9 +11,8 @@ class TyreOutput extends Model
   protected $table = 'tyre_outputs';
   
   protected  $fillable = [
+          'output_id',
           'dimention_id',
-          'user_id',
-          'dealer_id',
           'quantity',
           'status'
       ];

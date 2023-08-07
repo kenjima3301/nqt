@@ -28,5 +28,6 @@
 #cart-total{
     /* position: absolute; */
     margin-top: -10px;
+    font-size: 14px;
     /* margin-left: 3px; */
 }

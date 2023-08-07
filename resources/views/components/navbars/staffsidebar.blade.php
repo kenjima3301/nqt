@@ -29,6 +29,15 @@
           <span class="nav-link-text ms-1">Xuất hàng cho đại lý</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link text-white {{ $activePage == 'xuat-hang-khach-le' ? ' active bg-gradient-dark' : '' }}  "
+           href="{{url('staff/xuat-hang-khach-le')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="fa fa-tire" aria-hidden="true"></i>
+          </div>
+          <span class="nav-link-text ms-1">Xuất hàng cho khách lẻ</span>
+        </a>
+      </li>
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Danh sách hàng</h6>
       </li>

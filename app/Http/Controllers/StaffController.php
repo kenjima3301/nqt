@@ -9,6 +9,7 @@ use App\Models\TyreDimention;
 use App\Models\TyreOutput;
 use Illuminate\Support\Carbon;
 use App\Models\DealerTyre;
+use App\Models\Output;
 
 class StaffController extends Controller
 {
@@ -111,45 +112,123 @@ class StaffController extends Controller
   public function outputtyretodealer($id) {
     $tyres = Tyre::all();
     $dealer = \App\Models\Dealer::find($id);
-    $outputs = TyreOutput::where('dealer_id', $id)->where('status', 'pending')->get();
+    $output = Output::where('dealer_id', $dealer->id)->where('status','new')->first();
+    $outputed = Output::where('dealer_id', $dealer->id)->where('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
+    if(!$output){
+      $output = Output::create([
+          'user_id' => Auth::user()->id,
+          'dealer_id' => $dealer->id,
+          'status' => 'new'
+      ]);
+      $output->output_code = 'NQT-'.str_pad($output->id, 5, "0", STR_PAD_LEFT);
+      $output->save();
+    }
     return view('staff.outputtyretodealer', [
         'tyres' => $tyres,
         'dealer' => $dealer,
-        'outputs' => $outputs
+        'output' => $output,
+        'outputed' => $outputed
     ]);
   }
   
   public function deteleoutput($id) {
     $tyreoutput = TyreOutput::find($id);
-    $dealer_id = $tyreoutput->dealer_id;
+    $output = Output::find($tyreoutput->output_id);
+    $dealer_id = $output->dealer_id;
     $tyreoutput->delete();
     return redirect('staff/xuat-hang-dai-ly/'.$dealer_id);
   }
   
+  public function updateoutput(Request $request) {
+    $output = Output::find($request->output_id);
+    $output->note = $request->note;
+    if($request->outputfile != ''){
+        $Name = time().'.'.$request->outputfile->extension();
+        $path = public_path().'/output/dealer/';
+        if (!file_exists($path)) {
+          mkdir($path, 0775, true);
+        }
+        $request->outputfile->move($path, $Name);
+        $output->file = '/output/dealer/'.$Name;
+    }
+    $output->save();
+    
+    return redirect('staff/xuat-hang-dai-ly/'.$output->dealer_id);
+  }
+  
+  public function downloadoutput($id)  {
+      $output = Output::find($id);
+     return response()->download(public_path($output->file));
+    }
+  
   public function canceloutput($id) {
-    TyreOutput::where('dealer_id', $id)->where('status', 'pending')->delete();
-    return redirect('staff/xuat-hang-dai-ly/'.$id);
+    $output = Output::find($id);
+    $output->status = 'huy';
+    $output->save();
+    return redirect('staff/xuat-hang-dai-ly/'.$output->dealer_id);
   }
   
   public function confirmoutput($id) {
-    $outputs = TyreOutput::where('dealer_id', $id)->where('status', 'pending')->get();
-    foreach ($outputs as $output){
-      $output->status = 'confirm';
-      $output->save();
-      $dimetion = DealerTyre::where('dealer_id', $output->dealer_id)->where('dimention_id', $output->dimention_id)->first();
-      if($dimetion){
-        $dimetion->total = $dimetion->total + $output->quantity;
-        $dimetion->save();
-      }else {
-        DealerTyre::create([
-            'dealer_id' => $output->dealer_id,
-            'dimention_id' => $output->dimention_id,
-            'total' => $output->quantity,
-            'status' => 'public'
-        ]);
-      }
-      
-    }
-    return redirect('staff/xuat-hang-dai-ly/'.$id);
+    $output = Output::find($id);
+    $output->status = 'xuat';
+    $output->save();
+    return redirect('staff/xuat-hang-dai-ly/'.$output->dealer_id);
   }
+  
+  public function nqtoutputconfirm($id) {
+      $output = Output::find($id);
+      $output->status = 'nhap';
+      $output->save();
+      return redirect('staff/xuat-hang-dai-ly/'.$output->dealer_id);
+    }
+    
+    public function outputtoclient() {
+        $tyres = Tyre::all();
+        $output = Output::where('dealer_id', 0)->where('status','new')->first();
+        $outputed = Output::where('user_id', Auth::user()->id)->where('dealer_id', 0)->where('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
+        if(!$output){
+          $output = Output::create([
+              'user_id' => Auth::user()->id,
+              'dealer_id' => 0,
+              'status' => 'new'
+          ]);
+          $output->output_code = 'NQT-'.str_pad($output->id, 5, "0", STR_PAD_LEFT);
+          $output->save();
+        }
+        return view('staff.outputtyretoclient', [
+            'tyres' => $tyres,
+            'output' => $output,
+            'outputed' => $outputed
+        ]);
+    }
+    
+    public function canceloutputtoclient($id) {
+      $output = Output::find($id);
+      $output->status = 'huy';
+      $output->save();
+      
+      return redirect('staff/xuat-hang-khach-le');
+    }
+    
+    public function confirmoutputtoclient($id) {
+      $output = Output::find($id);
+      $output->status = 'xuat';
+      $output->save();
+      
+      return redirect('staff/xuat-hang-khach-le');
+    }
+    
+    public function nqtoutputconfirmclient($id) {
+      $output = Output::find($id);
+      $output->status = 'nhap';
+      $output->save();
+      return redirect('staff/xuat-hang-khach-le');
+    }
+    
+    public function outputdetail($id) {
+      $output = Output::find($id);
+      return view('staff.output-detail', [
+            'output' => $output
+        ]);
+    }
 }

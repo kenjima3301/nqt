@@ -109,6 +109,14 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::get('/xoa-nhap-dai-ly/{id}', [StaffController::class, 'deteleoutput']);
   Route::get('/xac-nhan-xuat-hang-dai-ly/{id}', [StaffController::class, 'confirmoutput']);
   Route::get('/huy-xuat-hang-dai-ly/{id}', [StaffController::class, 'canceloutput']);
+  Route::post('/updateoutput', [StaffController::class, 'updateoutput']);
+  Route::get('/downloadoutput/{id}', [StaffController::class, 'downloadoutput']);
+  Route::get('/da-nhan-hang-tu-nqt/{id}', [StaffController::class, 'nqtoutputconfirm']);
+  Route::get('/xuat-hang-khach-le', [StaffController::class, 'outputtoclient']);
+  Route::get('/xac-nhan-xuat-hang-khach-le/{id}', [StaffController::class, 'confirmoutputtoclient']);
+  Route::get('/huy-xuat-hang-khach-le/{id}', [StaffController::class, 'canceloutputtoclient']);
+  Route::get('/khach-le-da-nhan-hang-tu-nqt/{id}', [StaffController::class, 'nqtoutputconfirmclient']);
+  Route::get('/xuat-hang-chi-tiet/{id}', [StaffController::class, 'outputdetail']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'client', 'as' => 'client'], function () {
@@ -131,10 +139,19 @@ Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
   Route::get('/goldencrown', [DealerController::class, 'goldencrown']);
   Route::post('/goldencrown', [DealerController::class, 'goldencrownsearch']);
   Route::get('/othertyre', [DealerController::class, 'othertyre']);
-   Route::post('/findtyre', [DealerController::class, 'findtyre']);
+  Route::post('/findtyre', [DealerController::class, 'findtyre']);
+  Route::get('/xuat-hang-tu-NQT', [DealerController::class, 'nqtoutput']);
+  Route::get('/downloadoutput/{id}', [DealerController::class, 'downloadoutput']);
+  Route::get('/da-nhan-hang-tu-nqt/{id}', [DealerController::class, 'nqtoutputconfirm']);
+  Route::get('kho-hang', [DealerController::class, 'inventory']);
+  Route::get('/xuat-hang-cho-khach', [DealerController::class, 'outputtoclient']);
+  Route::get('/xac-nhan-xuat-hang-cho-khach/{id}', [DealerController::class, 'confirmoutputtoclient']);
+  Route::get('/huy-xuat-hang-cho-khach/{id}', [DealerController::class, 'canceloutputtoclient']);
+  Route::get('/xuat-hang-chi-tiet/{id}', [DealerController::class, 'outputdetail']);
 })->middleware('auth');
 
 // Ajax 
 Route::post('get_get_size_list_by_tyre_id', [AjaxController::class, 'get_get_size_list_by_tyre_id'])->name('get_get_size_list_by_tyre_id');
+Route::post('get_get_size_list_by_tyre_id_and_dealer', [AjaxController::class, 'get_get_size_list_by_tyre_id_and_dealer'])->name('get_get_size_list_by_tyre_id_and_dealer');
 Route::post('add_temp_output', [AjaxController::class, 'add_temp_output'])->name('add_temp_output');
 

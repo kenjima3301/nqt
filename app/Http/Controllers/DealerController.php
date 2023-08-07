@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tyre;
 use App\Models\TyreDimention;
+use App\Models\Output;
+use App\Models\DealerTyre;
 
 class DealerController extends Controller
 {
@@ -17,7 +19,7 @@ class DealerController extends Controller
     }
     
   public function dashboard() {
-    $outputs = TyreOutput::where('user_id', Auth::user()->id)->whereDate('created_at', '=', Carbon::today())->get();
+    $outputs = Output::where('dealer_id', Auth::user()->id)->where('status', 'xuat')->get();
     return view('dealer.dashboard', ['outputs' => $outputs]);
     
   }
@@ -100,4 +102,91 @@ class DealerController extends Controller
     }
     return view($template, ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions]);
   }
+  
+  public function nqtoutput() {
+    $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+    $outputs = Output::where('dealer_id', $dealer->id)->where('status', 'xuat')->get();
+    return view('dealer.nqtoutput',['outputs' => $outputs]);
+    
+  }
+  
+  public function downloadoutput($id)  {
+      $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+      $output = Output::where('id',$id)->where('dealer_id', $dealer->id)->first();
+     return response()->download(public_path($output->file));
+    }
+    
+    public function nqtoutputconfirm($id) {
+      $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+      $output = Output::where('id', $id)->where('dealer_id', $dealer->id)->first();
+      if($output){
+        foreach ($output->dimentions as $dimention){
+          $dealertyre = DealerTyre::where('dealer_id', $dealer->id)->where('dimention_id',$dimention->dimention_id)->first();
+          if($dealertyre){
+            $dealertyre->total = $dealertyre->total + $dimention->quantity;
+            $dealertyre->save();
+          }else {
+            DealerTyre::create([
+                'dealer_id'=> $dealer->id,
+                'dimention_id'=> $dimention->dimention_id,
+                'total' => $dimention->quantity,
+                'status' => 'public'
+            ]);
+          }
+        }
+      }
+      $output->status = 'nhap';
+      $output->save();
+      return redirect('dealer/xuat-hang-tu-NQT');
+    }
+    
+    public function inventory() {
+      $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+      $tyres = DealerTyre::where('dealer_id', $dealer->id)->where('status', 'public')->get();
+      return view('dealer.inventory',['tyres' => $tyres]);
+    }
+    
+    public function outputtoclient() {
+        $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+        $tyres = DealerTyre::where('dealer_id', $dealer->id)->where('status', 'public')->get();
+        $output = Output::where('user_id', Auth::user()->id)->where('status','new')->first();
+        $outputed = Output::where('user_id', Auth::user()->id)->where('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
+        if(!$output){
+          $output = Output::create([
+              'user_id' => Auth::user()->id,
+              'dealer_id' => 0,
+              'status' => 'new'
+          ]);
+          $output->output_code = 'NQT-'.str_pad($output->id, 5, "0", STR_PAD_LEFT);
+          $output->save();
+        }
+        return view('dealer.outputtyretoclient', [
+            'tyres' => $tyres,
+            'output' => $output,
+            'outputed' => $outputed
+        ]);
+    }
+    
+    public function confirmoutputtoclient($id) {
+      $output = Output::find($id);
+      $output->status = 'xuat';
+      $output->save();
+      
+      return redirect('dealer/xuat-hang-cho-khach');
+    }
+    
+    public function canceloutputtoclient($id) {
+      $output = Output::find($id);
+      $output->status = 'huy';
+      $output->save();
+      
+      return redirect('dealer/xuat-hang-cho-khach');
+    }
+    
+    public function outputdetail($id) {
+      $output = Output::find($id);
+      return view('dealer.output-detail', [
+            'output' => $output
+        ]);
+    }
 }
