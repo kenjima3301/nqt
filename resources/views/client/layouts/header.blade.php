@@ -130,6 +130,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('lien-he')}}">Liên hệ</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('shoping-cart')}}"><i class="fa-light fa-cart-shopping"></i></a>
+                            </li>
                             @if( auth()->check() )
                                 <li class="nav-item dropdown">
                                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -147,7 +150,7 @@
                             @else 
                             <li class="nav-item">
                                     <a class="nav-link" href="{{url('/login')}}">Đăng nhập</a>
-                                </li>
+                            </li>
                             @endif
                             
                         </ul>
