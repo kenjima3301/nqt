@@ -151,6 +151,10 @@ class HomeController extends Controller
       return view('client.contactus');
     }
 
+    public function shopingCart(){
+     return view('client.shoping-cart');
+    }
+
     public function checkout(){
       $file_name = 'tinh_tp';
       $tinh = $this->readJson($file_name);

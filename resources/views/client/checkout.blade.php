@@ -1,5 +1,5 @@
 @extends ('client.layouts.master')
-@section('title', 'NQT - Chi tiết sản phẩm')
+@section('title', 'NQT - Thanh toán')
 @section('content')
 <div class="container mt-4">
 
