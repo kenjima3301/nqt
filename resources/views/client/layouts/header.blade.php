@@ -131,7 +131,7 @@
                                 <a class="nav-link" href="{{url('lien-he')}}">Liên hệ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('shoping-cart')}}"><i class="fa-light fa-cart-shopping"></i></a>
+                                <a class="nav-link" href="{{route('shoping-cart')}}"><i class="fa-light fa-cart-shopping"></i> <span id="cart-total">5</span></a>
                             </li>
                             @if( auth()->check() )
                                 <li class="nav-item dropdown">

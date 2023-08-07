@@ -24,3 +24,9 @@
     background-color: #35A25B; 
     color: black;
 }
+
+#cart-total{
+    /* position: absolute; */
+    margin-top: -10px;
+    /* margin-left: 3px; */
+}
