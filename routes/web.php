@@ -166,4 +166,5 @@ Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
 Route::post('get_get_size_list_by_tyre_id', [AjaxController::class, 'get_get_size_list_by_tyre_id'])->name('get_get_size_list_by_tyre_id');
 Route::post('get_get_size_list_by_tyre_id_and_dealer', [AjaxController::class, 'get_get_size_list_by_tyre_id_and_dealer'])->name('get_get_size_list_by_tyre_id_and_dealer');
 Route::post('add_temp_output', [AjaxController::class, 'add_temp_output'])->name('add_temp_output');
+Route::post('add_quantity_to_total', [AjaxController::class, 'add_quantity_to_total'])->name('add_quantity_to_total');
 

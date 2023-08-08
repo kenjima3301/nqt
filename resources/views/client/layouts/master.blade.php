@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/promotion.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/checkout.css') }}">
+    <link rel="stylesheet" href="{{asset('assets/css/client/parts-detail.css')}}">
 </head>
 <body>
   @php

@@ -49,4 +49,13 @@ class AjaxController extends Controller
             'status' => 'new'
         ]);
     }
+    
+    public function add_quantity_to_total(Request $request) {
+      $user = Auth::user();
+      $dimention_id = $request->post('dimention_id');
+      $total = $request->post('total');
+      $cart = \App\Models\OrderTyre::find($dimention_id);
+      $cart->quantity = $total;
+      $cart->save();
+    }
 }

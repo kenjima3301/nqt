@@ -36,7 +36,11 @@
                             <td>16PR</td>
                             <td>{{$tyre->dimention->sevice_index}}</td>
                             <td>
-                                <input type="number" name="3" class="quantity" id="3" value="{{$tyre->quantity}}" size="4" width="10%">
+                              <div class="quantity">
+                        <button class="btn minus1" onclick="decreasequantity({{$tyre->id}})">-</button>
+                          <input type="number" name="{{$tyre->id}}" class="quantity" id="{{$tyre->id}}" value="{{$tyre->quantity}}" size="4" width="10%">
+                        <button class="btn add1" onclick="increasequantity({{$tyre->id}})">+</button>
+                      </div>
                             </td>
                             <td>Cái</td>
                             <td>100.000 đ</td>
@@ -93,6 +97,43 @@
 @endsection
 @section('script')
 <script>
+  $( document ).ready(function() {
+    $('input[name=change_total]').change(function() {
+     let newtotal = $(this).val();
+     let accessory_id = $(this).attr("id");
+     add_quantity_to_total(accessory_id,newtotal);
+    });
+  });
+function increasequantity(id){
+  let total = $('input[name='+id+']').val();
+//  let maxtotal = {{2 ?? ''}};
+//  if(total < maxtotal) {
+    newtotal = parseInt(total) + 1;
+    $('input[name='+id+']').val(newtotal);
+    add_quantity_to_total(id, newtotal);
+//  }
+}
+
+function decreasequantity(id){
+  let total = $('input[name='+id+']').val();
+  if(total > 1) {
+    newtotal = parseInt(total) - 1;
+    $('input[name='+id+']').val(newtotal);
+    add_quantity_to_total(id, newtotal);
+  }
+}
+function add_quantity_to_total(dimention_id,newtotal) {
+            $.ajax({
+                  url:'{{url("add_quantity_to_total")}}',
+                  type:'post',
+                  data:'dimention_id=' + dimention_id + '&total=' + newtotal + '&_token={{csrf_token()}}',
+                  success:function(result){
+                    window.location.reload();
+                  }
+              });
+    } 
+</script>
+<!--<script>
     // jQuery code to handle quality increase and decrease
     $(document).ready(function() {
       const qualityValue = $("#quality-value");
@@ -117,5 +158,5 @@
         qualityValue.text(value);
       }
     });
-</script>
+</script>-->
 @endsection
