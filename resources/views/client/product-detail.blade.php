@@ -99,9 +99,9 @@
                         <div class="col-lg-4">
                             <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
                         </div>
-                        <div class="col-lg-8 text-center">
-                            <a href="{{ route('shoping-cart')}}" class="btn btn-success">Thêm vào giỏ hàng</a>
-                            <a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>
+                        <div class="col-lg-8 text-right">
+                            <a href="{{ url('client/them-gio-hang/'.$tyre->id)}}" class="btn btn-success">Thêm vào giỏ hàng</a>
+                            <!--<a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>-->
                         </div>
                     </div>
                 </div>

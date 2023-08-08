@@ -117,6 +117,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::get('/huy-xuat-hang-khach-le/{id}', [StaffController::class, 'canceloutputtoclient']);
   Route::get('/khach-le-da-nhan-hang-tu-nqt/{id}', [StaffController::class, 'nqtoutputconfirmclient']);
   Route::get('/xuat-hang-chi-tiet/{id}', [StaffController::class, 'outputdetail']);
+  Route::post('/findoutputbycode', [StaffController::class, 'findoutputbycode']);
+  Route::get('/don-hang-online', [StaffController::class, 'orders']);
+  Route::get('/chi-tiet-don-online/{id}', [StaffController::class, 'orderdetail']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'client', 'as' => 'client'], function () {
@@ -124,7 +127,14 @@ Route::group(['prefix' => 'client', 'as' => 'client'], function () {
     return redirect('client/profile');
   });
   Route::get('/profile', [ClientController::class, 'profile']);
-  
+  Route::get('/gio-hang', [ClientController::class, 'cart'])->name('client.gio-hang');
+  Route::get('/thanh-toan', [ClientController::class, 'checkout']);
+  Route::post('/updateprofile', [ClientController::class, 'updateprofile']);
+  Route::get('/them-gio-hang/{id}', [ClientController::class, 'addtocart']);
+  Route::get('/xoa-san-phan-gio-hang/{id}', [ClientController::class, 'removetyrefromcar']);
+  Route::post('/xac-nhan-don-hang', [ClientController::class, 'checkoutconfirm']);
+  Route::get('/don-hang', [ClientController::class, 'order']);
+  Route::get('/don-hang-chi-tiet/{id}', [ClientController::class, 'orderdetail']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
@@ -148,6 +158,8 @@ Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
   Route::get('/xac-nhan-xuat-hang-cho-khach/{id}', [DealerController::class, 'confirmoutputtoclient']);
   Route::get('/huy-xuat-hang-cho-khach/{id}', [DealerController::class, 'canceloutputtoclient']);
   Route::get('/xuat-hang-chi-tiet/{id}', [DealerController::class, 'outputdetail']);
+  Route::post('/findoutputbycode', [DealerController::class, 'findoutputbycode']);
+  Route::post('/updateoutput', [DealerController::class, 'updateoutput']);
 })->middleware('auth');
 
 // Ajax 

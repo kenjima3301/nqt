@@ -10,6 +10,7 @@ use App\Models\TyreOutput;
 use Illuminate\Support\Carbon;
 use App\Models\DealerTyre;
 use App\Models\Output;
+use App\Models\Order;
 
 class StaffController extends Controller
 {
@@ -113,7 +114,7 @@ class StaffController extends Controller
     $tyres = Tyre::all();
     $dealer = \App\Models\Dealer::find($id);
     $output = Output::where('dealer_id', $dealer->id)->where('status','new')->first();
-    $outputed = Output::where('dealer_id', $dealer->id)->where('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
+    $outputed = Output::where('dealer_id', $dealer->id)->whereIn('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
     if(!$output){
       $output = Output::create([
           'user_id' => Auth::user()->id,
@@ -185,7 +186,7 @@ class StaffController extends Controller
     public function outputtoclient() {
         $tyres = Tyre::all();
         $output = Output::where('dealer_id', 0)->where('status','new')->first();
-        $outputed = Output::where('user_id', Auth::user()->id)->where('dealer_id', 0)->where('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
+        $outputed = Output::where('user_id', Auth::user()->id)->where('dealer_id', 0)->whereIn('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
         if(!$output){
           $output = Output::create([
               'user_id' => Auth::user()->id,
@@ -231,4 +232,25 @@ class StaffController extends Controller
             'output' => $output
         ]);
     }
+    
+    public function findoutputbycode(Request $request) {
+      $output = Output::where('output_code', $request->code)->first();
+      if($output){
+        return view('staff.output-detail', [
+            'output' => $output
+        ]);
+      }else {
+        return back()->with('message1',"Không tìm thấy mã đơn.");
+      }
+    }
+    
+    public function orders() {
+      $orders = Order::where('status', 'booked')->get();
+      return view('staff.orders', ['orders' => $orders]);
+    }
+    
+    public function orderdetail($id) {
+    $order = Order::find($id);
+    return view('staff.orderdetail',  compact('order'));
+  }
 }

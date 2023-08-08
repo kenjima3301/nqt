@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-  <x-navbars.staffsidebar activePage='xuat-hang-khach-le'></x-navbars.staffsidebar>
+  <x-navbars.staffsidebar activePage=''></x-navbars.staffsidebar>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <x-navbars.navs.auth titlePage="Xuất hàng cho khách lẻ"></x-navbars.navs.auth>
     <div class="container-fluid py-4">

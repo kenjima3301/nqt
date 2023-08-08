@@ -9,17 +9,17 @@
             <div class="card-header">
               <h5 class="mb-0">Số lượng xuất kho trong kỳ (ngày)</h5>
             </div>
-            @if (\Session::has('success'))
+            @if (\Session::has('message1'))
                 <div class="alert alert-danger">
-                        <span>{!! \Session::get('success') !!}</span>
+                        <span>{!! \Session::get('message1') !!}</span>
                 </div>
               @endif
              <div class="d-sm-flex p-2 my-4">
-              <form method="POST" action="{{url('staff/findtyre')}}" enctype="multipart/form-data">
+              <form method="POST" action="{{url('staff/findoutputbycode')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                   <div class="col-md-6">
-                <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-1 p-2" placeholder="Tìm theo mã gai" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                <input type="name" name="code" value="{{ $errors->first('name')}}" class="form-control border border-1 p-2" placeholder="Nhập mã đơn hàng" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                   </div>
                   <div class="col-md-3">
                 <button type="submit" class="btn bg-gradient-primary">Tìm</button>

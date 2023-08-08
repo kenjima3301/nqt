@@ -150,7 +150,7 @@ class DealerController extends Controller
         $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
         $tyres = DealerTyre::where('dealer_id', $dealer->id)->where('status', 'public')->get();
         $output = Output::where('user_id', Auth::user()->id)->where('status','new')->first();
-        $outputed = Output::where('user_id', Auth::user()->id)->where('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
+        $outputed = Output::where('user_id', Auth::user()->id)->whereIn('status',array('xuat','nhap'))->orderBy('created_at', 'DESC')->get();
         if(!$output){
           $output = Output::create([
               'user_id' => Auth::user()->id,
@@ -166,6 +166,23 @@ class DealerController extends Controller
             'outputed' => $outputed
         ]);
     }
+    
+    public function updateoutput(Request $request) {
+    $output = Output::find($request->output_id);
+    $output->note = $request->note;
+    if($request->outputfile != ''){
+        $Name = time().'.'.$request->outputfile->extension();
+        $path = public_path().'/output/dealer/';
+        if (!file_exists($path)) {
+          mkdir($path, 0775, true);
+        }
+        $request->outputfile->move($path, $Name);
+        $output->file = '/output/dealer/'.$Name;
+    }
+    $output->save();
+    
+    return redirect('dealer/xuat-hang-cho-khach');
+  }
     
     public function confirmoutputtoclient($id) {
       $output = Output::find($id);
@@ -188,5 +205,16 @@ class DealerController extends Controller
       return view('dealer.output-detail', [
             'output' => $output
         ]);
+    }
+    
+    public function findoutputbycode(Request $request) {
+      $output = Output::where('output_code', $request->code)->where('user_id', Auth::user()->id)->first();
+      if($output){
+        return view('dealer.output-detail', [
+            'output' => $output
+        ]);
+      }else {
+        return back()->with('message1',"Không tìm thấy mã đơn.");
+      }
     }
 }

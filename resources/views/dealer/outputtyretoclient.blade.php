@@ -72,8 +72,8 @@
                   </table></div>
                 @if(count($output->dimentions) >0)
                   <div class="d-sm-flex p-2 my-4">
-                    <a href="{{url('dealer/xac-nhan-xuat-hang-khach-le/'.$output->id)}}" class="btn bg-gradient-primary">Xác nhận xuất hàng</a>
-                    <a href="{{url('dealer/huy-xuat-hang-khach-le/'.$output->id)}}" class="btn">Hủy xuất hàng</a>
+                    <a href="{{url('dealer/xac-nhan-xuat-hang-cho-khach/'.$output->id)}}" class="btn bg-gradient-primary">Xác nhận xuất hàng</a>
+                    <a href="{{url('dealer/huy-xuat-hang-cho-khach/'.$output->id)}}" class="btn">Hủy xuất hàng</a>
                   </div>
                 @endif
               </div>

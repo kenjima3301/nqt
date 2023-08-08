@@ -133,7 +133,7 @@
                             
                             @if( auth()->check() )
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('shoping-cart')}}"><i class="fa-light fa-cart-shopping"></i> <span id="cart-total">5</span></a>
+                                <a class="nav-link" href="{{url('client/gio-hang')}}"><i class="fa-light fa-cart-shopping"></i> <span id="cart-total">@if($order) {{count($order->tyres)}} @endif</span></a>
                             </li>
                                 <li class="nav-item dropdown">
                                  <a class="nav-link dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

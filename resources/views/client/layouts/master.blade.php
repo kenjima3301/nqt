@@ -17,9 +17,12 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/checkout.css') }}">
 </head>
 <body>
+  @php
+  $order = App\Models\Order::where('user_id', optional(Auth::user())->id)->where('status', 'new')->first();
+  @endphp
     <div class="wrapper">
         <!-- header -->
-        @include('client.layouts.header')
+        @include('client.layouts.header', ['order' => $order])
         <!-- end header  -->
         
         <div class="main-content">
