@@ -72,16 +72,19 @@
                 <div class="col-lg-6 bg-white">
                     <!-- Product name -->
                     <h3 class="card-title mt-3">{{$tyre->name}}</h3>
-                    <p class="card-text">{{$tyre->drive->name}}</p>
+                    <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
                     <!-- Product description -->
                     @foreach (json_decode($tyre->tyre_features, true) as $feature)
+                    @if($feature != null)
                     <p><i class="fa-solid fa-circle fa-2xs" style="color:#35A25B;"></i> {{$feature}}</p>
+                    @endif
                     @endforeach
                     <div class="row justify-content-center">
+                      @if($tyre->install_position_image != null)
                         <div class="col-sm-12">
                             <img src="{{asset($tyre->install_position_image)}}" class="img-fluid">
                         </div>
-                        
+                        @endif
                     </div>
                     <div class="sub-desc row mt-3">
                         <div class="col-lg-4">
@@ -95,22 +98,21 @@
                         </div>
                     </div>
 
-                    <div class="row mt">
+<!--                    <div class="row mt">
                         <div class="col-lg-4">
                             <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
                         </div>
                         <div class="col-lg-8 text-right">
-                            <a href="{{ url('client/them-gio-hang/'.$tyre->id)}}" class="btn btn-success">Thêm vào giỏ hàng</a>
-                            <!--<a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>-->
+                            <a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             
             <div class="row mt-3 bg-white ml-2">
                 
                     <table class="table-bordered table-responsive text-center">
-                        <thead>
+<!--                        <thead>
                             <tr>
                               <th rowspan="3" width="3%"></th>
                                 <th rowspan="3">Size</th>
@@ -136,6 +138,19 @@
                                 <th>(kPa)</th>
                                 <th>(psi)</th>
                             </tr>
+                        </thead>-->
+                      <thead>
+                            <tr>
+                              <th rowspan="3" width="3%">Nước sản xuất</th>
+                                <th rowspan="3">Quy cách</th>
+                                <th rowspan="3">Lớp bố</th>
+                                <th rowspan="3">Chỉ số tải trọng và tốc độ</th>
+                                <th rowspan="3">Đơn vị</th>
+                                <th rowspan="3">Kiểu gai</th>
+                                <th rowspan="3">Số lượng</th>
+                                <th rowspan="3">Đơn giá</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
                             
@@ -149,20 +164,15 @@
                                       @endforeach
                                   </td>
                                   <td>{{$size->size}}</td>
-                                  <td>{{$size->lr_pr}}</td>
+                                  <td>{{$size->ply}}</td>
                                   <td>{{$size->sevice_index}}</td>
-                                  <td>{{$size->tread_depth}}</td>
-                                  <td>{{$size->standard_rim}}</td>
-                                  <td>{{$size->overall_diameter}}</td>
-                                  <td>{{$size->section_width}}</td>
-                                  <td>{{$size->single_kg}}</td>
-                                  <td>{{$size->single_lbs}}</td>
-                                  <td>{{$size->single_kpa}}</td>
-                                  <td>{{$size->single_psi}}</td>
-                                  <td>{{$size->dual_kg}}</td>
-                                  <td>{{$size->dual_lbs}}</td>
-                                  <td>{{$size->dual_kpa}}</td>
-                                  <td>{{$size->dual_psi}}</td>
+                                  <td>{{$size->unit}}</td>
+                                  <td>{{$size->tread_type}}</td>
+                                  <td>{{$size->total}}</td>
+                                  <td>{{$size->price}}</td>
+                                  <td><a href="{{ url('client/them-gio-hang/'.$size->id)}}" class="btn btn-success">Thêm vào giỏ hàng</a>
+                                  </td>
+
                                   </tr>
                               @endforeach
                             
@@ -185,7 +195,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{$relatedtypre->name}}</h5>
-                            <p class="card-text">{{$relatedtypre->drive->name}}</p>
+                            <p class="card-text">@if(isset($relatedtypre->drive)) {{$relatedtypre->drive->name}} @endif</p>
                             <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
                             <div class="sub-desc row mt-3">
                                 <div class="col-lg-4">

@@ -28,12 +28,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                      @php 
+                      $total = 0;
+                      @endphp
                       @foreach($order->tyres as $tyre)
                         <tr>
                             <th scope="row">{{ $loop->index +1 }} </th>
                             <td>{{$tyre->dimention->size}}</td>
                             <td>{{$tyre->dimention->tyre->name}}</td>
-                            <td>16PR</td>
+                            <td>{{$tyre->dimention->ply}}</td>
                             <td>{{$tyre->dimention->sevice_index}}</td>
                             <td>
                               <div class="quantity">
@@ -42,9 +45,12 @@
                         <button class="btn add1" onclick="increasequantity({{$tyre->id}})">+</button>
                       </div>
                             </td>
-                            <td>Cái</td>
-                            <td>100.000 đ</td>
-                            <td>100.000 đ</td>
+                            <td>{{$tyre->dimention->unit}}</td>
+                            <td>{{$tyre->dimention->price}} đ</td>
+                            <td>{{intval($tyre->dimention->price) * intval($tyre->quantity)}} đ</td>
+                            @php 
+                            $total = $total + (intval($tyre->dimention->price) * intval($tyre->quantity));
+                            @endphp
                             <td><a href="{{url('client/xoa-san-phan-gio-hang/'.$tyre->id)}}"><i class="fa-light fa-rectangle-xmark text-danger"></i></a></td>
                         </tr>
                        @endforeach
@@ -81,7 +87,7 @@
                         <tbody>
                             <tr>
                                 <th>Tổng</th>
-                                <td>300.000 đ</td>
+                                <td>{{$total}} đ</td>
                             </tr>
                         </tbody>
                     </table>

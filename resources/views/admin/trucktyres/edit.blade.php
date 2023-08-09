@@ -18,11 +18,12 @@
               <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/lop-xe-tai')}}">Quay lại danh sách lốp xe</a>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{url('admin/lop-xe-tai-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+              <form method="POST" action="{{url('admin/lop-xe-tai-sua-post')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="tyre_id" value="{{$tyre->id}}">
                 <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Mã gai</label>
-                  <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mã gai" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name" value="{{$tyre->name}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mã gai" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <div class="row col-12 col-md-8">
                 <div class="form-group col-md-3">
@@ -30,7 +31,7 @@
                             <select class="form-control" name="model_id" id="model_id">
                               <option value="">Chọn loại xe</option>
                               @foreach($models as $model)
-                              <option value="{{$model->id}}">{{$model->name}}</option>
+                              <option @if($tyre->model_id == $model->id) selected @endif value="{{$model->id}}">{{$model->name}}</option>
                               @endforeach 
                             </select>
                           </div>
@@ -39,7 +40,7 @@
                             <select class="form-control" name="brand_id" id="brand_id">
                               <option value="">Chọn nhà sản xuất</option>
                               @foreach($brands as $brand)
-                              <option value="{{$brand->id}}">{{$brand->name}}</option>
+                              <option @if($tyre->brand_id == $brand->id) selected @endif value="{{$brand->id}}">{{$brand->name}}</option>
                               @endforeach 
                             </select>
                           </div>
@@ -48,7 +49,7 @@
                             <select class="form-control" name="drive_id" id="drive_id">
                               <option value="">Chọn kiểu đường lái</option>
                               @foreach($drives as $drive)
-                              <option value="{{$drive->id}}">{{$drive->name}}</option>
+                              <option @if($tyre->driveexperience_id == $drive->id) selected @endif value="{{$drive->id}}">{{$drive->name}}</option>
                               @endforeach 
                             </select>
                           </div>
@@ -57,17 +58,20 @@
                       <label for="exampleInputname">Cấu trúc lốp</label>
                       <select class="form-control" name="tyre_structure" id="tyre_structure">
                               <option value="">Chọn cấu trúc lốp</option>
-                              <option value="STEER/TRAILER">STEER/TRAILER</option>
-                              <option value="DRIVE">DRIVE</option>
-                              <option value="TRAILER">TRAILER</option>
+                              <option @if($tyre->tyre_structure == 'STEER/TRAILER') selected @endif value="STEER/TRAILER">STEER/TRAILER</option>
+                              <option @if($tyre->tyre_structure == 'DRIVE') selected @endif value="DRIVE">DRIVE</option>
+                              <option @if($tyre->tyre_structure == 'TRAILER') selected @endif value="TRAILER">TRAILER</option>
                             </select>
                     </div>
                 <div class="form-group col-12 col-md-8">
                       <label for="exampleInputname">Đặc trưng sản phẩm</label>
                       <div class="row">
                       <div class="col-8">
-                        <input type="name" name="features[]" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mô tả" value="" onfocus="focused(this)" onfocusout="defocused(this)">
-                      </div>
+                        @foreach (json_decode($tyre->tyre_features, true) as $feature)
+                          <input type="name" name="features[]" value="{{ $feature}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mô tả" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                        
+                        @endforeach
+                        </div>
                       <div class="col-4">
                       <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button" name="button" onclick="addmorefeature()">Thêm đặc trưng</button>
                       </div>
@@ -82,16 +86,22 @@
                 </div>
                 <br/>
                 <div class="form-group col-md-8">
-                  <label for="exampleInputname">Đăng ảnh kiểu xe và vị trí lắp đặt</label>
+                      @if($tyre->install_position_image != null)
+                        <div class="col-sm-12">
+                            <img src="{{asset($tyre->install_position_image)}}" class="img-fluid">
+                        </div>
+                        @endif
+                        <br/>
+                  <label for="exampleInputname">Thay ảnh kiểu xe và vị trí lắp đặt</label>
                   <div class="input-group hdtuto control-group lst increment" >
                         <div class="list-input-hidden-upload">
                           <input type="file" name="install" id="" class="myfrm form-control">
                         </div>
-                      </div>
+                  </div>
                 </div>
                 <br/>
                 <div class="form-group col-md-8">
-                  <label for="exampleInputname">Đăng ảnh lốp</label>
+                  <label for="exampleInputname">Thêm ảnh lốp</label>
                   <div class="input-group hdtuto control-group lst increment" >
                         <div class="list-input-hidden-upload">
                           <input multiple type="file" name="filenames[]" id="file_upload" class="myfrm form-control hidden">
@@ -100,7 +110,16 @@
                           <button class="btn btn-success btn-add-image" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>+Add image</button>
                         </div>
                       </div>
-                  <div class="list-images"></div>
+                  <div class="list-images">
+                      @foreach ($tyre->images as $image)
+                          <div class="box-image">
+                            <img src="{{asset($image->image)}}" class="picture-box">
+                            <div class="wrap-btn-delete"><span data-id="{{ $image->id }}" class="btn-delete-image">x</span></div>
+                            <input type="hidden" id="{{ $image->id }}" name="images_uploaded[]" value="{{ $image->id }}">
+                          </div>
+                          
+                        @endforeach
+                  </div>
                 </div>
                 @if($errors->any())
                 <div class="text-danger">

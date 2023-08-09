@@ -58,20 +58,31 @@
                         </tr>
                     </thead>
                     <tbody>
+                      @php 
+                      $total = 0;
+                      @endphp
                       @foreach($order->tyres as $tyre)
                         <tr>
                             <th scope="row">{{ $loop->index +1 }} </th>
                             <td>{{$tyre->dimention->size}}</td>
                             <td>{{$tyre->dimention->tyre->name}}</td>
-                            <td>16PR</td>
+                            <td>{{$tyre->dimention->ply}}</td>
                             <td>{{$tyre->dimention->sevice_index}}</td>
                             <td>
                                 {{$tyre->quantity}}
                             </td>
-                            <td>Cái</td>
-                            <td>100.000 đ</td>
+                            <td>{{$tyre->dimention->unit}}</td>
+                            <td>{{intval($tyre->dimention->price) * intval($tyre->quantity)}} đ</td>
+                            @php 
+                            $total = $total + (intval($tyre->dimention->price) * intval($tyre->quantity));
+                            @endphp
                         </tr>
                        @endforeach
+                       <tr>
+                         <th colspan="6"></th>
+                            <th scope="col text-right"> Tổng: </th>
+                            <th>{{$total}} đ</th>
+                        </tr>
                     </tbody>
                 </table>
             </div>

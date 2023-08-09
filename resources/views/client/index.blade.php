@@ -17,7 +17,7 @@
             <div class="card">
                 <div class="card-body">
                 <h5 class="card-title">{{$new->name}}</h5>
-                <p class="card-text">{{$new->drive->name}}</p>
+                <p class="card-text">@if(isset($tyre->drive)){{$new->drive->name}} @endif</p>
                 <img class="card-img-top" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}">
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">
@@ -55,7 +55,7 @@
             <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{$best->name}}</h5>
-                <p class="card-text">{{$best->drive->name}}</p>
+                <p class="card-text">@if(isset($tyre->drive)){{$best->drive->name}} @endif</p>
                 <img class="card-img-top" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}">
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">

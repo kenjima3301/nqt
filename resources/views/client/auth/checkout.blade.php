@@ -127,6 +127,9 @@
             <div class="card mb-4 mt-4">
                 <div class="card-body">
                     <h5 class="card-title">Thông tin sản phẩm <p class="sub-title">Có tổng: {{count($order->tyres)}} sản phẩm</p></h5>
+                    @php 
+                      $total = 0;
+                      @endphp
                     @foreach ($order->tyres as $tyre)
                     <div class="row mt-4">
                       <div class="col-lg-2">
@@ -139,7 +142,10 @@
                             <h5 class="text-center">{{$tyre->quantity}}</h5>
                         </div>
                       <div class="col-lg-5">
-                            <h5 class="text-center">100,000,000đ</h5>
+                            <h5 class="text-center">{{intval($tyre->dimention->price) * intval($tyre->quantity)}} đ</h5>
+                            @php 
+                            $total = $total + (intval($tyre->dimention->price) * intval($tyre->quantity));
+                            @endphp
                         </div>
                     </div>
                      @endforeach
@@ -147,7 +153,7 @@
                         <tbody>
                         <tr>
                             <td>Tổng</td>
-                            <td>100,000 đ</td>
+                            <td>{{$total}} đ</td>
                         </tr>
                         <tr>
                             <td>Thuế</td>
@@ -172,7 +178,7 @@
                             <h5>Tổng <br> <p class="sub-title">Giá chưa bao gồm phí vận chuyển</p></h5>
                         </div>
                         <div class="col-lg-4 text-center">
-                            <h5>100.000đ</h5>
+                            <h5>{{$total}} đ</h5>
                         </div>
                     </div>
                 </div>

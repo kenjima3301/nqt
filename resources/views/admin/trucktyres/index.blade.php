@@ -23,16 +23,28 @@
                        <th>Cấu trúc lốp</th>
                        <th>Kiểu xe và vị trí lắp đặt</th>
                        <th>Import Sai</th>
+                       <th></th>
                     </thead>
                     <tbody>
                       @foreach ($tyres as $key => $tyre)
                       <tr>
                         <td class="text-sm font-weight-normal">{{$tyre->name}}</td>
-                        <td class="text-sm font-weight-normal">{{$tyre->drive->name}}</td>
+                        <td class="text-sm font-weight-normal">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</td>
                         <td class="text-sm font-weight-normal">{{$tyre->tyre_structure}}</td>
-                        <td class="text-sm font-weight-normal"><img src="{{asset($tyre->install_position_image)}}" width="200"></td>
+                        <td class="text-sm font-weight-normal">
+                          @if($tyre->install_position_image != null)
+                          <img src="{{asset($tyre->install_position_image)}}" width="200">
+                          @endif
+                        </td>
                         <td><a href="{{url('admin/lop-xe-tai-import/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Import sai">
                             <i class="fas fa-file-import" aria-hidden="true"></i>
+                          </a>
+                        </td>
+                        <td><a href="{{url('admin/lop-xe-tai-sua/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Sửa">
+                            <i class="fas fa-edit" aria-hidden="true"></i>
+                          </a>
+                          <a href="{{url('admin/lop-xe-tai-xoa/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Xóa">
+                            <i class="fas fa-trash" aria-hidden="true"></i>
                           </a>
                         </td>
                       </tr>

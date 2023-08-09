@@ -29,13 +29,15 @@
 
                     <div class="col-lg-6 col-12">
                       <div>
-                        <h6 class="mb-0 text-dark">{{$tyre->drive->name}}</h6>
+                        <h6 class="mb-0 text-dark">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</h6>
                         <h6 class="mb-0 text-dark">{{$tyre->tyre_structure}}</h6>
                       </div>
                       <hr class="horizontal light mt-1 mb-3">
                       <div class="d-flex justify-content-center">
                         <div>
+                          @if($tyre->install_position_image != null)
                           <h6 class="mb-0"><img src="{{asset($tyre->install_position_image)}}" width="300"></h6>
+                          @endif
                         </div>
                       </div>
                     </div>
@@ -80,14 +82,6 @@
                 </div>
               </div>
             </div>
-<!--            <div class="col-lg-6 col-md-12 col-12 mt-4 mt-lg-2">
-              <div class="card">
-                <div class="card-body p-3 pt-2">
-                  <a class="btn bg-gradient-primary mb-2 me-4" href="{{url('admin/lop-xe-tai-import-download')}}"><i class="fa fa-download" aria-hidden="true"></i>
-                    Tải mẫu import</a>
-                </div>
-              </div>
-            </div>-->
           </div>
         </div>
 
@@ -100,25 +94,14 @@
     <table class="table" style='font-weight:200; line-height:0.85'>
       <thead>
         <tr>
-          <th class="text-xxs p-0 pt-1 text-center">Country</th>
-          <th class="text-xxs p-0 text-center">Size</th>
-          <th class="text-xxs p-0 text-center">LR / PR</th>
-          <th class="text-xxs p-0 text-center">Service index</th>
-          <th class="text-xxs p-0 text-center">Tread Depth(mm)</th>
-          
-          <th class="text-xxs p-0 text-center">Standard Rim</th>
-          <th class="text-xxs p-0 text-center">Overall Diameter(mm)</th>
-          <th class="text-xxs p-0 text-center">Section Width(mm)</th>
-          
-          <th class="text-xxs p-0 text-center">Single(kg)</th>
-          <th class="text-xxs p-0 text-center">Single(lbs)</th>
-          <th class="text-xxs p-0 text-center">Single(kPa)</th>
-          <th class="text-xxs p-0 text-center">Single(psi)</th>
-          
-          <th class="text-xxs p-0 text-center">Dual(kg)</th>
-          <th class="text-xxs p-0 text-center">Dual(lbs)</th>
-          <th class="text-xxs p-0 text-center">Dual(kPa)</th>
-          <th class="text-xxs p-0 text-center">Dual(psi)</th>
+          <th class="text-xxs p-0 pt-1 text-center" width="2%">Nước sản xuất</th>
+          <th class="text-xxs p-0 text-center">Quy cách</th>
+          <th class="text-xxs p-0 text-center">Lớp bố</th>
+          <th class="text-xxs p-0 text-center">Chỉ số tải trọng và tốc độ</th>
+          <th class="text-xxs p-0 text-center">Đơn vị</th>
+          <th class="text-xxs p-0 text-center">Kiểu gai</th>
+          <th class="text-xxs p-0 text-center">Số lượng</th>
+          <th class="text-xxs p-0 text-center">Đơn giá</th>
         </tr>
       </thead>
       <tbody>
@@ -133,23 +116,13 @@
             @endforeach
           </td>
           <td class=" text-center text-sm p-0"> {{$dimention->size}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->lr_pr}} </td>
+          <td class=" text-center text-sm p-0"> {{$dimention->ply}} </td>
           <td class=" text-center text-sm p-0"> {{$dimention->sevice_index}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->tread_depth}} </td>
+          <td class=" text-center text-sm p-0"> {{$dimention->unit}} </td>
           
-          <td class=" text-center text-sm p-0"> {{$dimention->standard_rim}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->overall_diameter}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->section_width}} </td>
-          
-          <td class=" text-center text-sm p-0"> {{$dimention->single_kg}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->single_lbs}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->single_kpa}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->single_psi}} </td>
-          
-          <td class=" text-center text-sm p-0"> {{$dimention->dual_kg}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->dual_lbs}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->dual_kpa}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->dual_psi}} </td>
+          <td class=" text-center text-sm p-0"> {{$dimention->tread_type}} </td>
+          <td class=" text-center text-sm p-0"> {{$dimention->total}} </td>
+          <td class=" text-center text-sm p-0"> {{$dimention->price}} </td>
         </tr>
         @endforeach
        
@@ -157,7 +130,10 @@
     </table>
   </div>
 </div>
+        
       </div>
+        <a class="btn mb-2 me-4 conten-right" href="{{url('admin/xoa-sai-trong-ma-gai/'.$tyre->id)}}">
+                    Xóa toàn bộ Sai</a>
     </div>
   </main>
 </x-layout>

@@ -39,9 +39,13 @@
                       @foreach ($goldencrowntyres as $key => $tyre)
                       <tr>
                         <td class="text-sm font-weight-normal">{{$tyre->name}}</td>
-                        <td class="text-sm font-weight-normal">{{$tyre->drive->name}}</td>
+                        <td class="text-sm font-weight-normal">@if(isset($tyre->drive)){{$tyre->drive->name}}@endif</td>
                         <td class="text-sm font-weight-normal">{{$tyre->tyre_structure}}</td>
-                        <td class="text-sm font-weight-normal"><img src="{{asset($tyre->install_position_image)}}" width="200"></td>
+                        <td class="text-sm font-weight-normal">
+                          @if($tyre->install_position_image != null)
+                          <img src="{{asset($tyre->install_position_image)}}" width="200">
+                          @endif
+                          </td>
                         <td class="text-sm font-weight-normal">{{$tyre->quantity}}</td>
                       </tr>
                       @endforeach

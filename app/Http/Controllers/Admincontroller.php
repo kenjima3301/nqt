@@ -145,24 +145,26 @@ class Admincontroller extends Controller
   }
   
   public function addtrucktyrespost(Request $request) {
-    
-    $path = public_path().'/tyre/install/';
-      if (!file_exists($path)) {
-        mkdir($path, 0775, true);
-      }
-    $imageName = time().'.'.$request->install->extension();
-    $request->install->move(public_path('tyre/install'), $imageName);
-    
-      $tyre = Tyre::create([
+    $tyre = Tyre::create([
           'name'   => $request->name,
           'model_id'   => $request->model_id,
           'brand_id'   => $request->brand_id,
           'driveexperience_id'   => $request->drive_id,
           'tyre_structure'   => $request->tyre_structure,
           'tyre_features'   => json_encode($request->features),
-          'install_position_image'   => 'tyre/install/'.$imageName,
           'price' => $request->price
       ]);
+    if($request->install != ''){
+    $path = public_path().'/tyre/install/';
+      if (!file_exists($path)) {
+        mkdir($path, 0775, true);
+      }
+    $imageName = time().'.'.$request->install->extension();
+    $request->install->move(public_path('tyre/install'), $imageName);
+    $tyre->install_position_image = 'tyre/install/'.$imageName;
+    $tyre->save();
+    }
+      
       $images = $request->filenames;
       foreach ($images as $key => $image){
         $path = public_path().'/tyre/image/';
@@ -180,6 +182,60 @@ class Admincontroller extends Controller
     return redirect('admin/lop-xe-tai');
   }
   
+  public function edittyre($id) {
+    $tyre = Tyre::find($id);
+    $brands = Brand::all();
+    $models = Modelcar::all();
+    $drives = Drive::all();
+    return view('admin.trucktyres.edit', [
+        'tyre' => $tyre,
+        'brands' => $brands,
+        'models' => $models,
+        'drives' => $drives
+        ]);
+  }
+  
+  public function edittyrepost(Request $request) {
+    $tyre = Tyre::find($request->tyre_id);
+    if($request->install != ''){
+    $path = public_path().'/tyre/install/';
+      if (!file_exists($path)) {
+        mkdir($path, 0775, true);
+      }
+    $imageName = time().'.'.$request->install->extension();
+    $request->install->move(public_path('tyre/install'), $imageName);
+    $tyre->install_position_image = 'tyre/install/'.$imageName;
+    $tyre->save();
+    }
+    $tyre->name = $request->name;
+    $tyre->model_id   = $request->model_id;
+    $tyre->brand_id   = $request->brand_id;
+    $tyre->driveexperience_id   = $request->drive_id;
+    $tyre->tyre_structure   = $request->tyre_structure;
+    $tyre->tyre_features   = json_encode($request->features);
+    $tyre->price = $request->price;
+    $tyre->save();
+    $imagexisted_ids = $request->images_uploaded;
+    TyreImage::where('tyre_id', $tyre->id)->whereNotIn('id',$imagexisted_ids)->delete();
+      if($request->filenames != ''){
+      $images = $request->filenames;
+      foreach ($images as $key => $image){
+        $path = public_path().'/tyre/image/';
+        if (!file_exists($path)) {
+          mkdir($path, 0775, true);
+        }
+        $imageName = time().$key.'.'.$image->extension();
+        $image->move(public_path('tyre/image'), $imageName);
+        TyreImage::create([
+            'tyre_id' => $tyre->id,
+             'image' => 'tyre/image/'.$imageName
+        ]);
+      }
+    }
+      
+    return redirect('admin/lop-xe-tai-import/'.$tyre->id);
+  }
+  
   public function import($id) {
     $tyre = Tyre::find($id);
     $tyre_dimentions = TyreDimention::where('tyre_id', $id)->get();
@@ -195,7 +251,7 @@ class Admincontroller extends Controller
         $tyre = Tyre::find($id);
         foreach ($datas->readRows() as $key => $row){
             if ( $key === 0 ) {
-              if(count($row) !=17 || $row[2] != 'Size'){
+              if(count($row) !=22 || $row[2] != 'Quy cách'){
                 return back()->with('success', 'Hãy chọn đúng file import.');
               }
                 continue;
@@ -204,20 +260,25 @@ class Admincontroller extends Controller
               $tyredimention = TyreDimention::create([
                      'tyre_id' => $tyre->id,
                       'size' => $row[2],
-                      'lr_pr'   => $row[3],
+                      'ply' => $row[3],
                       'sevice_index' => $row[4],
-                      'tread_depth' => $row[5],
-                      'standard_rim' => $row[6],
-                      'overall_diameter' => $row[7],
-                      'section_width'   => $row[8],
-                      'single_kg' => $row[9],
-                      'single_lbs' => $row[10],
-                      'single_kpa' => $row[11],
-                      'single_psi' => $row[12],
-                      'dual_kg'   => $row[13],
-                      'dual_lbs' => $row[14],
-                      'dual_kpa' => $row[15],
-                      'dual_psi' => $row[16]
+                      'unit' => $row[5],
+                      'tread_type' => $row[6],
+                      'total' => $row[7],
+                      'price' => $row[8],
+                      'lr_pr'   => $row[9],
+                      'tread_depth' => $row[10],
+                      'standard_rim' => $row[11],
+                      'overall_diameter' => $row[12],
+                      'section_width'   => $row[13],
+                      'single_kg' => $row[14],
+                      'single_lbs' => $row[15],
+                      'single_kpa' => $row[16],
+                      'single_psi' => $row[17],
+                      'dual_kg'   => $row[18],
+                      'dual_lbs' => $row[19],
+                      'dual_kpa' => $row[20],
+                      'dual_psi' => $row[21]
                   ]);
               if(intval($row[0]) == 1){
                 TyreMadein::create([
@@ -240,7 +301,7 @@ class Admincontroller extends Controller
 
   public function importdownload(Request $request) {
       $data = [
-          ["China", "Thailand", "Size", "LR / PR", "Service index","Tread Depth (mm)", "Standard Rim", 
+          ["China", "Thailand", "Quy cách","Lớp bố", "Chỉ số tải trọng và tốc độ","Đơn vị","Kiểu gai","Số lượng","Đơn giá", "LR / PR","Tread Depth (mm)", "Standard Rim", 
             "Overall Diameter (mm)","Section Width (mm)", "Single (kg) ", "Single (lbs) ", "Single (kPa) ", "Single (psi)", 
               "Dual (kg) ", "Dual (lbs) ", "Dual (kPa) ", "Dual (psi)"]
         ];
@@ -480,5 +541,16 @@ class Admincontroller extends Controller
         $dealer->user_id = $user->id;
         $dealer->save();
         return back()->with('successaccount','Thêm mới thành công tài khoản cho đại lý');
+    }
+    
+    public function deleteallsize($id) {
+      TyreDimention::where('tyre_id',$id)->delete();
+      
+      return back();
+    }
+    
+    public function deletetyre($id) {
+      Tyre::where('id', $id)->delete();
+      return back();
     }
 }

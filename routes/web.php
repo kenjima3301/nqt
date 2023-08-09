@@ -73,6 +73,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/lop-xe-tai-import/{id}', [Admincontroller::class, 'import']);
   Route::post('/lop-xe-tai-import/{id}', [Admincontroller::class, 'importpost']);
   Route::get('/lop-xe-tai-import-download', [Admincontroller::class, 'importdownload']);
+  Route::get('/xoa-sai-trong-ma-gai/{id}', [Admincontroller::class, 'deleteallsize']);
+  Route::get('/lop-xe-tai-xoa/{id}', [Admincontroller::class, 'deletetyre']);
+  Route::get('/lop-xe-tai-sua/{id}', [Admincontroller::class, 'edittyre']);
+  Route::post('/lop-xe-tai-sua-post', [Admincontroller::class, 'edittyrepost']);
   
   Route::get('/dai-ly', [Admincontroller::class, 'dealer']);
   Route::get('/dai-ly-add', [Admincontroller::class, 'adddealer']);

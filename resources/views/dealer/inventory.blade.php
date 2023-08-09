@@ -18,8 +18,9 @@
                       <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" data-sortable="" style="width: 11.4645%;"><a href="#" class="dataTable-sorter">
                             Tên</a></th>
-                       <th>Kiểu đường lái</th>
-                       <th>Cấu trúc lốp</th>
+                       <th>Quy cách</th>
+                       <th>Lớp bố</th>
+                       <th>Chỉ số tải trọng và tốc độ</th>
                        <th>Kiểu xe và vị trí lắp đặt</th>
                        <th>Số lượng</th>
                     </thead>
@@ -28,6 +29,7 @@
                       <tr>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->tyre->name}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->size}}</td>
+                        <td class="text-sm font-weight-normal">{{$tyre->dimention->ply}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->sevice_index}}</td>
                         <td class="text-sm font-weight-normal"><img src="{{asset($tyre->dimention->tyre->install_position_image)}}" width="200"></td>
                         <td class="text-sm font-weight-normal">{{$tyre->total}}</td>

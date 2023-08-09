@@ -245,7 +245,7 @@ class StaffController extends Controller
     }
     
     public function orders() {
-      $orders = Order::where('status', 'booked')->get();
+      $orders = Order::where('status', 'booked')->orderBy('created_at', 'DESC')->get();
       return view('staff.orders', ['orders' => $orders]);
     }
     

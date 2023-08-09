@@ -49,8 +49,8 @@
                     <div class="card">
                         <div class="card-body">
                           <h5 class="card-title">{{$tyre->name}}</h5>
-                          <p class="card-text">{{$tyre->drive->name}}</p>
-                          <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt="{{$tyre->drive->name}}">
+                          <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
+                          <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt=" @if(isset($tyre->drive)) {{$tyre->drive->name}} @endif">
                           <div class="sub-desc row mt-3">
                             <div class="col-lg-3">
                               <p>{{$tyre->model->name}}</p>

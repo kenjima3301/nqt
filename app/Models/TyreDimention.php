@@ -14,6 +14,11 @@ class TyreDimention extends Model
   protected  $fillable = [
           'tyre_id',
           'size',
+          'ply',
+          'tread_type',
+          'unit',
+          'total',
+          'price',
           'lr_pr',
           'sevice_index',
           'tread_depth',

@@ -103,7 +103,7 @@ class ClientController extends Controller
   }
   
   public function order() {
-    $orders = Order::where('user_id', Auth::user()->id)->where('status', 'booked')->get();
+    $orders = Order::where('user_id', Auth::user()->id)->where('status', 'booked')->orderBy('created_at', 'DESC')->get();
     return view('client.auth.order',  compact('orders'));
   }
   
