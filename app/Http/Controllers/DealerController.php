@@ -209,7 +209,7 @@ class DealerController extends Controller
     }
     
     public function findoutputbycode(Request $request) {
-      $output = Output::where('output_code', $request->code)->where('user_id', Auth::user()->id)->first();
+      $output = Output::where('output_code', $request->code)->where('user_id', Auth::user()->id)->whereIn('status', array('xuat','nhap'))->first();
       if($output){
         return view('dealer.output-detail', [
             'output' => $output

@@ -8,6 +8,12 @@
           <div class="card">
             <div class="card-header">
               <h5 class="mb-0">Lốp xe Trazano</h5>
+              <select class="col-2" id="filtercode">
+                <option value="">Lọc theo mẫu gai</option>
+                @foreach($tyre_codes as $code)
+                <option value="{{$code->id}}"> {{$code->name}}</option>
+                @endforeach
+              </select>
             </div>
             
               <!--</div>-->
@@ -16,9 +22,8 @@
                 <div class="dataTable-container"><table class="table table-flush dataTable-table" id="datatable-basic">
                     <thead class="thead-light">
                       <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" data-sortable="" style="width: 11.4645%;"><a href="#" class="dataTable-sorter">
-                            Tên</a></th>
-                       <th>Quy cách</th>
+                        <th>Quy cách</th>
+                       <th>Tên</th>
                        <th>Lớp bố</th>
                        <th>Chỉ số tải trọng và tốc độ</th>
                        <th>Kiểu xe và vị trí lắp đặt</th>
@@ -27,7 +32,7 @@
                     </thead>
                     <tbody>
                       @foreach ($tyres as $tyre)
-                      <tr>
+                      <tr class="{{$tyre->tyre->id}} allcode">
                         <td class="text-sm font-weight-normal">{{$tyre->size}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->tyre->name}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->ply}}</td>
@@ -51,4 +56,19 @@
       </div>
     </div>
   </main>
+  @push('js')
+  <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
+  <link href="{{asset('assets/css/select2.min.css')}}" rel="stylesheet" />
+  <script src="{{asset('assets/js/select2.min.js')}}"></script>
+  <script>
+        $(document).ready(function(){
+          $("#filtercode").select2();
+          $('#filtercode').change(function(){
+              let code = $(this).val();
+              $('.allcode').hide();
+              $('.'+code).show();
+          });
+        });
+        </script>
+  @endpush
 </x-layout>

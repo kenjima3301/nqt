@@ -124,10 +124,10 @@
                                     <span class="badge badge-sm badge-success">{{$ed->created_at->format('d-m-Y')}}</span>
                                   </td>
                                   <td>
-                                    @if($ed->status == 'nhap')
-                                    <span class="badge badge-sm badge-success">Đã nhận hàng </span>
+                                    @if($ed->status == 'xuat')
+                                    <span class="badge badge-sm badge-success">Đã xuất hàng </span>
                                     @else
-                                    <a href="{{url('dealer/khach-le-da-nhan-hang-tu-nqt/'.$ed->id)}}"><span class="badge badge-sm badge-danger">Xác nhận</span></a></td>
+                                    <a href="{{url('dealer/xac-nhan-xuat-hang-cho-khach/'.$ed->id)}}"><span class="badge badge-sm badge-danger">Xác nhận</span></a></td>
                                     @endif
                                 </tr>
                         @endforeach

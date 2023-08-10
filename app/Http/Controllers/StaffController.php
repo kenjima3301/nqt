@@ -237,14 +237,22 @@ class StaffController extends Controller
     }
     
     public function findoutputbycode(Request $request) {
-      $output = Output::where('output_code', $request->code)->first();
-      if($output){
-        return view('staff.output-detail', [
-            'output' => $output
-        ]);
+      if(preg_match('-R-',$request->code)){
+        $order = Order::where('order_code', $request->code)->where('status','booked')->first();
+        if($order){
+          return view('staff.orderdetail',  compact('order'));
+        }else {
+          return back()->with('message1',"Không tìm thấy mã đơn.");
+        }
       }else {
-        return back()->with('message1',"Không tìm thấy mã đơn.");
+        $output = Output::where('output_code', $request->code)->whereIn('status',array('xuat','nhap'))->first();
+        if($output){
+          return view('staff.output-detail', [
+              'output' => $output
+          ]);
+        }
       }
+      return back()->with('message1',"Không tìm thấy mã đơn.");
     }
     
     public function orders() {
@@ -259,7 +267,8 @@ class StaffController extends Controller
   
     public function inventory() {
         $tyres = TyreDimention::all();
-        return view('staff.inventory', ['tyres'=> $tyres]);
+        $tyre_codes = Tyre::all();
+        return view('staff.inventory', ['tyres'=> $tyres, 'tyre_codes' => $tyre_codes]);
     }
     
     public function inputgoods() {

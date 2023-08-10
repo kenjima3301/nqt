@@ -16,22 +16,23 @@
                 <div class="dataTable-container"><table class="table table-flush dataTable-table" id="datatable-basic">
                     <thead class="thead-light">
                       <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" data-sortable="" style="width: 11.4645%;"><a href="#" class="dataTable-sorter">
-                            Tên</a></th>
-                       <th>Quy cách</th>
+                        <th>Quy cách</th>
+                        <th> Mẫu gai </th>
                        <th>Lớp bố</th>
                        <th>Chỉ số tải trọng và tốc độ</th>
                        <th>Kiểu xe và vị trí lắp đặt</th>
+                       <th>Đơn vị</th>
                        <th>Số lượng</th>
                     </thead>
                     <tbody>
                       @foreach ($tyres as $tyre)
                       <tr>
-                        <td class="text-sm font-weight-normal">{{$tyre->dimention->tyre->name}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->size}}</td>
+                        <td class="text-sm font-weight-normal">{{$tyre->dimention->tyre->name}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->ply}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->sevice_index}}</td>
                         <td class="text-sm font-weight-normal"><img src="{{asset($tyre->dimention->tyre->install_position_image)}}" width="200"></td>
+                        <td class="text-sm font-weight-normal">{{$tyre->dimention->unit}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->total}}</td>
                       </tr>
                       @endforeach
