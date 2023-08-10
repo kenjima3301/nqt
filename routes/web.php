@@ -124,6 +124,13 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::post('/findoutputbycode', [StaffController::class, 'findoutputbycode']);
   Route::get('/don-hang-online', [StaffController::class, 'orders']);
   Route::get('/chi-tiet-don-online/{id}', [StaffController::class, 'orderdetail']);
+  Route::get('/thong-ke-kho-hang', [StaffController::class, 'inventory']);
+  Route::get('/nhap-hang', [StaffController::class, 'inputgoods']);
+  Route::get('/input-goods-download', [StaffController::class, 'importdownload']);
+  Route::post('/nhap-hang-import', [StaffController::class, 'importpost']);
+  Route::get('/xac-nhan-nhap-hang', [StaffController::class, 'importconfirm']);
+  Route::get('/confirminput', [StaffController::class, 'confirminput']);
+  Route::get('/cancelinput', [StaffController::class, 'cancelinput']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'client', 'as' => 'client'], function () {

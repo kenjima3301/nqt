@@ -11,6 +11,9 @@ use Illuminate\Support\Carbon;
 use App\Models\DealerTyre;
 use App\Models\Output;
 use App\Models\Order;
+use Shuchkin\SimpleXLSXGen;
+use Shuchkin\SimpleXLSX;
+use App\Models\Input;
 
 class StaffController extends Controller
 {
@@ -252,5 +255,106 @@ class StaffController extends Controller
     public function orderdetail($id) {
     $order = Order::find($id);
     return view('staff.orderdetail',  compact('order'));
+    }
+  
+    public function inventory() {
+        $tyres = TyreDimention::all();
+        return view('staff.inventory', ['tyres'=> $tyres]);
+    }
+    
+    public function inputgoods() {
+      $inputs = Input::where('status', 'pending')->get();
+      if(count($inputs) > 0){
+        return redirect('staff/xac-nhan-nhap-hang');
+      }
+      return view('staff.inputgoods');
+    }
+    
+    public function importdownload(Request $request) {
+      $data = [
+          ["Quy cách","Mẫu gai","Lớp bố", "Chỉ số tải trọng và tốc độ","Số lượng","Đơn giá"]
+        ];
+       $xlsx = SimpleXLSXGen::fromArray( $data ); 
+       $xlsx = new SimpleXLSXGen();
+      $xlsx->addSheet( $data, "Nhap hang" );
+       $xlsx->downloadAs('mau-import-nhap-hang.xlsx');
+        exit();
+    }
+    
+    public function importpost(Request $request) {
+    $this->validate($request, [
+               'importfile' => 'required|file|mimes:xls,xlsx'
+           ]);
+      $file = $request->file('importfile');
+      if ( $datas = SimpleXLSX::parse($file) ) {
+        foreach ($datas->readRows() as $key => $row){
+            if ( $key === 0 ) {
+              if(count($row) !=6 || $row[0] != 'Quy cách'){
+                return back()->with('success', 'Hãy chọn đúng file import.');
+              }
+                continue;
+            }else {
+              $row = array_map('trim', $row);
+              //get Tyre
+              $tyre = Tyre::where('name', $row[1])->first();
+              if($tyre){
+                $dimention = TyreDimention::where('tyre_id',$tyre->id)->where('size', $row[0])->where('ply',$row[2])->where('sevice_index',$row[3])->first();
+                if($dimention){
+                  Input::create([
+                      'dimention_id' => $dimention->id,
+                      'row_id' => $key,
+                      'total' => $row[4],
+                      'price' => $row[5],
+                      'status' => 'pending'
+                      
+                  ]);
+                }else {
+                  Input::create([
+                      'dimention_id' => 0,
+                      'row_id' => $key,
+                      'total' => $row[4],
+                      'price' => $row[5],
+                      'status' => 'pending'
+                      
+                  ]);
+                }
+              }else {
+                Input::create([
+                      'dimention_id' => 0,
+                      'row_id' => $key,
+                      'total' => $row[4],
+                      'price' => $row[5],
+                      'status' => 'pending'
+                      
+                  ]);
+              }
+            }
+        }
+        return redirect('staff/xac-nhan-nhap-hang');
+      }
+  }
+  
+  public function importconfirm() {
+      $inputs = Input::where('status', 'pending')->get();
+      return view('staff.inputconfirm', ['inputs' => $inputs]);
+  }
+  
+  public function confirminput() {
+    Input::where('dimention_id', 0)->where('status', 'pending')->delete();
+    $inputs = Input::where('status', 'pending')->get();
+    foreach($inputs as $input){
+      $dimention = TyreDimention::find($input->dimention_id);
+      $dimention->total = intval($dimention->total) + intval($input->total);
+      $dimention->price = $input->price;
+      $dimention->save();
+      $input->status = 'nhap';
+      $input->save();
+    }
+    return redirect('staff/nhap-hang')->with('message', 'Hoàn thành nhập hàng. Vui lòng kiểm tra kho hàng');
+  }
+  
+  public function cancelinput() {
+    Input::where('status', 'pending')->delete();
+    return redirect('staff/nhap-hang');
   }
 }

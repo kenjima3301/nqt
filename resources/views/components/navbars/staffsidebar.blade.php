@@ -17,7 +17,7 @@
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>
-          <span class="nav-link-text ms-1">Bảng quản trị</span>
+          <span class="nav-link-text ms-1">Xuất kho trong kỳ</span>
         </a>
       </li>
       <li class="nav-item">
@@ -47,34 +47,23 @@
           <span class="nav-link-text ms-1">Đơn hàng online</span>
         </a>
       </li>
-      <li class="nav-item mt-3">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Danh sách hàng</h6>
-      </li>
       <li class="nav-item">
-        <a class="nav-link text-white {{ $activePage == 'staff/trazano' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/trazano')}}">
+        <a class="nav-link text-white {{ $activePage == 'staff/thong-ke-kho-hang' ? ' active bg-gradient-dark' : '' }}  "
+           href="{{url('staff/thong-ke-kho-hang')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>
-          <span class="nav-link-text ms-1">Lốp Trazano</span>
+          <span class="nav-link-text ms-1">Thống kê kho hàng</span>
         </a>
       </li>
+      
       <li class="nav-item">
-        <a class="nav-link text-white {{ $activePage == 'staff/goldencrown' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/goldencrown')}}">
+        <a class="nav-link text-white {{ $activePage == 'staff/nhap-hang' ? ' active bg-gradient-dark' : '' }}  "
+           href="{{url('staff/nhap-hang')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
             <i class="fa fa-tire" aria-hidden="true"></i>
           </div>
-          <span class="nav-link-text ms-1">Lốp Golden Crown</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-white {{ $activePage == 'staff/othertyre' ? ' active bg-gradient-dark' : '' }}  "
-           href="{{url('staff/othertyre')}}">
-          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fa fa-tire" aria-hidden="true"></i>
-          </div>
-          <span class="nav-link-text ms-1">Lốp xe tải các nhãn hiệu khác</span>
+          <span class="nav-link-text ms-1">Nhập hàng</span>
         </a>
       </li>
     </ul>

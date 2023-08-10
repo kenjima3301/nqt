@@ -106,7 +106,8 @@ class DealerController extends Controller
   public function nqtoutput() {
     $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
     $outputs = Output::where('dealer_id', $dealer->id)->where('status', 'xuat')->get();
-    return view('dealer.nqtoutput',['outputs' => $outputs]);
+    $outputeds = Output::where('dealer_id', $dealer->id)->where('status', 'nhap')->get();
+    return view('dealer.nqtoutput',['outputs' => $outputs, 'outputeds'=> $outputeds]);
     
   }
   
