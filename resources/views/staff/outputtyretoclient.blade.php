@@ -15,7 +15,7 @@
                   <h5 class="font-weight-bolder mb-0">
                     Mã đơn hàng: {{$output->output_code}}
                   </h5>
-                  <form action="{{url('staff/updateoutput')}}" method="POST" enctype="multipart/form-data">
+                  <form action="{{url('staff/updateoutputtoclient')}}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <input type="hidden" name="output_id" value="{{$output->id}}">
                     <div class="form-group col-12 col-md-10 pl-4">  

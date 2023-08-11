@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Output extends Model
 {
@@ -21,5 +22,9 @@ class Output extends Model
    
    public function dimentions(): HasMany {
         return $this->hasMany(TyreOutput::class, 'output_id', 'id');
+  }
+  
+  public function dealer(): HasOne {
+      return $this->hasOne(Dealer::class, 'id', 'dealer_id');
   }
 }

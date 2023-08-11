@@ -229,6 +229,23 @@ class StaffController extends Controller
       return redirect('staff/xuat-hang-khach-le');
     }
     
+    public function updateoutputtoclient(Request $request) {
+    $output = Output::find($request->output_id);
+    $output->note = $request->note;
+    if($request->outputfile != ''){
+        $Name = time().'.'.$request->outputfile->extension();
+        $path = public_path().'/output/client/';
+        if (!file_exists($path)) {
+          mkdir($path, 0775, true);
+        }
+        $request->outputfile->move($path, $Name);
+        $output->file = '/output/client/'.$Name;
+    }
+    $output->save();
+    
+    return redirect('staff/xuat-hang-khach-le');
+  }
+    
     public function outputdetail($id) {
       $output = Output::find($id);
       return view('staff.output-detail', [

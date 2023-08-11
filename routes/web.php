@@ -131,6 +131,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::get('/xac-nhan-nhap-hang', [StaffController::class, 'importconfirm']);
   Route::get('/confirminput', [StaffController::class, 'confirminput']);
   Route::get('/cancelinput', [StaffController::class, 'cancelinput']);
+  Route::post('/updateoutputtoclient', [StaffController::class, 'updateoutputtoclient']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'client', 'as' => 'client'], function () {
