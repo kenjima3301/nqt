@@ -9,8 +9,22 @@
         <div class="col-lg-12 mt-4">
             <div class="card mb-4">
                 <div class="card-body">
+                  <div class="row">
+                  <div class="col-9">
                     <h5 class="card-title bold">Đơn hàng {{$order->order_code}} 
                       <span class="btn bg-light mb-0 text-end avoid-this" id="indon" onclick="printorder()"> In đơn hàng! </span></h5>
+                  </div>
+                  <div class="col-3 avoid-this">
+                    Chuyển trạng thái 
+                    <select class="dataTable-selector" id="changeorderstatus" name="{{$order->id}}"> 
+                      <option value="dat" @selected($order->status == 'dat')>Đơn mới</option>
+                      <option value="xuat" @selected($order->status == 'xuat')>Giao hàng</option>
+                      <option value="giao" @selected($order->status == 'giao')>Hoàn thành</option>
+                      <option value="huy" @selected($order->status == 'huy')>Hủy</option>
+                    </select>
+                    <div id="sucessorderchange" class="text-success font-weight-light ms-sm-1"></div>
+                  </div>
+                </div>
                     <div class=" mb-4">
                     <div class="row form-outline mb-2 mt-4">
                         <div class="col-md-12">
@@ -129,6 +143,25 @@
 </style>
   @push('js')
   <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
+  <script type="text/javascript">
+     $(document).ready(function () {
+        $("#changeorderstatus").change(function () {
+          let order_id = $(this).attr('name');
+          let status = $(this).val();
+          change_order_status(order_id, status);
+       });
+    });
+    function change_order_status(order_id, status) {
+            $.ajax({
+                  url:'{{url("change_order_status")}}',
+                  type:'post',
+                  data:'order_id=' + order_id + '&status=' + status + '&_token={{csrf_token()}}',
+                  success:function(result){
+                    $('#sucessorderchange').text("Chuyển trạng thái thành công.");
+                  }
+              });
+    } 
+  </script>
   <script src="{{asset('assets/js/jQuery.print.js')}}"></script>
 <script>
   function printorder(){

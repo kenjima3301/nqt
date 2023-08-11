@@ -96,19 +96,19 @@ class ClientController extends Controller
     $order->address = $request->address.' '. $communename["name"] .' '. $districtname["name"]. ' '. $tinhname["name"];
     $order->note = $request->note;
     $order->payment = $request->payment;
-    $order->status = 'booked';
+    $order->status = 'dat';
     $order->save();
     return redirect('client/don-hang');
     
   }
   
   public function order() {
-    $orders = Order::where('user_id', Auth::user()->id)->where('status', 'booked')->orderBy('created_at', 'DESC')->get();
+    $orders = Order::where('user_id', Auth::user()->id)->whereIn('status', Order::STATUS)->orderBy('created_at', 'DESC')->get();
     return view('client.auth.order',  compact('orders'));
   }
   
   public function orderdetail($id) {
-    $order = Order::where('id',$id)->where('user_id', Auth::user()->id)->where('status', 'booked')->first();
+    $order = Order::where('id',$id)->where('user_id', Auth::user()->id)->whereIn('status', Order::STATUS)->first();
     return view('client.auth.orderdetail',  compact('order'));
   }
 

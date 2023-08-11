@@ -7,7 +7,12 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Đơn hàng online</h5>
+                <select class="dataTable-selector" id="select_status">
+                  <option href="{{url('staff/don-hang-online')}}" @selected($status[$activepage] == 'dat')>Đơn mới</option>
+                  <option href="{{url('staff/don-hang-online-dang-giao')}}" @selected($status[$activepage] == 'xuat')>Đơn đang giao</option>
+                  <option href="{{url('staff/don-hang-online-hoan-thanh')}}" @selected($status[$activepage] == 'giao')>Đơn hoàn thành</option>
+                  <option href="{{url('staff/don-hang-online-huy')}}" @selected($status[$activepage] == 'huy')>Đơn hủy</option>
+                </select>
             </div>
             <div class="card-body p-3 position-relative">
               <div class="row">
@@ -20,6 +25,7 @@
                         <th scope="col">Tên</th>
                         <th scope="col">Phone</th>
                         <th>Địa chỉ</th>
+                        <th>Số sản phẩm</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -30,6 +36,7 @@
                         <td>{{$order->name}}</td>
                         <td>{{$order->phone}}</td>
                         <td>{{$order->address}}</td>
+                        <td>{{count($order->tyres)}}</td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -44,6 +51,16 @@
       </div>
     </div>
   </main>
-
+ @push('js')
+ <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#select_status").change(function () {
+          href = $(this).find('option:selected').attr("href");
+          window.location.href = href;
+        });
+    });
+  </script>
+   @endpush
 </x-layout>
 

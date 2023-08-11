@@ -58,4 +58,12 @@ class AjaxController extends Controller
       $cart->quantity = $total;
       $cart->save();
     }
+    
+    public function change_order_status(Request $request) {
+      $order_id = $request->post('order_id');
+      $status = $request->post('status');
+      $order = \App\Models\Order::find($order_id);
+      $order->status = $status;
+      $order->save();
+    }
 }

@@ -22,6 +22,13 @@ class Order extends Model
       'status',
   ];
   
+  const STATUS = [
+        'dat',
+        'xuat',
+        'giao',
+        'huy'
+    ];
+  
   public function tyres(): HasMany {
         return $this->hasMany(OrderTyre::class, 'order_id', 'id');
   }
