@@ -23,7 +23,7 @@ class StaffController extends Controller
     }
     
   public function dashboard() {
-    $outputs = TyreOutput::whereDate('created_at', '=', Carbon::today())->get();
+    $outputs = Output::where('user_id', Auth::user()->id)->whereDate('updated_at', '=', Carbon::today())->get();
     return view('staff.dashboard', ['outputs' => $outputs]);
   }
   
@@ -106,6 +106,11 @@ class StaffController extends Controller
     return view($template, ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions]);
   }
   
+  public function tyredetail($id) {
+    $tyre = Tyre::find($id);
+    return view('staff.tyre-detail', ['tyre' => $tyre]);
+  }
+  
   public function outputtodealer() {
     $dealers = \App\Models\Dealer::all();
     return view('staff.outputtodealer', [
@@ -176,6 +181,11 @@ class StaffController extends Controller
     $output = Output::find($id);
     $output->status = 'xuat';
     $output->save();
+    foreach ($output->dimentions as $tyre){
+      $dimention = TyreDimention::find($tyre->dimention_id);
+      $dimention->total = intval($dimention->total) - intval($tyre->quantity);
+      $dimention->save();
+    }
     return redirect('staff/xuat-hang-dai-ly/'.$output->dealer_id);
   }
   
@@ -255,7 +265,7 @@ class StaffController extends Controller
     
     public function findoutputbycode(Request $request) {
       if(preg_match('-R-',$request->code)){
-        $order = Order::where('order_code', $request->code)->where('status','booked')->first();
+        $order = Order::where('order_code', $request->code)->where('status','dat')->first();
         if($order){
           return view('staff.orderdetail',  compact('order'));
         }else {
@@ -273,13 +283,33 @@ class StaffController extends Controller
     }
     
     public function orders() {
-      $orders = Order::where('status', 'booked')->orderBy('created_at', 'DESC')->get();
-      return view('staff.orders', ['orders' => $orders]);
+      $orders = Order::where('status', 'dat')->orderBy('created_at', 'DESC')->get();
+      $status = Order::STATUS;
+      return view('staff.orders', ['orders' => $orders, 'activepage' => 0, 'status' => $status]);
+    }
+    
+    public function ordersprocessing() {
+      $orders = Order::where('status', 'xuat')->orderBy('created_at', 'DESC')->get();
+      $status = Order::STATUS;
+      return view('staff.orders', ['orders' => $orders, 'activepage' => 1, 'status' => $status]);
+    }
+    
+    public function ordersdone() {
+      $orders = Order::where('status', 'giao')->orderBy('created_at', 'DESC')->get();
+      $status = Order::STATUS;
+      return view('staff.orders', ['orders' => $orders, 'activepage' => 2, 'status' => $status]);
+    }
+    
+    public function orderscancel() {
+      $orders = Order::where('status', 'huy')->orderBy('created_at', 'DESC')->get();
+      $status = Order::STATUS;
+      return view('staff.orders', ['orders' => $orders, 'activepage' => 3, 'status' => $status]);
     }
     
     public function orderdetail($id) {
     $order = Order::find($id);
-    return view('staff.orderdetail',  compact('order'));
+    $status = Order::STATUS;
+    return view('staff.orderdetail',  compact('order','status'));
     }
   
     public function inventory() {
@@ -382,5 +412,16 @@ class StaffController extends Controller
   public function cancelinput() {
     Input::where('status', 'pending')->delete();
     return redirect('staff/nhap-hang');
+  }
+  
+  public function updatedimention(Request $request) {
+    $dimention = TyreDimention::find($request->dimention_id);
+    if($dimention){
+      $dimention->total = $request->total;
+      $dimention->price = $request->price;
+      $dimention->save();
+    }
+    
+    return back()->with('successdimention', 'Cập nhật thành công.');
   }
 }

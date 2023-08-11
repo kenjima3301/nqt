@@ -123,6 +123,9 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::get('/xuat-hang-chi-tiet/{id}', [StaffController::class, 'outputdetail']);
   Route::post('/findoutputbycode', [StaffController::class, 'findoutputbycode']);
   Route::get('/don-hang-online', [StaffController::class, 'orders']);
+  Route::get('/don-hang-online-dang-giao', [StaffController::class, 'ordersprocessing']);
+  Route::get('/don-hang-online-hoan-thanh', [StaffController::class, 'ordersdone']);
+  Route::get('/don-hang-online-huy', [StaffController::class, 'orderscancel']);
   Route::get('/chi-tiet-don-online/{id}', [StaffController::class, 'orderdetail']);
   Route::get('/thong-ke-kho-hang', [StaffController::class, 'inventory']);
   Route::get('/nhap-hang', [StaffController::class, 'inputgoods']);
@@ -132,6 +135,8 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
   Route::get('/confirminput', [StaffController::class, 'confirminput']);
   Route::get('/cancelinput', [StaffController::class, 'cancelinput']);
   Route::post('/updateoutputtoclient', [StaffController::class, 'updateoutputtoclient']);
+  Route::get('/lop-xe-tai-chi-tiet/{id}', [StaffController::class, 'tyredetail']);
+  Route::post('/cap-nhat-gia-so-luong-cho-lop', [StaffController::class, 'updatedimention']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'client', 'as' => 'client'], function () {
@@ -172,6 +177,8 @@ Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {
   Route::get('/xuat-hang-chi-tiet/{id}', [DealerController::class, 'outputdetail']);
   Route::post('/findoutputbycode', [DealerController::class, 'findoutputbycode']);
   Route::post('/updateoutput', [DealerController::class, 'updateoutput']);
+  Route::get('/lop-xe-tai-chi-tiet/{id}', [DealerController::class, 'tyredetail']);
+  Route::post('/cap-nhat-gia-so-luong-cho-lop', [DealerController::class, 'updatedimention']);
 })->middleware('auth');
 
 // Ajax 
@@ -179,4 +186,5 @@ Route::post('get_get_size_list_by_tyre_id', [AjaxController::class, 'get_get_siz
 Route::post('get_get_size_list_by_tyre_id_and_dealer', [AjaxController::class, 'get_get_size_list_by_tyre_id_and_dealer'])->name('get_get_size_list_by_tyre_id_and_dealer');
 Route::post('add_temp_output', [AjaxController::class, 'add_temp_output'])->name('add_temp_output');
 Route::post('add_quantity_to_total', [AjaxController::class, 'add_quantity_to_total'])->name('add_quantity_to_total');
+Route::post('change_order_status', [AjaxController::class, 'change_order_status'])->name('change_order_status');
 

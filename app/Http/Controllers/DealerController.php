@@ -19,8 +19,10 @@ class DealerController extends Controller
     }
     
   public function dashboard() {
-    $outputs = Output::where('dealer_id', Auth::user()->id)->where('status', 'xuat')->get();
-    return view('dealer.dashboard', ['outputs' => $outputs]);
+    $outputs = Output::where('user_id', Auth::user()->id)->whereIn('status', array('xuat','nhap'))->whereDate('updated_at', '=', Carbon::today())->get();
+    $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+    $tyres = DealerTyre::where('dealer_id', $dealer->id)->where('status', 'public')->get();
+    return view('dealer.dashboard', ['outputs' => $outputs, 'tyres' => $tyres]);
     
   }
   
@@ -189,7 +191,14 @@ class DealerController extends Controller
       $output = Output::find($id);
       $output->status = 'xuat';
       $output->save();
-      
+      $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+      foreach ($output->dimentions as $dimention){
+        $dealertyre = DealerTyre::where('dealer_id', $dealer->id)->where('dimention_id', $dimention->dimention_id)->first();
+        if($dealertyre){
+          $dealertyre->total = $dealertyre->total - $dimention->quantity;
+          $dealertyre->save();
+        }
+      }
       return redirect('dealer/xuat-hang-cho-khach');
     }
     
@@ -217,5 +226,20 @@ class DealerController extends Controller
       }else {
         return back()->with('message1',"Không tìm thấy mã đơn.");
       }
+    }
+    
+    public function tyredetail($id) {
+      $tyre = Tyre::find($id);
+      $dealer = \App\Models\Dealer::where('user_id', Auth::user()->id)->first();
+      $tyredimentions = TyreDimention::where('tyre_id', $tyre->id)->pluck('id')->toArray();
+      $tyre_dimentions = DealerTyre::whereIn('dimention_id', $tyredimentions)->where('dealer_id', $dealer->id)->get();
+      return view('dealer.tyre-detail', ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions]);
+    }
+    
+    public function updatedimention(Request $request) {
+      $dealerdimention = DealerTyre::find($request->dimention_id);
+      $dealerdimention->total = $request->total;
+      $dealerdimention->save();
+      return back()->with('successdimention', 'Cập nhật thành công.');
     }
 }

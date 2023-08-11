@@ -39,26 +39,33 @@
       </thead>
       <tbody>
         @foreach ($outputs as $output)
+          @foreach($output->dimentions as $dimention)
+          @foreach ($tyres as $key => $tyre)
+            @if($tyre->dimention_id == $dimention->dimention_id)
+              @php
+              $thistyre = $tyres[$key];
+              @endphp
+            @endif
+            @endforeach
                 <tr>
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-xs">{{$output->dimention->tyre->name}}</h6>
-                        <p class="text-xs text-secondary mb-0">{{$output->dimention->tyre->brand->name}}
-                        - {{$output->dimention->tyre->drive->name}}</p>
+                        <h6 class="mb-0 text-xs">{{$dimention->dimention->tyre->name}}</h6>
                       </div>
                     </div>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-success">{{$output->dimention->tyre->quantity + $output->quantity}}</span>
+                    <span class="badge badge-sm badge-success">{{$thistyre->total + $dimention->quantity}}</span>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-danger">{{$output->quantity}}</span>
+                    <span class="badge badge-sm badge-danger">{{$dimention->quantity}}</span>
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm badge-warning">{{$output->dimention->tyre->quantity}}</span>
+                    <span class="badge badge-sm badge-warning">{{$thistyre->total}}</span>
                   </td>
                 </tr>
+            @endforeach
         @endforeach
          </tbody>
     </table>

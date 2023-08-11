@@ -34,7 +34,7 @@
                       @foreach ($tyres as $tyre)
                       <tr class="{{$tyre->tyre->id}} allcode">
                         <td class="text-sm font-weight-normal">{{$tyre->size}}</td>
-                        <td class="text-sm font-weight-normal">{{$tyre->tyre->name}}</td>
+                        <td class="text-sm font-weight-normal"><a href="{{url('staff/lop-xe-tai-chi-tiet/'.$tyre->tyre->id)}}">{{$tyre->tyre->name}}</a></td>
                         <td class="text-sm font-weight-normal">{{$tyre->ply}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->sevice_index}}</td>
                         <td class="text-sm font-weight-normal">

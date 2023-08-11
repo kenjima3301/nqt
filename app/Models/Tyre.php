@@ -36,4 +36,8 @@ class Tyre extends Model
   public function images(): HasMany {
         return $this->hasMany(TyreImage::class, 'tyre_id', 'id');
   }
+  
+  public function dimentions(): HasMany {
+        return $this->hasMany(TyreDimention::class, 'tyre_id', 'id');
+  }
 }

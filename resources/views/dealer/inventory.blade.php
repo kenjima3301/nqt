@@ -28,7 +28,7 @@
                       @foreach ($tyres as $tyre)
                       <tr>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->size}}</td>
-                        <td class="text-sm font-weight-normal">{{$tyre->dimention->tyre->name}}</td>
+                        <td class="text-sm font-weight-normal"><a href="{{url('dealer/lop-xe-tai-chi-tiet/'.$tyre->dimention->tyre->id)}}">{{$tyre->dimention->tyre->name}}</a></td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->ply}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->dimention->sevice_index}}</td>
                         <td class="text-sm font-weight-normal"><img src="{{asset($tyre->dimention->tyre->install_position_image)}}" width="200"></td>
