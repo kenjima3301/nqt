@@ -10,7 +10,11 @@
           <div class="row g-0">
             <div class="col-lg-12">
               <div class="card-body p-md-5 mx-md-4">
-
+                @if (\Session::has('message'))
+                  <div class="alert alert-info">
+                          <span>{!! \Session::get('message') !!}</span>
+                  </div>
+                  @endif
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
                   <p>Đăng ký:</p>

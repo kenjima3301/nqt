@@ -32,7 +32,16 @@
                       Yêu cầu đổi mật khẩu
                     </button>
                   </div>
-                  
+                  @if (\Session::has('success'))
+                  <div class="alert alert-success">
+                          <span>{!! \Session::get('success') !!}</span>
+                  </div>
+                  @endif
+                  @if (\Session::has('message'))
+                  <div class="alert alert-danger">
+                          <span>{!! \Session::get('message') !!}</span>
+                  </div>
+                  @endif
                 </form>
                   <div class="text-right">
                     <a href="{{url('dang-ky-tai-khoan')}}" style="color:#35A25B">Đăng ký tài khoản</a>

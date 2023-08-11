@@ -93,9 +93,10 @@ class Usercontroller extends Controller
       $user->remember_token = $token;
       $user->save();
       $url = url('email/verify/'.$user->id.'/'.$token);
-      (new MailController)->send($request->email,$subject ,$url);
+      $data['url'] = $url;
+      (new MailController)->send($request->email,$subject,'email.register' ,$data);
         
-        return back()->with('message','Xác thực email của bạn để đăng nhập tài khoản.');
+        return back()->with('message','Đăng ký thành công. Vui lòng kiểm tra email của bạn và xác thực để đăng nhập tài khoản.');
     }
     
     public function verifyemail($id, $token) {
@@ -105,6 +106,7 @@ class Usercontroller extends Controller
         $user->email_verified_at = now();
         $user->save();
       }
+      return redirect('login');
     }
     
     public function forgotpass() {
@@ -124,7 +126,7 @@ class Usercontroller extends Controller
             $url = url('email/changepass/'.$user->id.'/'.$token);
             $data['url'] = $url;
         (new MailController)->send($request->email,$subject,'email.forgotpass' ,$data);
-        return back()->with('message', 'Email đã được gửi vui long kiểm tra email và đổi mật khẩu theo hướng dẫn.');
+        return back()->with('success', 'Email đã được gửi vui long kiểm tra email và đổi mật khẩu theo hướng dẫn.');
       }else {
         return back()->with('message', 'Email chưa được đăng ký. Hãy đăng ký tài khoản cho email này.');
       }

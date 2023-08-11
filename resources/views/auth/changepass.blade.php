@@ -42,7 +42,7 @@
 
                   <div class="text-center pt-1 pb-1">
                     <button class="btn btn-block fa-lg gradient-custom-2 mb-3 text-white" style="background-color: #35A25B" type="submit">
-                      Đăng ký</button>
+                      Đổi mật khẩu</button>
                   </div>
                   
                 </form>
