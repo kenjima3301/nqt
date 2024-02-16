@@ -59,15 +59,13 @@
                 <div class="col-lg-6">
                     <!-- Main product image -->
                     <div class="row">
-                        <img src="{{asset($tyre->images[0]->image)}}" width="400px" class="img-fluid mx-auto">
+                      <ul class="list">
+                        @foreach ($tyre->images as $image)
+                        <li @if(!$loop->first) style="display:none" @endif><img src="{{asset($image->image)}}" width="400px" class="img-fluid mx-auto"></li>
+                        @endforeach
+                      </ul>
                     </div>
-                    <div class="row mt-3">
-                      @foreach ($tyre->images as $image)
-                        <div class="col-md-3">
-                            <img src="{{asset($image->image)}}" class="img-fluid">
-                        </div>
-                       @endforeach
-                    </div>
+                    
                 </div>
                 <div class="col-lg-6 bg-white">
                     <!-- Product name -->
@@ -82,7 +80,7 @@
                     <div class="row justify-content-center">
                       @if($tyre->install_position_image != null)
                         <div class="col-sm-12">
-                            <img src="{{asset($tyre->install_position_image)}}" class="img-fluid">
+                            <img src="{{asset($tyre->install_position_image)}}" style="max-width: 125px;">
                         </div>
                         @endif
                     </div>
@@ -196,7 +194,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$relatedtypre->name}}</h5>
                             <p class="card-text">@if(isset($relatedtypre->drive)) {{$relatedtypre->drive->name}} @endif</p>
-                            <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
+                            <img class="card-img-top" src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
                             <div class="sub-desc row mt-3">
                                 <div class="col-lg-4">
                                     <p>{{$relatedtypre->model->name}}</p>
@@ -281,4 +279,5 @@
     });
   });
 </script>
+<script src="{{asset('client/assets/js/jquery360.js')}}"></script>
 @endsection

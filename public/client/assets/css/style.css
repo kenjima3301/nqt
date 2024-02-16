@@ -27,6 +27,19 @@ html {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+@media screen and (max-width: 768px) {
+  .header-site {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+}
+
 .logo {
     display: inline-block;
     line-height: 177px;
@@ -100,6 +113,13 @@ html {
 .main-content {
     margin-top: 177px;
     background-color: #F6F7F9;
+}
+
+@media screen and (max-width: 768px) {
+  .main-content {
+    margin-top: 100px;
+    background-color: #F6F7F9;
+  }
 }
 
 .slider img{
