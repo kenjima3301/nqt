@@ -2,7 +2,7 @@
 @section('title', 'NQT - Trang chủ')
 @section('content')
  <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact section-bg">
+    <section id="contact" class="contact">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">

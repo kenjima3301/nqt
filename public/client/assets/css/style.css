@@ -9,7 +9,13 @@ html {
   }
 
 .wrapper {
-    background-color: #F6F7F9;
+  background-color: #fff;
+/*    background-image: url("./../../../assets/images/bg.jpg");
+    background-color: #8dcca6;*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+     /*background-position: bottom left;*/
 }
 
 .text-color {
@@ -112,13 +118,27 @@ html {
 
 .main-content {
     margin-top: 177px;
-    background-color: #F6F7F9;
+    /*background-color: #F6F7F9;*/
+    background-image: url("./../../../assets/images/bg2.jpg");
+    background-color: #b3dac5;
+    /*background-position: center;*/
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+     background-position: bottom center;
+     padding-bottom: 30px;
 }
 
 @media screen and (max-width: 768px) {
   .main-content {
     margin-top: 100px;
-    background-color: #F6F7F9;
+    /*background-color: #F6F7F9;*/
+     background-image: url("./../../../assets/images/bg2.jpg");
+    background-color: #b3dac5;
+    /*background-position: center;*/
+    background-repeat: no-repeat;
+    /*background-size: cover;*/
+     background-position: bottom center;
+     /*padding-bottom: 30px;*/
   }
 }
 
@@ -159,7 +179,8 @@ html {
 }
 
 .menu-footer li a:hover {
-    color: #35A25B;
+    /*color: #35A25B;*/
+    color: #fff;
 }
 
 .footer-info {

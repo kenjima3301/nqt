@@ -1,8 +1,9 @@
 @extends ('client.layouts.master')
 @section('title', 'NQT - Chi tiết sản phẩm')
 @section('content')
+<link rel="stylesheet" href="https://sachinchoolur.github.io/lightslider/dist/css/lightslider.min.css">
 <div class="container mt-4">
-	<div class="row">
+	<div class="row ">
          <!-- Left Navbar -->
         <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
       <form method="POST" action="{{url('tim-lop-xe-filter')}}" enctype="multipart/form-data">
@@ -55,15 +56,17 @@
 
         <!-- Right Product Detail -->
         <div class="col-lg-9 col-md-8 col-sm-12">
-            <div class="row mt-4">
-                <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-6  mt-4">
                     <!-- Main product image -->
                     <div class="row">
-                      <ul class="list">
-                        @foreach ($tyre->images as $image)
-                        <li @if(!$loop->first) style="display:none" @endif><img src="{{asset($image->image)}}" width="400px" class="img-fluid mx-auto"></li>
-                        @endforeach
-                      </ul>
+                          <ul id="lightSlider">
+                            @foreach ($tyre->images as $image)
+                                <li data-thumb="{{asset($image->image)}}" class="text-center">
+                                  <img id="myImg{{$image->id}}" src="{{asset($image->image)}}" class="img-fluid">
+                                </li>
+                            @endforeach
+                          </ul>                  
                     </div>
                     
                 </div>
@@ -107,9 +110,9 @@
                 </div>
             </div>
             
-            <div class="row mt-3 bg-white ml-2">
+            <div class="row bg-white">
                 
-                    <table class="table-bordered table-responsive text-center">
+                    <table class=" table-responsive text-center">
 <!--                        <thead>
                             <tr>
                               <th rowspan="3" width="3%"></th>
@@ -184,9 +187,9 @@
                     </div>
                 
             </div>
-
-            <h5 class="text-color mt-3 ml-2">Sản phẩm liên quan:</h5>
-
+            @if(count($relatedtypres)> 0)
+            <h5 class="text-color mt-3 " style="background: #e69c30; padding: 10px;color: #000;">Sản phẩm liên quan:</h5>
+            @endif
             <div class="row mt-3">
               @foreach ($relatedtypres as $relatedtypre)
                 <div class="col-lg-4">
@@ -194,7 +197,9 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$relatedtypre->name}}</h5>
                             <p class="card-text">@if(isset($relatedtypre->drive)) {{$relatedtypre->drive->name}} @endif</p>
+                            <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" >
                             <img class="card-img-top" src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
+                            </a>
                             <div class="sub-desc row mt-3">
                                 <div class="col-lg-4">
                                     <p>{{$relatedtypre->model->name}}</p>
@@ -210,9 +215,9 @@
                                 <div class="col-lg-6">
                                     <p>{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
                                 </div>
-                                <div class="col-lg-6 text-center">
-                                    <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" class="btn btn-success">Chi tiết</a>
-                                </div>
+<!--                                <div class="col-lg-6 text-center">
+                                    <a class="btn btn-success">Chi tiết</a>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -223,6 +228,93 @@
         </div>
     </div>
 </div>
+<style>
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+</style>
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
 @endsection
 @section('script')
 <script>
@@ -280,4 +372,71 @@
   });
 </script>
 <script src="{{asset('client/assets/js/jquery360.js')}}"></script>
+<!--<link type="text/css" rel="stylesheet" href=https://sachinchoolur.github.io/lightslider/dist/css/lightslider.min.css" />-->                  
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+<script src="https://sachinchoolur.github.io/lightslider/src/js/lightslider.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        window.prettyPrint && prettyPrint()
+        var slider = $('#lightSlider').lightSlider({
+            gallery:true,
+            item:1,
+            thumbItem:9,
+            slideMargin: 0,
+            speed:900,
+            auto:true,
+            loop:true,
+            pauseOnHover: true,
+        slideEndAnimation: true,
+        pause: 2000,
+        keyPress: false,
+        controls: true,
+        prevHtml: '',
+        nextHtml: '',
+        rtl: false,
+        adaptiveHeight: false,
+        vertical: false,
+        verticalHeight: 500,
+        vThumbWidth: 100,
+        pager: true,
+        galleryMargin: 5,
+        thumbMargin: 5,
+        currentPagerPosition: 'middle',
+        enableTouch: true,
+        enableDrag: true,
+        freeMove: true,
+        swipeThreshold: 40,
+        responsive: [],
+            onSliderLoad: function() {
+                $('#lightSlider').removeClass('cS-hidden');
+            }     
+        });
+    });
+
+</script>
+<script>
+// Get the modal
+@foreach ($tyre->images as $image)
+var modal{{$image->id}} = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+
+var img{{$image->id}} = document.getElementById("myImg{{$image->id}}");
+var modalImg{{$image->id}} = document.getElementById("img01");
+var captionText{{$image->id}} = document.getElementById("caption");
+img{{$image->id}}.onclick = function(){
+  modal{{$image->id}}.style.display = "block";
+  modalImg{{$image->id}}.src = this.src;
+  captionText{{$image->id}}.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal{{$image->id}}.style.display = "none";
+}
+@endforeach
+</script>
 @endsection

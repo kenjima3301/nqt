@@ -10,7 +10,7 @@
 
     <!-- new product -->
     <div class="new-product">
-        <h3 class="text-color">Sản phẩm mới cập nhật</h3>
+        <h3 class="text-color" style="background: #e69c30; padding: 10px;color: #000;">Sản phẩm mới</h3>
         <div class="list-new-product row mt-4">
           @foreach($new_products as $new)
             <div class="col-lg-3">
@@ -18,15 +18,17 @@
                 <div class="card-body">
                 <h5 class="card-title">{{$new->name}}</h5>
                 <p class="card-text">@if(isset($tyre->drive)){{$new->drive->name}} @endif</p>
+                <a href="{{url('lop-xe-tai/'.$new->id)}}">
                 <img class="card-img-top" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}">
+                </a>
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">
                     <p>{{$new->model->name}} </p>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                     <p>{{$new->brand->name}}</p>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                     <p> {{$new->tyre_structure}}</p>
                     </div>
                 </div>
@@ -34,9 +36,9 @@
                     <div class="col-lg-6">
                     <p>{{number_format($new->price, 0, '', ',')}}đ / Lốp</p>
                     </div>
-                    <div class="col-lg-6 text-center">
-                    <a href="{{url('lop-xe-tai/'.$new->id)}}" class="btn btn-success">Chi tiết</a>
-                    </div>
+<!--                    <div class="col-lg-6 text-center">
+                    <a href="" class="btn btn-success">Chi tiết</a>
+                    </div>-->
                 </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@
 
     <!-- product bestseller -->
     <div class="product-best-seller mt-4">
-    <h3 class="text-color">Sản phẩm bán chạy</h3>
+    <h3 class="text-color" style="background: #e69c30; padding: 10px;color: #000;">Sản phẩm bán chạy</h3>
         <div class="list-new-product row">
         @foreach($best_products as $best)
         <div class="col-lg-3 mt-4">
@@ -56,15 +58,17 @@
             <div class="card-body">
                 <h5 class="card-title">{{$best->name}}</h5>
                 <p class="card-text">@if(isset($tyre->drive)){{$best->drive->name}} @endif</p>
+                <a href="{{url('lop-xe-tai/'.$best->id)}}">
                 <img class="card-img-top" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}">
+                </a>
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">
                     <p>{{$best->model->name}} </p>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                     <p>{{$best->brand->name}}</p>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                     <p> {{$best->tyre_structure}}</p>
                     </div>
                 </div>
@@ -72,9 +76,9 @@
                 <div class="col-lg-6">
                     <p>{{number_format($best->price, 0, '', ',')}}đ / Lốp</p>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <a href="{{url('lop-xe-tai/'.$best->id)}}" class="btn btn-success">Chi tiết</a>
-                </div>
+<!--                <div class="col-lg-6 text-center">
+                    <a href="" class="btn btn-success">Chi tiết</a>
+                </div>-->
                 </div>
             </div>
             </div>

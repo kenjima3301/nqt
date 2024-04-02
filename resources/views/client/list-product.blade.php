@@ -50,7 +50,9 @@
                         <div class="card-body">
                           <h5 class="card-title">{{$tyre->name}}</h5>
                           <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
+                          <a href="{{url('lop-xe-tai/'.$tyre->id)}}">
                           <img class="card-img-top" src="{{asset($tyre->images[0]->image)}}" alt=" @if(isset($tyre->drive)) {{$tyre->drive->name}} @endif">
+                          </a>
                           <div class="sub-desc row mt-3">
                             <div class="col-lg-3">
                               <p>{{$tyre->model->name}}</p>
@@ -66,9 +68,9 @@
                             <div class="col-lg-6">
                               <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
                             </div>
-                            <div class="col-lg-6 text-center">
-                              <a href="{{url('lop-xe-tai/'.$tyre->id)}}" class="btn btn-success">Chi tiết</a>
-                            </div>
+<!--                            <div class="col-lg-6 text-center">
+                              <a  class="btn btn-success">Chi tiết</a>
+                            </div>-->
                           </div>
                         </div>
                     </div>

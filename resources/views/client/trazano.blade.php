@@ -4,8 +4,8 @@
 <!-- ======= Hero Section ======= -->
   <section id="herotranzano" class="d-flex align-items-center">
     <div class="container">
-      <h1>Welcome to Trazano</h1>
-      <h2>We are team of talented designers making websites with Bootstrap</h2>
+      <h1>Về Trazano</h1>
+      <h2>Thương hiệu định hướng thị trường ra đời ở Mỹ và phân phối rộng rãi trên thị trường quốc tế. Thương hiệu này cung cấp một sự lựa chọn khác về giá cả cạnh tranh cho các nhà phân phối trên toàn thế giới.</h2>
     </div>
   </section><!-- End Hero -->
 
@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-lg-4 d-flex align-items-stretch">
             <div class="content">
-              <h3>Why Choose Trazano?</h3>
+              <h3>Tại sao chọn Trazano?</h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
                 Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
@@ -99,9 +99,8 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Gallery</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
+          <h2>Hình ảnh</h2>
+          <p>Chuỗi sự kiện quốc tế của Trazano</p>
       </div>
 
       <div class="container-fluid">

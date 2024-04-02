@@ -1,13 +1,13 @@
-<footer class="bg-white mt-4 pt-3 ">
+<footer class="pt-3 " style="background: #e69c2f;">
   <div class="container">
     <div class="row mt-4 mb">
       <div class="col-lg-6">
         <a href="{{route('index')}}"><img src="{{ asset('client/assets/img/logo.png') }}" alt="Your logo" class="img-fluid" width="15%"></a>
         <div class="footer-info">
-          <p><i class="fa-light fa-location-dot"></i> Địa chỉ: 79/5A DT743 - Phường Tân Đông Hiệp - TP. Dĩ An - Tỉnh Bình Dương</p>
-          <p><i class="fa-light fa-rectangle-code"></i> MST: 0314168571</p>
-          <p><i class="fa-light fa-envelope"></i> Email: nqt3999@gmail.com</p>
-          <p><i class="fa-light fa-phone"></i> Điện thoại: (+84) 934.54.13.13</p>
+          <p><i class="fa-light fa-location-dot" style="color:rgba(19, 19, 19, 0.6)"></i> Địa chỉ: 79/5A DT743 - Phường Tân Đông Hiệp - TP. Dĩ An - Tỉnh Bình Dương</p>
+          <p><i class="fa-light fa-rectangle-code"  style="color:rgba(19, 19, 19, 0.6)"></i> MST: 0314168571</p>
+          <p><i class="fa-light fa-envelope"  style="color:rgba(19, 19, 19, 0.6)"></i> Email: nqt3999@gmail.com</p>
+          <p><i class="fa-light fa-phone"  style="color:rgba(19, 19, 19, 0.6)"></i> Điện thoại: (+84) 934.54.13.13</p>
         </div>
       </div>
       <div class="col-lg-6">
@@ -36,7 +36,7 @@
             <div class="menu-footer col-lg-4 col-md-6">
                 <h5>Trazano</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="nav-link">Giới thiệu</a></li>
+                    <li><a href="{{url('ve-trazano')}}" class="nav-link">Giới thiệu</a></li>
                     <li><a href="#" class="nav-link">Điểm nổi bật</a></li>
                     <li><a href="#" class="nav-link">Các dòng lốp</a></li>
                 </ul>

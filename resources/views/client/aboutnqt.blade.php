@@ -4,16 +4,22 @@
  <section id="hero">
 <div class="container">
       <div class="row">
-        <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
-          <div>
-            <h1>We design digital products that help grow businesses</h1>
-            <h2>We are team of talented designers making websites with Bootstrap</h2>
-          </div>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
-          <img src="{{ asset('client/assets/img/hero-img.png') }}" class="img-fluid" alt="">
+        <div class="col-lg-12 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column content-center" data-aos="fade-up">
+            <h1 class="text-center">LỊCH SỬ PHÁT TRIỂN</h1>
+            <h2 class="text-center">CÔNG TY CỔ PHẦN NGỌC QUYẾT THẮNG được thành lập ngày 21/12/2016</h2>
+            
+            
+          <p class="text-center">Nguồn nhân lực là yếu tố quan trọng mang đến sự thành công: 
+          <p  class="text-center">
+            Giám đốc có nhiều kinh nghiệm, năng động giúp Công ty phát triển liên tục nhiều năm</p>
+          <p  class="text-center">
+              Đội ngũ nhân viên, quản lý trình đô cao, sảng tạo
+          </p><p  class="text-center">
+              Tập thể CBCNV đoàn kết nhất trí, tự tin và có trách nhiệm với công việc.
+            </p>
         </div>
       </div>
+      
     </div>
 
   </section><!-- End Hero -->
@@ -25,26 +31,54 @@
       <div class="container">
 
         <div class="row">
-          <div class="col-lg-6" data-aos="zoom-in">
-            <img src="{{ asset('client/assets/img/about.jpg') }}" class="img-fluid" alt="">
+          <div class="col-lg-6 center-block" data-aos="zoom-in">
+            <img src="{{ asset('assets/images/mission.jpg') }}" id="mission-image" class="img-fluid" alt="" style="width: 300px; height:auto;margin-left:30%">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-contents-center" data-aos="fade-left">
             <div class="content pt-4 pt-lg-0">
-              <h3>Learn more about us</h3>
+              <h3>SỨ MỆNH</h3>
               <p class="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
-              </p>
-              <ul>
-                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperd</li>
-              </ul>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate tera noden carma palorp mades tera.
+                Luôn thích nghi với sự thay đổi của thị trường. Kịp thời nắm bắt xu hướng phát triển của thế giới, chủ động tạo lợi thế cạnh tranh để phát triển bền vững. Đẩy mạnh nhập khẩu các loại lốp xe tải Radial có chất lượng cao nhất để phục vụ nhu cầu ngày càng cao của khách hàng.
               </p>
             </div>
           </div>
+        </div>
+
+     
+
+        <div class="row" style="margin-top: 100px;">
+          <div class="col-lg-6 d-flex flex-column justify-contents-center" data-aos="fade-left">
+            <div class="content pt-4 pt-lg-0">
+              <h3>TẦM NHÌN</h3>
+              <h5>I.Tầm nhìn Doanh nghiệp</h5>
+              <p class="fst-italic">- Tuyên bố về tầm nhìn doanh nghiệp
+                </p>
+              <ul>
+                <li><i class="bi bi-check-circle"></i> Luôn khẳng định NQT là nhà nhập khẩu và phân phối hàng đầu về lốp Ô tô tải, Ô Tô Khách tại Việt Nam.</li>
+                <li><i class="bi bi-check-circle"></i> Mở rộng và phát triển lớn mạnh các sản phẩm săm lốp xe truyền thống phục vụ nhu cầu đa dạng của Khách hàng.</li>
+              </ul>
+              <p class="fst-italic">- Giải thích nội dung tuyên bố tầm nhìn doanh nghiệp
+                </p>
+              <ul>
+                <li><i class="bi bi-check-circle"></i> NQT khẳng định với người tiêu dùng là thương hiệu được NQT nhập khẩu và đưa ra thị trường luôn đảm bảo về chất lượng hàng đầu Việt Nam.</li>
+                <li><i class="bi bi-check-circle"></i> NQT luôn luôn lựa chọn nhập khẩu và phân phối các dòng sản phẩm chất lượng cao, giá bán cạnh tranh đáp ứng lợi ích thiết thực của người tiêu dùng, đóng góp tích cực cho sự phát triển kinh tế Việt Nam</li>
+              </ul>
+                
+                <h5>II. Tầm nhìn thương hiệu</h5>
+              <p class="fst-italic">- Tuyên bố về tầm nhìn thương hiệu sản phẩm
+                </p>
+              <ul>
+                <li><i class="bi bi-check-circle"></i> Khẳng định vị trí nhà nhập khẩu, phân phối hàng đầu Việt Nam</li>
+                <li><i class="bi bi-check-circle"></i> NQT phấn đấu là thương hiệu nổi tiếng Việt Nam. Từng bước xây dựng hệ thống khách hàng tin cậy bền vững tại Việt Nam, với số lượng khách hàng ngày càng đông.</li>
+              </ul>
+              
+            </div>
+            
+          </div>
+          <div class="col-lg-6 justify-contents-center" data-aos="zoom-in">
+            <img src="{{ asset('assets/images/vision.jpeg') }}" class="img-fluid" alt="" style="margin-top: 20%">
+          </div>
+          
         </div>
 
       </div>
@@ -54,61 +88,60 @@
     <section id="team" class="team">
       <div class="container">
 
-        <div class="section-title" data-aos="fade-up">
-          <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <div class="section-title">
+          <h2>GIÁ TRỊ CỐT LÕI</h2>
+          <p>Tuyên bố về giá trị cốt lõi của doanh nghiệp:</p>
         </div>
 
         <div class="row">
 
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in">
-              <div class="pic"><img src="{{ asset('client/assets/img/team-1.jpg') }}" class="img-fluid" alt=""></div>
+          <div class="col-lg-4">
+            <div class="member">
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <h4>Tinh thần đồng đội</h4>
+                <span>Có chung niềm tin và mục tiêu vì sự phát triển Công ty. Không đố kỵ, bè phái và luôn giúp đỡ, tương trợ, quan tâm lẫn nhau trong công việc và cuộc sống.</span>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="100">
-              <div class="pic"><img src="{{ asset('client/assets/img/team-2.jpg') }}" class="img-fluid" alt=""></div>
+          <div class="col-lg-4">
+            <div class="member">
+              <!--<div class="pic"><img src="" class="img-fluid" alt=""></div>-->
               <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <h4>Sự nhiệt huyết</h4>
+                <span>Làm việc xuất phát từ tấm lòng, luôn làm việc hết mình với trách nhiệm cao nhất có thể.</span>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-4 col-md-6">
-            <div class="member" data-aos="zoom-in" data-aos-delay="200">
-              <div class="pic"><img src="{{ asset('client/assets/img/team-3.jpg') }}" class="img-fluid" alt=""></div>
+          <div class="col-lg-4">
+            <div class="member">
               <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
+                <h4>Tính chuyên nghiệp</h4>
+                <span>Làm việc theo kế hoạch, có tinh thần trách nhiệm, tác phong công nghiệp, có tính tự chủ và tinh thần hợp tác trong công việc.</span>
               </div>
             </div>
           </div>
-
+        </div>
+        <div class="row">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-4">
+            <div class="member">
+              <div class="member-info">
+                <h4 style="height:48px">Không ngừng sáng tạo</h4>
+                <span>Không bao giờ hài lòng, thỏa mãn với kết quả đạt được. Học tập cái mới, không ngừng sáng tạo để thành công.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="member">
+              <div class="member-info">
+                <h4>Tôn trọng lợi ích Khách hàng – Doanh nghiệp – Cộng đồng</h4>
+                <span>Đặt lợi ích Doanh nghiệp, lợi ích Khách hàng và cộng đồng cao hơn lợi ích cá nhân.</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2"></div>
         </div>
 
       </div>
@@ -119,67 +152,69 @@
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Clients</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <h2>HỆ THỐNG PHÂN PHỐI & KHÁCH HÀNG TRONG NƯỚC</h2>
+          <p>NQT đã thiết lập hệ thống phân phối mạnh và rộng khắp Việt Nam. Các nhà phân phối của NQT có nhiều kinh nghiệm, có sự gắn kết, hợp tác vì sự phát triển chung và lâu dài.</p>
+          <p>Nhiều khách hàng lớn tin dùng sản phẩm do NQT nhập khẩu và phân phôi như: Công ty Vận Tải Nam Quốc, Cong Ty TNHH Cảng Quốc Tế Tân Cảng Cái Mép, Công ty Vận Tải Thành Đạt, Công ty Vận Tải Bình Minh Tải, nhiều Cty vận tải , xe khách cả nước.</p>
         </div>
 
-        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+<!--        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
 
           <div class="col-lg-3 col-md-4 col-xs-6">
             <div class="client-logo" data-aos="zoom-in">
-              <img src="{{ asset('client/assets/img/client-1.png') }}" class="img-fluid" alt="">
+              <img src="" class="img-fluid" alt="">
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="100">
-              <img src="{{ asset('client/assets/img/client-2.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
+        </div>-->
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="150">
-              <img src="{{ asset('client/assets/img/client-3.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
+      </div>
+    </section><!-- End Clients Section -->
+    
+    <section id="clients" class="clients">
+      <div class="container">
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="200">
-              <img src="{{ asset('client/assets/img/client-4.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="250">
-              <img src="{{ asset('client/assets/img/client-5.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="300">
-              <img src="{{ asset('client/assets/img/client-6.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in" data-aos-delay="350">
-              <img src="{{ asset('client/assets/img/client-7.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-xs-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="client-logo">
-              <img src="{{ asset('client/assets/img/client-8.png') }}" class="img-fluid" alt="">
-            </div>
-          </div>
-
+        <div class="section-title" data-aos="fade-up">
+          <h2>THÀNH QUẢ VÀ VỊ THẾ CỦA NQT</h2>
+          <p>Bằng sự linh hoạt và sáng tạo NQT đã tạo được lợi thế cạnh tranh trên thị trường. Tốc độ tăng trưởng cao và liên tục trong nhiều năm và hiện nay NQT dần chiếm lĩnh thị phần lốp ô tô tải tại Việt Nam.</p>
         </div>
+
+<!--        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in">
+              <img src="" class="img-fluid" alt="">
+            </div>
+          </div>
+
+        </div>-->
+
+      </div>
+    </section><!-- End Clients Section -->
+    
+    <section id="clients" class="clients">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>CHIẾN LƯỢC PHÁT TRIỂN</h2>
+          <p>Với lợi thế về nguồn nhân lực năng động, trách nhiệm; sản phẩm do NQT nhập khẩu và phân phối có thị phần lớn</p>
+          <p>Với nhiều năm kinh nghiệm trong ngành nhập khẩu, phân phối săm lốp, NQT tin tưởng sẽ tiếp tục đáp ứng tốt mọi nhu cầu của khách hàng trong nước, xứng đáng là Nhà nhập khẩu, phân phối săm lốp xe hàng đầu tại Việt Nam.</p>
+        </div>
+
+<!--        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+
+          <div class="col-lg-3 col-md-4 col-xs-6">
+            <div class="client-logo" data-aos="zoom-in">
+              <img src="" class="img-fluid" alt="">
+            </div>
+          </div>
+
+        </div>-->
 
       </div>
     </section><!-- End Clients Section -->
  
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact section-bg">
+    <section id="contact" class="contact">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
