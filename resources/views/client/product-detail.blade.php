@@ -59,18 +59,20 @@
             <div class="row">
                 <div class="col-lg-6  mt-4">
                     <!-- Main product image -->
-                    <div class="row">
+                    <!--<div class="row">-->
                           <ul id="lightSlider">
                             @foreach ($tyre->images as $image)
                                 <li data-thumb="{{asset($image->image)}}" class="text-center">
-                                  <img id="myImg{{$image->id}}" src="{{asset($image->image)}}" class="img-fluid">
+                                  <img id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="display: block;
+                                      max-height: 300px;
+                                      max-width: 100%;">
                                 </li>
                             @endforeach
                           </ul>                  
-                    </div>
+                    <!--</div>-->
                     
                 </div>
-                <div class="col-lg-6 bg-white">
+                <div class="col-lg-6 bg-white pt-3">
                     <!-- Product name -->
                     <h3 class="card-title mt-3">{{$tyre->name}}</h3>
                     <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
@@ -396,7 +398,7 @@
         rtl: false,
         adaptiveHeight: false,
         vertical: false,
-        verticalHeight: 500,
+        verticalHeight: 400,
         vThumbWidth: 100,
         pager: true,
         galleryMargin: 5,

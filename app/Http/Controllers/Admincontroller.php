@@ -216,7 +216,9 @@ class Admincontroller extends Controller
     $tyre->price = $request->price;
     $tyre->save();
     $imagexisted_ids = $request->images_uploaded;
+    if(is_array($imagexisted_ids)){
     TyreImage::where('tyre_id', $tyre->id)->whereNotIn('id',$imagexisted_ids)->delete();
+    }
       if($request->filenames != ''){
       $images = $request->filenames;
       foreach ($images as $key => $image){
