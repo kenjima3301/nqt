@@ -104,7 +104,7 @@
 var geocoder;
 var map;
 
-var geocoder = new google.maps.Geocoder();
+//var geocoder = new google.maps.Geocoder();
 
 function initMap() {
   
