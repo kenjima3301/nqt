@@ -8,15 +8,16 @@
             <h1 class="text-center">LỊCH SỬ PHÁT TRIỂN</h1>
             <h2 class="text-center">CÔNG TY CỔ PHẦN NGỌC QUYẾT THẮNG được thành lập ngày 21/12/2016</h2>
             
-            
-          <p class="text-center">Nguồn nhân lực là yếu tố quan trọng mang đến sự thành công: 
-          <p  class="text-center">
-            Giám đốc có nhiều kinh nghiệm, năng động giúp Công ty phát triển liên tục nhiều năm</p>
-          <p  class="text-center">
-              Đội ngũ nhân viên, quản lý trình đô cao, sảng tạo
-          </p><p  class="text-center">
-              Tập thể CBCNV đoàn kết nhất trí, tự tin và có trách nhiệm với công việc.
+            <span class="lh-sm">
+              <p class="text-center" style="margin-bottom: 0px;"><strong>Nguồn nhân lực là yếu tố quan trọng mang đến sự thành công: </strong>
+          <p  class="text-center "  style="margin-bottom: 0px;">
+            <strong> Giám đốc có nhiều kinh nghiệm, năng động giúp Công ty phát triển liên tục nhiều năm </strong></p>
+          <p  class="text-center"  style="margin-bottom: 0px;">
+            <strong>Đội ngũ nhân viên, quản lý trình đô cao, sảng tạo</strong>
+          </p><p  class="text-center"  style="margin-bottom: 0px;">
+            <strong>Tập thể CBCNV đoàn kết nhất trí, tự tin và có trách nhiệm với công việc.</strong>
             </p>
+            </span>
         </div>
       </div>
       
@@ -32,7 +33,7 @@
 
         <div class="row">
           <div class="col-lg-6 center-block" data-aos="zoom-in">
-            <img src="{{ asset('assets/images/mission.jpg') }}" id="mission-image" class="img-fluid" alt="" style="width: 300px; height:auto;margin-left:30%">
+            <div alt="" id="mission"></div>
           </div>
           <div class="col-lg-6 d-flex flex-column justify-contents-center" data-aos="fade-left">
             <div class="content pt-4 pt-lg-0">
@@ -157,58 +158,19 @@
           <p>Nhiều khách hàng lớn tin dùng sản phẩm do NQT nhập khẩu và phân phôi như: Công ty Vận Tải Nam Quốc, Cong Ty TNHH Cảng Quốc Tế Tân Cảng Cái Mép, Công ty Vận Tải Thành Đạt, Công ty Vận Tải Bình Minh Tải, nhiều Cty vận tải , xe khách cả nước.</p>
         </div>
 
-<!--        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in">
-              <img src="" class="img-fluid" alt="">
-            </div>
-          </div>
-
-        </div>-->
-
-      </div>
-    </section><!-- End Clients Section -->
-    
-    <section id="clients" class="clients">
-      <div class="container">
 
         <div class="section-title" data-aos="fade-up">
           <h2>THÀNH QUẢ VÀ VỊ THẾ CỦA NQT</h2>
           <p>Bằng sự linh hoạt và sáng tạo NQT đã tạo được lợi thế cạnh tranh trên thị trường. Tốc độ tăng trưởng cao và liên tục trong nhiều năm và hiện nay NQT dần chiếm lĩnh thị phần lốp ô tô tải tại Việt Nam.</p>
         </div>
 
-<!--        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in">
-              <img src="" class="img-fluid" alt="">
-            </div>
-          </div>
-
-        </div>-->
-
-      </div>
-    </section><!-- End Clients Section -->
-    
-    <section id="clients" class="clients">
-      <div class="container">
 
         <div class="section-title" data-aos="fade-up">
           <h2>CHIẾN LƯỢC PHÁT TRIỂN</h2>
           <p>Với lợi thế về nguồn nhân lực năng động, trách nhiệm; sản phẩm do NQT nhập khẩu và phân phối có thị phần lớn</p>
           <p>Với nhiều năm kinh nghiệm trong ngành nhập khẩu, phân phối săm lốp, NQT tin tưởng sẽ tiếp tục đáp ứng tốt mọi nhu cầu của khách hàng trong nước, xứng đáng là Nhà nhập khẩu, phân phối săm lốp xe hàng đầu tại Việt Nam.</p>
         </div>
-
-<!--        <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
-
-          <div class="col-lg-3 col-md-4 col-xs-6">
-            <div class="client-logo" data-aos="zoom-in">
-              <img src="" class="img-fluid" alt="">
-            </div>
-          </div>
-
-        </div>-->
 
       </div>
     </section><!-- End Clients Section -->
