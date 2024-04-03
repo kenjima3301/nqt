@@ -99,15 +99,16 @@
   }
   </style>
    @push('js')
-   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAprYDo7S9Lokb_iNROoE-Q_q6nrp8xmVs&v=3.5&amp;sensor=false"></script>
+   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAprYDo7S9Lokb_iNROoE-Q_q6nrp8xmVs&v=3.5&callback=initMap" async defer></script>
 <script type="text/javascript">
 var geocoder;
 var map;
 
 var geocoder = new google.maps.Geocoder();
 
-function initialize(lat, lng) {
-  var latLng = new google.maps.LatLng(lat, lng);
+function initMap() {
+  
+  var latLng = new google.maps.LatLng(21.0278, 105.8342);
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 13,
     center: latLng,
