@@ -217,14 +217,14 @@
   }
   </style>
    @push('js')
-   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAprYDo7S9Lokb_iNROoE-Q_q6nrp8xmVs&v=3.5&callback=initMap" async defer></script>
+   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAprYDo7S9Lokb_iNROoE-Q_q6nrp8xmVs&callback=initMap" async defer></script>
 <script type="text/javascript">
 var geocoder;
 var map;
 
 var geocoder = new google.maps.Geocoder();
 
-function initialize() {
+function initMap() {
   var latLng = new google.maps.LatLng(21.0278, 105.8342);
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 13,

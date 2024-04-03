@@ -99,7 +99,7 @@
   }
   </style>
    @push('js')
-   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAprYDo7S9Lokb_iNROoE-Q_q6nrp8xmVs&v=3.5&callback=initMap" async defer></script>
+   <script src="http://maps.google.com/maps/api/js?key=AIzaSyAprYDo7S9Lokb_iNROoE-Q_q6nrp8xmVs&callback=initMap" async defer></script>
 <script type="text/javascript">
 var geocoder;
 var map;
