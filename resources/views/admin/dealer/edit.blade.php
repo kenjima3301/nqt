@@ -225,7 +225,7 @@ var map;
 //var geocoder = new google.maps.Geocoder();
 
 function initMap() {
-  var latLng = new google.maps.LatLng({{$dealer->lat}},{{$dealer->lng}});
+   var latLng = {lat: {{$dealer->lat}}, lng: {{$dealer->lng}}};
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 13,
     center: latLng,
