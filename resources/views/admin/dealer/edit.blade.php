@@ -225,7 +225,7 @@ var map;
 //var geocoder = new google.maps.Geocoder();
 
 function initMap() {
-  var latLng = new google.maps.LatLng(21.0278, 105.8342);
+  var latLng = new google.maps.LatLng({{$dealer->lat}},{{$dealer->lng}});
   var map = new google.maps.Map(document.getElementById('mapCanvas'), {
     zoom: 13,
     center: latLng,
@@ -298,7 +298,7 @@ function updateMarkerPosition(latLng) {
 }
 
 // Onload handler to fire off the app.
-google.maps.event.addDomListener(window, 'load', initialize({{$dealer->lat}},{{$dealer->lng}}));
+google.maps.event.addDomListener(window, 'load', initMap());
 </script>
   @endpush
 </x-layout>

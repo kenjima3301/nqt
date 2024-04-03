@@ -181,7 +181,7 @@ function updateMarkerPosition(latLng) {
 }
 
 // Onload handler to fire off the app.
-google.maps.event.addDomListener(window, 'load', initialize(21.0227384, 105.8163641));
+google.maps.event.addDomListener(window, 'load', initMap());
 </script>
   @endpush
 </x-layout>
