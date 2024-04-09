@@ -6,12 +6,7 @@
       <div class="row mt-4">
         <div class="col-lg-7">
           <div class="card bg-gradient-white">
-            <div class="row">
-              @foreach ($tyre->images as $image)
-              <img class="col-1 w-15 mt-n7 mt-lg-n8 d-none d-md-block mx-auto z-index-1" src="{{asset($image->image)}}" alt="car image">
-              @endforeach
-              <h4 class="col-{{10 - count($tyre->images)}} opacity-9 text-start text-dark">{{$tyre->name}}</h4>
-            </div>
+            <h4 class="col-4 opacity-9 text-start text-dark">{{$tyre->name}}</h4>
             <div class="card-body px-5 z-index-1 bg-cover overflow-hidden pb-2">
               <div class="row">
                 <div class="col-12 text-center">
@@ -38,6 +33,13 @@
                           @if($tyre->install_position_image != null)
                           <h6 class="mb-0"><img src="{{asset($tyre->install_position_image)}}" width="300"></h6>
                           @endif
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center">
+                        <div>
+                          @foreach ($tyre->images as $image)
+                          <img style="max-width: 300px;" src="{{asset($image->image)}}" alt="car image">
+                          @endforeach
                         </div>
                       </div>
                     </div>
@@ -90,18 +92,19 @@
       <div class="container-fluid py-4">
       <div class='row col-12'>
         <div class="card">
-  <div class="table-responsive">
+  <div class="table-responsive text-nowrap">
     <table class="table" style='font-weight:200; line-height:0.85'>
       <thead>
         <tr>
-          <th class="text-xxs p-0 pt-1 text-center" width="2%">Nước sản xuất</th>
-          <th class="text-xxs p-0 text-center">Quy cách</th>
-          <th class="text-xxs p-0 text-center">Lớp bố</th>
-          <th class="text-xxs p-0 text-center">Chỉ số tải trọng và tốc độ</th>
-          <th class="text-xxs p-0 text-center">Đơn vị</th>
-          <th class="text-xxs p-0 text-center">Kiểu gai</th>
-          <th class="text-xxs p-0 text-center">Số lượng</th>
-          <th class="text-xxs p-0 text-center">Đơn giá</th>
+          <th class="text-xxs text-center" width="2%">Nước sản xuất</th>
+          <th class="text-xxs text-center"  width="2%">Quy cách</th>
+          <th class="text-xxs text-center">Lớp bố</th>
+          <th class="text-xxs text-center">Chỉ số tải trọng và tốc độ</th>
+          <th class="text-xxs text-center">Đơn vị</th>
+          <th class="text-xxs text-center">Kiểu gai</th>
+          <th class="text-xxs text-center">Số lượng</th>
+          <th class="text-xxs text-center">Đơn giá</th>
+          <th class="text-xxs text-center"></th>
         </tr>
       </thead>
       <tbody>
@@ -115,25 +118,46 @@
             <img src="{{asset($country->country->flag)}}" width='10'>
             @endforeach
           </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->size}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->ply}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->sevice_index}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->unit}} </td>
+          <td class=" text-center text-sm"> {{$dimention->size}} </td>
+          <td class=" text-center text-sm"> {{$dimention->ply}} </td>
+          <td class=" text-center text-sm"> {{$dimention->sevice_index}} </td>
+          <td class=" text-center text-sm"> {{$dimention->unit}} </td>
           
-          <td class=" text-center text-sm p-0"> {{$dimention->tread_type}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->total}} </td>
-          <td class=" text-center text-sm p-0"> {{$dimention->price}} </td>
+          <td class=" text-center text-sm"> {{$dimention->tread_type}} </td>
+          <td class=" text-center text-sm"> {{$dimention->total}} </td>
+          <td class=" text-center text-sm"> {{$dimention->price}} </td>
+          <td><a class="btn mb-2 me-4 conten-right" href="{{url('admin/xoa-sai-trong-ma-gai/'.$dimention->id)}}">Xóa</a></td>
         </tr>
         @endforeach
-       
+       <form action="{{url('admin/lop-xe-tai-quy-cach-add-new')}}" method="POST">
+        @csrf
+        <input type="hidden" name="tyre_id" value="{{$tyre->id}}">
+        <tr>
+          <td>
+            <select name="coutry_id">
+              @foreach ($countries as $country)
+              <option value="{{$country->id}}"> {{$country->name}}</option>
+              @endforeach
+            </select>
+          </td>
+          <td><input type="text" name="size" value="" size="10"></td>
+          <td > <input type="text" name="ply" value="" size="10"> </td>
+          <td> <input type="text" name="sevice_index" value="" size="10"></td>
+          <td> <input type="text" name="unit" value="" size="10"> </td>
+          <td>  <input type="text" name="tread_type" value="" size="10"> </td>
+          <td>  <input type="number" name="total" value="" style="width: 100px;"> </td>
+          <td >  <input type="text" name="price" value="" size="10"> </td>
+          <td><input type="submit" value="Thêm quy cách"></td>
+        </tr>
+      </form>
       </tbody>
     </table>
   </div>
 </div>
-        
+<!--        
       </div>
         <a class="btn mb-2 me-4 conten-right" href="{{url('admin/xoa-sai-trong-ma-gai/'.$tyre->id)}}">
                     Xóa toàn bộ Sai</a>
-    </div>
+    </div>-->
   </main>
 </x-layout>

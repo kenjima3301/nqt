@@ -93,6 +93,33 @@ class Admincontroller extends Controller
     return redirect('admin/hang-san-xuat');
   }
   
+  
+  public function addbackgroundimage() {
+    $brands = $brands = Brand::all();
+    return view('admin.backgroundimage.add', ['brands' => $brands]);
+  }
+  
+  public function addbackgroundimagepost(Request $request) {
+    $imageName = time().'.'.$request->image->extension();
+    $request->image->move(public_path('background/image'), $imageName);
+    $path = public_path().'/background/image/';
+      if (!file_exists($path)) {
+        mkdir($path, 0775, true);
+      }
+      \App\Models\BackgroundImage::create([
+          'brand_id'   => $request->brand_id,
+          'image'   => 'background/image/'.$imageName,
+      ]);
+    return redirect('admin/quan-ly-khac');
+  }
+  
+  public function deletebackgroundimage($id) {
+    $backgroundimage = \App\Models\BackgroundImage::find($id);
+    $backgroundimage->delete();
+    
+    return back();
+  }
+  
   public function driveexperiences() {
     $drives = Drive::all();
     return view('admin.driveexperiences.index', ['drives' => $drives]);
@@ -238,10 +265,48 @@ class Admincontroller extends Controller
     return redirect('admin/lop-xe-tai-import/'.$tyre->id);
   }
   
+  public function tyredetail($id) {
+    $tyre = Tyre::find($id);
+    return view('admin.trucktyres.tyre-detail', ['tyre' => $tyre]);
+  }
+  
+  public function dimentiondetail($id) {
+    $dimention = TyreDimention::find($id);
+    return view('admin.trucktyres.tyre-dimention-detail', ['dimention' => $dimention]);
+    
+  }
+  
+  public function dimentionimageupload(Request $request) {
+    $dimention = TyreDimention::find($request->dimention_id);
+    $imagexisted_ids = $request->images_uploaded;
+    if(is_array($imagexisted_ids)){
+      \App\Models\DimentionImage::where('dimention_id', $dimention->id)->whereNotIn('id',$imagexisted_ids)->delete();
+    }
+      if($request->filenames != ''){
+      $images = $request->filenames;
+      foreach ($images as $key => $image){
+        $path = public_path().'/dimention/image/'.$dimention->id;
+        if (!file_exists($path)) {
+          mkdir($path, 0775, true);
+        }
+        $imageName = time().$key.'.'.$image->extension();
+        $image->move(public_path('/dimention/image/'.$dimention->id), $imageName);
+        \App\Models\DimentionImage::create([
+            'dimention_id' => $dimention->id,
+             'image' => 'dimention/image/'.$dimention->id.'/'.$imageName,
+            'order' => $key+1
+        ]);
+      }
+    }
+    return back();
+  }
+  
+  
   public function import($id) {
     $tyre = Tyre::find($id);
     $tyre_dimentions = TyreDimention::where('tyre_id', $id)->get();
-    return view('admin.trucktyres.import', ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions]);
+    $countries = Madein::all();
+    return view('admin.trucktyres.import', ['tyre' => $tyre, 'tyre_dimentions' => $tyre_dimentions, 'countries' => $countries]);
   }
   
   public function importpost($id, Request $request) {
@@ -392,11 +457,13 @@ class Admincontroller extends Controller
     $madeins = Madein::all();
     $brands = Brand::all();
     $drives = Drive::all();
+    $background_images = \App\Models\BackgroundImage::all();
     return view('admin.group.index', [
         'models' => $models,
         'madeins' => $madeins,
         'brands' => $brands,
-        'drives' => $drives
+        'drives' => $drives,
+        'background_images' => $background_images
         ]);
   }
   
@@ -545,14 +612,60 @@ class Admincontroller extends Controller
         return back()->with('successaccount','Thêm mới thành công tài khoản cho đại lý');
     }
     
-    public function deleteallsize($id) {
-      TyreDimention::where('tyre_id',$id)->delete();
-      
+    public function deletesize($id) {
+      $dimention = TyreDimention::find($id);
+      $promotion = \App\Models\Promotion::where('dimention_id',$dimention->id)->first();
+      if($promotion){
+        $promotion->delete();
+      }
+      $dimention->delete();
       return back();
     }
     
     public function deletetyre($id) {
       Tyre::where('id', $id)->delete();
       return back();
+    }
+    
+    public function promotion() {
+       $promotions = \App\Models\Promotion::all();
+       $tyre_codes = Tyre::all();
+      return view('admin.trucktyres.promotion', ['promotions' => $promotions,'tyre_codes' => $tyre_codes]);
+    }
+    
+    public function promotiontyre($id) {
+       $tyre = Tyre::find($id);
+        return view('admin.trucktyres.tyre-promotion', ['tyre' => $tyre]);
+    }
+    
+    public function promotiontyredelete($id) {
+       $promotion = \App\Models\Promotion::find($id);
+       $promotion->delete();
+      return back();
+    }
+    
+    public function promotiontyreadd(Request $request) {
+        $promotion = \App\Models\Promotion::firstOrCreate(['tyre_id' => $request->tyre_id, 'dimention_id' => $request->dimention_id]);
+        $promotion->promotion_price = $request->price;
+        $promotion->save();
+      return back();
+    }
+    
+    public function dimentionadd(Request $request) {
+       $tyredimention = TyreDimention::create([
+                     'tyre_id' => $request->tyre_id,
+                      'size' => $request->size,
+                      'ply' => $request->ply,
+                      'sevice_index' => $request->sevice_index,
+                      'unit' => $request->unit,
+                      'tread_type' =>$request->tread_type,
+                      'total' => $request->total,
+                      'price' => $request->price
+                  ]);
+       TyreMadein::create([
+                    'tyre_dimention_id' => $tyredimention->id,
+                    'madecountry_id' => $request->coutry_id
+                ]);
+       return back();
     }
 }

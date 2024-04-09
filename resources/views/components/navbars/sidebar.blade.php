@@ -22,6 +22,15 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link text-white {{ $activePage == 'promotion' ? ' active bg-gradient-dark' : '' }}  "
+           href="{{url('admin/promotion')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="fa fa-truck" aria-hidden="true"></i>
+          </div>
+          <span class="nav-link-text ms-1">Chương trình khuyến mại</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link text-white {{ $activePage == 'dai-ly' ? ' active bg-gradient-dark' : '' }}  "
            href="{{url('admin/dai-ly')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

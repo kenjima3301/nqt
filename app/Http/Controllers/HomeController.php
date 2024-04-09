@@ -17,7 +17,8 @@ class HomeController extends Controller
     public function index() {
       $new_products = Tyre::select('*')->take(4)->orderBy("id", "desc")->get();
       $best_products = Tyre::select('*')->take(8)->get();
-      return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products] );
+      $promotions = \App\Models\Promotion::select('*')->groupBy('promotions.tyre_id')->take(8)->get();
+      return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products,'promotions' => $promotions] );
     }
 
     public function listProduct() {
@@ -113,6 +114,38 @@ class HomeController extends Controller
           'tyre_sizes' => $tyre_sizes,
           'thailand' => $thailand,
           'china' => $china
+          ]);
+    }
+    
+    public function sizeDetail($id,$size) {
+      $models = Modelcar::all();
+      $model = Modelcar::take(1)->first();
+      $brands = Brand::all();
+      $brand = Brand::take(1)->first();
+      $sizes = TyreDimention::select('size')->distinct('size')->get();
+      $sizedetail = TyreDimention::find($size);
+      $tyre = Tyre::find($id);
+      $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
+//      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
+      $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
+              ->where('tyre_dimentions.tyre_id', $tyre->id)
+              ->where('tyre_countries.madecountry_id', 1)
+                ->count();
+      $china = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
+              ->where('tyre_dimentions.tyre_id', $tyre->id)
+              ->where('tyre_countries.madecountry_id', 2)
+                ->count();      
+      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(3)->get();
+      return view('client.product-detail', [
+          'tyre' => $tyre, 
+          'sizes' => $sizes, 
+          'relatedtypres' => $relatedtypres,
+          'models' => $models,
+          'brands' => $brands,
+          'tyre_sizes' => $tyre_sizes,
+          'thailand' => $thailand,
+          'china' => $china,
+          'sizedetail' => $sizedetail
           ]);
     }
 

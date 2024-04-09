@@ -21,6 +21,7 @@ use App\Http\Controllers\AjaxController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/lop-xe-tai/{id}', [HomeController::class, 'productDetail'])->name('product-detail');
+Route::get('/lop-xe-tai/{id}/{size}', [HomeController::class, 'sizeDetail'])->name('size-detail');
 Route::get('/tim-lop-xe', [HomeController::class, 'listProduct'])->name('list-product');
 Route::post('/tim-lop-xe', [HomeController::class, 'listProductpost']);
 Route::post('/tim-lop-xe-filter', [HomeController::class, 'listProductpostfilter']);
@@ -63,6 +64,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/hang-san-xuat-add', [Admincontroller::class, 'addbrand']);
   Route::post('/hang-san-xuat-add', [Admincontroller::class, 'addbrandpost']);
   
+  Route::get('/anh-nen-add', [Admincontroller::class, 'addbackgroundimage']);
+  Route::post('/anh-nen-add', [Admincontroller::class, 'addbackgroundimagepost']);
+  Route::get('/anh-nen-delete/{id}', [Admincontroller::class, 'deletebackgroundimage']);
+  
   Route::get('/kieu-duong-lai', [Admincontroller::class, 'driveexperiences']);
   Route::get('/kieu-duong-lai-add', [Admincontroller::class, 'adddriveexperiences']);
   Route::post('/kieu-duong-lai-add', [Admincontroller::class, 'adddriveexperiencespost']);
@@ -73,10 +78,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/lop-xe-tai-import/{id}', [Admincontroller::class, 'import']);
   Route::post('/lop-xe-tai-import/{id}', [Admincontroller::class, 'importpost']);
   Route::get('/lop-xe-tai-import-download', [Admincontroller::class, 'importdownload']);
-  Route::get('/xoa-sai-trong-ma-gai/{id}', [Admincontroller::class, 'deleteallsize']);
+  Route::get('/xoa-sai-trong-ma-gai/{id}', [Admincontroller::class, 'deletesize']);
   Route::get('/lop-xe-tai-xoa/{id}', [Admincontroller::class, 'deletetyre']);
   Route::get('/lop-xe-tai-sua/{id}', [Admincontroller::class, 'edittyre']);
   Route::post('/lop-xe-tai-sua-post', [Admincontroller::class, 'edittyrepost']);
+  Route::get('/lop-xe-tai-chi-tiet/{id}', [Admincontroller::class, 'tyredetail']);
+  Route::get('/quy-cach-chi-tiet/{id}', [Admincontroller::class, 'dimentiondetail']);
+  Route::post('/quy-cach-chi-tiet/uploadimage', [Admincontroller::class, 'dimentionimageupload']);
+  Route::post('/lop-xe-tai-quy-cach-add-new', [Admincontroller::class, 'dimentionadd']);
   
   Route::get('/dai-ly', [Admincontroller::class, 'dealer']);
   Route::get('/dai-ly-add', [Admincontroller::class, 'adddealer']);
@@ -92,6 +101,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::post('/bai-viet-edit/{id}', [Admincontroller::class, 'editblogpost']);
   
   Route::get('/quan-ly-khac', [Admincontroller::class, 'groupmanagement']);
+  Route::get('/promotion', [Admincontroller::class, 'promotion']);
+  Route::get('/lop-xe-tai-promotion-tyre/{id}', [Admincontroller::class, 'promotiontyre']);
+  Route::get('/lop-xe-tai-promotion-tyre-xoa/{id}', [Admincontroller::class, 'promotiontyredelete']);
+  Route::post('/lop-xe-tai-promotion-tyre-add', [Admincontroller::class, 'promotiontyreadd']);
   
 })->middleware('auth');
 

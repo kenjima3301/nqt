@@ -87,6 +87,31 @@
               </div>
             </div>
           </div>
+          <div class="row mt-4">
+            <div class="col-lg-12 col-md-12 col-sm-6 mt-lg-0 mt-4">
+              <div class="card ">
+                <div class="card-header p-3 pt-2 bg-transparent">
+                  <div class="">
+                    <a href="{{url('admin/anh-nen-add')}}"> <span class="badge bg-gradient-primary ms-auto">+Thêm ảnh nền</span></a>
+                  </div>
+                  <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize ">Ảnh nền</p>
+                    <h4 class="mb-0 ">{{count($background_images)}}</h4>
+                  </div>
+                </div>
+                <hr class="horizontal my-0 dark">
+                <div class="card-body p-3 grid-container" style="display: inline-flex;">
+                  
+                 @foreach ($background_images as $image)
+                 <div class="grid-item">
+                 <img src="{{asset($image->image)}}" width="200px">
+                 <figcaption>{{$image->brand->name}} <a href="{{url('admin/anh-nen-delete/'.$image->id)}}" style="color:red;"><i class="material-icons">close</i></a></figcaption>
+                 </div>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

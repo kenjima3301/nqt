@@ -55,27 +55,40 @@
         </div>
 
         <!-- Right Product Detail -->
-        <div class="col-lg-9 col-md-8 col-sm-12">
+        <div class="col-lg-9 col-md-8 col-sm-12" style="background: #f7931d;">
             <div class="row">
-                <div class="col-lg-6  mt-4">
+                <div class="col-lg-6  mt-4 text-center" >
                     <!-- Main product image -->
                     <!--<div class="row">-->
-                          <ul id="lightSlider">
-                            @foreach ($tyre->images as $image)
-                                <li data-thumb="{{asset($image->image)}}" class="text-center">
-                                  <img id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="display: block;
-                                      max-height: 300px;
-                                      max-width: 100%;">
-                                </li>
+                          <ul id="lightSlider" class="text-center">
+                            @foreach($tyre_sizes as $sizeimage)
+                            @if(isset($sizedetail))
+                              @php 
+                                if($sizeimage->id != $sizedetail->id){
+                                    continue;
+                                }
+                              @endphp
+                            @endif
+                              @foreach ($sizeimage->images as $image)
+                                  <li data-thumb="{{asset($image->image)}}" class="text-center">
+                                    <img class="mx-auto d-block" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="display: block;
+                                        max-height: 300px;
+                                        max-width: 100%;">
+                                  </li>
+                              @endforeach
                             @endforeach
                           </ul>                  
                     <!--</div>-->
-                    
+                    <div class="mt-2 mb-1">
+                      @foreach($tyre_sizes as $size)
+                      <a class="p-1 " @if(isset($sizedetail) && $size->id == $sizedetail->id) style="background:#ffffff" else style="background:#ffffff" @endif href="{{url('lop-xe-tai/'.$tyre->id.'/'.$size->id)}}">{{$size->size}}</a>
+                      @endforeach
+                    </div>
                 </div>
-                <div class="col-lg-6 bg-white pt-3">
+                <div class="col-lg-6 pt-3" style="background: #f7931d;">
                     <!-- Product name -->
                     <h3 class="card-title mt-3">{{$tyre->name}}</h3>
-                    <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
+                    <p class="card-text text-white">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
                     <!-- Product description -->
                     @foreach (json_decode($tyre->tyre_features, true) as $feature)
                     @if($feature != null)
@@ -85,12 +98,12 @@
                     <div class="row justify-content-center">
                       @if($tyre->install_position_image != null)
                         <div class="col-sm-12">
-                            <img src="{{asset($tyre->install_position_image)}}" style="max-width: 125px;">
+                            <img src="{{asset($tyre->install_position_image)}}" style="max-width: 250px;">
                         </div>
                         @endif
                     </div>
-                    <div class="sub-desc row mt-3">
-                        <div class="col-lg-4">
+                    <div class="sub-desc row mt-3 text-white">
+                        <div class="col-lg-4 ">
                             <p>{{$tyre->model->name}}</p>
                         </div>
                         <div class="col-lg-4">
@@ -112,7 +125,7 @@
                 </div>
             </div>
             
-            <div class="row bg-white">
+            <div class="row" style="background: #ffffff;">
                 
                     <table class=" table-responsive text-center">
 <!--                        <thead>
@@ -158,7 +171,7 @@
                         <tbody>
                             
                               @foreach($tyre_sizes as $size)
-                              <tr class="@if(isset($size->madeins[0]) && count($size->madeins) == 2){{'bothflag'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'China'){{'china'}}@endif">
+                              <tr class="@if(isset($size->madeins[0]) && count($size->madeins) == 2){{'bothflag'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'China'){{'china'}}@endif" @if(isset($sizedetail) && $size->id == $sizedetail->id) style="background:#f7931d" @endif>
                                   <td class="text-left">@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
@@ -172,7 +185,12 @@
                                   <td>{{$size->unit}}</td>
                                   <td>{{$size->tread_type}}</td>
                                   <td>{{$size->total}}</td>
-                                  <td>{{$size->price}}</td>
+                                  <td>@if(isset($size->promotion))
+                                      {{number_format(intval($size->promotion->promotion_price), 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format(intval($size->price), 0, '', ',')}}đ</span>
+                                      @else 
+                                      {{number_format(intval($size->price), 0, '', ',')}}đ 
+                                      @endif
+                                    / {{$size->unit}}</td>
                                   <td><a href="{{ url('client/them-gio-hang/'.$size->id)}}" class="btn btn-success">Thêm vào giỏ hàng</a>
                                   </td>
 
@@ -190,7 +208,7 @@
                 
             </div>
             @if(count($relatedtypres)> 0)
-            <h5 class="text-color mt-3 " style="background: #e69c30; padding: 10px;color: #000;">Sản phẩm liên quan:</h5>
+            <h5 class="text-color mt-3 " style="padding: 10px;color: #000;">Sản phẩm liên quan:</h5>
             @endif
             <div class="row mt-3">
               @foreach ($relatedtypres as $relatedtypre)
@@ -215,7 +233,13 @@
                             </div>
                             <div class="row mt">
                                 <div class="col-lg-6">
-                                    <p>{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
+                                    <p> @if(isset($relatedtypre->promotion))
+                                      {{number_format($promotion->promotion_price, 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span>
+                                      @else 
+                                      {{number_format($relatedtypre->price, 0, '', ',')}}đ 
+                                      @endif
+                                      / Lốp
+                                    </p>
                                 </div>
 <!--                                <div class="col-lg-6 text-center">
                                     <a class="btn btn-success">Chi tiết</a>
@@ -310,6 +334,13 @@
     width: 100%;
   }
 }
+.lSSlideOuter .lSPager.lSGallery img{
+  max-width: 50px;
+  max-height: 50px;
+}
+.thumbSelected{
+    border:4px solid red;
+ }
 </style>
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
@@ -418,7 +449,15 @@
 </script>
 <script>
 // Get the modal
-@foreach ($tyre->images as $image)
+@foreach($tyre_sizes as $sizeimage)
+@if(isset($sizedetail))
+                              @php 
+                                if($sizeimage->id != $sizedetail->id){
+                                    continue;
+                                }
+                              @endphp
+                            @endif
+  @foreach ($sizeimage->images as $image)
 var modal{{$image->id}} = document.getElementById("myModal");
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -439,6 +478,7 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
   modal{{$image->id}}.style.display = "none";
 }
+@endforeach
 @endforeach
 </script>
 @endsection

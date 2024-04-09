@@ -40,4 +40,8 @@ class Tyre extends Model
   public function dimentions(): HasMany {
         return $this->hasMany(TyreDimention::class, 'tyre_id', 'id');
   }
+  
+  public function backgroundimage(): HasOne {
+      return $this->hasOne(BackgroundImage::class, 'brand_id', 'brand_id')->inRandomOrder();
+  }
 }

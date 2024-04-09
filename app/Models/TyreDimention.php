@@ -42,4 +42,12 @@ class TyreDimention extends Model
   public function tyre(): HasOne {
       return $this->hasOne(Tyre::class, 'id', 'tyre_id');
   }
+  
+  public function images(): HasMany {
+        return $this->hasMany(DimentionImage::class, 'dimention_id', 'id');
+  }
+  
+  public function promotion(): HasOne {
+      return $this->hasOne(Promotion::class, 'dimention_id', 'id');
+  }
 }
