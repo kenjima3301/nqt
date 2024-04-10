@@ -101,11 +101,12 @@ class Admincontroller extends Controller
   
   public function addbackgroundimagepost(Request $request) {
     $imageName = time().'.'.$request->image->extension();
-    $request->image->move(public_path('background/image'), $imageName);
+    
     $path = public_path().'/background/image/';
       if (!file_exists($path)) {
         mkdir($path, 0775, true);
       }
+    $request->image->move(public_path('background/image'), $imageName);
       \App\Models\BackgroundImage::create([
           'brand_id'   => $request->brand_id,
           'image'   => 'background/image/'.$imageName,
