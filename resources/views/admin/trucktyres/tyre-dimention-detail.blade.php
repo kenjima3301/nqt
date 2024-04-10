@@ -35,7 +35,7 @@
                                   <td>{{$dimention->tread_type}}</td>
                                   <td>{{$dimention->total}}</td>
                                   <td>{{$dimention->price}}</td>
-                                  <td><a href="{{ url('client/them-gio-hang/'.$dimention->id)}}" class="btn btn-success">Thêm vào giỏ hàng</a>
+                                  <td><a href="{{ url('admin/lop-xe-tai-import/'.$dimention->tyre_id)}}" class="btn btn-success">Quy lại mã Gai</a>
                                   </td>
 
                                   </tr>
@@ -43,35 +43,16 @@
                         </tbody>
                     </table>
           <div class="form-group col-md-8">
-          <table class=" table-responsive text-center">
-                      <thead>
-                            <tr>
-                                <th>Ảnh</th>
-                                <th>Thứ tự</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                          @foreach ($dimention->images as $image)
-                          <tr>
-                                  <td><img src="{{asset($image->image)}}" style="max-width: 100px;"></td>
-                                  <td>{{$image->order}}</td>
-
-                                  </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-        </div>
-          <div class="form-group col-md-8">
             <form method="POST" action="{{url('admin/quy-cach-chi-tiet/uploadimage')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="dimention_id" value="{{$dimention->id}}">
-                  <label for="exampleInputname">Thêm ảnh lốp</label>
+                  <!--<label for="exampleInputname"></label>-->
                   <div class="input-group hdtuto control-group lst increment" >
                         <div class="list-input-hidden-upload">
                           <input multiple type="file" name="filenames[]" id="file_upload" class="myfrm form-control hidden">
                         </div>
                         <div class="input-group-btn"> 
-                          <button class="btn btn-success btn-add-image" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>+Add image</button>
+                          <button class="btn btn-success btn-add-image" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>+Thêm ảnh lốp</button>
                         </div>
                       </div>
                   <div class="list-images">

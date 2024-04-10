@@ -22,7 +22,7 @@
                        <th>Kiểu đường lái</th>
                        <th>Cấu trúc lốp</th>
                        <th>Kiểu xe và vị trí lắp đặt</th>
-                       <th>Import Sai</th>
+                       <th>Quản lý Sai</th>
                        <th></th>
                     </thead>
                     <tbody>
@@ -37,7 +37,7 @@
                           @endif
                         </td>
                         <td><a href="{{url('admin/lop-xe-tai-import/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Import sai">
-                            <i class="fas fa-file-import" aria-hidden="true"></i>
+                            Chi tiết Sai
                           </a>
                         </td>
                         <td><a href="{{url('admin/lop-xe-tai-sua/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Sửa">
