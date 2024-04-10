@@ -18,7 +18,7 @@
                 <h5 class="card-title">{{$promotion->tyre->name}}</h5>
                 <p class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</p>
                 <a href="{{url('lop-xe-tai/'.$promotion->tyre->id)}}">
-                <img class="card-img-top" @if(isset($promotion->tyre->backgroundimage)) style="background: url('{{asset($promotion->tyre->backgroundimage->image)}}'); background-size:100% 100%;" @endif src="{{asset($promotion->tyre->images[0]->image)}}" alt="{{$promotion->tyre->name}}" style="max-width: 100px;">
+                <img class="card-img-top" @if(isset($promotion->tyre->backgroundimage)) style="background: url('{{asset($promotion->tyre->backgroundimage->image)}}'); background-size:100% 100%;" @endif src="{{asset($promotion->tyre->images[0]->image)}}" alt="{{$promotion->tyre->name}}">
                 </a>
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">
