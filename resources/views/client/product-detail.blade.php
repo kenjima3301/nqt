@@ -341,6 +341,10 @@
 .thumbSelected{
     border:4px solid red;
  }
+ .lSGallery li img {
+   width: 100px;
+   height: 100px;
+ }
 </style>
 <div id="myModal" class="modal">
   <span class="close">&times;</span>
