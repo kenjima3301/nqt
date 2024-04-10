@@ -28,7 +28,7 @@
                     <tbody>
                       @foreach ($tyres as $key => $tyre)
                       <tr>
-                        <td class="text-sm font-weight-normal"><a href="{{url('admin/lop-xe-tai-chi-tiet/'.$tyre->id)}}">{{$tyre->name}}</a></td>
+                        <td class="text-sm font-weight-normal">{{$tyre->name}}</td>
                         <td class="text-sm font-weight-normal">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</td>
                         <td class="text-sm font-weight-normal">{{$tyre->tyre_structure}}</td>
                         <td class="text-sm font-weight-normal">

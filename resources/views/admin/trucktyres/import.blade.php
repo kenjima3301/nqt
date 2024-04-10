@@ -118,7 +118,7 @@
             <img src="{{asset($country->country->flag)}}" width='10'>
             @endforeach
           </td>
-          <td class=" text-center text-sm"> {{$dimention->size}} </td>
+          <td class=" text-center text-sm"><a href="{{url('admin/quy-cach-chi-tiet/'.$dimention->id)}}"> {{$dimention->size}} </a></td>
           <td class=" text-center text-sm"> {{$dimention->ply}} </td>
           <td class=" text-center text-sm"> {{$dimention->sevice_index}} </td>
           <td class=" text-center text-sm"> {{$dimention->unit}} </td>
