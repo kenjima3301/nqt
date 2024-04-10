@@ -342,8 +342,8 @@
     border:4px solid red;
  }
  .lSGallery li img {
-   width: 100px;
-   height: 100px;
+   width: 50px !important;
+   height: 50px !important;
  }
 </style>
 <div id="myModal" class="modal">
