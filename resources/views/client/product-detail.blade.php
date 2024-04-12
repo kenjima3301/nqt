@@ -215,10 +215,10 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{$relatedtypre->name}}</h5>
+                            <h5 class="card-title">{{$relatedtypre->brand->name}}  {{$relatedtypre->name}}</h5>
                             <p class="card-text">@if(isset($relatedtypre->drive)) {{$relatedtypre->drive->name}} @endif</p>
                             <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" >
-                            <img class="card-img-top" style="@if(isset($relatedtypre->backgroundimage)) background: url('{{asset($relatedtypre->backgroundimage->image)}}'); background-size:100% 100%;@endif max-height: 256px;"  src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
+                            <img class="card-img-top" style="max-height: 256px;"  src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
                             </a>
                             <div class="sub-desc row mt-3">
                                 <div class="col-lg-4">

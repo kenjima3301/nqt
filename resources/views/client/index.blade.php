@@ -13,34 +13,26 @@
         <div class="list-new-product row mt-4 mb-4">
           @foreach($promotions as $promotion)
             <div class="col-lg-3">
-            <div class="card">
-                <div class="card-body">
-                <h5 class="card-title">{{$promotion->tyre->name}}</h5>
-                <p class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</p>
-                <a href="{{url('lop-xe-tai/'.$promotion->tyre->id)}}">
-                <img class="card-img-top" style="@if(isset($promotion->tyre->backgroundimage)) background: url('{{asset($promotion->tyre->backgroundimage->image)}}'); background-size:100% 100%;@endif max-height: 256px;"  src="{{asset($promotion->tyre->images[0]->image)}}" alt="{{$promotion->tyre->name}}">
-                </a>
-                <div class="sub-desc row mt-3">
-                    <div class="col-lg-4">
-                    <p>{{$promotion->tyre->model->name}} </p>
-                    </div>
-                    <div class="col-lg-3">
-                    <p>{{$promotion->tyre->brand->name}}</p>
-                    </div>
-                    <div class="col-lg-5">
-                    <p> {{$promotion->tyre->tyre_structure}}</p>
-                    </div>
-                </div>
-                <div class="row mt">
-                    <div class="col-lg-12">
-                      <p>{{number_format($promotion->promotion_price, 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span> / Lốp</p>
-                    </div>
-<!--                    <div class="col-lg-6 text-center">
-                    <a href="" class="btn btn-success">Chi tiết</a>
-                    </div>-->
-                </div>
-                </div>
-            </div>
+            
+              <div class="card booking-card v-2 mt-2 rounded-bottom">
+      <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
+        <img class="card-img-top"  src="{{asset($promotion->tyre->images[0]->image)}}" alt="{{$promotion->tyre->name}}" style="max-height:291px;">
+        <a href="#!">
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title font-weight-bold m-0"><a>{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</a></h4>
+
+        <span class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</span>
+        <span class="card-text">{{$promotion->tyre->model->name}}</span>
+        <span class="card-text">{{$promotion->tyre->brand->name}}</span>
+        <span class="card-text">{{$promotion->tyre->tyre_structure}}</span>
+        <!--<hr class="my-4">-->
+        <p class="h5 font-weight-bold">{{number_format($promotion->promotion_price, 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span> / Lốp</p>
+
+      </div>
+    </div>
             </div>
           @endforeach
         </div>
@@ -55,10 +47,10 @@
             <div class="col-lg-3">
             <div class="card">
                 <div class="card-body">
-                <h5 class="card-title">{{$new->name}}</h5>
+                <h5 class="card-title">{{$new->brand->name}} {{$new->name}}</h5>
                 <p class="card-text">@if(isset($tyre->drive)){{$new->drive->name}} @endif</p>
                 <a href="{{url('lop-xe-tai/'.$new->id)}}">
-                <img class="card-img-top"  style="@if(isset($new->backgroundimage)) background: url('{{asset($new->backgroundimage->image)}}'); background-size:100% 100%; @endif max-height: 256px;" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}">
+                <img class="card-img-top"  style="max-height: 256px;" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}">
                 </a>
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">
@@ -95,10 +87,10 @@
         <div class="col-lg-3 mt-4">
             <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{$best->name}}</h5>
+                <h5 class="card-title">{{$best->brand->name}} {{$best->name}}</h5>
                 <p class="card-text">@if(isset($tyre->drive)){{$best->drive->name}} @endif</p>
                 <a href="{{url('lop-xe-tai/'.$best->id)}}">
-                  <img class="card-img-top" style="@if(isset($best->backgroundimage)) background: url('{{asset($best->backgroundimage->image)}}'); background-size:100% 100%; @endif max-height: 256px;" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}">
+                  <img class="card-img-top" style="max-height: 256px;" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}">
                 </a>
                 <div class="sub-desc row mt-3">
                     <div class="col-lg-4">

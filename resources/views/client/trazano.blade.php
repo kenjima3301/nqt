@@ -95,7 +95,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Gallery Section ======= -->
-    <section id="gallery" class="gallery">
+<!--    <section id="gallery" class="gallery">
       <div class="container">
 
         <div class="section-title">
@@ -108,64 +108,8 @@
 
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-1.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-1.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-2.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-1.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-3.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-3.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-4.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-4.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-5.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-5.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-6.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-6.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-7.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-7.jpg') }}" alt="" class="img-fluid">
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="gallery-item">
-              <a href="{{ asset('trazano/gallery-8.jpg') }}" class="galelry-lightbox">
-                <img src="{{ asset('trazano/gallery-8.jpg') }}" alt="" class="img-fluid">
+              <a href="" class="galelry-lightbox">
+                <img src="" alt="" class="img-fluid">
               </a>
             </div>
           </div>
@@ -173,7 +117,7 @@
         </div>
 
       </div>
-    </section><!-- End Gallery Section -->
+    </section> End Gallery Section -->
   </main><!-- End #main -->
   <script src="https://bootstrapmade.com/assets/js/demo.js?v=5.0"></script>
   <script src="https://bootstrapmade.com/assets/vendor/aos/aos.js"></script>
