@@ -4,7 +4,7 @@
 <div class="container">
     <!-- slider -->
     <div class="slider">
-        <img src="{{ asset('client/assets/img/slider.png')}}" alt="">
+        <img src="{{ asset('assets/images/huong-dan-tim-kiem-AS668.png')}}" alt="">
     </div>
     <!-- end slider -->
     @if(count($promotions) > 0)
