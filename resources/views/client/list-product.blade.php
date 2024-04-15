@@ -46,34 +46,24 @@
             <div class="row mt-3">
               @foreach ($tyres as $tyre)
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">{{$tyre->brand->name}} {{$tyre->name}}</h5>
-                          <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
-                          <a href="{{url('lop-xe-tai/'.$tyre->id)}}">
-                          <img class="card-img-top" style=" max-height: 256px;"  src="{{asset($tyre->images[0]->image)}}" alt=" @if(isset($tyre->drive)) {{$tyre->drive->name}} @endif">
-                          </a>
-                          <div class="sub-desc row mt-3">
-                            <div class="col-lg-3">
-                              <p>{{$tyre->model->name}}</p>
-                            </div>
-                            <div class="col-lg-3">
-                              <p>{{$tyre->brand->name}}</p>
-                            </div>
-                            <div class="col-lg-6">
-                              <p> {{$tyre->tyre_structure}}</p>
-                            </div>
-                          </div>
-                          <div class="row mt">
-                            <div class="col-lg-6">
-                              <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
-                            </div>
-<!--                            <div class="col-lg-6 text-center">
-                              <a  class="btn btn-success">Chi tiết</a>
-                            </div>-->
-                          </div>
-                        </div>
+                    <div class="card booking-card v-2 mt-2 rounded-bottom">
+                    <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
+                      <a href="{{url('lop-xe-tai/'.$tyre->id)}}">
+                      <img class="card-img-top"  src="{{asset($tyre->images[0]->image)}}" alt="{{$tyre->name}}" style="max-height:291px;">
+                      </a>
                     </div>
+                    <div class="card-body">
+                      <h4 class="card-title m-0"><a>{{$tyre->brand->name}} {{$tyre->name}}</a></h4>
+
+                      <span class="card-text">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</span>
+                      <span class="card-text">{{$tyre->model->name}}</span>
+                      <span class="card-text">{{$tyre->brand->name}}</span>
+                      <span class="card-text">{{$tyre->tyre_structure}}</span>
+                      <!--<hr class="my-4">-->
+                      <p style="float: right;">{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
+
+                    </div>
+                  </div>
                 </div>
                @endforeach
             </div>
