@@ -25,6 +25,11 @@
                   <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên hãng sản xuất" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <br/>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Tên</label>
+                  <input type="name" name="name_en" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên hãng sản xuất" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
+                <br/>
                 <div class="form-group col-md-6">
                   <label for="exampleInputname">Đăng ảnh logo</label>
                   <div class="input-group hdtuto control-group lst increment" >

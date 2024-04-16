@@ -30,9 +30,18 @@
                   <input type="name" name="title" class="form-control border border-2 p-2" id="exampleInputname" value="{{$post->title}}" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <div class="form-group col-12 col-md-9">
+                  <label for="exampleInputname">Tiêu đề tiếng anh</label>
+                  <input type="name" name="title_en" value="{{$post->title_en}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tiêu đề tiếng anh" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
+                <div class="form-group col-12 col-md-9">
                   <label for="exampleInputname">Nội dung</label>
                   <textarea id="content" name="content" rows="5" class="form-control border border-2 p-2">{!! $post->content !!}</textarea>
                   </div>
+                <div class="form-group col-12 col-md-9">
+                  <label for="exampleInputname">Nội dung tiếng anh</label>
+                  <textarea id="contenten" name="content_en" rows="5" class="form-control border border-2 p-2">{!! $post->content_en !!}</textarea>
+                  </div>
+
 
                 @if($errors->any())
                 <div class="text-danger">
@@ -72,7 +81,21 @@
                 ]
             });
             $('#content').summernote('fontName', 'Arial');
-
+            $('#contenten').summernote({
+              tabsize: 2,
+                height: 300,
+                toolbar: [
+                  ['style', ['style']],
+                  ['font', ['bold', 'underline', 'clear']],
+                  ['fontname', ['fontname']],
+                  ['color', ['color']],
+                  ['para', ['ul', 'ol', 'paragraph']],
+                  ['table', ['table']],
+                  ['insert', ['link', 'picture', 'video']],
+                  ['view', ['codeview', 'help']],
+                ]
+            });
+            $('#contenten').summernote('fontName', 'Arial');
         });
     </script>
 </x-layout>

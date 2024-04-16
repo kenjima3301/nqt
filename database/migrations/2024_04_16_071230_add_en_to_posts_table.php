@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('type_id');
-            $table->string('title');
-            $table->string('slug');
-            $table->longText('content');
-            $table->string('status');
-            $table->timestamps();
+        Schema::table('posts', function (Blueprint $table) {
+          $table->string('title_en')->after('title')->nullable();
+          $table->longText('content_en')->after('content')->nullable();
         });
     }
 
@@ -27,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::table('posts', function (Blueprint $table) {
+          $table->dropColumn('title_en');
+          $table->dropColumn('content_en');
+        });
     }
 };

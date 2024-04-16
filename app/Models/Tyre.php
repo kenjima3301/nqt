@@ -33,6 +33,10 @@ class Tyre extends Model
       return $this->hasOne(Drive::class, 'id', 'driveexperience_id');
   }
   
+  public function structure(): HasOne {
+      return $this->hasOne(TyreStructure::class, 'id', 'tyre_structure');
+  }
+  
   public function images(): HasMany {
         return $this->hasMany(TyreImage::class, 'tyre_id', 'id');
   }

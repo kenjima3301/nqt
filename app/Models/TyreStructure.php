@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class BackgroundImage extends Model
+class TyreStructure extends Model
 {
-  protected $table = 'background_images';
+  protected $table = 'tyre_structures';
   
   protected $fillable = [
-      'brand_id',
-      'image'
+      'name',
+      'name_en'
   ];
   
-  public function brand(): HasOne {
-      return $this->hasOne(Brand::class, 'id', 'brand_id');
-  }
 }

@@ -18,25 +18,31 @@
               <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/quan-ly-khac')}}">Quay lại</a>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{url('admin/anh-nen-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+              <form method="POST" action="{{url('admin/menu-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group col-12 col-md-6">
-                  <label for="exampleInputname">Chọn nhà sản xuất</label>
-                  <select name="brand_id">
-                    @foreach($brands as $brand)
-                    <option value="{{$brand->id}}">{{$brand->name}}</option>
+                  <label for="exampleInputname">Tên menu</label>
+                  <input type="name" name="name" value="" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên menu" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Tên tiếng anh</label>
+                  <input type="name" name="name_en" value="" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Menu name" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
+                @if(count($menus) >0)
+                <br/>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Chọn menu cha</label>
+                  <select name="parent_id">
+                    <option value="">Chọn menu</option>
+                    @foreach($menus as $menu)
+                      
+                      <option value="{{$menu->id}}">{{$menu->name}}</option>
+                      
                     @endforeach
                   </select>
                 </div>
+                @endif
                 <br/>
-                <div class="form-group col-md-6">
-                  <label for="exampleInputname">Đăng ảnh logo</label>
-                  <div class="input-group hdtuto control-group lst increment" >
-                        <div class="list-input-hidden-upload">
-                          <input type="file" name="image" id="file_upload" class="myfrm form-control hidden">
-                        </div>
-                      </div>
-                </div>
                 @if($errors->any())
                 <div class="text-danger">
                  Hãy nhập đầy đủ thông tin các trường bên trên

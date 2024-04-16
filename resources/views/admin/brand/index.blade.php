@@ -24,7 +24,7 @@
                     <tbody>
                       @foreach($brands as $brand)
                       <tr>
-                        <td class="text-sm font-weight-normal">{{$brand->name}}</td>
+                        <td class="text-sm font-weight-normal">{{$brand->name}} - {{$brand->name_en}}</td>
                         <td class="text-sm font-weight-normal"><img src="{{asset($brand->image)}}" height="20"></td>
                       </tr>
                       @endforeach

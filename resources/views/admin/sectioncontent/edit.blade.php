@@ -4,7 +4,7 @@
     <x-navbars.navs.auth titlePage="Thêm loại xe"></x-navbars.navs.auth>
     <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-12 col-lg-8 m-auto">
+        <div class="col-12 col-lg-12 m-auto">
           <div class="card">
             <div class="card-header">
               <h5 class="mb-0">Thêm loại xe</h5>
@@ -15,22 +15,28 @@
             </div>
             @endif
             <div class="col-12 text-end">
-              <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/quan-ly-khac')}}">Quay lại danh sách loại xe</a>
+              <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/sectioncontent')}}">Quay lại</a>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{url('admin/loai-xe-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+              <form method="POST" action="{{url('admin/sectioncontent-edit')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group col-12 col-md-6">
+                <input type="hidden" value="{{$content->id}}" name="content_id">
+                <div class="col-12">
+<!--                <div class="form-group col-lg-4">
+                  <label for="exampleInputname">Key</label>
+                  <input type="name" name="key" value="{{$content->key}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>-->
+                  
+                <div class="form-group col-lg-6">
                   <label for="exampleInputname">Tên</label>
-                  <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <textarea type="name" name="name" class="form-control border border-2 p-2" rows="5">{{$content->name}}</textarea>
                 </div>
-                <br/>
                 
-                <div class="form-group col-12 col-md-6">
+                <div class="form-group col-6">
                   <label for="exampleInputname">Tên tiếng anh</label>
-                  <input type="text" name="name_en" value="{{ $errors->first('name_en')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <textarea type="name" name="name_en" class="form-control border border-2 p-2" rows="5">{{$content->name_en}}</textarea>
+                  </div>
                 </div>
-                <br/>
                 
                 @if($errors->any())
                 <div class="text-danger">

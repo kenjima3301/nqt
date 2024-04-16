@@ -24,7 +24,7 @@
                     <tbody>
                       @foreach($madeins as $madein)
                       <tr>
-                        <td class="text-sm font-weight-normal">{{$madein->name}}</td>
+                        <td class="text-sm font-weight-normal">{{$madein->name}} - {{$madein->name_en}}</td>
                         <td class="text-sm font-weight-normal"><img src="{{asset($madein->flag)}}" width="20"></td>
                       </tr>
                       @endforeach

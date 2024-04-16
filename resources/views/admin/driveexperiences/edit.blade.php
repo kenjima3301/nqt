@@ -18,23 +18,27 @@
               <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/quan-ly-khac')}}">Quay lại danh sách kiểu đường lái</a>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{url('admin/kieu-duong-lai-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+              <form method="POST" action="{{url('admin/kieu-duong-lai-edit')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="drive_id" value="{{$drive->id}}">
                 <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Tên</label>
-                  <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên kiểu đường lái" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name" value="{{$drive->name}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên kiểu đường lái" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
-                 <div class="form-group col-12 col-md-8">
+                
+                <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Tên tiếng anh</label>
-                  <input type="name" name="name_en" value="{{ $errors->first('name_en')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên kiểu đường lái" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name_en" value="{{$drive->name_en}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên kiểu đường lái" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
+                
                 <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Mô tả</label>
-                  <textarea name="description" rows="5" class="form-control border border-2 p-2">{{ $errors->first('description')}}</textarea>
+                  <textarea name="description" rows="5" class="form-control border border-2 p-2">{{$drive->description}}</textarea>
                   </div>
-                 <div class="form-group col-12 col-md-8">
+                
+                <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Mô tả  tiếng anh</label>
-                  <textarea name="description_en" rows="5" class="form-control border border-2 p-2">{{ $errors->first('description_en')}}</textarea>
+                  <textarea name="description_en" rows="5" class="form-control border border-2 p-2">{{$drive->description_en}}</textarea>
                   </div>
                 @if($errors->any())
                 <div class="text-danger">

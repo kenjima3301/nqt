@@ -18,20 +18,19 @@
               <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/quan-ly-khac')}}">Quay lại danh sách loại xe</a>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{url('admin/loai-xe-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+              <form method="POST" action="{{url('admin/loai-xe-edit')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" value="{{$model->id}}" name="model_id">
                 <div class="form-group col-12 col-md-6">
                   <label for="exampleInputname">Tên</label>
-                  <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name" value="{{ $model->name}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <br/>
-                
                 <div class="form-group col-12 col-md-6">
                   <label for="exampleInputname">Tên tiếng anh</label>
-                  <input type="text" name="name_en" value="{{ $errors->first('name_en')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name_en" value="{{ $model->name_en}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <br/>
-                
                 @if($errors->any())
                 <div class="text-danger">
                  Hãy nhập đầy đủ thông tin các trường bên trên

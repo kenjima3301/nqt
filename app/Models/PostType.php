@@ -11,5 +11,6 @@ class PostType extends Model
   
   protected  $fillable = [
           'name',
+          'name_en'
       ];
 }

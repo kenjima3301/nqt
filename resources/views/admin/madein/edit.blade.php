@@ -15,19 +15,20 @@
             </div>
             @endif
             <div class="col-12 text-end">
-              <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/quan-ly-khac')}}">Quay lại danh sách nước sản xuất</a>
+              <a class="btn bg-gradient-primary mb-0 me-4" href="{{url('admin/nuoc-san-xuat')}}">Quay lại danh sách nước sản xuất</a>
             </div>
             <div class="card-body">
-              <form method="POST" action="{{url('admin/nuoc-san-xuat-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+              <form method="POST" action="{{url('admin/nuoc-san-xuat-edit')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" value="{{$madein->id}}" name="madein_id">
                 <div class="form-group col-12 col-md-6">
                   <label for="exampleInputname">Tên</label>
-                  <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name" value="{{$madein->name}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <br/>
                 <div class="form-group col-12 col-md-6">
-                  <label for="exampleInputname">Tên</label>
-                  <input type="name" name="name_en" value="{{ $errors->first('name_en')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <label for="exampleInputname">Tên tiếng anh</label>
+                  <input type="name" name="name_en" value="{{$madein->name_en}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên loại xe" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <br/>
                 <div class="form-group col-md-6">

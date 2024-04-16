@@ -57,9 +57,9 @@
                       <label for="exampleInputname">Cấu trúc lốp</label>
                       <select class="form-control" name="tyre_structure" id="tyre_structure">
                               <option value="">Chọn cấu trúc lốp</option>
-                              <option value="STEER/TRAILER">STEER/TRAILER</option>
-                              <option value="DRIVE">DRIVE</option>
-                              <option value="TRAILER">TRAILER</option>
+                              @foreach ($structures as $structure)
+                              <option value="{{$structure->id}}">{{$structure->name}}</option>
+                              @endforeach
                             </select>
                     </div>
                 <div class="form-group col-12 col-md-8">

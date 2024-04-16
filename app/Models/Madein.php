@@ -11,6 +11,7 @@ class Madein extends Model
   
   protected  $fillable = [
           'name',
+          'name_en',
           'flag'
       ];
 }

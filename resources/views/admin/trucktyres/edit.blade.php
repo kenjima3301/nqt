@@ -58,9 +58,9 @@
                       <label for="exampleInputname">Cấu trúc lốp</label>
                       <select class="form-control" name="tyre_structure" id="tyre_structure">
                               <option value="">Chọn cấu trúc lốp</option>
-                              <option @if($tyre->tyre_structure == 'STEER/TRAILER') selected @endif value="STEER/TRAILER">STEER/TRAILER</option>
-                              <option @if($tyre->tyre_structure == 'DRIVE') selected @endif value="DRIVE">DRIVE</option>
-                              <option @if($tyre->tyre_structure == 'TRAILER') selected @endif value="TRAILER">TRAILER</option>
+                              @foreach ($structures as $structure)
+                              <option @if($tyre->tyre_structure == $structure->id) selected @endif value="{{$structure->id}}">{{$structure->name}}</option>
+                              @endforeach
                             </select>
                     </div>
                 <div class="form-group col-12 col-md-8">

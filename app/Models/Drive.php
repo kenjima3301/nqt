@@ -11,7 +11,9 @@ class Drive extends Model
   
   protected  $fillable = [
           'name',
+          'name_en',
           'description',
+          'description_en',
           'features'
       ];
 }

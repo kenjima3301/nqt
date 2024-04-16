@@ -29,9 +29,20 @@
                   <label for="exampleInputname">Tiêu đề</label>
                   <input type="name" name="title" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tên tiêu đề" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
+                
+                <div class="form-group col-12 col-md-9">
+                  <label for="exampleInputname">Tiêu đề tiếng anh</label>
+                  <input type="name" name="title_en" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tiêu đề tiếng anh" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
+                
                 <div class="form-group col-12 col-md-9">
                   <label for="exampleInputname">Nội dung</label>
                   <textarea id="content" name="content" rows="5" class="form-control border border-2 p-2">{{ $errors->first('description')}}</textarea>
+                  </div>
+                
+                <div class="form-group col-12 col-md-9">
+                  <label for="exampleInputname">Nội dung tiếng anh</label>
+                  <textarea id="contenten" name="content_en" rows="5" class="form-control border border-2 p-2">{{ $errors->first('description')}}</textarea>
                   </div>
 
                 @if($errors->any())
@@ -72,7 +83,23 @@
                 ]
             });
             $('#content').summernote('fontName', 'Arial');
-
+            
+            
+            $('#contenten').summernote({
+              tabsize: 2,
+                height: 300,
+                toolbar: [
+                  ['style', ['style']],
+                  ['font', ['bold', 'underline', 'clear']],
+                  ['fontname', ['fontname']],
+                  ['color', ['color']],
+                  ['para', ['ul', 'ol', 'paragraph']],
+                  ['table', ['table']],
+                  ['insert', ['link', 'picture', 'video']],
+                  ['view', ['codeview', 'help']],
+                ]
+            });
+            $('#contenten').summernote('fontName', 'Arial');
         });
     </script>
 </x-layout>

@@ -11,6 +11,7 @@ class Modelcar extends Model
   
   protected  $fillable = [
           'name',
+          'name_en'
       ];
 
 }

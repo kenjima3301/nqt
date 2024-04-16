@@ -26,7 +26,7 @@
         <span class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</span>
         <span class="card-text">{{$promotion->tyre->model->name}}</span>
         <span class="card-text">{{$promotion->tyre->brand->name}}</span>
-        <span class="card-text">{{$promotion->tyre->tyre_structure}}</span>
+        <span class="card-text">{{$promotion->tyre->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right;">{{number_format($promotion->promotion_price, 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span> / Lốp</p>
 
@@ -56,7 +56,7 @@
         <span class="card-text">@if(isset($new->drive)){{$new->drive->name}} @endif</span>
         <span class="card-text">{{$new->model->name}}</span>
         <span class="card-text">{{$new->brand->name}}</span>
-        <span class="card-text">{{$new->tyre_structure}}</span>
+        <span class="card-text">{{$new->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right;">{{number_format($new->price, 0, '', ',')}}đ / Lốp</p>
 
@@ -86,7 +86,7 @@
         <span class="card-text">@if(isset($best->drive)){{$best->drive->name}} @endif</span>
         <span class="card-text">{{$best->model->name}}</span>
         <span class="card-text">{{$best->brand->name}}</span>
-        <span class="card-text">{{$best->tyre_structure}}</span>
+        <span class="card-text">{{$best->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right;">{{number_format($best->price, 0, '', ',')}}đ / Lốp</p>
 

@@ -55,22 +55,42 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/loai-xe', [Admincontroller::class, 'model']);
   Route::get('/loai-xe-add', [Admincontroller::class, 'addmodel']);
   Route::post('/loai-xe-add', [Admincontroller::class, 'addmodelpost']);
+  Route::get('/loai-xe-edit/{id}', [Admincontroller::class, 'editmodel']);
+  Route::post('/loai-xe-edit', [Admincontroller::class, 'editmodelpost']);
+  
+  Route::get('/cau-truc-lop-add', [Admincontroller::class, 'addstructure']);
+  Route::post('/cau-truc-lop-add', [Admincontroller::class, 'addstructurepost']);
+  Route::get('/cau-truc-lop-edit/{id}', [Admincontroller::class, 'editstructure']);
+  Route::post('/cau-truc-lop-edit', [Admincontroller::class, 'editstructurepost']);
   
   Route::get('/nuoc-san-xuat', [Admincontroller::class, 'madein']);
   Route::get('/nuoc-san-xuat-add', [Admincontroller::class, 'addmadein']);
   Route::post('/nuoc-san-xuat-add', [Admincontroller::class, 'addmadeinpost']);
+  Route::get('/nuoc-san-xuat-edit/{id}', [Admincontroller::class, 'editmadein']);
+  Route::post('/nuoc-san-xuat-edit', [Admincontroller::class, 'editmadeinpost']);
   
   Route::get('/hang-san-xuat', [Admincontroller::class, 'brand']);
   Route::get('/hang-san-xuat-add', [Admincontroller::class, 'addbrand']);
   Route::post('/hang-san-xuat-add', [Admincontroller::class, 'addbrandpost']);
+  Route::get('/hang-san-xuat-edit/{id}', [Admincontroller::class, 'editbrand']);
+  Route::post('/hang-san-xuat-edit', [Admincontroller::class, 'editbrandpost']);
   
-  Route::get('/anh-nen-add', [Admincontroller::class, 'addbackgroundimage']);
-  Route::post('/anh-nen-add', [Admincontroller::class, 'addbackgroundimagepost']);
-  Route::get('/anh-nen-delete/{id}', [Admincontroller::class, 'deletebackgroundimage']);
+  Route::get('/menu-add', [Admincontroller::class, 'addmenu']);
+  Route::post('/menu-add', [Admincontroller::class, 'addmenupost']);
+  Route::get('/menu-edit/{id}', [Admincontroller::class, 'editmenu']);
+  Route::post('/menu-edit/{id}', [Admincontroller::class, 'editmenupost']);
   
   Route::get('/kieu-duong-lai', [Admincontroller::class, 'driveexperiences']);
   Route::get('/kieu-duong-lai-add', [Admincontroller::class, 'adddriveexperiences']);
   Route::post('/kieu-duong-lai-add', [Admincontroller::class, 'adddriveexperiencespost']);
+  Route::get('/kieu-duong-lai-edit/{id}', [Admincontroller::class, 'editdriveexperiences']);
+  Route::post('/kieu-duong-lai-edit', [Admincontroller::class, 'editdriveexperiencespost']);
+ 
+  Route::get('/sectioncontent', [Admincontroller::class, 'sectioncontent']);
+  Route::get('/sectioncontent-add', [Admincontroller::class, 'addsectioncontent']);
+  Route::post('/sectioncontent-add', [Admincontroller::class, 'addsectioncontentpost']);
+  Route::get('/sectioncontent-edit/{id}', [Admincontroller::class, 'editsectioncontent']);
+  Route::post('/sectioncontent-edit', [Admincontroller::class, 'editsectioncontentpost']);
   
   Route::get('/lop-xe-tai', [Admincontroller::class, 'trucktyres']);
   Route::get('/lop-xe-tai-add', [Admincontroller::class, 'addtrucktyres']);
@@ -93,6 +113,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/dai-ly/edit/{id}', [Admincontroller::class, 'editdealer']);
   Route::post('/dai-ly-edit', [Admincontroller::class, 'editdealerpost']);
   Route::post('register-dealer', [Admincontroller::class, 'adddealeruser']);
+  
+  Route::get('/danh-muc-add', [Admincontroller::class, 'addcategory']);
+  Route::post('/danh-muc-add', [Admincontroller::class, 'addcategorypost']);
+  Route::get('/danh-muc-edit/{id}', [Admincontroller::class, 'editcategory']);
+  Route::post('/danh-muc-edit', [Admincontroller::class, 'editcategorypost']);
   
   Route::get('/bai-viet', [Admincontroller::class, 'blog']);
   Route::get('/bai-viet-add', [Admincontroller::class, 'addblog']);

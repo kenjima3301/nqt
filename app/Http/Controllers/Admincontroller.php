@@ -42,9 +42,105 @@ class Admincontroller extends Controller
   
   public function addmodelpost(Request $request) {
     Modelcar::create([
-        'name' => $request->name
+        'name' => $request->name,
+        'name_en' => $request->name_en
     ]);
     return redirect('admin/loai-xe');
+  }
+  
+  public function addstructure() {
+    return view('admin.tyrestructure.add');
+  }
+  
+  public function addstructurepost(Request $request) {
+    \App\Models\TyreStructure::create([
+        'name' => $request->name,
+        'name_en' => $request->name_en
+    ]);
+    return redirect('admin/quan-ly-khac');
+  }
+  
+  public function editstructure($id) {
+    $structure = \App\Models\TyreStructure::find($id);
+    return view('admin.tyrestructure.edit',['structure' => $structure]);
+  }
+  
+  public function editstructurepost(Request $request) {
+    $structure = \App\Models\TyreStructure::find($request->structure_id);
+    $structure->name = $request->name;
+    $structure->name_en = $request->name_en;
+    $structure->save();
+    return redirect('admin/quan-ly-khac');
+  }
+  
+  public function addcategory() {
+    return view('admin.category.add');
+  }
+  
+  public function addcategorypost(Request $request) {
+    PostType::create([
+        'name' => $request->name,
+        'name_en' => $request->name_en
+    ]);
+    return redirect('admin/quan-ly-khac');
+  }
+  
+  public function editcategory($id) {
+     $type = PostType::find($id);
+    return view('admin.category.edit', ['type' => $type]);
+  }
+  
+  public function editcategorypost(Request $request) {
+    $type = PostType::find($request->type_id);
+    $type->name = $request->name;
+    $type->name_en = $request->name_en;
+    $type->save();
+    return redirect('admin/loai-xe');
+  }
+  
+   public function editmodel($id) {
+     $model = Modelcar::find($id);
+    return view('admin.model.edit', ['model' => $model]);
+  }
+  
+  public function editmodelpost(Request $request) {
+    $model = Modelcar::find($request->model_id);
+    $model->name = $request->name;
+    $model->name_en = $request->name_en;
+    $model->save();
+    return redirect('admin/loai-xe');
+  }
+  
+  public function sectioncontent() {
+    $contents = \App\Models\SectionContent::all();
+    return view('admin.sectioncontent.index', ['contents' => $contents]);
+  }
+  
+  public function addsectioncontent() {
+    return view('admin.sectioncontent.add');
+  }
+  
+  public function addsectioncontentpost(Request $request) {
+    \App\Models\SectionContent::create([
+        'key' => $request->key,
+        'name' => $request->name,
+        'name_en' => $request->name_en
+    ]);
+    return redirect('admin/sectioncontent');
+  }
+  
+  public function editsectioncontent($id) {
+    $content = \App\Models\SectionContent::find($id);
+    return view('admin.sectioncontent.edit',['content' => $content]);
+  }
+  
+  public function editsectioncontentpost(Request $request) {
+    $content = \App\Models\SectionContent::find($request->content_id);
+    $content->key = $request->key;
+    $content->name = $request->name;
+    $content->name_en = $request->name_en;
+    $content->save();
+    return redirect('admin/sectioncontent');
   }
   
   public function madein() {
@@ -65,8 +161,33 @@ class Admincontroller extends Controller
       }
     Madein::create([
           'name'   => $request->name,
+          'name_en' => $request->name_en,
           'flag'   => 'country/flag/'.$imageName,
       ]);
+    return redirect('admin/nuoc-san-xuat');
+  }
+  
+  public function editmadein($id) {
+    $madein = Madein::find($id);
+    return view('admin.madein.edit', ['madein' => $madein]);
+  }
+  
+  public function editmadeinpost(Request $request) {
+    $madein = Madein::find($request->madein_id);
+    $madein->name = $request->name;
+    $madein->name_en = $request->name_en;
+    $madein->save();
+    if($request->flag){
+    $imageName = time().'.'.$request->flag->extension();
+    $request->flag->move(public_path('country/flag'), $imageName);
+    $path = public_path().'/country/flag/';
+      if (!file_exists($path)) {
+        mkdir($path, 0775, true);
+      }
+      $madein->flag = 'country/flag/'.$imageName;
+      $madein->save();
+    }
+    
     return redirect('admin/nuoc-san-xuat');
   }
   
@@ -93,32 +214,65 @@ class Admincontroller extends Controller
     return redirect('admin/hang-san-xuat');
   }
   
-  
-  public function addbackgroundimage() {
-    $brands = $brands = Brand::all();
-    return view('admin.backgroundimage.add', ['brands' => $brands]);
+  public function editbrand($id) {
+    $brand = Brand::find($id);
+    return view('admin.brand.edit', ['brand' => $brand]);
+    
   }
   
-  public function addbackgroundimagepost(Request $request) {
-    $imageName = time().'.'.$request->image->extension();
+  public function editbrandpost(Request $request) {
+    $brand = Brand::find($request->brand_id);
+    $brand->name = $request->name;
+    $brand->name_en = $request->name_en;
+    $brand->save();
     
-    $path = public_path().'/background/image/';
+    if($request->image){
+    $imageName = time().'.'.$request->image->extension();
+    $request->image->move(public_path('brand/image'), $imageName);
+    $path = public_path().'/brand/image/';
       if (!file_exists($path)) {
         mkdir($path, 0775, true);
       }
-    $request->image->move(public_path('background/image'), $imageName);
-      \App\Models\BackgroundImage::create([
-          'brand_id'   => $request->brand_id,
-          'image'   => 'background/image/'.$imageName,
-      ]);
+      $brand->image = 'brand/image/'.$imageName;
+      $brand->save();
+    }
+    return redirect('admin/hang-san-xuat');
+  }
+  
+  
+  public function addmenu() {
+    $menus = \App\Models\Menu::whereNull('parent_id')->get();
+    return view('admin.menu.add', ['menus' => $menus]);
+  }
+  
+  public function addmenupost(Request $request) {
+    $menu = \App\Models\Menu::create([
+        'name' => $request->name,
+        'name_en' => $request->name_en
+    ]);
+    if($request->parent_id){
+      $menu->parent_id = $request->parent_id;
+      $menu->save();
+    }
     return redirect('admin/quan-ly-khac');
   }
   
-  public function deletebackgroundimage($id) {
-    $backgroundimage = \App\Models\BackgroundImage::find($id);
-    $backgroundimage->delete();
-    
-    return back();
+  public function editmenu($id) {
+    $menu = \App\Models\Menu::find($id);
+    $menus = \App\Models\Menu::whereNull('parent_id')->get();
+    return view('admin.menu.edit', ['menus' => $menus, 'menu' => $menu]);
+  }
+  
+   public function editmenupost(Request $request) {
+    $menu = \App\Models\Menu::find($request->menu_id);
+    $menu->name = $request->name;
+    $menu->name_en = $request->name_en;
+    $menu->save();
+    if($request->parent_id){
+      $menu->parent_id = $request->parent_id;
+      $menu->save();
+    }
+    return redirect('admin/quan-ly-khac');
   }
   
   public function driveexperiences() {
@@ -131,30 +285,29 @@ class Admincontroller extends Controller
   }
   
   public function adddriveexperiencespost(Request $request) {
-//    $features = $request->features;
-//    $images = $request->images;
-//    
-//    $addfeatures = array();
-//    foreach ($features as $key =>  $feature){
-//      if($feature){
-//        $path = public_path().'/drive/image/';
-//          if (!file_exists($path)) {
-//            mkdir($path, 0775, true);
-//          }
-//        $image = $images[$key];
-//        $imageName = time().$key.'.'.$image->extension();
-//        $image->move(public_path('drive/image'), $imageName);
-//        $addfeatures[$key]['feature'] = $feature;
-//        $addfeatures[$key]['image'] = 'drive/image/'.$imageName;
-//      }
-//    }
     Drive::create([
           'name'   => $request->name,
           'description'   => $request->description,
-//          'features'   => json_encode($addfeatures),
       ]);
     return redirect('admin/kieu-duong-lai');
   }
+  
+  public function editdriveexperiences($id) {
+    $drive = Drive::find($id);
+    
+    return view('admin.driveexperiences.edit', ['drive' => $drive]);
+  }
+  
+  public function editdriveexperiencespost(Request $request) {
+    $drive = Drive::find($request->drive_id);
+    $drive->name = $request->name;
+    $drive->description = $request->description;
+    $drive->name_en = $request->name_en;
+    $drive->description_en = $request->description_en;
+    $drive->save();
+    return redirect('admin/kieu-duong-lai');
+  }
+  
   
   public function trucktyres() {
     $tyres = Tyre::where('model_id', 1)->orderBy("id", "desc")->get();
@@ -165,10 +318,12 @@ class Admincontroller extends Controller
     $brands = Brand::all();
     $models = Modelcar::all();
     $drives = Drive::all();
+    $structures = \App\Models\TyreStructure::all();
     return view('admin.trucktyres.add', [
         'brands' => $brands,
         'models' => $models,
-        'drives' => $drives
+        'drives' => $drives,
+        'structures' => $structures
         ]);
   }
   
@@ -215,11 +370,13 @@ class Admincontroller extends Controller
     $brands = Brand::all();
     $models = Modelcar::all();
     $drives = Drive::all();
+    $structures = \App\Models\TyreStructure::all();
     return view('admin.trucktyres.edit', [
         'tyre' => $tyre,
         'brands' => $brands,
         'models' => $models,
-        'drives' => $drives
+        'drives' => $drives,
+        'structures' => $structures
         ]);
   }
   
@@ -458,13 +615,19 @@ class Admincontroller extends Controller
     $madeins = Madein::all();
     $brands = Brand::all();
     $drives = Drive::all();
-    $background_images = \App\Models\BackgroundImage::all();
+    $menus = \App\Models\Menu::all();
+    $types = PostType::all();
+    $typestructures = \App\Models\TyreStructure::all();
+    $contents = \App\Models\SectionContent::latest()->limit(10)->get();
     return view('admin.group.index', [
         'models' => $models,
         'madeins' => $madeins,
         'brands' => $brands,
         'drives' => $drives,
-        'background_images' => $background_images
+        'menus' => $menus,
+        'contents' => $contents,
+        'types' => $types,
+        'typestructures' =>$typestructures
         ]);
   }
   
