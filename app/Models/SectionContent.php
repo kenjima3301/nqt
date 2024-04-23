@@ -14,4 +14,13 @@ class SectionContent extends Model
     'name',
     'name_en'
   ];
+  
+  public function name_show(){
+        if(session()->get('language')=='en'){
+            return $this->name_en;
+        }
+        else{
+            return $this->name;
+        }
+    }
 }

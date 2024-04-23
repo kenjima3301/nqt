@@ -4,12 +4,16 @@
 <div class="container">
     <!-- slider -->
     <div class="slider">
+      @if(session()->get('language') == 'vi')
         <img src="{{ asset('assets/images/huong-dan-tim-kiem-AS668.png')}}" alt="">
+      @else 
+        <img src="{{ asset('assets/images/huong-dan-tim-kiem-AS668_en.png')}}" alt="">
+      @endif
     </div>
     <!-- end slider -->
     @if(count($promotions) > 0)
     <div class="new-product">
-        <h3 class="text-color" style="background: #f7931d; padding: 10px;color: #000;">Chương trình khuyến mãi</h3>
+        <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">Chương trình khuyến mãi</h3>
         <div class="list-new-product row mt-4 mb-4">
           @foreach($promotions as $promotion)
             <div class="col-lg-3">
@@ -40,7 +44,7 @@
     
     <!-- new product -->
     <div class="new-product">
-        <h3 class="text-color" style="background: #f7931d; padding: 10px;color: #000;">Sản phẩm mới</h3>
+        <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">Sản phẩm mới</h3>
         <div class="list-new-product row mt-4">
           @foreach($new_products as $new)
             <div class="col-lg-3">
@@ -70,7 +74,7 @@
 
     <!-- product bestseller -->
     <div class="product-best-seller mt-4">
-    <h3 class="text-color" style="background: #f7931d; padding: 10px;color: #000;">Sản phẩm bán chạy</h3>
+    <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">Sản phẩm bán chạy</h3>
         <div class="list-new-product row">
         @foreach($best_products as $best)
         <div class="col-lg-3 mt-4">

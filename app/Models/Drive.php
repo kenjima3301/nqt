@@ -16,4 +16,22 @@ class Drive extends Model
           'description_en',
           'features'
       ];
+  
+  public function name_show(){
+        if(session()->get('language')=='en'){
+            return $this->name_en;
+        }
+        else{
+            return $this->name;
+        }
+    }
+    
+    public function description_show(){
+        if(session()->get('language')=='en'){
+            return $this->description_en;
+        }
+        else{
+            return $this->description;
+        }
+    }
 }

@@ -119,8 +119,8 @@ html {
 .main-content {
     margin-top: 177px;
     /*background-color: #F6F7F9;*/
-    background-image: url("./../../../assets/images/bg2.jpg");
-    background-color: #b3dac5;
+    background-image: url("./../../../assets/images/bg3.jpg");
+    background-color: #eaf7fc;
     /*background-position: center;*/
     background-repeat: no-repeat;
     /*background-size: cover;*/
@@ -132,7 +132,7 @@ html {
   .main-content {
     margin-top: 100px;
     /*background-color: #F6F7F9;*/
-     background-image: url("./../../../assets/images/bg2.jpg");
+     background-image: url("./../../../assets/images/bg3.jpg");
     background-color: #b3dac5;
     /*background-position: center;*/
     background-repeat: no-repeat;
@@ -174,19 +174,19 @@ html {
 }
 
 .menu-footer li a {
-    color: rgba(19, 19, 19, 0.6);
+    color: #fff;
     padding: 0.5rem 0rem;
 }
 
 .menu-footer li a:hover {
     /*color: #35A25B;*/
-    color: #fff;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .footer-info {
     margin-top: 18px;
     margin-left: 10px;
-    color: rgba(19, 19, 19, 0.6);
+    color: #fff;
 }
 
 .footer-info i {
@@ -483,19 +483,23 @@ html {
 }
 
 .card.booking-card.v-2 {
-  background-color: #F7931D;
+  background-color: #35A25B;
 }
 
 .card.booking-card.v-2 .fa {
-  color: #f7aa00;
+  color: #fff;
+}
+
+.card.booking-card.v-2 .card-body .card-title {
+  color: #fff;
 }
 
 .card.booking-card.v-2 .card-body .card-text {
-  color: #db2d43;
+  color: #fff;
 }
 
 .card.card.booking-card.v-2 .chip {
-  background-color: #87e5da;
+  background-color: #fff;
 }
 
 .card.booking-card.v-2 .card-body hr {
@@ -504,4 +508,8 @@ html {
 
 .card.booking-card li {
   padding: 10px;
+}
+
+.lg-prev  {
+  color: #35A25B;
 }

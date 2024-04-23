@@ -14,6 +14,19 @@ use Illuminate\Mail\Mailables\Content;
 
 class Usercontroller extends Controller
 {   
+  
+    public function changeLanguage($lang) {
+      $language = config('app.locale');
+      if ($lang == 'en') {
+          $language = 'en';
+      }
+      if ($lang == 'vi') {
+          $language = 'vi';
+      }
+      session()->put('language', $language);
+      return redirect()->back();
+    }
+    
     function login()
     {
         return view('auth.login');

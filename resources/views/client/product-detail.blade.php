@@ -1,7 +1,7 @@
 @extends ('client.layouts.master')
 @section('title', 'NQT - Chi tiết sản phẩm')
 @section('content')
-<link rel="stylesheet" href="https://sachinchoolur.github.io/lightslider/dist/css/lightslider.min.css">
+<link rel="stylesheet" href="{{asset('client/assets/css/lightslider.min.css')}}">
 <div class="container mt-4">
 	<div class="row ">
          <!-- Left Navbar -->
@@ -55,7 +55,7 @@
         </div>
 
         <!-- Right Product Detail -->
-        <div class="col-lg-9 col-md-8 col-sm-12" style="background: #f7931d;">
+        <div class="col-lg-9 col-md-8 col-sm-12" style="background: #fff;">
             <div class="row">
                 <div class="col-lg-6  mt-4 text-center" >
                     <!-- Main product image -->
@@ -85,7 +85,7 @@
                       @endforeach
                     </div>
                 </div>
-                <div class="col-lg-6 pt-3" style="background: #f7931d;">
+                <div class="col-lg-6 pt-3" style="background: #fff;">
                     <!-- Product name -->
                     <h3 class="card-title mt-3">{{$tyre->name}}</h3>
                     <p class="card-text text-white">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
@@ -113,48 +113,12 @@
                             <p>{{$tyre->tyre_structure}}</p>
                         </div>
                     </div>
-
-<!--                    <div class="row mt">
-                        <div class="col-lg-4">
-                            <p>{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
-                        </div>
-                        <div class="col-lg-8 text-right">
-                            <a href="{{url('lien-he')}}" class="btn btn-success">Liên hệ</a>
-                        </div>
-                    </div>-->
                 </div>
             </div>
             
             <div class="row" style="background: #ffffff;">
                 
                     <table class=" table-responsive text-center">
-<!--                        <thead>
-                            <tr>
-                              <th rowspan="3" width="3%"></th>
-                                <th rowspan="3">Size</th>
-                                <th rowspan="3">LR / PR</th>
-                                <th rowspan="3">Service index</th>
-                                <th rowspan="3">Tread Depth<br/> (mm)</th>
-                                <th rowspan="3">Standard Rim</th>
-                                <th rowspan="3">Overall Diameter<br/> (mm)</th>
-                                <th rowspan="3">Section Width<br/> (mm)</th>
-                                <th colspan="8">Max. Load Capacity at Cold Inflation Pressure</th>
-                            </tr>
-                            <tr>
-                                <th colspan="4">Single</th>
-                                <th colspan="4">Dual</th>
-                            </tr>
-                            <tr>
-                                <th>(kg)</th>
-                                <th>(lbs)</th>
-                                <th>(kPa)</th>
-                                <th>(psi)</th>
-                                <th>(kg)</th>
-                                <th>(lbs)</th>
-                                <th>(kPa)</th>
-                                <th>(psi)</th>
-                            </tr>
-                        </thead>-->
                       <thead>
                             <tr>
                               <th rowspan="3" width="3%">Nước sản xuất</th>
@@ -171,7 +135,7 @@
                         <tbody>
                             
                               @foreach($tyre_sizes as $size)
-                              <tr class="@if(isset($size->madeins[0]) && count($size->madeins) == 2){{'bothflag'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'China'){{'china'}}@endif" @if(isset($sizedetail) && $size->id == $sizedetail->id) style="background:#f7931d" @endif>
+                              <tr class="@if(isset($size->madeins[0]) && count($size->madeins) == 2){{'bothflag'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'China'){{'china'}}@endif" @if(isset($sizedetail) && $size->id == $sizedetail->id) style="background:#35A25B" @endif>
                                   <td class="text-left">@foreach ($size->madeins as $country) 
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
@@ -213,40 +177,24 @@
             <div class="row mt-3">
               @foreach ($relatedtypres as $relatedtypre)
                 <div class="col-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$relatedtypre->brand->name}}  {{$relatedtypre->name}}</h5>
-                            <p class="card-text">@if(isset($relatedtypre->drive)) {{$relatedtypre->drive->name}} @endif</p>
-                            <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" >
-                            <img class="card-img-top" style="max-height: 256px;"  src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}">
-                            </a>
-                            <div class="sub-desc row mt-3">
-                                <div class="col-lg-4">
-                                    <p>{{$relatedtypre->model->name}}</p>
-                                </div>
-                                <div class="col-lg-4">
-                                    <p>{{$relatedtypre->brand->name}}</p>
-                                </div>
-                                <div class="col-lg-4">
-                                    <p>{{$relatedtypre->tyre_structure}}</p>
-                                </div>
-                            </div>
-                            <div class="row mt">
-                                <div class="col-lg-6">
-                                    <p> @if(isset($relatedtypre->promotion))
-                                      {{number_format($promotion->promotion_price, 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span>
-                                      @else 
-                                      {{number_format($relatedtypre->price, 0, '', ',')}}đ 
-                                      @endif
-                                      / Lốp
-                                    </p>
-                                </div>
-<!--                                <div class="col-lg-6 text-center">
-                                    <a class="btn btn-success">Chi tiết</a>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
+                  <div class="card booking-card v-2 mt-2 rounded-bottom">
+      <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
+        <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}">
+        <img class="card-img-top"  src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}" style="max-height:291px;">
+        </a>
+      </div>
+      <div class="card-body" style="padding-bottom: 0">
+        <h4 class="card-title m-0"><a>{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</a></h4>
+
+        <span class="card-text">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif</span>
+        <span class="card-text">{{$relatedtypre->model->name}}</span>
+        <span class="card-text">{{$relatedtypre->brand->name}}</span>
+        <span class="card-text">{{$relatedtypre->structure->name ?? ''}}</span>
+        <!--<hr class="my-4">-->
+        <p style="float: right;">{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
+
+      </div>
+    </div>
                 </div>
               @endforeach
             </div>
@@ -428,8 +376,8 @@
         pause: 2000,
         keyPress: false,
         controls: true,
-        prevHtml: '',
-        nextHtml: '',
+        prevHtml: '<div class="lg-prev lg-icon"><i class="fa fa-chevron-left"></i></div>',
+        nextHtml: '<div class="lg-prev lg-icon"><i class="fa fa-chevron-right"></i></div>',
         rtl: false,
         adaptiveHeight: false,
         vertical: false,

@@ -248,7 +248,9 @@ class Admincontroller extends Controller
   public function addmenupost(Request $request) {
     $menu = \App\Models\Menu::create([
         'name' => $request->name,
-        'name_en' => $request->name_en
+        'name_en' => $request->name_en,
+        'link' => $request->link
+        
     ]);
     if($request->parent_id){
       $menu->parent_id = $request->parent_id;
@@ -267,6 +269,7 @@ class Admincontroller extends Controller
     $menu = \App\Models\Menu::find($request->menu_id);
     $menu->name = $request->name;
     $menu->name_en = $request->name_en;
+    $menu->link = $request->link;
     $menu->save();
     if($request->parent_id){
       $menu->parent_id = $request->parent_id;

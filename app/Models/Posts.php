@@ -23,4 +23,22 @@ class Posts extends Model
     public function type(): HasOne {
       return $this->hasOne(PostType::class, 'id', 'type_id');
   }
+  
+  public function title_show(){
+        if(session()->get('language')=='en'){
+            return $this->title_en;
+        }
+        else{
+            return $this->title;
+        }
+    }
+    
+    public function content_show(){
+        if(session()->get('language')=='en'){
+            return $this->content_en;
+        }
+        else{
+            return $this->content;
+        }
+    }
 }

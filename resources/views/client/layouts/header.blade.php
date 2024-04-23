@@ -72,6 +72,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{url('/login')}}">Đăng nhập</a>
                                 </li>
+                                
+                                @if(session()->get('language') == 'vi')
+                                  <li class="nav-item">
+                                    <a href="{{url('language/en')}}"><img src="{{asset('assets/images/en.jpg')}}"></a>
+                                  </li>
+                                @else 
+                                  <li class="nav-item">
+                                    <a  href="{{url('language/vi')}}"><img src="{{asset('assets/images/vn.png')}}"></a>
+                                  </li>
+                                @endif
                             </ul>
                         </nav>
                     </div>
@@ -156,6 +166,19 @@
                             </li>
                             @endif
                             
+                                @if(session()->get('language') == 'vi')
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{url('language/en')}}"  style="padding-left: 10px; padding-right: 10px">
+                                      <img src="{{asset('assets/images/en.jpg')}}">
+                                    </a>
+                                  </li>
+                                @else 
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="{{url('language/vi')}}" style="padding-left: 10px; padding-right: 10px">
+                                      <img src="{{asset('assets/images/vn.png')}}">
+                                    </a>
+                                  </li>
+                                @endif
                         </ul>
                     </div>
                 </div>

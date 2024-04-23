@@ -176,7 +176,7 @@
     </section><!-- End Clients Section -->
  
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+<!--    <section id="contact" class="contact">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
@@ -241,7 +241,31 @@
         </div>
 
       </div>
-      </section><!-- End Contact Section -->
+      </section> End Contact Section -->
+<section id="gallery" class="gallery">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Hình ảnh</h2>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row g-0">
+        @for ($i =1; $i<=7; $i++)
+          <div class="col-lg-3 col-md-4">
+            
+            <div class="gallery-item">
+              <a href="{{asset('assets/images/nqt/'.$i.'.jpg')}}" class="galelry-lightbox">
+                <img src="{{asset('assets/images/nqt/'.$i.'.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+            
+          </div>
+        @endfor
+        </div>
+
+      </div>
+    </section>
   </main><!-- End #main -->
   <script src="https://bootstrapmade.com/assets/js/demo.js?v=5.0"></script>
   <script src="https://bootstrapmade.com/assets/vendor/aos/aos.js"></script>

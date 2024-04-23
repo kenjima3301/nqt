@@ -94,6 +94,8 @@ class HomeController extends Controller
       $brand = Brand::take(1)->first();
       $sizes = TyreDimention::select('size')->distinct('size')->get();
       $tyre = Tyre::find($id);
+      $tyre->views = $tyre->views +1;
+      $tyre->save();
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
 //      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
       $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
@@ -124,6 +126,8 @@ class HomeController extends Controller
       $brand = Brand::take(1)->first();
       $sizes = TyreDimention::select('size')->distinct('size')->get();
       $sizedetail = TyreDimention::find($size);
+      $sizedetail->views = $sizedetail->views +1;
+      $sizedetail->save();
       $tyre = Tyre::find($id);
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
 //      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();

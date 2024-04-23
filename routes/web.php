@@ -47,6 +47,7 @@ Route::get('quen-mat-khau', [Usercontroller::class, 'forgotpass']);
 Route::post('forgotpass', [Usercontroller::class, 'forgotpasspost']);
 Route::get('email/changepass/{id}/{token}', [Usercontroller::class, 'changepass']);
 Route::post('changepass', [Usercontroller::class, 'changepasspost']);
+Route::get('/language/{locale}', [Usercontroller::class, 'changeLanguage'])->name('change-language');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/', function () {

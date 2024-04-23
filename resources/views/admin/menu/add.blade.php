@@ -28,6 +28,10 @@
                   <label for="exampleInputname">Tên tiếng anh</label>
                   <input type="name" name="name_en" value="" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Menu name" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Link</label>
+                  <input type="text" name="link" value="" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Menu name" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
                 @if(count($menus) >0)
                 <br/>
                 <div class="form-group col-12 col-md-6">
