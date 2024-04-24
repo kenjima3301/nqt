@@ -23,7 +23,7 @@
                     <tbody>
                       @foreach($contents as $key => $content)
                       <tr>
-                      
+                      <td class="text-sm font-weight-normal">{{$content->key}}</td>
                         <td class="text-sm font-weight-normal">{{$content->name}}</td>
                    
                         <td class="text-sm font-weight-normal">{{$content->name_en}}</td>

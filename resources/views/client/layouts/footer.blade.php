@@ -1,27 +1,65 @@
+@php 
+$contents = \App\Models\SectionContent::where('key','LIKE',"%footer%")->get();
+@endphp 
 <footer class="pt-3 " style="background: #35A25B;">
   <div class="container">
     <div class="row mt-4 mb">
       <div class="col-lg-6">
         <a href="{{route('index')}}"><img src="{{ asset('client/assets/img/logo.png') }}" alt="Your logo" class="img-fluid" width="15%"></a>
         <div class="footer-info">
-          <p><i class="fa-light fa-location-dot" style="color:#fff"></i> Địa chỉ: 79/5A DT743 - Phường Tân Đông Hiệp - TP. Dĩ An - Tỉnh Bình Dương</p>
-          <p><i class="fa-light fa-rectangle-code"  style="color:#fff"></i> MST: 0314168571</p>
-          <p><i class="fa-light fa-envelope"  style="color:#fff"></i> Email: nqt3999@gmail.com</p>
-          <p><i class="fa-light fa-phone"  style="color:#fff"></i> Điện thoại: (+84) 934.54.13.13</p>
+          @php
+          $footer_dia_chi = $contents->filter(function($item) {
+                                  return $item->key == 'footer_dia_chi';
+                              })->first();
+          @endphp
+          <p><i class="fa-light fa-location-dot" style="color:#fff"></i> {{$footer_dia_chi->name_show()}}</p>
+          @php
+          $footer_mst = $contents->filter(function($item) {
+                                  return $item->key == 'footer_mst';
+                              })->first();
+          @endphp
+          <p><i class="fa-light fa-rectangle-code"  style="color:#fff"></i> {{$footer_mst->name_show()}}</p>
+          @php
+          $footer_email = $contents->filter(function($item) {
+                                  return $item->key == 'footer_email';
+                              })->first();
+          @endphp
+          <p><i class="fa-light fa-envelope"  style="color:#fff"></i> {{$footer_email->name_show()}}</p>
+          @php
+          $footer_dien_thoai = $contents->filter(function($item) {
+                                  return $item->key == 'footer_dien_thoai';
+                              })->first();
+          @endphp
+          <p><i class="fa-light fa-phone"  style="color:#fff"></i> {{$footer_dien_thoai->name_show()}}</p>
         </div>
       </div>
       <div class="col-lg-6">
         <div class="row">
             <div class="menu-footer col-lg-4 col-md-6">
-                <h5>About</h5>
+          @php
+          $footer_ve_chung_toi= $contents->filter(function($item) {
+                                  return $item->key == 'footer_ve_chung_toi';
+                              })->first();
+          @endphp
+                <h5>{{$footer_ve_chung_toi->name_show()}}</h5>
                 <ul class="list-unstyled">
-                    <li><a href="{{url('/ve-nqt')}}" class="nav-link">Về Ngọc Quyết Thắng</a></li>
+                  @php
+                  $footer_ve_nqt = $contents->filter(function($item) {
+                                          return $item->key == 'footer_ve_nqt';
+                                      })->first();
+                  @endphp
+                    <li><a href="{{url('/ve-nqt')}}" class="nav-link">{{$footer_ve_nqt->name_show()}}</a></li>
                     <li><a href="#" class="nav-link">Hợp tác với chúng tôi</a></li>
                     <li><a href="#" class="nav-link">Trải nghiệm khách hàng</a></li>
                 </ul>
             </div>
             <div class="menu-footer col-lg-4 col-md-6">
-                <h5>Thông tin</h5>
+          @php
+          $footer_thong_tin = $contents->filter(function($item) {
+                                  return $item->key == 'footer_thong_tin';
+                              })->first();
+          @endphp
+                <h5>{{$footer_thong_tin->name_show()}}</h5>
                 <ul class="list-unstyled">
                     <li><a href="{{url('blog/bi-quyet-chon-lop-xe')}}" class="nav-link">Bí quyết chọn lốp xe</a></li>
                     <li><a href="#" class="nav-link">Phân loại các dòng xe</a></li>

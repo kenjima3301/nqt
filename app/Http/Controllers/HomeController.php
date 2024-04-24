@@ -18,7 +18,8 @@ class HomeController extends Controller
       $new_products = Tyre::select('*')->take(4)->orderBy("id", "desc")->get();
       $best_products = Tyre::select('*')->take(8)->get();
       $promotions = \App\Models\Promotion::select('*')->groupBy('promotions.tyre_id')->take(8)->get();
-      return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products,'promotions' => $promotions] );
+      $sectioncontents = \App\Models\SectionContent::all();
+      return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products,'promotions' => $promotions,'sectioncontents' => $sectioncontents] );
     }
 
     public function listProduct() {

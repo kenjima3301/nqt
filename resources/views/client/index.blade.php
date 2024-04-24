@@ -13,7 +13,12 @@
     <!-- end slider -->
     @if(count($promotions) > 0)
     <div class="new-product">
-        <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">Chương trình khuyến mãi</h3>
+      @php
+          $truong_trinh_khuyen_mai = $sectioncontents->filter(function($item) {
+                                  return $item->key == 'truong_trinh_khuyen_mai';
+                              })->first();
+          @endphp
+        <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">{{$truong_trinh_khuyen_mai->name_show()}}</h3>
         <div class="list-new-product row mt-4 mb-4">
           @foreach($promotions as $promotion)
             <div class="col-lg-3">
@@ -44,7 +49,12 @@
     
     <!-- new product -->
     <div class="new-product">
-        <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">Sản phẩm mới</h3>
+      @php
+          $san_pham_moi = $sectioncontents->filter(function($item) {
+                                  return $item->key == 'san_pham_moi';
+                              })->first();
+          @endphp
+        <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">{{$san_pham_moi->name_show()}}</h3>
         <div class="list-new-product row mt-4">
           @foreach($new_products as $new)
             <div class="col-lg-3">
@@ -74,7 +84,12 @@
 
     <!-- product bestseller -->
     <div class="product-best-seller mt-4">
-    <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">Sản phẩm bán chạy</h3>
+       @php
+          $san_pham_ban_chay = $sectioncontents->filter(function($item) {
+                                  return $item->key == 'san_pham_ban_chay';
+                              })->first();
+          @endphp
+    <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">{{$san_pham_ban_chay->name_show()}}</h3>
         <div class="list-new-product row">
         @foreach($best_products as $best)
         <div class="col-lg-3 mt-4">

@@ -136,7 +136,7 @@ class Admincontroller extends Controller
   
   public function editsectioncontentpost(Request $request) {
     $content = \App\Models\SectionContent::find($request->content_id);
-    $content->key = $request->key;
+//    $content->key = $request->key;
     $content->name = $request->name;
     $content->name_en = $request->name_en;
     $content->save();
@@ -641,7 +641,8 @@ class Admincontroller extends Controller
   
   public function addblog() {
     $types = PostType::all();
-    return view('admin.blog.add', ['types' => $types]);
+    $menus = \App\Models\Menu::whereNull('parent_id')->get();
+    return view('admin.blog.add', ['types' => $types,'menus' => $menus]);
   }
   
   public function addblogpost(Request $request)
@@ -689,7 +690,8 @@ class Admincontroller extends Controller
             'title' => $request->title,
             'slug' => $slug,
             'content' => $content,
-            'status' => 'public'
+            'status' => 'public',
+             'menu'  => $request->menu
        ]);
  
        return redirect('admin/bai-viet');
@@ -698,7 +700,8 @@ class Admincontroller extends Controller
     public function editblog($id) {
     $post = Posts::find($id);
     $types = PostType::all();
-    return view('admin.blog.edit', ['types' => $types,'post' => $post]);
+    $menus = \App\Models\Menu::whereNull('parent_id')->get();
+    return view('admin.blog.edit', ['types' => $types,'post' => $post,'menus' => $menus]);
   }
   
     public function editblogpost($id, Request $request)
@@ -748,6 +751,7 @@ class Admincontroller extends Controller
             $post->slug = $slug;
        }
        $post->content = $content;
+       $post->menu = $request->menu;
        $post->save();
  
        return redirect('admin/bai-viet');

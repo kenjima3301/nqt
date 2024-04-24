@@ -34,7 +34,17 @@
                   <label for="exampleInputname">Tiêu đề tiếng anh</label>
                   <input type="name" name="title_en" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Tiêu đề tiếng anh" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
-                
+                <div class="form-group col-12 col-md-9">
+                <label for="exampleInputname">Chọn menu hiển thị</label>
+                  <select name="parent_id">
+                    <option value="">Chọn menu</option>
+                    @foreach($menus as $menu)
+                      @if(in_array($menu->id, array(3,4)))
+                    <option value="{{$menu->id}}">{{$menu->name}}</option>
+                      @endif
+                    @endforeach
+                  </select>
+                </div>
                 <div class="form-group col-12 col-md-9">
                   <label for="exampleInputname">Nội dung</label>
                   <textarea id="content" name="content" rows="5" class="form-control border border-2 p-2">{{ $errors->first('description')}}</textarea>

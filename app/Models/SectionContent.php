@@ -12,7 +12,9 @@ class SectionContent extends Model
   protected $fillable = [
     'key',
     'name',
-    'name_en'
+    'name_en',
+    'content',
+    'content_en'
   ];
   
   public function name_show(){
@@ -21,6 +23,15 @@ class SectionContent extends Model
         }
         else{
             return $this->name;
+        }
+    }
+    
+  public function content_show(){
+        if(session()->get('language')=='en'){
+            return $this->content_en;
+        }
+        else{
+            return $this->content;
         }
     }
 }

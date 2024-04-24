@@ -17,7 +17,8 @@ class Posts extends Model
           'slug',
           'content',
           'content_en',
-          'status'
+          'status',
+          'menu'
       ];
   
     public function type(): HasOne {

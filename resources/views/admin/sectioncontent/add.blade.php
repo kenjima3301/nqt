@@ -28,12 +28,22 @@
                   
                 <div class="form-group col-lg-6">
                   <label for="exampleInputname">Tên</label>
-                  <textarea type="name" name="name" class="form-control border border-2 p-2" rows="5"></textarea>
+                  <textarea type="name" name="name" class="form-control border border-2 p-2" rows="2"></textarea>
                 </div>
                 
                 <div class="form-group col-6">
                   <label for="exampleInputname">Tên tiếng anh</label>
-                  <textarea type="name" name="name_en" class="form-control border border-2 p-2" rows="5"></textarea>
+                  <textarea type="name" name="name_en" class="form-control border border-2 p-2" rows="2"></textarea>
+                  </div>
+                
+                <div class="form-group col-lg-6">
+                  <label for="exampleInputname">Nội dung </label>
+                  <textarea type="name" name="content" class="form-control border border-2 p-2" rows="5"></textarea>
+                </div>
+                
+                <div class="form-group col-6">
+                  <label for="exampleInputname">Nội dung  tiếng anh</label>
+                  <textarea type="name" name="content_en" class="form-control border border-2 p-2" rows="5"></textarea>
                   </div>
                 </div>
                 
