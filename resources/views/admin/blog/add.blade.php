@@ -36,11 +36,11 @@
                 </div>
                 <div class="form-group col-12 col-md-9">
                 <label for="exampleInputname">Chọn menu hiển thị</label>
-                  <select name="parent_id">
+                  <select name="menu">
                     <option value="">Chọn menu</option>
                     @foreach($menus as $menu)
-                      @if(in_array($menu->id, array(3,4)))
-                    <option value="{{$menu->id}}">{{$menu->name}}</option>
+                      @if(in_array($menu->id, array(3,4,14)))
+                      <option value="{{$menu->id}}">{{$menu->name}}</option>
                       @endif
                     @endforeach
                   </select>

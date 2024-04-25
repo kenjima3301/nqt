@@ -155,7 +155,10 @@ class HomeController extends Controller
     }
 
     public function nqt() {
-      return view('client.aboutnqt');
+      $sectioncontents = \App\Models\SectionContent::where('key','LIKE',"%ve_nqt%")->get();
+//      $content = \App\Models\SectionContent::where('key', 've_nqt_thanh_lap')->first();
+//      dd($content);
+      return view('client.aboutnqt', ['sectioncontents' => $sectioncontents]);
     }
     
     public function services() {

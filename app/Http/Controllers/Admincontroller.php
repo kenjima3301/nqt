@@ -112,7 +112,7 @@ class Admincontroller extends Controller
   }
   
   public function sectioncontent() {
-    $contents = \App\Models\SectionContent::all();
+    $contents = \App\Models\SectionContent::orderBy('updated_at', 'desc')->get();
     return view('admin.sectioncontent.index', ['contents' => $contents]);
   }
   
@@ -124,7 +124,9 @@ class Admincontroller extends Controller
     \App\Models\SectionContent::create([
         'key' => $request->key,
         'name' => $request->name,
-        'name_en' => $request->name_en
+        'name_en' => $request->name_en,
+        'content' => $request->content,
+        'content_en' => $request->content_en
     ]);
     return redirect('admin/sectioncontent');
   }
@@ -139,6 +141,8 @@ class Admincontroller extends Controller
 //    $content->key = $request->key;
     $content->name = $request->name;
     $content->name_en = $request->name_en;
+    $content->content = $request->content;
+    $content->content_en = $request->content_en;
     $content->save();
     return redirect('admin/sectioncontent');
   }
@@ -241,7 +245,7 @@ class Admincontroller extends Controller
   
   
   public function addmenu() {
-    $menus = \App\Models\Menu::whereNull('parent_id')->get();
+    $menus = \App\Models\Menu::all();
     return view('admin.menu.add', ['menus' => $menus]);
   }
   
@@ -250,8 +254,11 @@ class Admincontroller extends Controller
         'name' => $request->name,
         'name_en' => $request->name_en,
         'link' => $request->link
-        
     ]);
+    if($request->level){
+      $menu->level = $request->level;
+      $menu->save();
+    }
     if($request->parent_id){
       $menu->parent_id = $request->parent_id;
       $menu->save();
@@ -261,7 +268,7 @@ class Admincontroller extends Controller
   
   public function editmenu($id) {
     $menu = \App\Models\Menu::find($id);
-    $menus = \App\Models\Menu::whereNull('parent_id')->get();
+    $menus = \App\Models\Menu::all();
     return view('admin.menu.edit', ['menus' => $menus, 'menu' => $menu]);
   }
   
@@ -270,9 +277,15 @@ class Admincontroller extends Controller
     $menu->name = $request->name;
     $menu->name_en = $request->name_en;
     $menu->link = $request->link;
+    $menu->status = $request->status;
+    $menu->order = $request->order;
     $menu->save();
     if($request->parent_id){
       $menu->parent_id = $request->parent_id;
+      $menu->save();
+    }
+    if($request->level){
+      $menu->level = $request->level;
       $menu->save();
     }
     return redirect('admin/quan-ly-khac');
@@ -621,7 +634,7 @@ class Admincontroller extends Controller
     $menus = \App\Models\Menu::all();
     $types = PostType::all();
     $typestructures = \App\Models\TyreStructure::all();
-    $contents = \App\Models\SectionContent::latest()->limit(10)->get();
+    $contents = \App\Models\SectionContent::latest()->limit(5)->get();
     return view('admin.group.index', [
         'models' => $models,
         'madeins' => $madeins,

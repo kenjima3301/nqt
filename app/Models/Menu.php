@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Menu extends Model
 {
@@ -25,4 +26,8 @@ class Menu extends Model
             return $this->name;
         }
     }
+    
+  public function posts(): HasMany {
+        return $this->hasMany(Posts::class, 'menu', 'id');
+  }
 }

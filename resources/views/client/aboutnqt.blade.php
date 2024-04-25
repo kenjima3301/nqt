@@ -5,18 +5,24 @@
 <div class="container">
       <div class="row">
         <div class="col-lg-12 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column content-center" data-aos="fade-up">
-            <h1 class="text-center">LỊCH SỬ PHÁT TRIỂN</h1>
-            <h2 class="text-center">CÔNG TY CỔ PHẦN NGỌC QUYẾT THẮNG được thành lập ngày 21/12/2016</h2>
+          @php
+          $ve_nqt_tieu_de = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_tieu_de';
+                              })->first();
+          @endphp  
+          <h1 class="text-center">{{$ve_nqt_tieu_de->name_show()}}</h1>
+          @php
+          $ve_nqt_thanh_lap = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_thanh_lap';
+                              })->first();
+          $ve_nqt_thanh_laps = preg_split("/\r\n|\n|\r/", $ve_nqt_thanh_lap->content_show());                    
+          @endphp 
+            <h2 class="text-center">{{$ve_nqt_thanh_lap->name_show()}}</h2>
             
             <span class="lh-sm">
-              <p class="text-center" style="margin-bottom: 0px;"><strong>Nguồn nhân lực là yếu tố quan trọng mang đến sự thành công: </strong>
-          <p  class="text-center "  style="margin-bottom: 0px;">
-            <strong> Giám đốc có nhiều kinh nghiệm, năng động giúp Công ty phát triển liên tục nhiều năm </strong></p>
-          <p  class="text-center"  style="margin-bottom: 0px;">
-            <strong>Đội ngũ nhân viên, quản lý trình đô cao, sảng tạo</strong>
-          </p><p  class="text-center"  style="margin-bottom: 0px;">
-            <strong>Tập thể CBCNV đoàn kết nhất trí, tự tin và có trách nhiệm với công việc.</strong>
-            </p>
+              @foreach($ve_nqt_thanh_laps as $ve_nqt_thanh_lap)
+              <p class="text-center" style="margin-bottom: 0px;"><strong>{{$ve_nqt_thanh_lap}} </strong></p>
+              @endforeach
             </span>
         </div>
       </div>
@@ -37,10 +43,18 @@
           </div>
           <div class="col-lg-6 d-flex flex-column justify-contents-center" data-aos="fade-left">
             <div class="content pt-4 pt-lg-0">
-              <h3>SỨ MỆNH</h3>
+          @php
+          $ve_nqt_su_menh = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_su_menh';
+                              })->first();
+          $ve_nqt_su_menhs = preg_split("/\r\n|\n|\r/", $ve_nqt_su_menh->content_show());                    
+          @endphp 
+              <h3>{{$ve_nqt_su_menh->name_show()}}</h3>
+              @foreach($ve_nqt_su_menhs as $ve_nqt_su_menh)
               <p class="fst-italic">
-                Luôn thích nghi với sự thay đổi của thị trường. Kịp thời nắm bắt xu hướng phát triển của thế giới, chủ động tạo lợi thế cạnh tranh để phát triển bền vững. Đẩy mạnh nhập khẩu các loại lốp xe tải Radial có chất lượng cao nhất để phục vụ nhu cầu ngày càng cao của khách hàng.
-              </p>
+                {{$ve_nqt_su_menh}}
+                </p>
+              @endforeach
             </div>
           </div>
         </div>
@@ -50,28 +64,59 @@
         <div class="row" style="margin-top: 100px;">
           <div class="col-lg-6 d-flex flex-column justify-contents-center" data-aos="fade-left">
             <div class="content pt-4 pt-lg-0">
-              <h3>TẦM NHÌN</h3>
-              <h5>I.Tầm nhìn Doanh nghiệp</h5>
-              <p class="fst-italic">- Tuyên bố về tầm nhìn doanh nghiệp
+              @php
+          $ve_nqt_tam_nhin = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_tam_nhin';
+                              })->first();
+          $ve_nqt_tam_nhins = preg_split("/\r\n|\n|\r/", $ve_nqt_tam_nhin->content_show());                    
+          @endphp 
+              <h3>{{$ve_nqt_tam_nhin->name_show()}}</h3>
+              @foreach ($ve_nqt_tam_nhins as $key=>$ve_nqt_tam_nhin)
+              <h5>{{$ve_nqt_tam_nhin}}</h5>
+              @if($key == 0)
+              @php
+          $ve_nqt_tam_nhin_1 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_tam_nhin_1';
+                              })->first();
+          $ve_nqt_tam_nhin_1s = preg_split("/\r\n|\n|\r/", $ve_nqt_tam_nhin_1->content_show());                    
+          @endphp 
+              <p class="fst-italic">{{$ve_nqt_tam_nhin_1->name_show()}}
                 </p>
               <ul>
-                <li><i class="bi bi-check-circle"></i> Luôn khẳng định NQT là nhà nhập khẩu và phân phối hàng đầu về lốp Ô tô tải, Ô Tô Khách tại Việt Nam.</li>
-                <li><i class="bi bi-check-circle"></i> Mở rộng và phát triển lớn mạnh các sản phẩm săm lốp xe truyền thống phục vụ nhu cầu đa dạng của Khách hàng.</li>
+                @foreach($ve_nqt_tam_nhin_1s as $ve_nqt_tam_nhin_1)
+                <li><i class="bi bi-check-circle"></i>{{$ve_nqt_tam_nhin_1}}</li>
+                @endforeach
               </ul>
-              <p class="fst-italic">- Giải thích nội dung tuyên bố tầm nhìn doanh nghiệp
+                @php
+          $ve_nqt_tam_nhin_12 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_tam_nhin_12';
+                              })->first();
+          $ve_nqt_tam_nhin_12s = preg_split("/\r\n|\n|\r/", $ve_nqt_tam_nhin_12->content_show());                    
+          @endphp
+              <p class="fst-italic">{{$ve_nqt_tam_nhin_12->name_show()}}
                 </p>
               <ul>
-                <li><i class="bi bi-check-circle"></i> NQT khẳng định với người tiêu dùng là thương hiệu được NQT nhập khẩu và đưa ra thị trường luôn đảm bảo về chất lượng hàng đầu Việt Nam.</li>
-                <li><i class="bi bi-check-circle"></i> NQT luôn luôn lựa chọn nhập khẩu và phân phối các dòng sản phẩm chất lượng cao, giá bán cạnh tranh đáp ứng lợi ích thiết thực của người tiêu dùng, đóng góp tích cực cho sự phát triển kinh tế Việt Nam</li>
+                @foreach($ve_nqt_tam_nhin_12s as $ve_nqt_tam_nhin_12)
+                <li><i class="bi bi-check-circle"></i> {{$ve_nqt_tam_nhin_12}}</li>
+                @endforeach
               </ul>
-                
-                <h5>II. Tầm nhìn thương hiệu</h5>
-              <p class="fst-italic">- Tuyên bố về tầm nhìn thương hiệu sản phẩm
+                @elseif($key == 1)
+                @php
+          $ve_nqt_tam_nhin_2 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_tam_nhin_2';
+                              })->first();
+          $ve_nqt_tam_nhin_2s = preg_split("/\r\n|\n|\r/", $ve_nqt_tam_nhin_2->content_show());                    
+          @endphp
+                <p class="fst-italic">{{$ve_nqt_tam_nhin_2->name_show()}}
                 </p>
               <ul>
-                <li><i class="bi bi-check-circle"></i> Khẳng định vị trí nhà nhập khẩu, phân phối hàng đầu Việt Nam</li>
-                <li><i class="bi bi-check-circle"></i> NQT phấn đấu là thương hiệu nổi tiếng Việt Nam. Từng bước xây dựng hệ thống khách hàng tin cậy bền vững tại Việt Nam, với số lượng khách hàng ngày càng đông.</li>
+                @foreach($ve_nqt_tam_nhin_2s as $ve_nqt_tam_nhin_2)
+                <li><i class="bi bi-check-circle"></i> {{$ve_nqt_tam_nhin_2}}</li>
+                @endforeach
               </ul>
+                @endif
+              @endforeach
+               
               
             </div>
             
@@ -90,8 +135,16 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>GIÁ TRỊ CỐT LÕI</h2>
-          <p>Tuyên bố về giá trị cốt lõi của doanh nghiệp:</p>
+          @php
+          $ve_nqt_gia_tri = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_gia_tri';
+                              })->first();
+          $ve_nqt_gia_tris = preg_split("/\r\n|\n|\r/", $ve_nqt_gia_tri->content_show());                    
+          @endphp
+          <h2>{{$ve_nqt_gia_tri->name_show()}}</h2>
+          @foreach($ve_nqt_gia_tris as $ve_nqt_gia_tri)
+          <p>{{$ve_nqt_gia_tri}}</p>
+          @endforeach
         </div>
 
         <div class="row">
@@ -99,8 +152,16 @@
           <div class="col-lg-4">
             <div class="member">
               <div class="member-info">
-                <h4>Tinh thần đồng đội</h4>
-                <span>Có chung niềm tin và mục tiêu vì sự phát triển Công ty. Không đố kỵ, bè phái và luôn giúp đỡ, tương trợ, quan tâm lẫn nhau trong công việc và cuộc sống.</span>
+                @php
+          $ve_nqt_gia_tri_1 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_gia_tri_1';
+                              })->first();
+          $ve_nqt_gia_tri_1s = preg_split("/\r\n|\n|\r/", $ve_nqt_gia_tri_1->content_show());                    
+          @endphp
+                <h4>{{$ve_nqt_gia_tri_1->name_show()}}</h4>
+                @foreach($ve_nqt_gia_tri_1s as $ve_nqt_gia_tri_1)
+                <span>{{$ve_nqt_gia_tri_1}}</span>
+                @endforeach
               </div>
             </div>
           </div>
@@ -109,18 +170,34 @@
             <div class="member">
               <!--<div class="pic"><img src="" class="img-fluid" alt=""></div>-->
               <div class="member-info">
-                <h4>Sự nhiệt huyết</h4>
-                <span>Làm việc xuất phát từ tấm lòng, luôn làm việc hết mình với trách nhiệm cao nhất có thể.</span>
-              </div>
+                @php
+          $ve_nqt_gia_tri_2 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_gia_tri_2';
+                              })->first();
+          $ve_nqt_gia_tri_2s = preg_split("/\r\n|\n|\r/", $ve_nqt_gia_tri_2->content_show());                    
+          @endphp
+                <h4>{{$ve_nqt_gia_tri_2->name_show()}}</h4>
+                @foreach($ve_nqt_gia_tri_2s as $ve_nqt_gia_tri_2)
+                <span>{{$ve_nqt_gia_tri_2}}</span>
+                @endforeach
+                </div>
             </div>
           </div>
 
           <div class="col-lg-4">
             <div class="member">
               <div class="member-info">
-                <h4>Tính chuyên nghiệp</h4>
-                <span>Làm việc theo kế hoạch, có tinh thần trách nhiệm, tác phong công nghiệp, có tính tự chủ và tinh thần hợp tác trong công việc.</span>
-              </div>
+                @php
+          $ve_nqt_gia_tri_3 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_gia_tri_3';
+                              })->first();
+          $ve_nqt_gia_tri_3s = preg_split("/\r\n|\n|\r/", $ve_nqt_gia_tri_3->content_show());                    
+          @endphp
+                <h4>{{$ve_nqt_gia_tri_3->name_show()}}</h4>
+                @foreach($ve_nqt_gia_tri_3s as $ve_nqt_gia_tri_3)
+                <span>{{$ve_nqt_gia_tri_3}}</span>
+                @endforeach
+               </div>
             </div>
           </div>
         </div>
@@ -129,16 +206,32 @@
           <div class="col-lg-4">
             <div class="member">
               <div class="member-info">
-                <h4 style="height:48px">Không ngừng sáng tạo</h4>
-                <span>Không bao giờ hài lòng, thỏa mãn với kết quả đạt được. Học tập cái mới, không ngừng sáng tạo để thành công.</span>
+                @php
+          $ve_nqt_gia_tri_4 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_gia_tri_4';
+                              })->first();
+          $ve_nqt_gia_tri_4s = preg_split("/\r\n|\n|\r/", $ve_nqt_gia_tri_4->content_show());                    
+          @endphp
+                <h4>{{$ve_nqt_gia_tri_4->name_show()}}</h4>
+                @foreach($ve_nqt_gia_tri_4s as $ve_nqt_gia_tri_4)
+                <span>{{$ve_nqt_gia_tri_4}}</span>
+                @endforeach
               </div>
             </div>
           </div>
           <div class="col-lg-4">
             <div class="member">
               <div class="member-info">
-                <h4>Tôn trọng lợi ích Khách hàng – Doanh nghiệp – Cộng đồng</h4>
-                <span>Đặt lợi ích Doanh nghiệp, lợi ích Khách hàng và cộng đồng cao hơn lợi ích cá nhân.</span>
+                @php
+          $ve_nqt_gia_tri_5 = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_gia_tri_5';
+                              })->first();
+          $ve_nqt_gia_tri_5s = preg_split("/\r\n|\n|\r/", $ve_nqt_gia_tri_5->content_show());                    
+          @endphp
+                <h4>{{$ve_nqt_gia_tri_5->name_show()}}</h4>
+                @foreach($ve_nqt_gia_tri_5s as $ve_nqt_gia_tri_5)
+                <span>{{$ve_nqt_gia_tri_5}}</span>
+                @endforeach
               </div>
             </div>
           </div>
@@ -151,25 +244,46 @@
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients">
       <div class="container">
-
+          @php
+          $ve_nqt_he_thong_phan_phoi = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_he_thong_phan_phoi';
+                              })->first();
+          $ve_nqt_he_thong_phan_phois = preg_split("/\r\n|\n|\r/", $ve_nqt_he_thong_phan_phoi->content_show());                    
+          @endphp
         <div class="section-title" data-aos="fade-up">
-          <h2>HỆ THỐNG PHÂN PHỐI & KHÁCH HÀNG TRONG NƯỚC</h2>
-          <p>NQT đã thiết lập hệ thống phân phối mạnh và rộng khắp Việt Nam. Các nhà phân phối của NQT có nhiều kinh nghiệm, có sự gắn kết, hợp tác vì sự phát triển chung và lâu dài.</p>
-          <p>Nhiều khách hàng lớn tin dùng sản phẩm do NQT nhập khẩu và phân phôi như: Công ty Vận Tải Nam Quốc, Cong Ty TNHH Cảng Quốc Tế Tân Cảng Cái Mép, Công ty Vận Tải Thành Đạt, Công ty Vận Tải Bình Minh Tải, nhiều Cty vận tải , xe khách cả nước.</p>
+          <h2>{{$ve_nqt_he_thong_phan_phoi->name_show()}}</h2>
+          @foreach($ve_nqt_he_thong_phan_phois as $ve_nqt_he_thong_phan_phoi)
+          <p>{{$ve_nqt_he_thong_phan_phoi}}</p>        
+          @endforeach
         </div>
 
 
         <div class="section-title" data-aos="fade-up">
-          <h2>THÀNH QUẢ VÀ VỊ THẾ CỦA NQT</h2>
-          <p>Bằng sự linh hoạt và sáng tạo NQT đã tạo được lợi thế cạnh tranh trên thị trường. Tốc độ tăng trưởng cao và liên tục trong nhiều năm và hiện nay NQT dần chiếm lĩnh thị phần lốp ô tô tải tại Việt Nam.</p>
+          @php
+          $ve_nqt_thanh_qua = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_thanh_qua';
+                              })->first();
+          $ve_nqt_thanh_quas = preg_split("/\r\n|\n|\r/", $ve_nqt_thanh_qua->content_show());                    
+          @endphp
+          <h2>{{$ve_nqt_thanh_qua->name_show()}}</h2>
+          @foreach($ve_nqt_thanh_quas as $ve_nqt_thanh_qua)
+          <p>{{$ve_nqt_thanh_qua}}</p>
+          @endforeach
         </div>
 
 
 
         <div class="section-title" data-aos="fade-up">
-          <h2>CHIẾN LƯỢC PHÁT TRIỂN</h2>
-          <p>Với lợi thế về nguồn nhân lực năng động, trách nhiệm; sản phẩm do NQT nhập khẩu và phân phối có thị phần lớn</p>
-          <p>Với nhiều năm kinh nghiệm trong ngành nhập khẩu, phân phối săm lốp, NQT tin tưởng sẽ tiếp tục đáp ứng tốt mọi nhu cầu của khách hàng trong nước, xứng đáng là Nhà nhập khẩu, phân phối săm lốp xe hàng đầu tại Việt Nam.</p>
+          @php
+          $ve_nqt_chien_luoc = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_chien_luoc';
+                              })->first();
+          $ve_nqt_chien_luocs = preg_split("/\r\n|\n|\r/", $ve_nqt_chien_luoc->content_show());                    
+          @endphp
+          <h2>{{$ve_nqt_chien_luoc->name_show()}}</h2>
+          @foreach($ve_nqt_chien_luocs as $ve_nqt_chien_luoc)
+          <p>{{$ve_nqt_chien_luoc}}</p>
+          @endforeach
         </div>
 
       </div>
@@ -246,7 +360,12 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>Hình ảnh</h2>
+          @php
+          $ve_nqt_hinh_anh = $sectioncontents->filter(function($item) {
+                                  return $item->key == 've_nqt_hinh_anh';
+                              })->first();
+          @endphp
+          <h2>{{$ve_nqt_hinh_anh->name_show()}}</h2>
       </div>
 
       <div class="container-fluid">

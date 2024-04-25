@@ -32,6 +32,15 @@
                   <label for="exampleInputname">Link</label>
                   <input type="text" name="link" value="" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Menu name" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
+                <br/>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Menu cấp </label>
+                  <select name="level">
+                    <option>Chọn cấp menu</option>
+                    <option value="1">Cấp 1</option>
+                    <option value="2">Cấp 2</option>
+                  </select>
+                </div>
                 @if(count($menus) >0)
                 <br/>
                 <div class="form-group col-12 col-md-6">

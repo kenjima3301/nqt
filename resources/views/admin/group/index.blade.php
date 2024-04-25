@@ -127,7 +127,6 @@
                       <tr>
                             <th>Tên</th>
                             <th>Tiếng anh</th>
-                            <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -162,9 +161,10 @@
                 <div class="dataTable-container"><table class="table table-flush dataTable-table" id="datatable-basic">
                     <thead class="thead-light">
                       <tr>
+                        
+                            <th>Key</th>
                             <th>Tên</th>
                             <th>Tiếng anh</th>
-                            <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -206,6 +206,13 @@
                         @foreach($menus as $submenu) 
                             @if($submenu->parent_id == $menu->id)
                                    <p class="mb-0">{{$submenu->name}} - {{$submenu->name_en}} <a href="{{url('admin/menu-edit/'.$submenu->id)}}"> <i class="fas fa-edit" aria-hidden="true"></i></a></p>
+                                   <div class="card-footer p-3">
+                                    @foreach($menus as $sub2) 
+                                        @if($sub2->parent_id == $submenu->id)
+                                               <p class="mb-0">{{$sub2->name}} - {{$sub2->name_en}} <a href="{{url('admin/menu-edit/'.$sub2->id)}}"> <i class="fas fa-edit" aria-hidden="true"></i></a></p>
+                                        @endif
+                                    @endforeach
+                                    </div>
                             @endif
                         @endforeach
                         </div>

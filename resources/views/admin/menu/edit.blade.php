@@ -33,6 +33,15 @@
                   <label for="exampleInputname">Link</label>
                   <input type="text" name="link" value="{{$menu->link}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Menu name" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
+                <br/>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Menu cấp </label>
+                  <select name="level">
+                    <option>Chọn cấp menu</option>
+                    <option value="1" @if($menu->level == 1) selected @endif>Cấp 1</option>
+                    <option value="2" @if($menu->level == 2) selected @endif>Cấp 2</option>
+                  </select>
+                </div>
                 @if(count($menus) >0)
                 <br/>
                 <div class="form-group col-12 col-md-6">
@@ -41,12 +50,25 @@
                     <option value="">Chọn menu</option>
                     @foreach($menus as $me)
                      
-                    <option value="{{$menu->id}}" @if($menu->parent_id == $me->id) selected @endif>{{$me->name}}</option>
+                    <option value="{{$me->id}}" @if($menu->parent_id == $me->id) selected @endif>{{$me->name}}</option>
                       
                     @endforeach
                   </select>
                 </div>
                 @endif
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Thứ tự hiển thị</label>
+                  <input type="number" name="oder" value="{{$menu->order}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Nhập số" onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
+                <br/>
+                <div class="form-group col-12 col-md-6">
+                  <label for="exampleInputname">Hiển thị </label>
+                  <select name="status">
+                    <option>Chọn Ẩn/Hiển thị</option>
+                    <option value="unpublic" @if($menu->status == "unpublic") selected @endif> Ẩn</option>
+                    <option value="public" @if($menu->status == "public") selected @endif>Hiển thị</option>
+                  </select>
+                </div>
                 <br/>
                 @if($errors->any())
                 <div class="text-danger">
