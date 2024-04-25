@@ -57,8 +57,7 @@
 
                       <span class="card-text">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</span>
                       <span class="card-text">{{$tyre->model->name}}</span>
-                      <span class="card-text">{{$tyre->brand->name}}</span>
-                      <span class="card-text">{{$tyre->tyre_structure}}</span>
+                      <span class="card-text">{{$tyre->structure->name ?? ''}}</span>
                       <!--<hr class="my-4">-->
                       <p style="float: right;">{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
 

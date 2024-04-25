@@ -188,7 +188,6 @@
 
         <span class="card-text">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif</span>
         <span class="card-text">{{$relatedtypre->model->name}}</span>
-        <span class="card-text">{{$relatedtypre->brand->name}}</span>
         <span class="card-text">{{$relatedtypre->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right;">{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
