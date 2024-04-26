@@ -421,6 +421,8 @@ class Admincontroller extends Controller
     $imagexisted_ids = $request->images_uploaded;
     if(is_array($imagexisted_ids)){
     TyreImage::where('tyre_id', $tyre->id)->whereNotIn('id',$imagexisted_ids)->delete();
+    }else {
+      TyreImage::where('tyre_id', $tyre->id)->delete();
     }
       if($request->filenames != ''){
       $images = $request->filenames;
@@ -457,6 +459,8 @@ class Admincontroller extends Controller
     $imagexisted_ids = $request->images_uploaded;
     if(is_array($imagexisted_ids)){
       \App\Models\DimentionImage::where('dimention_id', $dimention->id)->whereNotIn('id',$imagexisted_ids)->delete();
+    }else {
+      \App\Models\DimentionImage::where('dimention_id', $dimention->id)->delete();
     }
       if($request->filenames != ''){
       $images = $request->filenames;
