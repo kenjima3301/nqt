@@ -4,13 +4,17 @@
     <x-navbars.navs.auth titlePage="Import Sai"></x-navbars.navs.auth>
     <div class="container-fluid py-4">
       <div class="row mt-4">
+        
         <div class="row bg-white">
-                    <table class=" table-responsive text-center">
+          <div class="col-12 text-end">
+          <a href="{{ url('admin/lop-xe-tai-import/'.$dimention->tyre_id)}}" class="btn btn-success">Quy lại mã Gai</a>
+           </div>          
+          <table class=" table-responsive text-center">
                       <thead>
                             <tr>
                               <th rowspan="3" width="3%">Nước sản xuất</th>
-                                <th rowspan="3">Quy cách</th>
-                                <th rowspan="3">Lớp bố</th>
+                                <th  rowspan="3">Quy cách</th>
+                                <th  rowspan="3">Lớp bố</th>
                                 <th rowspan="3">Chỉ số tải trọng và tốc độ</th>
                                 <th rowspan="3">Đơn vị</th>
                                 <th rowspan="3">Kiểu gai</th>
@@ -20,29 +24,33 @@
                             </tr>
                         </thead>
                         <tbody>
+                          
                               <tr class="@if(isset($dimention->madeins[0]) && count($dimention->madeins) == 2){{'bothflag'}}@elseif(isset($dimention->madeins[0]) && $dimention->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($dimention->madeins[0]) && $dimention->madeins[0]->country->name == 'China'){{'china'}}@endif">
-                                  <td class="text-left">@foreach ($dimention->madeins as $country) 
-                                      @if(count($dimention->madeins) == 1 && $country->country->name == 'Thailand')
-                                        &nbsp;&nbsp;
-                                      @endif
-                                      <img src="{{asset($country->country->flag)}}" width='10'>
-                                      @endforeach
+                                <form action="{{url('admin/lop-xe-tai-quy-cach-update')}}" method="POST">  
+                                  @csrf
+                                  <input type='hidden' name="id" value="{{$dimention->id}}">
+                                <td class="text-left">
+                                  <select name="country_id">
+                                    @foreach ($countries as $country)
+                                    <option value="{{$country->id}}"> {{$country->name}}</option>
+                                    @endforeach
+                                  </select>
                                   </td>
-                                  <td>{{$dimention->size}}</td>
-                                  <td>{{$dimention->ply}}</td>
-                                  <td>{{$dimention->sevice_index}}</td>
-                                  <td>{{$dimention->unit}}</td>
-                                  <td>{{$dimention->tread_type}}</td>
-                                  <td>{{$dimention->total}}</td>
-                                  <td>{{$dimention->price}}</td>
-                                  <td><a href="{{ url('admin/lop-xe-tai-import/'.$dimention->tyre_id)}}" class="btn btn-success">Quy lại mã Gai</a>
+                                  <td><input type="text" name="size" size="10" value="{{$dimention->size}}"></td>
+                                  <td><input type="text" name="ply" size="10" value="{{$dimention->ply}}"></td>
+                                  <td><input type="text" name="sevice_index" size="10" value="{{$dimention->sevice_index}}"></td>
+                                  <td><input type="text" name="unit" size="10" value="{{$dimention->unit}}"></td>
+                                  <td><input type="text" name="tread_type" size="10" value="{{$dimention->tread_type}}"></td>
+                                  <td><input type="number" name="total" size="10" value="{{$dimention->total}}"></td>
+                                  <td><input type="number" name="price" size="10" value="{{$dimention->price}}"></td>
+                                  <td><input type="submit" value="Cập nhật">
                                   </td>
-
+                                  </form>
                                   </tr>
                             
                         </tbody>
                     </table>
-          <div class="form-group col-md-8">
+          <div class="form-group col-md-8 mt-4">
             <form method="POST" action="{{url('admin/quy-cach-chi-tiet/uploadimage')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="dimention_id" value="{{$dimention->id}}">

@@ -107,6 +107,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/quy-cach-chi-tiet/{id}', [Admincontroller::class, 'dimentiondetail']);
   Route::post('/quy-cach-chi-tiet/uploadimage', [Admincontroller::class, 'dimentionimageupload']);
   Route::post('/lop-xe-tai-quy-cach-add-new', [Admincontroller::class, 'dimentionadd']);
+  Route::post('/lop-xe-tai-quy-cach-update', [Admincontroller::class, 'dimentionupdate']);
   
   Route::get('/dai-ly', [Admincontroller::class, 'dealer']);
   Route::get('/dai-ly-add', [Admincontroller::class, 'adddealer']);

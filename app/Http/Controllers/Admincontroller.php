@@ -450,7 +450,8 @@ class Admincontroller extends Controller
   
   public function dimentiondetail($id) {
     $dimention = TyreDimention::find($id);
-    return view('admin.trucktyres.tyre-dimention-detail', ['dimention' => $dimention]);
+    $countries = Madein::all();
+    return view('admin.trucktyres.tyre-dimention-detail', ['dimention' => $dimention,'countries'=> $countries]);
     
   }
   
@@ -857,5 +858,22 @@ class Admincontroller extends Controller
                     'madecountry_id' => $request->coutry_id
                 ]);
        return back();
+    }
+    
+    public function dimentionupdate(Request $request) {
+      $tyredimention = TyreDimention::find($request->id);
+      $tyredimention->size = $request->size;
+      $tyredimention->ply = $request->ply;
+      $tyredimention->sevice_index = $request->sevice_index;
+      $tyredimention->unit = $request->unit;
+      $tyredimention->tread_type = $request->tread_type;
+      $tyredimention->total = $request->total;
+      $tyredimention->price = $request->price;
+      $tyredimention->save();
+      $country = TyreMadein::where('tyre_dimention_id', $request->id)->first();
+      $country->madecountry_id = $request->country_id;
+      $country->save();
+      return back();
+      
     }
 }
