@@ -18,6 +18,7 @@ class Tyre extends Model
           'driveexperience_id',
           'tyre_structure',
           'tyre_features',
+          'tyre_features_en',
           'install_position_image'
       ];
   
@@ -48,4 +49,13 @@ class Tyre extends Model
   public function backgroundimage(): HasOne {
       return $this->hasOne(BackgroundImage::class, 'brand_id', 'brand_id')->inRandomOrder();
   }
+  
+  public function features_show(){
+        if(session()->get('language')=='en'){
+            return $this->tyre_features_en;
+        }
+        else{
+            return $this->tyre_features;
+        }
+    }
 }

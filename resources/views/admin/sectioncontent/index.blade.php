@@ -17,6 +17,7 @@
                 <div class="dataTable-container"><table class="table table-flush dataTable-table" id="datatable-basic">
                     <thead class="thead-light">
                       <tr>
+                        <th>Key</th>
                             <th>Tên</th>
                             <th>Tiếng anh</th>
                     </thead>

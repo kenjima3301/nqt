@@ -65,20 +65,31 @@
                     </div>
                 <div class="form-group col-12 col-md-8">
                       <label for="exampleInputname">Đặc trưng sản phẩm</label>
-                      <div class="row">
-                      <div class="col-8">
-                        @foreach (json_decode($tyre->tyre_features, true) as $feature)
-                          <input type="name" name="features[]" value="{{ $feature}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mô tả" value="" onfocus="focused(this)" onfocusout="defocused(this)">
-                        
-                        @endforeach
+                      <!--<div class="row">-->
+                      <div class="col-12">
+                        <textarea name="features" class="form-control border border-2 p-2" rows="5">{{$tyre->tyre_features}}</textarea>
                         </div>
-                      <div class="col-4">
+<!--                      <div class="col-4">
                       <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button" name="button" onclick="addmorefeature()">Thêm đặc trưng</button>
-                      </div>
-                        <div class="col-8">
+                      </div>-->
+<!--                        <div class="col-8">
                       <div id="addmorefeature"></div>
+                        </div>-->
+                      <!--</div>-->
+                </div>
+                <div class="form-group col-12 col-md-8">
+                      <label for="exampleInputname">Đặc trưng tiếng anh</label>
+                      <!--<div class="row">-->
+                      <div class="col-12">
+                        <textarea name="features_en" class="form-control border border-2 p-2" rows="5">{{$tyre->tyre_features_en}}</textarea>
                         </div>
-                      </div>
+<!--                      <div class="col-4">
+                      <button class="btn btn-outline-secondary mb-3 mb-md-0 ms-auto" type="button" name="button" onclick="addmorefeature()">Thêm đặc trưng</button>
+                      </div>-->
+<!--                        <div class="col-8">
+                      <div id="addmorefeature"></div>
+                        </div>-->
+                      <!--</div>-->
                 </div>
                  <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Giá sản phẩm</label>

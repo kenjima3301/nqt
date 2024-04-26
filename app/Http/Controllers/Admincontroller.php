@@ -350,7 +350,8 @@ class Admincontroller extends Controller
           'brand_id'   => $request->brand_id,
           'driveexperience_id'   => $request->drive_id,
           'tyre_structure'   => $request->tyre_structure,
-          'tyre_features'   => json_encode($request->features),
+          'tyre_features'   => $request->features,
+          'tyre_features_en'   => $request->features_en,
           'price' => $request->price
       ]);
     if($request->install != ''){
@@ -413,7 +414,8 @@ class Admincontroller extends Controller
     $tyre->brand_id   = $request->brand_id;
     $tyre->driveexperience_id   = $request->drive_id;
     $tyre->tyre_structure   = $request->tyre_structure;
-    $tyre->tyre_features   = json_encode($request->features);
+    $tyre->tyre_features   = $request->features;
+    $tyre->tyre_features_en = $request->features_en;
     $tyre->price = $request->price;
     $tyre->save();
     $imagexisted_ids = $request->images_uploaded;

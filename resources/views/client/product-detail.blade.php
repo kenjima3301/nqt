@@ -87,13 +87,14 @@
                 </div>
                 <div class="col-lg-6 pt-3" style="background: #fff;">
                     <!-- Product name -->
-                    <h3 class="card-title mt-3">{{$tyre->name}}</h3>
+                    <h3 class="card-title mt-3">{{$tyre->brand->name}} {{$tyre->name}}</h3>
                     <p class="card-text text-white">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
                     <!-- Product description -->
-                    @foreach (json_decode($tyre->tyre_features, true) as $feature)
-                    @if($feature != null)
-                    <p><i class="fa-solid fa-circle fa-2xs" style="color:#35A25B;"></i> {{$feature}}</p>
-                    @endif
+                    @php 
+                    $features = preg_split("/\r\n|\n|\r/", $tyre->tyre_features);
+                    @endphp 
+                    @foreach($features as $feature)
+                      <p><i class="fa-solid fa-circle fa-2xs" style="color:#35A25B;"></i> {{$feature}}</p>
                     @endforeach
                     <div class="row justify-content-center">
                       @if($tyre->install_position_image != null)
@@ -121,7 +122,9 @@
                     <table class=" table-responsive text-center">
                       <thead>
                             <tr>
-                              <th rowspan="3" width="3%">Nước sản xuất</th>
+                              <th rowspan="3" width="3%">
+                                Nước sản xuất
+                              </th>
                                 <th rowspan="3">Quy cách</th>
                                 <th rowspan="3">Lớp bố</th>
                                 <th rowspan="3">Chỉ số tải trọng và tốc độ</th>
