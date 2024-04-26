@@ -24,13 +24,14 @@
                        <th>Kiểu xe và vị trí lắp đặt</th>
                        <th>Quản lý Sai</th>
                        <th></th>
+                       <th></th>
                     </thead>
                     <tbody>
                       @foreach ($tyres as $key => $tyre)
                       <tr>
                         <td class="text-sm font-weight-normal">{{$tyre->name}}</td>
                         <td class="text-sm font-weight-normal">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</td>
-                        <td class="text-sm font-weight-normal">{{$tyre->tyre_structure}}</td>
+                        <td class="text-sm font-weight-normal">{{$tyre->structure->name ?? ''}}</td>
                         <td class="text-sm font-weight-normal">
                           @if($tyre->install_position_image != null)
                           <img src="{{asset($tyre->install_position_image)}}" width="200">
@@ -43,9 +44,14 @@
                         <td><a href="{{url('admin/lop-xe-tai-sua/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Sửa">
                             <i class="fas fa-edit" aria-hidden="true"></i>
                           </a>
+                        </td>
+                        <td>
+                          <span id='xoa{{$tyre->id}}' onclick="xoa({{$tyre->id}})"><i class="fas fa-trash" aria-hidden="true"></i></span>
+                          <span id='xacnhan{{$tyre->id}}' style='display: none;'>
                           <a href="{{url('admin/lop-xe-tai-xoa/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Xóa">
-                            <i class="fas fa-trash" aria-hidden="true"></i>
+                            Xác nhận xóa sản phẩm
                           </a>
+                          </span>
                         </td>
                       </tr>
                       @endforeach
@@ -59,4 +65,14 @@
       </div>
     </div>
   </main>
+@push('js')
+  <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
+<script>
+function xoa(id) {
+  
+  $("#xoa"+id).hide();
+  $("#xacnhan"+id).show();
+}
+</script>
+  @endpush
 </x-layout>

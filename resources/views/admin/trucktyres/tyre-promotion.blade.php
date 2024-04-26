@@ -19,7 +19,10 @@
                       </h4>
                       <hr class="horizontal light mt-1 mb-3">
                       <div class="col-12">
-                        @foreach (json_decode($tyre->tyre_features, true) as $feature)
+                        @php 
+                        $features = preg_split("/\r\n|\n|\r/", $tyre->tyre_features);
+                        @endphp 
+                        @foreach($features as $feature)
                         <p>{{$feature}}</p>
                         @endforeach
                       </div>
@@ -28,7 +31,7 @@
                     <div class="col-lg-6 col-12">
                       <div>
                         <h6 class="mb-0 text-dark">{{$tyre->drive->name ?? ''}}</h6>
-                        <h6 class="mb-0 text-dark">{{$tyre->tyre_structure}}</h6>
+                        <h6 class="mb-0 text-dark">{{$tyre->structure->name ?? ''}}</h6>
                       </div>
                       <hr class="horizontal light mt-1 mb-3">
                       <div class="d-flex justify-content-center">

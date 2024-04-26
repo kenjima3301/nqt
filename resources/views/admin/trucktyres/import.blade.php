@@ -28,7 +28,7 @@
                     <div class="col-lg-6 col-12">
                       <div>
                         <h6 class="mb-0 text-dark">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</h6>
-                        <h6 class="mb-0 text-dark">{{$tyre->tyre_structure}}</h6>
+                        <h6 class="mb-0 text-dark">{{$tyre->structure->name ?? ''}}</h6>
                       </div>
                       <hr class="horizontal light mt-1 mb-3">
                       <div class="d-flex justify-content-center">
