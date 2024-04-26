@@ -89,7 +89,9 @@ $ten_tim_kiem = \App\Models\SectionContent::where('key','ten_tim_kiem')->first()
                             </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{url('/login')}}">Đăng nhập</a>
+                                    <a class="nav-link" href="{{url('/login')}}">
+                                      @if(session()->get('language') == 'vi') Đăng nhập @else Login @endif
+                                    </a>
                                 </li>
                             @endif
                             
@@ -179,19 +181,21 @@ $ten_tim_kiem = \App\Models\SectionContent::where('key','ten_tim_kiem')->first()
                             </li>
                             @else 
                             <li class="nav-item">
-                                    <a class="nav-link" href="{{url('/login')}}">Đăng nhập</a>
+                                    <a class="nav-link" href="{{url('/login')}}">
+                                      @if(session()->get('language') == 'vi') Đăng nhập @else Login @endif
+                                    </a>
                             </li>
                             @endif
                             
                                 @if(session()->get('language') == 'vi')
                                   <li class="nav-item">
-                                    <a class="nav-link" href="{{url('language/en')}}"  style="padding-left: 10px; padding-right: 10px">
+                                    <a class="" href="{{url('language/en')}}"  style="padding-left: 10px; padding-right: 10px">
                                       <img src="{{asset('assets/images/en.jpg')}}">
                                     </a>
                                   </li>
                                 @else 
                                   <li class="nav-item">
-                                    <a class="nav-link" href="{{url('language/vi')}}" style="padding-left: 10px; padding-right: 10px">
+                                    <a class="" href="{{url('language/vi')}}" style="padding-left: 10px; padding-right: 10px">
                                       <img src="{{asset('assets/images/vn.png')}}">
                                     </a>
                                   </li>
