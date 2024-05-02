@@ -12,7 +12,7 @@
           <table class=" table-responsive text-center">
                       <thead>
                             <tr>
-                              <th rowspan="3" width="3%">Nước sản xuất</th>
+                              <th>Nước sản xuất</th>
                                 <th  rowspan="3">Quy cách</th>
                                 <th  rowspan="3">Lớp bố</th>
                                 <th rowspan="3">Chỉ số tải trọng và tốc độ</th>
@@ -29,10 +29,16 @@
                                 <form action="{{url('admin/lop-xe-tai-quy-cach-update')}}" method="POST">  
                                   @csrf
                                   <input type='hidden' name="id" value="{{$dimention->id}}">
-                                <td class="text-left">
-                                  <select name="country_id">
+                                <td>
+                                  @php 
+                                  $madein = array();
+                                  foreach ($dimention->madeins as $country) {
+                                   $madein[] = $country->madecountry_id;
+                                  }
+                                  @endphp
+                                  <select name="country_id[]" id="select_country_id" class="form-control select last_valid_selection" multiple="multiple">
                                     @foreach ($countries as $country)
-                                    <option value="{{$country->id}}"> {{$country->name}}</option>
+                                    <option value="{{$country->id}}" @if(in_array($country->id, $madein)) selected @endif> {{$country->name}}</option>
                                     @endforeach
                                   </select>
                                   </td>
@@ -114,7 +120,8 @@
         width: 15%;
     }
   </style>
-  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
   @push('js')
   <script src="{{asset('assets/js/jquery-3.6.3.min.js')}}"></script>
   <script type="text/javascript">
@@ -152,5 +159,12 @@ $(document).ready(function () {
   });
 });
   </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#select_country_id').selectpicker();
+    });
+</script>
   @endpush
 </x-layout>

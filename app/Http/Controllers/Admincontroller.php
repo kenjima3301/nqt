@@ -853,10 +853,13 @@ class Admincontroller extends Controller
                       'total' => $request->total,
                       'price' => $request->price
                   ]);
+       $countries = $request->country_id;
+      foreach($countries as $country){
        TyreMadein::create([
                     'tyre_dimention_id' => $tyredimention->id,
-                    'madecountry_id' => $request->coutry_id
+                    'madecountry_id' => $country
                 ]);
+      }
        return back();
     }
     
@@ -870,9 +873,18 @@ class Admincontroller extends Controller
       $tyredimention->total = $request->total;
       $tyredimention->price = $request->price;
       $tyredimention->save();
-      $country = TyreMadein::where('tyre_dimention_id', $request->id)->first();
-      $country->madecountry_id = $request->country_id;
-      $country->save();
+      $countries = $request->country_id;
+      TyreMadein::where('tyre_dimention_id', $request->id)->whereNotIn('madecountry_id', $countries)->delete();
+      foreach($countries as $country){
+        $checkcountry = TyreMadein::where('tyre_dimention_id', $request->id)->where('madecountry_id', $country)->first();
+        if(!$checkcountry){
+          TyreMadein::create([
+              'tyre_dimention_id' => $request->id,
+              'madecountry_id' => $country
+          ]);
+        }
+      }
+      
       return back();
       
     }

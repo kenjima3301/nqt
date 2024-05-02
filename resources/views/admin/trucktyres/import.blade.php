@@ -137,7 +137,7 @@
         <input type="hidden" name="tyre_id" value="{{$tyre->id}}">
         <tr>
           <td>
-            <select name="coutry_id">
+            <select name="country_id[]" id="select_country_id" class="form-control select last_valid_selection" multiple="multiple" >
               @foreach ($countries as $country)
               <option value="{{$country->id}}"> {{$country->name}}</option>
               @endforeach
@@ -163,4 +163,15 @@
                     Xóa toàn bộ Sai</a>
     </div>-->
   </main>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+  @push('js')
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#select_country_id').selectpicker();
+    });
+</script>
+@endpush
 </x-layout>
