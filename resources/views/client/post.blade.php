@@ -9,7 +9,7 @@
 
         <div class="row">
           <div class="col-md-12 blog-main">
-            <div class="blog-post">
+            <div class="blog-post" style="min-height: 650px;">
               <h1 class="blog-post-title text-center mb-3">{{$post->title}}</h1>
               <!--<p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>-->
               {!! $post->content  !!}
