@@ -52,14 +52,14 @@
                       <img class="card-img-top"  src="{{asset($tyre->images[0]->image)}}" alt="{{$tyre->name}}" style="max-height:291px;">
                       </a>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"  style="padding: 0.25rem; min-height: 85px;">
                       <h4 class="card-title m-0"><a>{{$tyre->brand->name}} {{$tyre->name}}</a></h4>
 
                       <span class="card-text">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</span>
                       <span class="card-text">{{$tyre->model->name}}</span>
                       <span class="card-text">{{$tyre->structure->name ?? ''}}</span>
                       <!--<hr class="my-4">-->
-                      <p style="float: right;">{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
+                      <p style="float: right; margin: 0;">{{number_format($tyre->price, 0, '', ',')}}đ / Lốp</p>
 
                     </div>
                   </div>

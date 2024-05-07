@@ -186,14 +186,14 @@
         <img class="card-img-top"  src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body" style="padding-bottom: 0">
+      <div class="card-body" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 85px;">
         <h4 class="card-title m-0"><a>{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</a></h4>
 
         <span class="card-text">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif</span>
         <span class="card-text">{{$relatedtypre->model->name}}</span>
         <span class="card-text">{{$relatedtypre->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
-        <p style="float: right;">{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
+        <p style="float: right;margin: 0;">{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
 
       </div>
     </div>
