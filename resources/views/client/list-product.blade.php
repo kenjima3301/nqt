@@ -53,7 +53,7 @@
                       </a>
                     </div>
                     <div class="card-body"  style="padding: 0.25rem; min-height: 85px;">
-                      <h4 class="card-title m-0"><a>{{$tyre->brand->name}} {{$tyre->name}}</a></h4>
+                      <h4 class="card-title m-0" @if($tyre->brand->id == 1) style="color: #e69c2f;" @elseif($tyre->brand->id == 3) style="color: #000;" @endif>{{$tyre->brand->name}} {{$tyre->name}}</h4>
 
                       <span class="card-text">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</span>
                       <span class="card-text">{{$tyre->model->name}}</span>

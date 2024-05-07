@@ -187,7 +187,7 @@
         </a>
       </div>
       <div class="card-body" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0"><a>{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</a></h4>
+        <h4 class="card-title m-0" @if($relatedtypre->brand->id == 1) style="color: #e69c2f;" @elseif($relatedtypre->brand->id == 3) style="color: #000;" @endif>{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</h4>
 
         <span class="card-text">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif</span>
         <span class="card-text">{{$relatedtypre->model->name}}</span>

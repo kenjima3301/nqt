@@ -30,7 +30,7 @@
         </a>
       </div>
       <div class="card-body" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0"><a>{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</a></h4>
+        <h4 class="card-title m-0"  @if($promotion->tyre->brand->id == 1) style="color: #e69c2f;" @elseif($promotion->tyre->brand->id == 3) style="color: #000;" @endif>{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</h4>
 
         <span class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</span>
         <span class="card-text">{{$promotion->tyre->model->name}}</span>
@@ -64,7 +64,7 @@
         </a>
       </div>
       <div class="card-body" style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0"><a>{{$new->brand->name}} {{$new->name}}</a></h4>
+        <h4 class="card-title m-0"   @if($new->brand->id == 1) style="color: #e69c2f;" @elseif($new->brand->id == 3) style="color: #000;" @endif>{{$new->brand->name}} {{$new->name}}</h4>
 
         <span class="card-text">@if(isset($new->drive)){{$new->drive->name}} @endif</span>
         <span class="card-text">{{$new->model->name}}</span>
@@ -98,7 +98,7 @@
         </a>
       </div>
       <div class="card-body"  style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0"><a>{{$best->brand->name}} {{$best->name}}</a></h4>
+        <h4 class="card-title m-0"  @if($best->brand->id == 1) style="color: #e69c2f;" @elseif($best->brand->id == 3) style="color: #000;" @endif>{{$best->brand->name}} {{$best->name}}</h4>
 
         <span class="card-text">@if(isset($best->drive)){{$best->drive->name}} @endif {{$best->model->name}}
                       {{$best->structure->name ?? ''}}
