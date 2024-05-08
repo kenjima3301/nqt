@@ -314,7 +314,7 @@ class StaffController extends Controller
   
     public function inventory() {
         $tyres = TyreDimention::all();
-        $tyre_codes = Tyre::all();
+        $tyre_codes = Tyre::where('status', 'public')->get();
         return view('staff.inventory', ['tyres'=> $tyres, 'tyre_codes' => $tyre_codes]);
     }
     

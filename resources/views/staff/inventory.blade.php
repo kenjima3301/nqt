@@ -33,6 +33,7 @@
                     </thead>
                     <tbody>
                       @foreach ($tyres as $tyre)
+                      @if(isset($tyre->tyre))
                       <tr class="{{$tyre->tyre->id}} allcode">
                         <td class="text-sm font-weight-normal">{{$tyre->size}}</td>
                         <td class="text-sm font-weight-normal"><a href="{{url('staff/lop-xe-tai-chi-tiet/'.$tyre->tyre->id)}}">{{$tyre->tyre->name}}</a></td>
@@ -47,6 +48,7 @@
                         <td class="text-sm font-weight-normal">{{$tyre->price}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->views}}</td>
                       </tr>
+                      @endif
                       @endforeach
                       
                     </tbody>
