@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h5 class="mb-0">Lốp xe Trazano</h5>
+              <h5 class="mb-0">Lốp xe</h5>
               <select class="col-2" id="filtercode">
                 <option value="">Lọc theo mẫu gai</option>
                 @foreach($tyre_codes as $code)
@@ -29,6 +29,7 @@
                        <th>Kiểu xe và vị trí lắp đặt</th>
                        <th>Số lượng</th>
                        <th>Đơn giá</th>
+                       <th>Lượt xem</th>
                     </thead>
                     <tbody>
                       @foreach ($tyres as $tyre)
@@ -44,6 +45,7 @@
                         </td>
                         <td class="text-sm font-weight-normal">{{$tyre->total}}</td>
                         <td class="text-sm font-weight-normal">{{$tyre->price}}</td>
+                        <td class="text-sm font-weight-normal">{{$tyre->views}}</td>
                       </tr>
                       @endforeach
                       
@@ -70,5 +72,8 @@
           });
         });
         </script>
+  @if (count($tyre_codes) > 5)
+        @include('datatables')
+    @endif
   @endpush
 </x-layout>

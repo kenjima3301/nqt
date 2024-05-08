@@ -96,6 +96,7 @@
           <th class="text-xxs p-0 text-center">QUY CÁCH</th>
           <th class="text-xxs p-0 text-center">LỚP BỐ</th>
           <th class="text-xxs p-0 text-center">CHỈ SỐ TẢI TRỌNG VÀ TỐC ĐỘ</th>
+          <th class="text-xxs p-0 text-center">LƯỢT XEM</th>
           <th class="text-xxs p-0 text-center">SỐ LƯỢNG</th>
           <th class="text-xxs p-0 text-center">ĐƠN GIÁ</th>
         </tr>
@@ -117,6 +118,7 @@
           <td class=" text-center text-sm p-0"> {{$dimention->size}} </td>
           <td class=" text-center text-sm p-0"> {{$dimention->ply}} </td>
           <td class=" text-center text-sm p-0"> {{$dimention->sevice_index}} </td>
+          <td class=" text-center text-sm p-0"> {{$dimention->views}} </td>
           <td class=" text-center text-sm p-0"> <input type="number" name="total" value="{{$dimention->total}}"> </td>
           
           <td class=" text-center text-sm p-0"> <input type="number" name="price" value="{{$dimention->price}}"> </td>

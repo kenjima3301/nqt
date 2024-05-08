@@ -174,6 +174,77 @@
                     </div>
                 
             </div>
+          <style>
+            .ratings {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  direction: rtl;
+  text-align: left;
+}
+
+.star {
+  position: relative;
+  line-height: 30px;
+  display: inline-block;
+  transition: color 0.2s ease;
+  color: #ebebeb;
+}
+
+.star:before {
+  content: '\2605';
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+}
+
+.star:hover,
+.star.selected,
+.star:hover ~ .star,
+.star.selected ~ .star{
+  transition: color 0.8s ease;
+  color: orange;
+}
+.checked {
+  color: orange;
+}
+          </style>
+          @if(auth()->check() && Auth::user()->hasRole('client'))
+              <div class="row ml-1">
+                <h5 class="text-color" style="padding: 10px;color: #000;">Viết đánh giá sản phẩm</h5>
+                <ul class="ratings">
+                  <li class="star" data-id="5"></li>
+                  <li class="star" data-id="4"></li>
+                  <li class="star" data-id="3"></li>
+                  <li class="star" data-id="2"></li>
+                  <li class="star" data-id="1"></li>
+                </ul>
+                <form method="POST" action="{{url('client/danh-gia-add')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="vote" id="vote">
+                <input type="hidden" name="tyre_id" value="{{$tyre->id}}">
+                <textarea name="comment" rows="4" cols="100"></textarea>
+                <button type="submit" class="btn bg-gradient-primary mt-3">Đăng</button>
+                </form>
+              </div>
+          @endif
+          @if(count($tyre->reviews) > 0)
+          <h5 class="text-color" style="color: #000;">Đánh giá của khách hàng</h5>
+            @foreach($tyre->reviews as $review)
+            
+             <div class="row p-2 ml-1" @if ($loop->even) style="background-color:#f6f8fa;" @endif>
+                  <ul class="ratings">
+                    <li class="fa fa-star w3-large @if($review->vote >= 5 ) checked @endif"></li>
+                    <li class="fa fa-star w3-large @if($review->vote >= 4 ) checked @endif"></li>
+                    <li class="fa fa-star w3-large @if($review->vote >= 3 ) checked @endif"></li>
+                    <li class="fa fa-star w3-large @if($review->vote >= 2 ) checked @endif"></li>
+                    <li class="fa fa-star w3-large @if($review->vote >= 1 ) checked @endif"></li>
+                  </ul>
+                  <p>{{$review->comment}}</p>
+                </div>
+            @endforeach
+          @endif
             @if(count($relatedtypres)> 0)
             <h5 class="text-color mt-3 " style="padding: 10px;color: #000;">Sản phẩm liên quan:</h5>
             @endif
@@ -357,6 +428,20 @@
       $(this).find(".arrow").toggleClass("fa-light fa-caret-down fa-light fa-caret-up");
     });
   });
+  $(function (){
+  var star = '.star',
+      selected = '.selected';
+  
+  $(star).on('click', function(){
+    $(selected).each(function(){
+      $(this).removeClass('selected');
+    });
+    $(this).addClass('selected');
+    var value = $(this).attr("data-id");
+    $('#vote').val(value);
+  });
+ 
+});
 </script>
 <script src="{{asset('client/assets/js/jquery360.js')}}"></script>
 <!--<link type="text/css" rel="stylesheet" href=https://sachinchoolur.github.io/lightslider/dist/css/lightslider.min.css" />-->                  

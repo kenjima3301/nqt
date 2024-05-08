@@ -165,4 +165,15 @@ class ClientController extends Controller
     $ordertyre->delete();
     return redirect('client/gio-hang');
   }
+  
+  public function reviewadd(Request $request) {
+    \App\Models\Review::create([
+        'user_id' => Auth::user()->id,
+        'tyre_id' => $request->tyre_id,
+        'vote' => $request->vote,
+        'comment' => $request->comment,
+    ]);
+    
+    return back();
+  }
 }

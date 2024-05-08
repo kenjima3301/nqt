@@ -22,6 +22,7 @@
                        <th>Kiểu đường lái</th>
                        <th>Cấu trúc lốp</th>
                        <th>Kiểu xe và vị trí lắp đặt</th>
+                       <th>Lượt xem</th>
                        <th>Quản lý Sai</th>
                        <th></th>
                        <th></th>
@@ -37,12 +38,16 @@
                           <img src="{{asset($tyre->install_position_image)}}" width="200">
                           @endif
                         </td>
+                        <td>{{$tyre->views}}</td>
                         <td><a href="{{url('admin/lop-xe-tai-import/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Import sai">
                             Chi tiết Sai
                           </a>
                         </td>
                         <td><a href="{{url('admin/lop-xe-tai-sua/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="Sửa">
                             <i class="fas fa-edit" aria-hidden="true"></i>
+                          </a>
+                          <a href="{{url('admin/lop-xe-tai-an/'.$tyre->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="@if($tyre->status == 'public') Ẩn sản phẩm @else Hiển thị sản phẩm @endif">
+                            @if($tyre->status == 'public') Ẩn @else Hiển thị @endif
                           </a>
                         </td>
                         <td>
@@ -74,5 +79,8 @@ function xoa(id) {
   $("#xacnhan"+id).show();
 }
 </script>
+ @if (count($tyres) > 5)
+        @include('datatables')
+    @endif
   @endpush
 </x-layout>

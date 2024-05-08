@@ -15,8 +15,8 @@ use App\Models\Posts;
 class HomeController extends Controller
 {
     public function index() {
-      $new_products = Tyre::select('*')->take(4)->orderBy("id", "desc")->get();
-      $best_products = Tyre::select('*')->take(8)->get();
+      $new_products = Tyre::select('*')->take(4)->where('status', 'public')->orderBy("id", "desc")->get();
+      $best_products = Tyre::select('*')->where('status', 'public')->take(8)->get();
       $promotions = \App\Models\Promotion::select('*')->groupBy('promotions.tyre_id')->take(8)->get();
       $sectioncontents = \App\Models\SectionContent::all();
       return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products,'promotions' => $promotions,'sectioncontents' => $sectioncontents] );
@@ -27,7 +27,7 @@ class HomeController extends Controller
       $model = Modelcar::take(1)->first();
       $brands = Brand::all();
       $brand = Brand::take(1)->first();
-      $tyres = Tyre::where('model_id', $model->id)->where('brand_id', $brand->id)->get();
+      $tyres = Tyre::where('model_id', $model->id)->where('status', 'public')->where('brand_id', $brand->id)->get();
       $sizes = TyreDimention::select('size')->distinct('size')->get();
       return view('client.list-product', [
           'models' => $models,
@@ -74,6 +74,7 @@ class HomeController extends Controller
               ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%')
               ->where('tyres.model_id', $request->model)
               ->where('tyres.brand_id', $request->brand)
+              ->where('status', 'public')
               ->distinct('tyres.id')
               ->get('tyres.*');
       $sizes = TyreDimention::select('size')->distinct('size')->get();
@@ -116,7 +117,7 @@ class HomeController extends Controller
           'brands' => $brands,
           'tyre_sizes' => $tyre_sizes,
           'thailand' => $thailand,
-          'china' => $china
+          'china' => $china,
           ]);
     }
     

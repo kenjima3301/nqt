@@ -58,4 +58,9 @@ class Tyre extends Model
             return $this->tyre_features;
         }
     }
+    
+  public function reviews()
+    {
+        return $this->hasMany(Review::class, 'tyre_id', 'id')->orderBy('created_at','DESC');
+    }
 }

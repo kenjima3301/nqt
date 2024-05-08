@@ -103,6 +103,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/lop-xe-tai-xoa/{id}', [Admincontroller::class, 'deletetyre']);
   Route::get('/lop-xe-tai-sua/{id}', [Admincontroller::class, 'edittyre']);
   Route::post('/lop-xe-tai-sua-post', [Admincontroller::class, 'edittyrepost']);
+  Route::get('/lop-xe-tai-an/{id}', [Admincontroller::class, 'unpublictyre']);
   Route::get('/lop-xe-tai-chi-tiet/{id}', [Admincontroller::class, 'tyredetail']);
   Route::get('/quy-cach-chi-tiet/{id}', [Admincontroller::class, 'dimentiondetail']);
   Route::post('/quy-cach-chi-tiet/uploadimage', [Admincontroller::class, 'dimentionimageupload']);
@@ -192,6 +193,7 @@ Route::group(['prefix' => 'client', 'as' => 'client'], function () {
   Route::post('/xac-nhan-don-hang', [ClientController::class, 'checkoutconfirm']);
   Route::get('/don-hang', [ClientController::class, 'order']);
   Route::get('/don-hang-chi-tiet/{id}', [ClientController::class, 'orderdetail']);
+  Route::post('/danh-gia-add', [ClientController::class, 'reviewadd']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'dealer', 'as' => 'dealer.'], function () {

@@ -820,7 +820,7 @@ class Admincontroller extends Controller
     
     public function promotion() {
        $promotions = \App\Models\Promotion::all();
-       $tyre_codes = Tyre::all();
+       $tyre_codes = Tyre::where('status', 'public')->get();
       return view('admin.trucktyres.promotion', ['promotions' => $promotions,'tyre_codes' => $tyre_codes]);
     }
     
@@ -887,5 +887,21 @@ class Admincontroller extends Controller
       
       return back();
       
+    }
+    
+    public function unpublictyre($id) {
+     $tyre = Tyre::find($id);
+     if($tyre->status == 'public'){
+        $tyre->status = 'unpublic';
+        $promotions = \App\Models\Promotion::where('tyre_id', $tyre->id)->get();
+        foreach ($promotions as $promotion){
+         $promotion->delete();
+        }
+     }else {
+       $tyre->status = 'public';
+     }
+     $tyre->save();
+     
+     return back();
     }
 }

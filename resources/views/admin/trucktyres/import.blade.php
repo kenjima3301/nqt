@@ -105,6 +105,7 @@
           <th class="text-xxs text-center">Chỉ số tải trọng và tốc độ</th>
           <th class="text-xxs text-center">Đơn vị</th>
           <th class="text-xxs text-center">Kiểu gai</th>
+          <th class="text-xxs text-center">Lượt xem</th>
           <th class="text-xxs text-center">Số lượng</th>
           <th class="text-xxs text-center">Đơn giá</th>
           <th class="text-xxs text-center"></th>
@@ -127,6 +128,7 @@
           <td class=" text-center text-sm"> {{$dimention->unit}} </td>
           
           <td class=" text-center text-sm"> {{$dimention->tread_type}} </td>
+          <td class=" text-center text-sm"> {{$dimention->views}} </td>
           <td class=" text-center text-sm"> {{$dimention->total}} </td>
           <td class=" text-center text-sm"> {{$dimention->price}} </td>
           <td><a class="btn mb-2 me-4 conten-right" href="{{url('admin/xoa-sai-trong-ma-gai/'.$dimention->id)}}">Xóa</a></td>
