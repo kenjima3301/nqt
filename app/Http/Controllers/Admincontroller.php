@@ -904,4 +904,51 @@ class Admincontroller extends Controller
      
      return back();
     }
+    
+    public function allusers() {
+      $users = User::all();
+      return view('admin.user.list',['users' => $users]);
+    }
+    
+    public function useradd() {
+      $roles = \App\Models\Role::all();
+      return view('admin.user.add',['roles' => $roles]);
+    }
+    
+    public function useraddpost(Request $request) {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+        
+        $user = User::create([
+            'name'=> $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password)
+        ]);
+        
+        RoleUser::create([
+            'role_id' => $request->role,
+            'user_id' => $user->id
+        ]);
+      $subject = "Xác minh địa chỉ email tài khoản Ngọc Quyết Thắng";
+      $token = Str::random(64);
+      $user->remember_token = $token;
+      $user->save();
+      $url = url('email/verify/'.$user->id.'/'.$token);
+      $data['url'] = $url;
+      (new MailController)->send($request->email,$subject,'email.register' ,$data);
+        
+        return back()->with('success','Đăng ký thành công. Vui lòng kiểm tra email của bạn và xác thực để đăng nhập tài khoản.');
+    }
+    
+    public function userdelete($id) {
+      $user = User::find($id);
+      $user->delete();
+      
+      return back();
+    }
 }

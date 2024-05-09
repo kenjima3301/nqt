@@ -134,6 +134,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/lop-xe-tai-promotion-tyre-xoa/{id}', [Admincontroller::class, 'promotiontyredelete']);
   Route::post('/lop-xe-tai-promotion-tyre-add', [Admincontroller::class, 'promotiontyreadd']);
   
+  Route::get('/quan-ly-nguoi-dung', [Admincontroller::class, 'allusers']);
+  Route::get('/nguoi-dung-add', [Admincontroller::class, 'useradd']);
+  Route::post('/nguoi-dung-add', [Admincontroller::class, 'useraddpost']);
+  Route::get('/nguoi-dung-delete/{id}', [Admincontroller::class, 'userdelete']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
