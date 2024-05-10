@@ -8,10 +8,20 @@
         <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
       <form method="POST" action="{{url('tim-lop-xe-filter')}}" enctype="multipart/form-data">
       @csrf
-      <h4 class="text-center mt-4">Tìm Lốp</h4>
+      @php
+          $tim_kiem = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem';
+                              })->first();
+          @endphp
+      <h4 class="text-center mt-4">{{$tim_kiem->name_show()}}</h4>
         <div class="row">
           <div class="col-lg-12">
-            <label>Loại xe</label>
+            @php
+          $tim_kiem_loai_xe = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem_loai_xe';
+                              })->first();
+          @endphp
+            <label>{{$tim_kiem_loai_xe->name_show()}}</label>
             <select class="js-select2" name="model">
               @foreach($models as $model)
               <option value="{{$model->id}}">{{$model->name}}</option>
@@ -20,7 +30,12 @@
           </div>
           
           <div class="col-lg-12">
-            <label>Hãng lốp</label>
+            @php
+          $tim_kiem_hang = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem_hang';
+                              })->first();
+          @endphp
+            <label>{{$tim_kiem_hang->name_show()}}</label>
             <select class="js-select2" name="brand">
               @foreach($brands as $brand)
               <option value="{{$brand->id}}">{{$brand->name}}</option>
@@ -29,7 +44,12 @@
           </div>
 
           <div class="col-lg-12">
-            <label>Size lốp</label>
+            @php
+          $tim_kiem_size = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem_size';
+                              })->first();
+          @endphp
+            <label>{{$tim_kiem_size->name_show()}}</label>
             <select class="js-select2" name="size">
               @foreach($sizes as $size)
               <option value="{{$size->size}}">{{$size->size}}</option>
@@ -37,7 +57,7 @@
             </select>
           </div>
           <div class="col-lg-12 align-items-center mb-3">
-          <button class="btn btn-success text-center btn-sm btn-block">Tìm</button>
+          <button class="btn btn-success text-center btn-sm btn-block">{{$tim_kiem->name_show()}}</button>
           </div>
           <div class="col-lg-12">
             <div class="form-check form-check-inline">
@@ -121,17 +141,21 @@
                 
                     <table class=" table-responsive text-center">
                       <thead>
+                        @php
+          $san_pham_tiet_table = $contents->filter(function($item) {
+                                  return $item->key == 'san_pham_tiet_table';
+                              })->first();
+          $table = preg_split("/\r\n|\n|\r/", $san_pham_tiet_table->content_show());
+          @endphp
                             <tr>
-                              <th rowspan="3" width="3%">
-                                Nước sản xuất
-                              </th>
-                                <th rowspan="3">Quy cách</th>
-                                <th rowspan="3">Lớp bố</th>
-                                <th rowspan="3">Chỉ số tải trọng và tốc độ</th>
-                                <th rowspan="3">Đơn vị</th>
-                                <th rowspan="3">Kiểu gai</th>
-                                <th rowspan="3">Số lượng</th>
-                                <th rowspan="3">Đơn giá</th>
+                              <th rowspan="3" width="3%">{{$table[0]}}</th>
+                                <th rowspan="3">{{$table[1]}}</th>
+                                <th rowspan="3">{{$table[2]}}</th>
+                                <th rowspan="3">{{$table[3]}}</th>
+                                <th rowspan="3">{{$table[4]}}</th>
+                                <th rowspan="3">{{$table[5]}}</th>
+                                <th rowspan="3">{{$table[6]}}</th>
+                                <th rowspan="3">{{$table[7]}}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -158,7 +182,12 @@
                                       {{number_format(intval($size->price), 0, '', ',')}}đ 
                                       @endif
                                     / {{$size->unit}}</td>
-                                  <td><a href="{{ url('client/them-gio-hang/'.$size->id)}}" class="btn btn-success">Thêm vào giỏ hàng</a>
+                                  @php
+                                  $them_gio_hang = $contents->filter(function($item) {
+                                                          return $item->key == 'them_gio_hang';
+                                                      })->first();
+                                  @endphp
+                                  <td><a href="{{ url('client/them-gio-hang/'.$size->id)}}" class="btn btn-success">{{$them_gio_hang->name_show()}}</a>
                                   </td>
 
                                   </tr>
@@ -167,10 +196,10 @@
                         </tbody>
                     </table>
                     <div class="col-lg-3">
-                        <p><img src="{{asset('client/assets/img/china.jpg') }}" width="15px" alt=""> Made in China</p>
+                        <p><img src="{{asset('client/assets/img/china.jpg') }}" width="15px" alt=""> China</p>
                     </div>
                     <div class="col-lg-3">
-                        <p><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> Made in ThaiLand</p>
+                        <p><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> ThaiLand</p>
                     </div>
                 
             </div>
@@ -211,8 +240,13 @@
 }
           </style>
           @if(auth()->check() && Auth::user()->hasRole('client'))
+          @php
+          $viet_danh_gia_san_pham = $contents->filter(function($item) {
+                                  return $item->key == 'viet_danh_gia_san_pham';
+                              })->first();
+          @endphp
               <div class="row ml-1">
-                <h5 class="text-color" style="padding: 10px;color: #000;">Viết đánh giá sản phẩm</h5>
+                <h5 class="text-color" style="padding: 10px;color: #000;">{{$viet_danh_gia_san_pham->name_show()}}</h5>
                 <ul class="ratings">
                   <li class="star" data-id="5"></li>
                   <li class="star" data-id="4"></li>
@@ -225,12 +259,22 @@
                 <input type="hidden" name="vote" id="vote">
                 <input type="hidden" name="tyre_id" value="{{$tyre->id}}">
                 <textarea name="comment" rows="4" cols="100"></textarea>
-                <button type="submit" class="btn bg-gradient-primary mt-3">Đăng</button>
+                 @php
+          $viet_danh_gia_san_pham_button = $contents->filter(function($item) {
+                                  return $item->key == 'viet_danh_gia_san_pham_button';
+                              })->first();
+          @endphp
+                <button type="submit" class="btn bg-gradient-primary mt-3">{{$viet_danh_gia_san_pham_button->name_show()}}</button>
                 </form>
               </div>
           @endif
           @if(count($tyre->reviews) > 0)
-          <h5 class="text-color" style="color: #000;">Đánh giá của khách hàng</h5>
+          @php
+          $danh_gia_cua_khach_hang = $contents->filter(function($item) {
+                                  return $item->key == 'danh_gia_cua_khach_hang';
+                              })->first();
+          @endphp
+          <h5 class="text-color" style="color: #000;">{{$danh_gia_cua_khach_hang->name_show()}}</h5>
             @foreach($tyre->reviews as $review)
             
              <div class="row p-2 ml-1" @if ($loop->even) style="background-color:#f6f8fa;" @endif>
@@ -246,7 +290,12 @@
             @endforeach
           @endif
             @if(count($relatedtypres)> 0)
-            <h5 class="text-color mt-3 " style="padding: 10px;color: #000;">Sản phẩm liên quan:</h5>
+            @php
+          $san_pham_cung_loai = $contents->filter(function($item) {
+                                  return $item->key == 'san_pham_cung_loai';
+                              })->first();
+          @endphp
+            <h5 class="text-color mt-3 " style="padding: 10px;color: #000;">{{$san_pham_cung_loai->name_show()}}</h5>
             @endif
             <div class="row mt-3">
               @foreach ($relatedtypres as $relatedtypre)

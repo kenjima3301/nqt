@@ -70,6 +70,7 @@ class HomeController extends Controller
     public function listProductpostfilter(Request $request) {
       $models = Modelcar::all();
       $brands = Brand::all();
+      $contents = \App\Models\SectionContent::all();
       $tyres = Tyre::join('tyre_dimentions', 'tyres.id', '=', 'tyre_dimentions.tyre_id')
               ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%')
               ->where('tyres.model_id', $request->model)
@@ -85,7 +86,8 @@ class HomeController extends Controller
           'sizes' => $sizes,
           'sizeselected' => $request->size,
           'model_selected' => $request->model,
-          'brand_selected' => $request->brand
+          'brand_selected' => $request->brand,
+          'contents' => $contents
       ]);
     }
 
@@ -98,6 +100,7 @@ class HomeController extends Controller
       $tyre = Tyre::find($id);
       $tyre->views = $tyre->views +1;
       $tyre->save();
+      $contents = \App\Models\SectionContent::all();
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
 //      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
       $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
@@ -118,6 +121,7 @@ class HomeController extends Controller
           'tyre_sizes' => $tyre_sizes,
           'thailand' => $thailand,
           'china' => $china,
+          'contents' => $contents
           ]);
     }
     
@@ -190,7 +194,8 @@ class HomeController extends Controller
     }
     
     public function contactus() {
-      return view('client.contactus');
+      $contents = \App\Models\SectionContent::all();
+      return view('client.contactus',['contents' => $contents]);
     }
 
     public function shopingCart(){

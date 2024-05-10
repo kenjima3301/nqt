@@ -7,10 +7,20 @@
     <div class="col-lg-3 col-md-4 col-sm-12 bg-white">
       <form method="POST" action="{{url('tim-lop-xe-filter')}}" enctype="multipart/form-data">
       @csrf
-      <h4 class="text-center mt-4">Tìm Lốp</h4>
+      @php
+          $tim_kiem = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem';
+                              })->first();
+          @endphp
+      <h4 class="text-center mt-4">{{$tim_kiem->name_show()}}</h4>
         <div class="row">
           <div class="col-lg-12">
-            <label>Loại xe</label>
+            @php
+          $tim_kiem_loai_xe = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem_loai_xe';
+                              })->first();
+          @endphp
+            <label>{{$tim_kiem_loai_xe->name_show()}}</label>
             <select class="js-select2" name="model">
               @foreach($models as $model)
               <option value="{{$model->id}}" @if(isset($model_selected) && $model->id == $model_selected) selected @endif>{{$model->name}}</option>
@@ -19,7 +29,12 @@
           </div>
           
           <div class="col-lg-12">
-            <label>Hãng lốp</label>
+             @php
+          $tim_kiem_hang = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem_hang';
+                              })->first();
+          @endphp
+            <label>{{$tim_kiem_hang->name_show()}}</label>
             <select class="js-select2" name="brand">
               @foreach($brands as $brand)
               <option value="{{$brand->id}}" @if(isset($brand_selected) && $brand->id == $brand_selected) selected @endif>{{$brand->name}}</option>
@@ -28,7 +43,12 @@
           </div>
 
           <div class="col-lg-12">
-            <label>Size lốp</label>
+             @php
+          $tim_kiem_size = $contents->filter(function($item) {
+                                  return $item->key == 'tim_kiem_size';
+                              })->first();
+          @endphp
+            <label>{{$tim_kiem_size->name_show()}}</label>
             <select class="js-select2" name="size">
               @foreach($sizes as $size)
               <option value="{{$size->size}}" @if(isset($sizeselected) && $size->size == $sizeselected) selected @endif >{{$size->size}}</option>
@@ -36,7 +56,7 @@
             </select>
           </div>
           <div class="col-lg-12 align-items-center">
-          <button class="btn btn-success text-center btn-sm btn-block">Tìm</button>
+          <button class="btn btn-success text-center btn-sm btn-block">{{$tim_kiem->name_show()}}</button>
           </div>
         </div>
       </form>

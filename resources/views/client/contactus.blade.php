@@ -4,9 +4,13 @@
  <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container">
-
+              @php
+              $contact = $contents->filter(function($item) {
+                                      return $item->key == 'contact';
+                                  })->first();
+              @endphp
         <div class="section-title" data-aos="fade-up">
-          <h2>Liên hệ</h2>
+          <h2>{{$contact->name_show()}}</h2>
         </div>
 
         <div class="row">
@@ -15,22 +19,43 @@
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Địa chỉ:</h4>
-                <p>79/5A DT743 - Phường Tân Đông Hiệp - TP. Dĩ An - Tỉnh Bình Dương</p>
+                
+                <h4>@if(session()->get('language') == 'vi') Địa chỉ: @else Address: @endif</h4>
+                @php
+          $footer_dia_chi = $contents->filter(function($item) {
+                                  return $item->key == 'footer_dia_chi';
+                              })->first();
+          @endphp
+                <p>{{$footer_dia_chi->name_show()}}</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>nqt3999@gmail.com</p>
+                @php
+          $footer_email = $contents->filter(function($item) {
+                                  return $item->key == 'footer_email';
+                              })->first();
+          @endphp
+                <p>{{$footer_email->name_show()}}</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Điện thoại:</h4>
-                <p> (+84) 934.54.13.13</p>
+                <h4>@if(session()->get('language') == 'vi') Điện thoại: @else Phone: @endif</h4>
+                @php
+          $footer_dien_thoai = $contents->filter(function($item) {
+                                  return $item->key == 'footer_dien_thoai';
+                              })->first();
+          @endphp
+                <p>{{$footer_dien_thoai->name_show()}}</p>
               </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.517855388182!2d106.741649!3d10.924199799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d9c94916fadf%3A0xbb6ff70818f161ad!2zNzkgxJBUNzQzLCBLaHUgUGjhu5EsIFRodeG6rW4gQW4sIELDrG5oIETGsMahbmc!5e0!3m2!1sen!2s!4v1683176185483!5m2!1sen!2s" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+              @php
+            $map = $contents->filter(function($item) {
+                                  return $item->key == 'map';
+                              })->first();
+          @endphp
+            <iframe src="{{$map->content}}" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
             </div>
 
           </div>
