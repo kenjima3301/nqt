@@ -131,7 +131,14 @@
           <td class=" text-center text-sm"> {{$dimention->views}} </td>
           <td class=" text-center text-sm"> {{$dimention->total}} </td>
           <td class=" text-center text-sm"> {{$dimention->price}} </td>
-          <td><a class="btn mb-2 me-4 conten-right" href="{{url('admin/xoa-sai-trong-ma-gai/'.$dimention->id)}}">Xóa</a></td>
+<!--          <td>
+            <a class="btn mb-2 me-4 conten-right" href="{{url('admin/xoa-sai-trong-ma-gai/'.$dimention->id)}}">Xóa</a>
+          </td>-->
+          <td>
+                          <a href="{{url('admin/ma-gai-an/'.$dimention->id)}}" class="mx-1" data-bs-toggle="tooltip" data-bs-original-title="@if($dimention->status == 'public') Ẩn sản phẩm @else Hiển thị sản phẩm @endif">
+                            @if($dimention->status == 'public') Ẩn @else Hiển thị @endif
+                          </a>
+                        </td>
         </tr>
         @endforeach
        <form action="{{url('admin/lop-xe-tai-quy-cach-add-new')}}" method="POST">

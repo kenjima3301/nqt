@@ -813,6 +813,17 @@ class Admincontroller extends Controller
       return back();
     }
     
+    public function hidesize($id) {
+      $dimention = TyreDimention::find($id);
+      if($dimention->status == 'public'){
+        $dimention->status = 'unpublic';
+     }else {
+       $dimention->status = 'public';
+     }
+     $dimention->save();
+      return back();
+    }
+    
     public function deletetyre($id) {
       Tyre::where('id', $id)->delete();
       return back();

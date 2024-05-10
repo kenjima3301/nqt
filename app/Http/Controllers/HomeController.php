@@ -78,7 +78,7 @@ class HomeController extends Controller
               ->where('status', 'public')
               ->distinct('tyres.id')
               ->get('tyres.*');
-      $sizes = TyreDimention::select('size')->distinct('size')->get();
+      $sizes = TyreDimention::select('size')->where('status', 'public')->distinct('size')->get();
       return view('client.list-product', [
           'models' => $models,
           'brands' => $brands,
@@ -96,12 +96,12 @@ class HomeController extends Controller
       $model = Modelcar::take(1)->first();
       $brands = Brand::all();
       $brand = Brand::take(1)->first();
-      $sizes = TyreDimention::select('size')->distinct('size')->get();
+      $sizes = TyreDimention::select('size')->where('status', 'public')->distinct('size')->get();
       $tyre = Tyre::find($id);
       $tyre->views = $tyre->views +1;
       $tyre->save();
       $contents = \App\Models\SectionContent::all();
-      $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
+      $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->where('status', 'public')->get();
 //      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
       $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
               ->where('tyre_dimentions.tyre_id', $tyre->id)

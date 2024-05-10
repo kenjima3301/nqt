@@ -100,6 +100,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::post('/lop-xe-tai-import/{id}', [Admincontroller::class, 'importpost']);
   Route::get('/lop-xe-tai-import-download', [Admincontroller::class, 'importdownload']);
   Route::get('/xoa-sai-trong-ma-gai/{id}', [Admincontroller::class, 'deletesize']);
+  Route::get('/ma-gai-an/{id}', [Admincontroller::class, 'hidesize']);
   Route::get('/lop-xe-tai-xoa/{id}', [Admincontroller::class, 'deletetyre']);
   Route::get('/lop-xe-tai-sua/{id}', [Admincontroller::class, 'edittyre']);
   Route::post('/lop-xe-tai-sua-post', [Admincontroller::class, 'edittyrepost']);
