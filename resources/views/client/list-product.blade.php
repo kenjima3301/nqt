@@ -69,11 +69,11 @@
                     <div class="card booking-card v-2 mt-2 rounded-bottom">
                     <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
                       <a href="{{url('lop-xe-tai/'.$tyre->id)}}">
-                      <img class="card-img-top"  src="{{asset($tyre->images[0]->image)}}" alt="{{$tyre->name}}" style="max-height:291px;">
+                      <img class="card-img-top" id="lop-image" src="{{asset($tyre->images[0]->image)}}" alt="{{$tyre->name}}" style="max-height:291px;">
                       </a>
                     </div>
                     <div class="card-body"  style="padding: 0.25rem; min-height: 85px;">
-                      <h4 class="card-title m-0" @if($tyre->brand->id == 1) style="color: #e69c2f;" @elseif($tyre->brand->id == 3) style="color: #000;" @endif>{{$tyre->brand->name}} {{$tyre->name}}</h4>
+                      <h4 class="card-title m-0" id="ten-lop" @if($tyre->brand->id == 1) style="color: #e69c2f;" @elseif($tyre->brand->id == 3) style="color: #000;" @endif>{{$tyre->brand->name}} {{$tyre->name}}</h4>
 
                       <span class="card-text">@if(isset($tyre->drive)){{$tyre->drive->name}} @endif</span>
                       <span class="card-text">{{$tyre->model->name}}</span>

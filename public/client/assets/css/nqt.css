@@ -1647,3 +1647,13 @@ section {
   font-size: 13px;
   color: #364146;
 }
+
+@media screen and (max-width: 1400px) {
+  #ten-lop {
+    font-size: 16px;
+  }
+  
+  #lop-image {
+    max-height: 235px !important;
+  }
+}

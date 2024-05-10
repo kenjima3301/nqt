@@ -303,11 +303,11 @@
                   <div class="card booking-card v-2 mt-2 rounded-bottom">
       <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
         <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}">
-        <img class="card-img-top"  src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}" style="max-height:291px;">
+        <img class="card-img-top" id="lop-image" src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}" style="max-height:291px;">
         </a>
       </div>
       <div class="card-body" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0" @if($relatedtypre->brand->id == 1) style="color: #e69c2f;" @elseif($relatedtypre->brand->id == 3) style="color: #000;" @endif>{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</h4>
+        <h4 class="card-title m-0" id="ten-lop" @if($relatedtypre->brand->id == 1) style="color: #e69c2f;" @elseif($relatedtypre->brand->id == 3) style="color: #000;" @endif>{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</h4>
 
         <span class="card-text">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif</span>
         <span class="card-text">{{$relatedtypre->model->name}}</span>
