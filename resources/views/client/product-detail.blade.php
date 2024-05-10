@@ -274,10 +274,18 @@
                                   return $item->key == 'danh_gia_cua_khach_hang';
                               })->first();
           @endphp
-          <h5 class="text-color" style="color: #000;">{{$danh_gia_cua_khach_hang->name_show()}}</h5>
+          <!--<h5 class="text-color" style="color: #000;">{{$danh_gia_cua_khach_hang->name_show()}}</h5>-->
+          <table class="table data-table table-striped mt-4">
+            <thead>
+              <tr>
+                <th>{{$danh_gia_cua_khach_hang->name_show()}}</th>
+              </tr>
+          </thead>
+             <tbody>
             @foreach($tyre->reviews as $review)
-            
-             <div class="row p-2 ml-1" @if ($loop->even) style="background-color:#f6f8fa;" @endif>
+            <tr>
+              <td>
+             <div class="row p-2 ml-1">
                   <ul class="ratings">
                     <li class="fa fa-star w3-large @if($review->vote >= 5 ) checked @endif"></li>
                     <li class="fa fa-star w3-large @if($review->vote >= 4 ) checked @endif"></li>
@@ -287,7 +295,11 @@
                   </ul>
                   <p>{{$review->comment}}</p>
                 </div>
+              </td>
+          </tr>
             @endforeach
+          </tbody>
+          </table>
           @endif
             @if(count($relatedtypres)> 0)
             @php
@@ -325,6 +337,13 @@
     </div>
 </div>
 <style>
+  #DataTables_Table_0_length {
+    display: none;
+  }
+  
+  #DataTables_Table_0_paginate {
+    float: right;
+  }
 #myImg:hover {opacity: 0.7;}
 
 /* The Modal (background) */
@@ -569,4 +588,22 @@ span.onclick = function() {
 @endforeach
 @endforeach
 </script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.data-table').dataTable({
+            "paging": true,
+            "pageLength": 10,
+            "searching": false,
+            "ordering": false,
+            "info": false,
+            "autoWidth": false,
+        });
+    });
+    
+</script>
+
 @endsection
