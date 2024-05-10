@@ -61,6 +61,6 @@ class Tyre extends Model
     
   public function reviews()
     {
-        return $this->hasMany(Review::class, 'tyre_id', 'id')->orderBy('created_at','DESC');
+        return $this->hasMany(Review::class, 'tyre_id', 'id')->where('status', 'approved')->orderBy('created_at','DESC');
     }
 }

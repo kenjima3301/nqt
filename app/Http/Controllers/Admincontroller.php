@@ -934,13 +934,9 @@ class Admincontroller extends Controller
             'role_id' => $request->role,
             'user_id' => $user->id
         ]);
-      $subject = "Xác minh địa chỉ email tài khoản Ngọc Quyết Thắng";
-      $token = Str::random(64);
-      $user->remember_token = $token;
+      $user->remember_token = NULL;
+      $user->email_verified_at = now();
       $user->save();
-      $url = url('email/verify/'.$user->id.'/'.$token);
-      $data['url'] = $url;
-      (new MailController)->send($request->email,$subject,'email.register' ,$data);
         
         return back()->with('success','Đăng ký thành công. Vui lòng kiểm tra email của bạn và xác thực để đăng nhập tài khoản.');
     }
@@ -948,6 +944,26 @@ class Admincontroller extends Controller
     public function userdelete($id) {
       $user = User::find($id);
       $user->delete();
+      
+      return back();
+    }
+    
+    public function reviews() {
+      $reviews = \App\Models\Review::where('status', 'pending')->get();
+      return view('admin.review.list',['reviews' => $reviews]);
+    }
+    
+    public function reviewapproved($id) {
+      $review = \App\Models\Review::find($id);
+      $review->status = 'approved';
+      $review->save();
+      
+      return back();
+    }
+    
+    public function reviewdelete($id) {
+      $review = \App\Models\Review::find($id);
+      $review->delete();
       
       return back();
     }

@@ -138,6 +138,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/nguoi-dung-add', [Admincontroller::class, 'useradd']);
   Route::post('/nguoi-dung-add', [Admincontroller::class, 'useraddpost']);
   Route::get('/nguoi-dung-delete/{id}', [Admincontroller::class, 'userdelete']);
+  
+  Route::get('/quan-ly-danh-gia', [Admincontroller::class, 'reviews']);
+  Route::get('/danh-gia-tan-thanh/{id}', [Admincontroller::class, 'reviewapproved']);
+  Route::get('/danh-gia-xoa/{id}', [Admincontroller::class, 'reviewdelete']);
 })->middleware('auth');
 
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {

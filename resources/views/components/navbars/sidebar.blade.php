@@ -58,6 +58,15 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link text-white {{ $activePage == 'quan-ly-danh-gia' ? ' active bg-gradient-dark' : '' }}  "
+           href="{{url('admin/quan-ly-danh-gia')}}">
+          <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+          </div>
+          <span class="nav-link-text ms-1">Quản lý đánh giá</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link text-white {{ $activePage == 'quan-ly-khac' ? ' active bg-gradient-dark' : '' }}  "
            href="{{url('admin/quan-ly-khac')}}">
           <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
