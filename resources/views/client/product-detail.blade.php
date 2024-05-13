@@ -108,7 +108,7 @@
                 <div class="col-lg-6 pt-3" style="background: #fff;">
                     <!-- Product name -->
                     <h3 class="card-title mt-3">{{$tyre->brand->name}} {{$tyre->name}}</h3>
-                    <p class="card-text text-white">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
+                    <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
                     <!-- Product description -->
                     @php 
                     $features = preg_split("/\r\n|\n|\r/", $tyre->tyre_features);

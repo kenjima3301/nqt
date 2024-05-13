@@ -29,11 +29,13 @@ class HomeController extends Controller
       $brand = Brand::take(1)->first();
       $tyres = Tyre::where('model_id', $model->id)->where('status', 'public')->where('brand_id', $brand->id)->get();
       $sizes = TyreDimention::select('size')->distinct('size')->get();
+      $contents = \App\Models\SectionContent::all();
       return view('client.list-product', [
           'models' => $models,
           'brands' => $brands,
           'tyres' => $tyres,
-          'sizes' => $sizes
+          'sizes' => $sizes,
+          'contents' => $contents
       ]);
     }
     
