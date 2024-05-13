@@ -135,6 +135,7 @@ class HomeController extends Controller
       $sizedetail->views = $sizedetail->views +1;
       $sizedetail->save();
       $tyre = Tyre::find($id);
+      $contents = \App\Models\SectionContent::all();
       $tyre_sizes = TyreDimention::where('tyre_id', $tyre->id)->get();
 //      $thailand = TyreMadein::where('tyre_dimention_id', $tyre->id)->where('')->count();
       $thailand = TyreMadein::join('tyre_dimentions', 'tyre_countries.tyre_dimention_id', '=', 'tyre_dimentions.id')
@@ -155,7 +156,8 @@ class HomeController extends Controller
           'tyre_sizes' => $tyre_sizes,
           'thailand' => $thailand,
           'china' => $china,
-          'sizedetail' => $sizedetail
+          'sizedetail' => $sizedetail,
+          'contents' => $contents
           ]);
     }
 
