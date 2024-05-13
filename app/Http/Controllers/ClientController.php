@@ -167,6 +167,10 @@ class ClientController extends Controller
   }
   
   public function reviewadd(Request $request) {
+    $request->validate([
+            'vote' =>  'required',
+            'comment'  =>  'required'
+        ]);
     \App\Models\Review::create([
         'user_id' => Auth::user()->id,
         'tyre_id' => $request->tyre_id,

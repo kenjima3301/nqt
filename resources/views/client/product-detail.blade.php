@@ -259,11 +259,22 @@
                 <input type="hidden" name="vote" id="vote">
                 <input type="hidden" name="tyre_id" value="{{$tyre->id}}">
                 <textarea name="comment" rows="4" cols="100"></textarea>
+                @if($errors->any())
+                <div class="text-danger">
+                  @php
+                  $viet_danh_gia_san_pham_canh_bao = $contents->filter(function($item) {
+                                  return $item->key == 'viet_danh_gia_san_pham_canh_bao';
+                              })->first();
+                  @endphp
+                 {{$viet_danh_gia_san_pham_canh_bao->name_show()}}
+                </div>
+                @endif
                  @php
-          $viet_danh_gia_san_pham_button = $contents->filter(function($item) {
+                  $viet_danh_gia_san_pham_button = $contents->filter(function($item) {
                                   return $item->key == 'viet_danh_gia_san_pham_button';
                               })->first();
-          @endphp
+                  @endphp
+          
                 <button type="submit" class="btn bg-gradient-primary mt-3">{{$viet_danh_gia_san_pham_button->name_show()}}</button>
                 </form>
               </div>
