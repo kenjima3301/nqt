@@ -75,7 +75,7 @@ class HomeController extends Controller
               ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%')
               ->where('tyres.model_id', $request->model)
               ->where('tyres.brand_id', $request->brand)
-              ->where('status', 'public')
+              ->where('tyres.status', 'public')
               ->distinct('tyres.id')
               ->get('tyres.*');
       $sizes = TyreDimention::select('size')->where('status', 'public')->distinct('size')->get();
