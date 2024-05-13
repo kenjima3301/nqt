@@ -22,7 +22,7 @@
                 @csrf
                 <div class="form-group col-12 col-md-8">
                   <label for="exampleInputname">Mã gai</label>
-                  <input type="name" name="name" value="{{ $errors->first('name')}}" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mã gai" value="" onfocus="focused(this)" onfocusout="defocused(this)">
+                  <input type="name" name="name" value="" class="form-control border border-2 p-2" id="exampleInputname" placeholder="Mã gai" value="" onfocus="focused(this)" onfocusout="defocused(this)">
                 </div>
                 <div class="row col-12 col-md-8">
                 <div class="form-group col-md-3">

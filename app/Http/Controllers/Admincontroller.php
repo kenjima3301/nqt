@@ -344,6 +344,12 @@ class Admincontroller extends Controller
   }
   
   public function addtrucktyrespost(Request $request) {
+    $request->validate([
+            'name' =>  'required',
+            'model_id'  =>  'required',
+            'brand_id'  =>  'required',
+            'filenames'  =>  'required'
+        ]);
     $tyre = Tyre::create([
           'name'   => $request->name,
           'model_id'   => $request->model_id,
@@ -854,6 +860,10 @@ class Admincontroller extends Controller
     }
     
     public function dimentionadd(Request $request) {
+      $this->validate($request, [
+            'size' => 'required',
+            'country_id' => 'required',
+        ]);
        $tyredimention = TyreDimention::create([
                      'tyre_id' => $request->tyre_id,
                       'size' => $request->size,

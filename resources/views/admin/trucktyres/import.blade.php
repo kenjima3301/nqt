@@ -157,6 +157,7 @@
           <td> <input type="text" name="sevice_index" value="" size="10"></td>
           <td> <input type="text" name="unit" value="" size="10"> </td>
           <td>  <input type="text" name="tread_type" value="" size="10"> </td>
+          <td></td>
           <td>  <input type="number" name="total" value="" style="width: 100px;"> </td>
           <td >  <input type="text" name="price" value="" size="10"> </td>
           <td><input type="submit" value="Thêm quy cách"></td>
