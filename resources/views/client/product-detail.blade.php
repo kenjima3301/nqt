@@ -539,6 +539,7 @@
             loop:true,
             pauseOnHover: true,
         slideEndAnimation: true,
+        useCSS: false,
         pause: 2000,
         keyPress: false,
         controls: true,
