@@ -556,10 +556,20 @@
         freeMove: true,
         swipeThreshold: 40,
         responsive: [],
-        onBeforeStart: function (el) {},
-        onSliderLoad: function (el) {},
-        onBeforeSlide: function (el) {},
-        onAfterSlide: function (el) {},
+        onBeforeStart: function (el) {
+          
+        },
+        onSliderLoad: function (el) {
+           if ( !$( ".lSAction" ).length ) {   
+              location.reload();
+           }
+        },
+        onBeforeSlide: function (el) {
+         
+        },
+        onAfterSlide: function (el) {
+          
+        },
         onBeforeNextSlide: function (el) {},
         onBeforePrevSlide: function (el) {}     
         });
