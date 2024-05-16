@@ -29,12 +29,11 @@
         <img class="card-img-top" id="lop-image" src="{{asset($promotion->tyre->images[0]->image)}}" alt="{{$promotion->tyre->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body" style="padding: 0.25rem; min-height: 110px;">
-        <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 18px; font-weight: 600" >{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</h4>
+      <div class="card-body" style="padding: 0.25rem; min-height: 75px;">
+        <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 14px; font-weight: 600" >{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</h4>
 
-        <span class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</span>
-        <span class="card-text">{{$promotion->tyre->model->name}}</span>
-        <span class="card-text">{{$promotion->tyre->structure->name ?? ''}}</span>
+        <span class="card-text" style="font-size: 10px;">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif
+        {{$promotion->tyre->model->name}} {{$promotion->tyre->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right; margin: 0;">{{number_format($promotion->promotion_price, 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span> / Lốp</p>
 
@@ -63,12 +62,11 @@
         <img class="card-img-top" id="lop-image" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body" style="padding: 0.25rem; min-height: 110px;">
-        <h4 class="card-title m-0" id="ten-lop"  style="color: #fff; font-size: 18px; font-weight: 600" >{{$new->brand->name}} {{$new->name}}</h4>
+      <div class="card-body" style="padding: 0.25rem; min-height: 75px;">
+        <h4 class="card-title m-0" id="ten-lop"  style="color: #fff; font-size: 14px; font-weight: 600" >{{$new->brand->name}} {{$new->name}}</h4>
 
-        <span class="card-text">@if(isset($new->drive)){{$new->drive->name}} @endif</span>
-        <span class="card-text">{{$new->model->name}}</span>
-        <span class="card-text">{{$new->structure->name ?? ''}}</span>
+        <span class="card-text" style="font-size: 10px;">@if(isset($new->drive)){{$new->drive->name}} @endif
+        {{$new->model->name}} {{$new->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right; margin: 0;">{{number_format($new->price, 0, '', ',')}}đ / Lốp</p>
 
@@ -97,10 +95,10 @@
         <img class="card-img-top" id="lop-image" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body"  style="padding: 0.25rem; min-height: 110px;">
-        <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 18px; font-weight: 600" >{{$best->brand->name}} {{$best->name}}</h4>
+      <div class="card-body"  style="padding: 0.25rem; min-height: 75px;">
+        <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 14px; font-weight: 600" >{{$best->brand->name}} {{$best->name}}</h4>
 
-        <span class="card-text">@if(isset($best->drive)){{$best->drive->name}} @endif {{$best->model->name}}
+        <span class="card-text" style="font-size: 10px;">@if(isset($best->drive)){{$best->drive->name}} @endif {{$best->model->name}}
                       {{$best->structure->name ?? ''}}
         </span>
         <!--<hr class="my-4">-->
