@@ -528,7 +528,7 @@
 <script src="https://sachinchoolur.github.io/lightslider/src/js/lightslider.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        window.prettyPrint && prettyPrint()
+//        window.prettyPrint && prettyPrint()
         var slider = $('#lightSlider').lightSlider({
             gallery:true,
             item:1,
@@ -552,15 +552,7 @@
         pager: true,
         galleryMargin: 5,
         thumbMargin: 5,
-        currentPagerPosition: 'middle',
-        enableTouch: true,
-        enableDrag: true,
-        freeMove: true,
-        swipeThreshold: 40,
-        responsive: [],
-            onSliderLoad: function() {
-                $('#lightSlider').removeClass('cS-hidden');
-            }     
+        currentPagerPosition: 'middle',   
         });
     });
 
