@@ -527,7 +527,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
 //        window.prettyPrint && prettyPrint()
-        var slider = $('#lightSlider').lightSlider({
+        $('#lightSlider').lightSlider({
             gallery:true,
             item:1,
             thumbItem:9,
@@ -556,9 +556,12 @@
         freeMove: true,
         swipeThreshold: 40,
         responsive: [],
-            onSliderLoad: function() {
-                $('#lightSlider').removeClass('cS-hidden');
-            }     
+        onBeforeStart: function (el) {},
+        onSliderLoad: function (el) {},
+        onBeforeSlide: function (el) {},
+        onAfterSlide: function (el) {},
+        onBeforeNextSlide: function (el) {},
+        onBeforePrevSlide: function (el) {}     
         });
     });
 
