@@ -523,8 +523,6 @@
 });
 </script>
 <script src="{{asset('client/assets/js/jquery360.js')}}"></script>
-<!--<link type="text/css" rel="stylesheet" href=https://sachinchoolur.github.io/lightslider/dist/css/lightslider.min.css" />-->                  
-<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
 <script src="https://sachinchoolur.github.io/lightslider/src/js/lightslider.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -552,7 +550,15 @@
         pager: true,
         galleryMargin: 5,
         thumbMargin: 5,
-        currentPagerPosition: 'middle',   
+        currentPagerPosition: 'middle',
+        enableTouch: true,
+        enableDrag: true,
+        freeMove: true,
+        swipeThreshold: 40,
+        responsive: [],
+            onSliderLoad: function() {
+                $('#lightSlider').removeClass('cS-hidden');
+            }     
         });
     });
 
@@ -606,7 +612,6 @@ span.onclick = function() {
             "autoWidth": false,
         });
     });
-    
 </script>
 
 @endsection
