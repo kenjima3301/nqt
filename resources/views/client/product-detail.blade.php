@@ -565,7 +565,9 @@
            }
         },
         onBeforeSlide: function (el) {
-         
+         if ( !$( ".lSAction" ).length ) {   
+              location.reload();
+           }
         },
         onAfterSlide: function (el) {
           
