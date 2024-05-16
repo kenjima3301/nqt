@@ -560,14 +560,14 @@
           
         },
         onSliderLoad: function (el) {
-           
-        },
-        onBeforeSlide: function (el) {
-          if ( $( ".lSAction" ).length ) {   
+           if ( $( ".lSAction" ).length ) {   
              
            }else {
               location.reload();
            }
+        },
+        onBeforeSlide: function (el) {
+          
         },
         onAfterSlide: function (el) {
           
