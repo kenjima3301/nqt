@@ -21,7 +21,7 @@
         <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">{{$truong_trinh_khuyen_mai->name_show()}}</h3>
         <div class="list-new-product row mt-4 mb-4">
           @foreach($promotions as $promotion)
-            <div class="col-lg-3">
+            <div class="col-lg-2">
             
               <div class="card booking-card v-2 mt-2 rounded-bottom">
       <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
@@ -29,8 +29,8 @@
         <img class="card-img-top" id="lop-image" src="{{asset($promotion->tyre->images[0]->image)}}" alt="{{$promotion->tyre->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0" id="ten-lop" @if($promotion->tyre->brand->id == 1) style="color: #e69c2f;" @elseif($promotion->tyre->brand->id == 3) style="color: #000;" @endif>{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</h4>
+      <div class="card-body" style="padding: 0.25rem; min-height: 110px;">
+        <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 18px; font-weight: 600" >{{$promotion->tyre->brand->name}} {{$promotion->tyre->name}}</h4>
 
         <span class="card-text">@if(isset($promotion->tyre->drive)){{$promotion->tyre->drive->name}} @endif</span>
         <span class="card-text">{{$promotion->tyre->model->name}}</span>
@@ -56,15 +56,15 @@
         <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">{{$san_pham_moi->name_show()}}</h3>
         <div class="list-new-product row mt-4">
           @foreach($new_products as $new)
-            <div class="col-lg-3">
+            <div class="col-lg-2">
             <div class="card booking-card v-2 mt-2 rounded-bottom">
       <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
         <a href="{{url('lop-xe-tai/'.$new->id)}}">
         <img class="card-img-top" id="lop-image" src="{{asset($new->images[0]->image)}}" alt="{{$new->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body" style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0" id="ten-lop"  @if($new->brand->id == 1) style="color: #e69c2f;" @elseif($new->brand->id == 3) style="color: #000;" @endif>{{$new->brand->name}} {{$new->name}}</h4>
+      <div class="card-body" style="padding: 0.25rem; min-height: 110px;">
+        <h4 class="card-title m-0" id="ten-lop"  style="color: #fff; font-size: 18px; font-weight: 600" >{{$new->brand->name}} {{$new->name}}</h4>
 
         <span class="card-text">@if(isset($new->drive)){{$new->drive->name}} @endif</span>
         <span class="card-text">{{$new->model->name}}</span>
@@ -90,15 +90,15 @@
     <h3 class="text-color" style="background: #35A25B; padding: 10px;color: #fff;">{{$san_pham_ban_chay->name_show()}}</h3>
         <div class="list-new-product row">
         @foreach($best_products as $best)
-        <div class="col-lg-3 mt-4">
+        <div class="col-lg-2 mt-4">
             <div class="card booking-card v-2 mt-2 rounded-bottom">
       <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
         <a href="{{url('lop-xe-tai/'.$best->id)}}">
         <img class="card-img-top" id="lop-image" src="{{asset($best->images[0]->image)}}" alt="{{$best->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body"  style="padding: 0.25rem; min-height: 85px;">
-        <h4 class="card-title m-0" id="ten-lop" @if($best->brand->id == 1) style="color: #e69c2f;" @elseif($best->brand->id == 3) style="color: #000;" @endif>{{$best->brand->name}} {{$best->name}}</h4>
+      <div class="card-body"  style="padding: 0.25rem; min-height: 110px;">
+        <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 18px; font-weight: 600" >{{$best->brand->name}} {{$best->name}}</h4>
 
         <span class="card-text">@if(isset($best->drive)){{$best->drive->name}} @endif {{$best->model->name}}
                       {{$best->structure->name ?? ''}}
