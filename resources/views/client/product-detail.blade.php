@@ -560,12 +560,12 @@
           
         },
         onSliderLoad: function (el) {
-           if ( !$( ".lSAction" ).length ) {   
-              location.reload();
-           }
+           
         },
         onBeforeSlide: function (el) {
-         if ( !$( ".lSAction" ).length ) {   
+          if ( $( ".lSAction" ).length ) {   
+             
+           }else {
               location.reload();
            }
         },
