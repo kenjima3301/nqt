@@ -454,6 +454,7 @@
 
 @endsection
 @section('script')
+<script src="{{asset('client/assets/js/jquery360.js')}}"></script>
 <script>
   $(document).ready(function() {
     $(".js-select2").select2();
@@ -522,8 +523,8 @@
  
 });
 </script>
-<script src="{{asset('client/assets/js/jquery360.js')}}"></script>
-<script src="https://sachinchoolur.github.io/lightslider/src/js/lightslider.js"></script>
+
+<script src="{{asset('client/assets/js/lightslider.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 //        window.prettyPrint && prettyPrint()
