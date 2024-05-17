@@ -113,7 +113,7 @@ class HomeController extends Controller
               ->where('tyre_dimentions.tyre_id', $tyre->id)
               ->where('tyre_countries.madecountry_id', 2)
                 ->count();      
-      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(3)->get();
+      $relatedtypres = Tyre::where('driveexperience_id', $tyre->driveexperience_id)->where('id','!=', $tyre->id)->take(4)->get();
       return view('client.product-detail', [
           'tyre' => $tyre, 
           'sizes' => $sizes, 
