@@ -455,6 +455,7 @@
 @endsection
 @section('script')
 <script src="{{asset('client/assets/js/jquery360.js')}}"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
 <script>
   $(document).ready(function() {
     $(".js-select2").select2();
