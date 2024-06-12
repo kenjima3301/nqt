@@ -195,10 +195,10 @@
 
                         </tbody>
                     </table>
-                    <div class="col-lg-3">
+                    <div class="col-md-3 col-3">
                         <p><img src="{{asset('client/assets/img/china.jpg') }}" width="15px" alt=""> China</p>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="ccol-md-3 col-6">
                         <p><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> ThaiLand</p>
                     </div>
 
