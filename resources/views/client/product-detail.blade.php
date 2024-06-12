@@ -28,7 +28,7 @@
               @endforeach
             </select>
           </div>
-          
+
           <div class="col-lg-12">
             @php
           $tim_kiem_hang = $contents->filter(function($item) {
@@ -68,7 +68,7 @@
               <input class="form-check-input" type="checkbox" id="thailandcheck" value="option1" checked="checked">
               <label class="form-check-label" for="inlineCheckbox1"><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> Thailand ({{$thailand}})</label>
             </div>
-            
+
           </div>
         </div>
       </form>
@@ -83,7 +83,7 @@
                           <ul id="lightSlider" class="text-center">
                             @foreach($tyre_sizes as $sizeimage)
                             @if(isset($sizedetail))
-                              @php 
+                              @php
                                 if($sizeimage->id != $sizedetail->id){
                                     continue;
                                 }
@@ -97,7 +97,7 @@
                                   </li>
                               @endforeach
                             @endforeach
-                          </ul>                  
+                          </ul>
                     <!--</div>-->
                     <div class="mt-2 mb-1">
                       @foreach($tyre_sizes as $size)
@@ -110,9 +110,9 @@
                     <h3 class="card-title mt-3">{{$tyre->brand->name}} {{$tyre->name}}</h3>
                     <p class="card-text">@if(isset($tyre->drive)) {{$tyre->drive->name}} @endif</p>
                     <!-- Product description -->
-                    @php 
+                    @php
                     $features = preg_split("/\r\n|\n|\r/", $tyre->tyre_features);
-                    @endphp 
+                    @endphp
                     @foreach($features as $feature)
                       <p><i class="fa-solid fa-circle fa-2xs" style="color:#35A25B;"></i> {{$feature}}</p>
                     @endforeach
@@ -136,9 +136,9 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row" style="background: #ffffff;">
-                
+
                     <table class=" table-responsive text-center">
                       <thead>
                         @php
@@ -160,10 +160,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                               @foreach($tyre_sizes as $size)
                               <tr class="@if(isset($size->madeins[0]) && count($size->madeins) == 2){{'bothflag'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'Thailand'){{'thai'}}@elseif(isset($size->madeins[0]) && $size->madeins[0]->country->name == 'China'){{'china'}}@endif" @if(isset($sizedetail) && $size->id == $sizedetail->id) style="background:#35A25B" @endif>
-                                  <td class="text-left">@foreach ($size->madeins as $country) 
+                                  <td class="text-left">@foreach ($size->madeins as $country)
                                       @if(count($size->madeins) == 1 && $country->country->name == 'Thailand')
                                         &nbsp;&nbsp;
                                       @endif
@@ -178,8 +178,8 @@
                                   <td>{{$size->total}}</td>
                                   <td>@if(isset($size->promotion))
                                       {{number_format(intval($size->promotion->promotion_price), 0, '', ',')}}đ <span style="text-decoration-line: line-through; color:red">{{number_format(intval($size->price), 0, '', ',')}}đ</span>
-                                      @else 
-                                      {{number_format(intval($size->price), 0, '', ',')}}đ 
+                                      @else
+                                      {{number_format(intval($size->price), 0, '', ',')}}đ
                                       @endif
                                     / {{$size->unit}}</td>
                                   @php
@@ -192,7 +192,7 @@
 
                                   </tr>
                               @endforeach
-                            
+
                         </tbody>
                     </table>
                     <div class="col-lg-3">
@@ -201,7 +201,7 @@
                     <div class="col-lg-3">
                         <p><img src="{{asset('country/flag/1681452454.png') }}" width="15px" alt=""> ThaiLand</p>
                     </div>
-                
+
             </div>
           <style>
             .ratings {
@@ -274,7 +274,7 @@
                                   return $item->key == 'viet_danh_gia_san_pham_button';
                               })->first();
                   @endphp
-          
+
                 <button type="submit" class="btn bg-gradient-primary mt-3">{{$viet_danh_gia_san_pham_button->name_show()}}</button>
                 </form>
               </div>
@@ -322,17 +322,17 @@
             @endif
             <div class="row mt-3">
               @foreach ($relatedtypres as $relatedtypre)
-                <div class="col-lg-3">
+                <div class="col-md-2 col-6">
                   <div class="card booking-card v-2 mt-2 rounded-bottom">
       <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light bg-white" data-mdb-ripple-color="light">
         <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}">
         <img class="card-img-top" id="lop-image" src="{{asset($relatedtypre->images[0]->image)}}" alt="{{$relatedtypre->name}}" style="max-height:291px;">
         </a>
       </div>
-      <div class="card-body" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 75px;">
+      <div class="card-body" id="info_content" style="padding-bottom: 0"  style="padding: 0.25rem; min-height: 75px;">
         <h4 class="card-title m-0" id="ten-lop" style="color: #fff; font-size: 14px; font-weight: 600">{{$relatedtypre->brand->name}} {{$relatedtypre->name}}</h4>
 
-        <span class="card-text" style="font-size: 10px;">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif 
+        <span class="card-text" id='sub_info' style="font-size: 10px;">@if(isset($relatedtypre->drive)){{$relatedtypre->drive->name}} @endif
           {{$relatedtypre->model->name}} {{$relatedtypre->structure->name ?? ''}}</span>
         <!--<hr class="my-4">-->
         <p style="float: right;margin: 0;">{{number_format($relatedtypre->price, 0, '', ',')}}đ / Lốp</p>
@@ -350,7 +350,7 @@
   #DataTables_Table_0_length {
     display: none;
   }
-  
+
   #DataTables_Table_0_paginate {
     float: right;
   }
@@ -392,7 +392,7 @@
 }
 
 /* Add Animation */
-.modal-content, #caption {  
+.modal-content, #caption {
   -webkit-animation-name: zoom;
   -webkit-animation-duration: 0.6s;
   animation-name: zoom;
@@ -400,12 +400,12 @@
 }
 
 @-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)} 
+  from {-webkit-transform:scale(0)}
   to {-webkit-transform:scale(1)}
 }
 
 @keyframes zoom {
-  from {transform:scale(0)} 
+  from {transform:scale(0)}
   to {transform:scale(1)}
 }
 
@@ -461,28 +461,28 @@
     $("#chinacheck").change(function() {
         if($(this).prop('checked')) {
             $(".china").show();  // checked
-            $(".bothflag").show();  
+            $(".bothflag").show();
             if($('#thailandcheck').is(":checked")){
-              $(".thai").show();  
+              $(".thai").show();
             }else {
-              $(".thai").hide();  
+              $(".thai").hide();
             }
           }
         else{
             $(".china").hide();  // checked
             if($('#thailandcheck').is(":checked")){
-               $(".bothflag").show();  
-                $(".thai").show(); 
+               $(".bothflag").show();
+                $(".thai").show();
             }else {
-               $(".bothflag").hide();  
-                $(".thai").hide(); 
+               $(".bothflag").hide();
+                $(".thai").hide();
             }
           }
     });
     $("#thailandcheck").change(function() {
         if($(this).prop('checked')) {
-            $(".bothflag").show();  
-            $(".thai").show();  
+            $(".bothflag").show();
+            $(".thai").show();
             if($('#chinacheck').is(":checked")){
                $(".china").show();  // checked
             }else {
@@ -497,7 +497,7 @@
                $(".china").hide();  // checked
                $(".bothflag").hide();
             }
-            $(".thai").hide(); 
+            $(".thai").hide();
           }
     });
   });
@@ -511,7 +511,7 @@
   $(function (){
   var star = '.star',
       selected = '.selected';
-  
+
   $(star).on('click', function(){
     $(selected).each(function(){
       $(this).removeClass('selected');
@@ -520,7 +520,7 @@
     var value = $(this).attr("data-id");
     $('#vote').val(value);
   });
- 
+
 });
 </script>
 
@@ -558,23 +558,23 @@
         swipeThreshold: 40,
         responsive: [],
         onBeforeStart: function (el) {
-          
+
         },
         onSliderLoad: function (el) {
-           if ( $( ".lSAction" ).length ) {   
-             
+           if ( $( ".lSAction" ).length ) {
+
            }else {
               location.reload();
            }
         },
         onBeforeSlide: function (el) {
-          
+
         },
         onAfterSlide: function (el) {
-          
+
         },
         onBeforeNextSlide: function (el) {},
-        onBeforePrevSlide: function (el) {}     
+        onBeforePrevSlide: function (el) {}
         });
     });
 
@@ -583,7 +583,7 @@
 // Get the modal
 @foreach($tyre_sizes as $sizeimage)
 @if(isset($sizedetail))
-                              @php 
+                              @php
                                 if($sizeimage->id != $sizedetail->id){
                                     continue;
                                 }
@@ -607,7 +607,7 @@ img{{$image->id}}.onclick = function(){
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() { 
+span.onclick = function() {
   modal{{$image->id}}.style.display = "none";
 }
 @endforeach

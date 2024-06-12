@@ -1657,7 +1657,11 @@ section {
   }
 }
 @media screen and (max-width: 768px) {
-    #lop-image {
-        max-height: 210px !important;
+
+    #info_content {
+        padding: 5px !important;
+    }
+    #sub_info {
+        font-size: 8px !important;
     }
 }
