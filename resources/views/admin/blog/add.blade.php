@@ -39,7 +39,7 @@
                   <select name="menu">
                     <option value="">Chọn menu</option>
                     @foreach($menus as $menu)
-                      @if(in_array($menu->id, array(3,4,14)))
+                      @if(in_array($menu->id, array(3,4,14,16)))
                       <option value="{{$menu->id}}">{{$menu->name}}</option>
                       @endif
                     @endforeach

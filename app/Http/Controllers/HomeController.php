@@ -15,7 +15,7 @@ use App\Models\Posts;
 class HomeController extends Controller
 {
     public function index() {
-      $new_products = Tyre::select('*')->take(6)->where('status', 'public')->orderBy("id", "desc")->get();
+      $new_products = Tyre::where('status', 'public')->orderBy("id", "desc")->get();
       $best_products = Tyre::select('*')->where('status', 'public')->take(12)->get();
       $promotions = \App\Models\Promotion::select('*')->groupBy('promotions.tyre_id')->take(12)->get();
       $sectioncontents = \App\Models\SectionContent::all();

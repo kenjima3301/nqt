@@ -28,6 +28,8 @@ class Menu extends Model
     }
     
   public function posts(): HasMany {
-        return $this->hasMany(Posts::class, 'menu', 'id');
+        return $this->hasMany(Posts::class, 'menu', 'id')
+                    ->orderBy('created_at', 'desc')
+                    ->limit(10);
   }
 }
