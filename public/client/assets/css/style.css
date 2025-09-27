@@ -117,7 +117,7 @@ html {
 }
 
 .main-content {
-    margin-top: 177px;
+    margin-top: 0px;
     /*background-color: #F6F7F9;*/
     background-image: url("./../../../assets/images/bg3.jpg");
     background-color: #eaf7fc;
@@ -130,10 +130,10 @@ html {
 
 @media screen and (max-width: 768px) {
   .main-content {
-    margin-top: 100px;
+    margin-top: 0px;
     /*background-color: #F6F7F9;*/
      background-image: url("./../../../assets/images/bg3.jpg");
-    background-color: #eaf7fc;
+     background-color: #eaf7fc;
     /*background-position: center;*/
     background-repeat: no-repeat;
     /*background-size: cover;*/

@@ -53,6 +53,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/', function () {
     return redirect('admin/lop-xe-tai');
   });
+  
+  // Image Manager Routes
+  Route::get('/image-manager', [App\Http\Controllers\ImageManagerController::class, 'index'])->name('image-manager');
+  Route::post('/image-manager/upload', [App\Http\Controllers\ImageManagerController::class, 'upload'])->name('image-manager.upload');
+  Route::delete('/image-manager/delete', [App\Http\Controllers\ImageManagerController::class, 'delete'])->name('image-manager.delete');
+  Route::get('/image-manager/search', [App\Http\Controllers\ImageManagerController::class, 'search'])->name('image-manager.search');
   Route::get('/loai-xe', [Admincontroller::class, 'model']);
   Route::get('/loai-xe-add', [Admincontroller::class, 'addmodel']);
   Route::post('/loai-xe-add', [Admincontroller::class, 'addmodelpost']);
@@ -104,12 +110,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
   Route::get('/lop-xe-tai-xoa/{id}', [Admincontroller::class, 'deletetyre']);
   Route::get('/lop-xe-tai-sua/{id}', [Admincontroller::class, 'edittyre']);
   Route::post('/lop-xe-tai-sua-post', [Admincontroller::class, 'edittyrepost']);
+  Route::delete('/lop-xe-tai-xoa-anh/{id}', [Admincontroller::class, 'deleteTyreImage']);
   Route::get('/lop-xe-tai-an/{id}', [Admincontroller::class, 'unpublictyre']);
   Route::get('/lop-xe-tai-chi-tiet/{id}', [Admincontroller::class, 'tyredetail']);
   Route::get('/quy-cach-chi-tiet/{id}', [Admincontroller::class, 'dimentiondetail']);
   Route::post('/quy-cach-chi-tiet/uploadimage', [Admincontroller::class, 'dimentionimageupload']);
   Route::post('/lop-xe-tai-quy-cach-add-new', [Admincontroller::class, 'dimentionadd']);
   Route::post('/lop-xe-tai-quy-cach-update', [Admincontroller::class, 'dimentionupdate']);
+  
+  // New routes for image management
+  Route::post('/assign-images-to-size', [Admincontroller::class, 'assignImagesToSize']);
+  Route::post('/import-images-for-size', [Admincontroller::class, 'importImagesForSize']);
   
   Route::get('/dai-ly', [Admincontroller::class, 'dealer']);
   Route::get('/dai-ly-add', [Admincontroller::class, 'adddealer']);

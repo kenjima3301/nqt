@@ -25,6 +25,23 @@ use App\Models\RoleUser;
 
 class Admincontroller extends Controller
 {
+  /**
+   * Generate unique short timestamp for filename
+   */
+  private function generateShortTimestamp() {
+    return substr(time(), -6) . substr(microtime(), 2, 3); // Last 6 digits + 3 microsecond digits
+  }
+  
+  /**
+   * Create directory with proper permissions for web server
+   */
+  private function createDirectoryWithPermissions($path) {
+    if (!file_exists($path)) {
+      mkdir($path, 0755, true);
+      chown($path, 'www-data');
+      chgrp($path, 'www-data');
+    }
+  }
   public function __construct()
     {
         $this->middleware('auth');
@@ -326,7 +343,9 @@ class Admincontroller extends Controller
   
   
   public function trucktyres() {
-    $tyres = Tyre::where('model_id', 1)->orderBy("id", "desc")->get();
+    $tyres = Tyre::with(['images','drive','structure'])
+      ->orderBy("id", "desc")
+      ->get();
     return view('admin.trucktyres.index', ['tyres' => $tyres]);
   }
   
@@ -348,8 +367,14 @@ class Admincontroller extends Controller
             'name' =>  'required',
             'model_id'  =>  'required',
             'brand_id'  =>  'required',
-            'filenames'  =>  'required'
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
         ]);
+        
+    // Validate that either filenames or server_images is provided
+    if (!$request->hasFile('filenames') && !$request->has('server_images')) {
+        return back()->withErrors(['filenames' => 'Vui lòng chọn ít nhất một ảnh.']);
+    }
+    
     $tyre = Tyre::create([
           'name'   => $request->name,
           'model_id'   => $request->model_id,
@@ -358,34 +383,76 @@ class Admincontroller extends Controller
           'tyre_structure'   => $request->tyre_structure,
           'tyre_features'   => $request->features,
           'tyre_features_en'   => $request->features_en,
-          'price' => $request->price
+          'price' => $request->price,
+          'status' => 'public'
       ]);
+      
+    // Handle thumbnail image
+    if($request->hasFile('thumbnail')){
+        $path = public_path().'/tyre/thumbnail/';
+        $this->createDirectoryWithPermissions($path);
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        $imageName = $tyreCode . '_thumbnail_' . $shortTimestamp . '.' . $request->thumbnail->extension();
+        $request->thumbnail->move(public_path('tyre/thumbnail'), $imageName);
+        $tyre->thumbnail_image = 'tyre/thumbnail/'.$imageName;
+        $tyre->save();
+    }
+    
+    // Handle installation position image
     if($request->install != ''){
-    $path = public_path().'/tyre/install/';
-      if (!file_exists($path)) {
-        mkdir($path, 0775, true);
-      }
-    $imageName = time().'.'.$request->install->extension();
-    $request->install->move(public_path('tyre/install'), $imageName);
-    $tyre->install_position_image = 'tyre/install/'.$imageName;
-    $tyre->save();
+        $path = public_path().'/tyre/install/';
+        $this->createDirectoryWithPermissions($path);
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        $imageName = $tyreCode . '_install_' . $shortTimestamp . '.' . $request->install->extension();
+        $request->install->move(public_path('tyre/install'), $imageName);
+        $tyre->install_position_image = 'tyre/install/'.$imageName;
+        $tyre->save();
     }
       
-      $images = $request->filenames;
-      foreach ($images as $key => $image){
-        $path = public_path().'/tyre/image/';
-        if (!file_exists($path)) {
-          mkdir($path, 0775, true);
+    // Handle uploaded images
+    if($request->hasFile('filenames')){
+        $images = $request->filenames;
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        foreach ($images as $key => $image){
+            $path = public_path().'/tyre/image/';
+            $this->createDirectoryWithPermissions($path);
+            $imageName = $tyreCode . '_' . ($key + 1) . '_' . $shortTimestamp . '.' . $image->extension();
+            $image->move(public_path('tyre/image'), $imageName);
+            TyreImage::create([
+                'tyre_id' => $tyre->id,
+                'image' => 'tyre/image/'.$imageName
+            ]);
         }
-        $imageName = time().$key.'.'.$image->extension();
-        $image->move(public_path('tyre/image'), $imageName);
-        TyreImage::create([
-            'tyre_id' => $tyre->id,
-             'image' => 'tyre/image/'.$imageName
-        ]);
-      }
+    }
+    
+    // Handle server images
+    if($request->has('server_images')){
+        $serverImages = $request->server_images;
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        foreach ($serverImages as $key => $imageName){
+            // Copy image from upload/product to tyre/image
+            $sourcePath = public_path('upload/product/'.$imageName);
+            $destinationPath = public_path('tyre/image/');
+            $this->createDirectoryWithPermissions($destinationPath);
+            
+            if(file_exists($sourcePath)){
+                $fileExtension = pathinfo($imageName, PATHINFO_EXTENSION);
+                $newImageName = $tyreCode . '_server_' . ($key + 1) . '_' . $shortTimestamp . '.' . $fileExtension;
+                copy($sourcePath, $destinationPath.$newImageName);
+                
+                TyreImage::create([
+                    'tyre_id' => $tyre->id,
+                    'image' => 'tyre/image/'.$newImageName
+                ]);
+            }
+        }
+    }
       
-    return redirect('admin/lop-xe-tai');
+    return redirect('admin/lop-xe-tai')->with('success', 'Thêm lốp xe thành công!');
   }
   
   public function edittyre($id) {
@@ -404,49 +471,125 @@ class Admincontroller extends Controller
   }
   
   public function edittyrepost(Request $request) {
+    $request->validate([
+        'name' => 'required',
+        'model_id' => 'required',
+        'brand_id' => 'required',
+        'tyre_id' => 'required|exists:tyres,id',
+        'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+    ]);
+    
     $tyre = Tyre::find($request->tyre_id);
-    if($request->install != ''){
-    $path = public_path().'/tyre/install/';
-      if (!file_exists($path)) {
-        mkdir($path, 0775, true);
-      }
-    $imageName = time().'.'.$request->install->extension();
-    $request->install->move(public_path('tyre/install'), $imageName);
-    $tyre->install_position_image = 'tyre/install/'.$imageName;
-    $tyre->save();
+    
+    // Handle thumbnail image
+    if($request->hasFile('thumbnail')){
+        $path = public_path().'/tyre/thumbnail/';
+        $this->createDirectoryWithPermissions($path);
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        $imageName = $tyreCode . '_thumbnail_edit_' . $shortTimestamp . '.' . $request->thumbnail->extension();
+        $request->thumbnail->move(public_path('tyre/thumbnail'), $imageName);
+        $tyre->thumbnail_image = 'tyre/thumbnail/'.$imageName;
+        $tyre->save();
     }
+    
+    // Handle installation position image
+    if($request->hasFile('install')){
+        $path = public_path().'/tyre/install/';
+        $this->createDirectoryWithPermissions($path);
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        $imageName = $tyreCode . '_install_edit_' . $shortTimestamp . '.' . $request->install->extension();
+        $request->install->move(public_path('tyre/install'), $imageName);
+        $tyre->install_position_image = 'tyre/install/'.$imageName;
+        $tyre->save();
+    }
+    
+    // Update tyre information
     $tyre->name = $request->name;
-    $tyre->model_id   = $request->model_id;
-    $tyre->brand_id   = $request->brand_id;
-    $tyre->driveexperience_id   = $request->drive_id;
-    $tyre->tyre_structure   = $request->tyre_structure;
-    $tyre->tyre_features   = $request->features;
+    $tyre->model_id = $request->model_id;
+    $tyre->brand_id = $request->brand_id;
+    $tyre->driveexperience_id = $request->drive_id;
+    $tyre->tyre_structure = $request->tyre_structure;
+    $tyre->tyre_features = $request->features;
     $tyre->tyre_features_en = $request->features_en;
     $tyre->price = $request->price;
     $tyre->save();
-    $imagexisted_ids = $request->images_uploaded;
-    if(is_array($imagexisted_ids)){
-    TyreImage::where('tyre_id', $tyre->id)->whereNotIn('id',$imagexisted_ids)->delete();
-    }else {
-      TyreImage::where('tyre_id', $tyre->id)->delete();
+    
+    // Handle existing images (keep selected ones, delete others)
+    $existingImageIds = $request->images_uploaded ?? [];
+    $deletedImageIds = $request->deleted_images ?? [];
+    
+    // Delete specifically requested images
+    if(is_array($deletedImageIds) && !empty($deletedImageIds)){
+        TyreImage::where('tyre_id', $tyre->id)->whereIn('id', $deletedImageIds)->delete();
     }
-      if($request->filenames != ''){
-      $images = $request->filenames;
-      foreach ($images as $key => $image){
-        $path = public_path().'/tyre/image/';
-        if (!file_exists($path)) {
-          mkdir($path, 0775, true);
+    
+    // Delete images not in the kept list (fallback for compatibility)
+    if(is_array($existingImageIds) && !empty($existingImageIds)){
+        TyreImage::where('tyre_id', $tyre->id)->whereNotIn('id', $existingImageIds)->delete();
+    }
+    
+    // Handle uploaded images
+    if($request->hasFile('filenames')){
+        $images = $request->filenames;
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        foreach ($images as $key => $image){
+            $path = public_path().'/tyre/image/';
+            $this->createDirectoryWithPermissions($path);
+            $imageName = $tyreCode . '_edit_' . ($key + 1) . '_' . $shortTimestamp . '.' . $image->extension();
+            $image->move(public_path('tyre/image'), $imageName);
+            TyreImage::create([
+                'tyre_id' => $tyre->id,
+                'image' => 'tyre/image/'.$imageName
+            ]);
         }
-        $imageName = time().$key.'.'.$image->extension();
-        $image->move(public_path('tyre/image'), $imageName);
-        TyreImage::create([
-            'tyre_id' => $tyre->id,
-             'image' => 'tyre/image/'.$imageName
-        ]);
-      }
+    }
+    
+    // Handle server images
+    if($request->has('server_images')){
+        $serverImages = $request->server_images;
+        $tyreCode = preg_replace('/[^a-zA-Z0-9_-]/', '_', $request->name); // Clean tyre code for filename
+        $shortTimestamp = $this->generateShortTimestamp(); // Unique short timestamp
+        foreach ($serverImages as $key => $imageName){
+            // Copy image from upload/product to tyre/image
+            $sourcePath = public_path('upload/product/'.$imageName);
+            $destinationPath = public_path('tyre/image/');
+            $this->createDirectoryWithPermissions($destinationPath);
+            
+            if(file_exists($sourcePath)){
+                $fileExtension = pathinfo($imageName, PATHINFO_EXTENSION);
+                $newImageName = $tyreCode . '_edit_server_' . ($key + 1) . '_' . $shortTimestamp . '.' . $fileExtension;
+                copy($sourcePath, $destinationPath.$newImageName);
+                
+                TyreImage::create([
+                    'tyre_id' => $tyre->id,
+                    'image' => 'tyre/image/'.$newImageName
+                ]);
+            }
+        }
     }
       
-    return redirect('admin/lop-xe-tai-import/'.$tyre->id);
+    return redirect('admin/lop-xe-tai-import/'.$tyre->id)->with('success', 'Cập nhật lốp xe thành công!');
+  }
+  
+  public function deleteTyreImage($id) {
+    try {
+      $image = TyreImage::find($id);
+      if ($image) {
+        // Delete physical file if exists
+        if (file_exists(public_path($image->image))) {
+          unlink(public_path($image->image));
+        }
+        // Delete database record
+        $image->delete();
+        return response()->json(['success' => true, 'message' => 'Xóa ảnh thành công']);
+      }
+      return response()->json(['success' => false, 'message' => 'Không tìm thấy ảnh']);
+    } catch (\Exception $e) {
+      return response()->json(['success' => false, 'message' => 'Lỗi khi xóa ảnh: ' . $e->getMessage()]);
+    }
   }
   
   public function tyredetail($id) {
@@ -462,30 +605,47 @@ class Admincontroller extends Controller
   }
   
   public function dimentionimageupload(Request $request) {
-    $dimention = TyreDimention::find($request->dimention_id);
-    $imagexisted_ids = $request->images_uploaded;
-    if(is_array($imagexisted_ids)){
-      \App\Models\DimentionImage::where('dimention_id', $dimention->id)->whereNotIn('id',$imagexisted_ids)->delete();
-    }else {
-      \App\Models\DimentionImage::where('dimention_id', $dimention->id)->delete();
-    }
-      if($request->filenames != ''){
-      $images = $request->filenames;
-      foreach ($images as $key => $image){
-        $path = public_path().'/dimention/image/'.$dimention->id;
-        if (!file_exists($path)) {
-          mkdir($path, 0775, true);
-        }
-        $imageName = time().$key.'.'.$image->extension();
-        $image->move(public_path('/dimention/image/'.$dimention->id), $imageName);
-        \App\Models\DimentionImage::create([
-            'dimention_id' => $dimention->id,
-             'image' => 'dimention/image/'.$dimention->id.'/'.$imageName,
-            'order' => $key+1
-        ]);
+    try {
+      $dimention = TyreDimention::find($request->dimention_id);
+      
+      if (!$dimention) {
+        return back()->with('error', 'Không tìm thấy thông tin size lốp xe!');
       }
+      
+      $imagexisted_ids = $request->images_uploaded;
+      if(is_array($imagexisted_ids)){
+        \App\Models\DimentionImage::where('dimention_id', $dimention->id)->whereNotIn('id',$imagexisted_ids)->delete();
+      }else {
+        \App\Models\DimentionImage::where('dimention_id', $dimention->id)->delete();
+      }
+      
+      $uploadedCount = 0;
+      if($request->filenames != ''){
+        $images = $request->filenames;
+        foreach ($images as $key => $image){
+          $path = public_path().'/dimention/image/'.$dimention->id;
+          if (!file_exists($path)) {
+            mkdir($path, 0775, true);
+          }
+          $imageName = time().$key.'.'.$image->extension();
+          $image->move(public_path('/dimention/image/'.$dimention->id), $imageName);
+          \App\Models\DimentionImage::create([
+              'dimention_id' => $dimention->id,
+               'image' => 'dimention/image/'.$dimention->id.'/'.$imageName,
+              'order' => $key+1
+          ]);
+          $uploadedCount++;
+        }
+      }
+      
+      if ($uploadedCount > 0) {
+        return back()->with('success', "Đã upload thành công {$uploadedCount} ảnh cho size {$dimention->size}!");
+      } else {
+        return back()->with('error', 'Không có ảnh nào được upload!');
+      }
+    } catch (\Exception $e) {
+      return back()->with('error', 'Lỗi khi upload ảnh: ' . $e->getMessage());
     }
-    return back();
   }
   
   
@@ -561,10 +721,117 @@ class Admincontroller extends Controller
         ];
        $xlsx = SimpleXLSXGen::fromArray( $data ); 
        $xlsx = new SimpleXLSXGen();
-      $xlsx->addSheet( $data, "Import Sai" );
-       $xlsx->downloadAs('mau-import-sai.xlsx');
+       $xlsx->addSheet( $data, "Import Size" );
+       $xlsx->downloadAs('mau-import-size.xlsx');
         exit();
 
+  }
+  
+  /**
+   * Assign existing tyre images to a specific size
+   */
+  public function assignImagesToSize(Request $request) {
+    $this->validate($request, [
+      'size_id' => 'required|exists:tyre_dimentions,id',
+      'image_ids' => 'required|array',
+      'image_ids.*' => 'exists:tyre_images,id'
+    ]);
+    
+    $sizeId = $request->size_id;
+    $imageIds = $request->image_ids;
+    
+    // Get the size details
+    $dimention = TyreDimention::find($sizeId);
+    if (!$dimention) {
+      return response()->json(['error' => 'Size not found'], 404);
+    }
+    
+    // Create directory for size images if not exists
+    $sizeImagePath = public_path('dimention/image/' . $sizeId);
+    if (!file_exists($sizeImagePath)) {
+      mkdir($sizeImagePath, 0775, true);
+    }
+    
+    $assignedCount = 0;
+    
+    foreach ($imageIds as $imageId) {
+      // Get the original image
+      $tyreImage = \App\Models\TyreImage::find($imageId);
+      if (!$tyreImage) continue;
+      
+      // Copy image to size directory
+      $originalPath = public_path($tyreImage->image);
+      $fileName = basename($tyreImage->image);
+      $newPath = $sizeImagePath . '/' . $fileName;
+      
+      if (file_exists($originalPath)) {
+        copy($originalPath, $newPath);
+        
+        // Create DimentionImage record
+        \App\Models\DimentionImage::create([
+          'dimention_id' => $sizeId,
+          'image' => 'dimention/image/' . $sizeId . '/' . $fileName,
+          'order' => $assignedCount + 1
+        ]);
+        
+        $assignedCount++;
+      }
+    }
+    
+    return response()->json([
+      'success' => true,
+      'message' => "Đã gán {$assignedCount} ảnh cho size {$dimention->size}",
+      'assigned_count' => $assignedCount
+    ]);
+  }
+  
+  /**
+   * Import new images for a specific size
+   */
+  public function importImagesForSize(Request $request) {
+    $this->validate($request, [
+      'size_id' => 'required|exists:tyre_dimentions,id',
+      'images' => 'required|array',
+      'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048'
+    ]);
+    
+    $sizeId = $request->size_id;
+    $images = $request->file('images');
+    
+    // Get the size details
+    $dimention = TyreDimention::find($sizeId);
+    if (!$dimention) {
+      return response()->json(['error' => 'Size not found'], 404);
+    }
+    
+    // Create directory for size images if not exists
+    $sizeImagePath = public_path('dimention/image/' . $sizeId);
+    if (!file_exists($sizeImagePath)) {
+      mkdir($sizeImagePath, 0775, true);
+    }
+    
+    $uploadedCount = 0;
+    
+    foreach ($images as $key => $image) {
+      // Generate unique filename
+      $fileName = time() . '_' . $key . '.' . $image->extension();
+      $image->move($sizeImagePath, $fileName);
+      
+      // Create DimentionImage record
+      \App\Models\DimentionImage::create([
+        'dimention_id' => $sizeId,
+        'image' => 'dimention/image/' . $sizeId . '/' . $fileName,
+        'order' => $uploadedCount + 1
+      ]);
+      
+      $uploadedCount++;
+    }
+    
+    return response()->json([
+      'success' => true,
+      'message' => "Đã import {$uploadedCount} ảnh cho size {$dimention->size}",
+      'uploaded_count' => $uploadedCount
+    ]);
   }
   
   

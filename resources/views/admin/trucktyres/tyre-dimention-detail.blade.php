@@ -57,6 +57,22 @@
                         </tbody>
                     </table>
           <div class="form-group col-md-8 mt-4">
+            @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    <ul>
+                        <li>{!! \Session::get('success') !!}</li>
+                    </ul>
+                </div>
+            @endif
+            
+            @if (\Session::has('error'))
+                <div class="alert alert-danger">
+                    <ul>
+                        <li>{!! \Session::get('error') !!}</li>
+                    </ul>
+                </div>
+            @endif
+            
             <form method="POST" action="{{url('admin/quy-cach-chi-tiet/uploadimage')}}" class="d-flex flex-column align-items-center" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="dimention_id" value="{{$dimention->id}}">
@@ -70,14 +86,18 @@
                         </div>
                       </div>
                   <div class="list-images">
-                      @foreach ($dimention->images as $image)
-                          <div class="box-image">
-                            <img src="{{asset($image->image)}}" class="picture-box">
-                            <div class="wrap-btn-delete"><span data-id="{{ $image->id }}" class="btn-delete-image">x</span></div>
-                            <input type="hidden" id="{{ $image->id }}" name="images_uploaded[]" value="{{ $image->id }}">
-                          </div>
-                          
+                      @if($dimention->images->count() > 0)
+                        <h6 class="mb-2">Ảnh hiện có ({{ $dimention->images->count() }} ảnh):</h6>
+                        @foreach ($dimention->images as $image)
+                            <div class="box-image">
+                              <img src="{{asset($image->image)}}" class="picture-box">
+                              <div class="wrap-btn-delete"><span data-id="{{ $image->id }}" class="btn-delete-image">x</span></div>
+                              <input type="hidden" id="{{ $image->id }}" name="images_uploaded[]" value="{{ $image->id }}">
+                            </div>
                         @endforeach
+                      @else
+                        <p class="text-muted">Chưa có ảnh nào cho size này. Hãy thêm ảnh bằng cách click nút "Thêm ảnh lốp" bên trên.</p>
+                      @endif
                   </div>
                   <button type="submit" class="btn bg-gradient-primary mt-3">Lưu</button>
             </form>
@@ -135,27 +155,81 @@ $(document).ready(function () {
         });
         
   $('.list-input-hidden-upload').on('change', '#file_upload', function (event) {
+    let fileCount = event.target.files.length;
+    let addedCount = 0;
+    
     $.each( event.target.files, function( key, value ) {
       let today = new Date();
       let time = today.getTime();
       let image = event.target.files[key];
       let file_name = event.target.files[key].name;
+      
+      // Kiểm tra định dạng file
+      if (!image.type.startsWith('image/')) {
+        alert('File "' + file_name + '" không phải là ảnh!');
+        return;
+      }
+      
+      // Kiểm tra kích thước file (max 5MB)
+      if (image.size > 5 * 1024 * 1024) {
+        alert('File "' + file_name + '" quá lớn (max 5MB)!');
+        return;
+      }
+      
       let box_image = $('<div class="box-image"></div>');
       box_image.append('<img src="' + URL.createObjectURL(image) + '" class="picture-box">');
-      box_image.append('<div class="wrap-btn-delete"><span data-id=' + time + ' class="btn-delete-image">x</span></div>');
+      box_image.append('<div class="wrap-btn-delete"><span data-id="' + time + '" class="btn-delete-image">x</span></div>');
       $(".list-images").append(box_image);
 
-      $(this).removeAttr('id');
-      $(this).attr('id', time);
-      let input_type_file = '<input type="file" name="filenames[]" id="file_upload" class="myfrm form-control hidden">';
-      $('.list-input-hidden-upload').append(input_type_file);
+      // Tạo input mới cho file này
+      let newInput = $('<input type="file" name="filenames[]" class="myfrm form-control hidden">');
+      newInput.attr('id', time);
+      $('.list-input-hidden-upload').append(newInput);
+      
+      // Gán file vào input mới
+      let dt = new DataTransfer();
+      dt.items.add(image);
+      newInput[0].files = dt.files;
+      
+      addedCount++;
     });
+    
+    // Hiển thị thông báo
+    if (addedCount > 0) {
+      // Ẩn thông báo "chưa có ảnh" nếu có
+      $('.list-images p.text-muted').hide();
+      
+      // Hiển thị thông báo tạm thời
+      let message = $('<div class="alert alert-info alert-dismissible fade show" role="alert">' +
+                     'Đã thêm ' + addedCount + ' ảnh vào danh sách. Click "Lưu" để upload lên server.' +
+                     '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>' +
+                     '</div>');
+      $('.list-images').before(message);
+      
+      // Tự động ẩn thông báo sau 3 giây
+      setTimeout(function() {
+        message.alert('close');
+      }, 3000);
+    }
+    
+    // Reset input gốc
+    $(this).val('');
   });
 
   $(".list-images").on('click', '.btn-delete-image', function () {
     let id = $(this).data('id');
+    
+    // Xóa input file tương ứng
     $('#' + id).remove();
+    
+    // Xóa preview ảnh
     $(this).parents('.box-image').remove();
+    
+    // Nếu không còn ảnh nào, tạo lại input gốc
+    if ($('.list-input-hidden-upload input[type="file"]').length === 0) {
+      let originalInput = '<input multiple type="file" name="filenames[]" id="file_upload" class="myfrm form-control hidden">';
+      $('.list-input-hidden-upload').append(originalInput);
+    }
   });
 });
   </script>

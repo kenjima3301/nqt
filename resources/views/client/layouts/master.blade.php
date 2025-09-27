@@ -16,12 +16,39 @@
     <link rel="stylesheet" href="{{ asset('client/assets/css/promotion.css') }}">
     <link rel="stylesheet" href="{{ asset('client/assets/css/checkout.css') }}">
     <link rel="stylesheet" href="{{asset('assets/css/client/parts-detail.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        .chat-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50">
   @php
   $order = App\Models\Order::where('user_id', optional(Auth::user())->id)->where('status', 'new')->first();
   @endphp
-    <div class="wrapper">
+    <div class="wrapper pt-0 mt-0">
         <!-- header -->
         @include('client.layouts.header', ['order' => $order])
         <!-- end header  -->

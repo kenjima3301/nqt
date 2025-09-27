@@ -19,7 +19,10 @@ class Tyre extends Model
           'tyre_structure',
           'tyre_features',
           'tyre_features_en',
-          'install_position_image'
+          'install_position_image',
+          'thumbnail_image',
+          'price',
+          'status'
       ];
   
   public function model(): HasOne {

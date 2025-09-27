@@ -28,7 +28,11 @@
                         <td class="text-sm font-weight-normal">{{$content->name}}</td>
                    
                         <td class="text-sm font-weight-normal">{{$content->name_en}}</td>
-                        <td><a href="{{url('admin/sectioncontent-edit/'.$content->id)}}"> <i class="fas fa-edit" aria-hidden="true"></i></a></td>
+                        <td class="align-middle">
+                          <a href="{{url('admin/sectioncontent-edit/'.$content->id)}}" class="btn btn-sm btn-outline-primary edit-btn" title="Chỉnh sửa">
+                            <i class="fas fa-edit me-1"></i>Sửa
+                          </a>
+                        </td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -41,3 +45,8 @@
     </div>
   </main>
 </x-layout>
+
+@push('js')
+<style>
+</style>
+@endpush

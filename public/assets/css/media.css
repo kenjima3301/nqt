@@ -1,0 +1,172 @@
+@media (max-width:1200px){
+	.menu ul li a{font-size:15px}
+	.name-gt{font-size:30px}
+	.item_tt h3 a{font-size:16px;line-height:24px}
+}
+@media (max-width: 1001px){
+	.product-layout{grid-template-columns: 1fr;}
+	.about_us{margin-right: 0px;}
+	.album-d{grid-template-columns: repeat(4, 1fr);}
+	.dichvu-txt-1{font-size: 15px;}
+	.dichvu-box{margin: 0px}
+	.search-res{width:60%;}
+	.copyright{text-align:center;}
+	.footer-counter{gap:5px;}
+	.footer-policy{gap:10px}
+	.footer-title{margin-top:0px;}
+	.footer-social{gap:5px}
+	.footer-company{font-size:25px;}
+	.footer-company span{font-size:17px;}
+	.tintuc-video{margin:30px 0px;}
+	.tt-video-d{grid-template-columns:1fr;gap:10px}
+	.hinhanh{padding:30px 0px;}
+	.hinhanh-slide{margin:0px -10px;padding:0px!important;}
+	.hinhanh-txt-1 span{font-size:30px;}
+	.hinhanh .wrap-content{grid-template-columns:1fr;gap:20px}
+	.productLayout{padding:0px 10px;gap:20px;margin: 30px 0px;}
+	.productLayout > div{width:100%;}
+	.intro-img:before{left:-10px;top:-10px;}
+	.intro-img:after{bottom:-10px;right:-10px;}
+	.intro-img:before,
+	.intro-img:after{width:100px;height:70px;}
+	.intro-box:nth-child(2){margin:0px 10px;padding-bottom: 10px;}
+	.intro-more{height:35px;width:215px;}
+	.intro-txt-1:before{height:70px;}
+	.intro-txt-1{font-size:20px;}
+	.intro-txt-1 span{font-size:30px;margin:0px;}
+	.intro-box:nth-child(1){margin-top:0px;}
+	.intro .wrap-content{grid-template-columns:1fr;gap:20px}
+	.filter-index{padding-bottom:30px;}
+	.banner-header{margin:0px}
+	.contact-box{display:none;}
+	body > *{max-width:100vw;overflow-x:hidden;}
+	.mmenu-logo{padding:10px 10px;display:flex;justify-content:center;align-items:center;gap:20px;background:#fff;}
+	.logo-header{margin:0px;width:fit-content;}
+	.search-box{display:none;}
+	.dichvu-next{right:0px;}
+	.dichvu-prev{left:0px;}
+	footer{padding-bottom:45px;display: flex;flex-direction: column;}
+	.toolbar{display:flex;}
+	.footer-layout .wrap-content{grid-template-columns:1fr;padding:30px 0px;gap:30px;}
+	.doitac,
+	.sanpham{padding:30px 0px;}
+	.dichvu-item{}
+	.dichvu{margin:30px 0px;}
+	.banner{margin-bottom:30px;}
+	.tieuchi{padding:30px 0px;margin:0px 0px;}
+	.intro{margin:30px 0px 15px 0px;}
+	.dichvu,
+	body{max-width:100vw;overflow-x:hidden;}
+	.title-main span{font-size:24px;text-align:center;}
+	button#ftwp-trigger{display:none!important}
+	#hamburger{display:block}
+	.menu-head{display:none!important;}
+	.header{padding:0px!important;}
+	.header-bottom{display:none}
+	.cart-mobi{font-size:23px;color:#6CBF2F}
+	.cart-mobi .sss{font-size:16px}
+	.header{padding:10px 0px}
+	.flex-product-main{display:block}
+	.flex-product-main .left-product{position:fixed;z-index:999;top:0px;left:0px;transform:translateX(-250px);bottom:0px;overflow-x:hidden;background:#fff;box-shadow:0px 0px 5px #000;transition:all 0.5s}
+	.flex-product-main .left-product.show{transform:translateX(0px)}
+	.flex-product-main .right-product{width:100%}
+	.grid-product{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+	.filter{display:block}
+	.menu_mobi_add{display:block}
+	.menu_mobi{display:flex}
+	.menu{display:none}
+	.search{margin-left:20px;margin-top:10px}
+	.footer__logo,
+	.footer__info,
+	.footer__baiviet,
+	.footer__fanpage,
+	.left_gthieu,
+	.right_gthieu{width:100%}
+	.footer__info,
+	.footer__fanpage,
+	.right_gthieu{margin-top:20px}
+	.left_gthieu{display:table;margin:auto;overflow:hidden}
+	.noidung_gthieu{margin-left:0}
+	.grid-news{grid-template-columns:1fr 1fr;grid-gap:20px}
+}
+@media (max-width:992px){
+	.xtatca{padding:6px 18px;font-size:14px}
+	.banner-sale{display:none}
+	.box-visao{width:48%}
+	.grid-container{grid-template-rows:1fr 1fr}
+	.newsletter-wrap{padding:40px 20px}
+}
+@media (max-width:769px){
+	.filter-index button{margin:0px auto;height:40px;}
+	.filter-index form{display:grid;}
+	.filter-title img{width:30px;}
+	.filter-title{font-size:15px;height:40px;margin-bottom:20px;}
+	.header-line{display:none;}
+	.header-top .wrap-content{flex-direction:column;gap:5px;}
+	.text-cart{display:none}
+	.grid-pro-detail{display:block}
+	.grid-pro-detail .left-pro-detail{width:100%;padding:0px;border-right:none}
+	.slick_photo1{text-align:center}
+	.grid-pro-detail .right-pro-detail{width:100%}
+	.grid-product{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+	.noidung_gthieu{padding:30px 20px}
+	.tde-gt{font-size:30px}
+	.title-main h2,
+	.name-gt{font-size:25px}
+	.footer__title,
+	.title-company,
+	.name-vsao{font-size:15px}
+	.left_form,
+	.right_form{width:100%}
+	.fanpage__title{font-size:20px}
+}
+@media (max-width:609px){
+
+	.album-d{grid-template-columns: repeat(3, 1fr);}
+	.title-main div{font-size: 14px;}
+	.tintuc-txt-2{margin: 0px;}
+	.hinhanh-txt-3{margin-bottom:20px;}
+	.hinhanh-arr img{width:35px;}
+	.tintuc-txt-1{line-height:auto;font-size:15px;}
+	.hinhanh-item{padding:5px;}
+	.hinhanh-txt-1 span{font-size:25px;}
+	.hinhanh-txt-2{font-size:15px;line-height:normal;}
+	.brand-product{font-size:13px;}
+	.title-product img{height:40px;}
+	.product .price-product{font-size:13px;}
+	.info-product{padding:10px;}
+	.product .name-product{font-size:14px;-webkit-line-clamp:2;}
+	.title-product span{padding:0px 20px;font-size:17px;}
+	.product-more{display:none;}
+	.title-product{margin-bottom:20px;flex-wrap:wrap;}
+	.footer-info-d{gap:20px;flex-wrap:wrap;}
+	.grid-news{grid-gap:20px 10px}
+	.newsletter-wrap{padding:40px 0px}
+	.mxh{width:100%;margin-top:15px}
+	.grid-container{gap:5px 5px}
+	.item_tt h3 a{font-size:15px;line-height:22px}
+}
+@media (max-width:550px){
+	.dichvu-slide{margin: 0px -10px;}
+	.dichvu-txt-2{opacity: 1;}
+	.dichvu-txt{width: 100% !important;margin: auto !important;}
+
+	.dichvu-img{
+    mask-image: unset !important;
+}
+}
+
+@media (max-width:460px){
+
+	.album-d{grid-template-columns: repeat(2, 1fr);}
+	.tintuc-txt-2{display: none;}
+	.tintuc-img{max-width: 150px;}
+	.product .name-product{font-size:13px;line-height:normal;}
+	.info-product{padding:10px 5px;}
+	.noidung_gthieu{padding:30px 10px}
+	.policy__list > li{width:100%;padding-right:0px!important;border-bottom:1px solid #f1f1f1!important}
+	.title-company,
+	.name-vsao{font-size:14px}
+}
+@media (max-width:369px){
+}

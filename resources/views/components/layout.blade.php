@@ -5,6 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!--    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('brand') }}/aplus-logo.png">
     <link rel="icon" type="image/png" href="{{ asset('brand') }}/aplus-logo.png">-->
@@ -28,6 +29,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/admin/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <link href="{{ asset('assets') }}/css/admin/edit-buttons.css" rel="stylesheet" />
   </head>
   <body class="{{ $bodyClass }}">
 

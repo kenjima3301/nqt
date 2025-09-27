@@ -1,5 +1,5 @@
 @extends ('client.layouts.master')
-@section('title', 'NQT - Trang chủ')
+@section('title', 'Công ty Cổ phần Ngọc Quyết Thắng | Nhà nhập khẩu các loại lốp xe uy tín và chất lượng')
 @section('content')
 
 

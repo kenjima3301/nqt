@@ -1,0 +1,92 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+<section>
+ <div class="max-width py-5">
+ <div class="product-layout">
+ <div class="product-box">
+ <div class="title-main">
+ <span>Tìm kiểm sản phẩm</span>
+ </div>
+ <form action="loc-san-pham" method="get" class="filter-product">
+ <select class="form-control" name="brand" id="">
+ <option value="">-- Tìm theo hãng--</option>
+ <?php $__currentLoopData = $tagsBrand; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $v): $loop = $this->incrementLoopIndices();  ?>
+ <option value="<?php echo \htmlentities($v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ <?php if(isset($_REQUEST['brand'])): ?>
+ <?php if($v['id']==$_REQUEST['brand']): ?>
+ selected
+ <?php endif; ?>
+ <?php endif; ?>
+ > <?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?> </option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ 
+ </select>
+ <select class="form-control" name="size" id="">
+ <option value="">-- Tìm theo size--</option>
+ <?php $__currentLoopData = $tagsSize; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $v): $loop = $this->incrementLoopIndices();  ?>
+ <option value="<?php echo \htmlentities($v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ <?php if(isset($_REQUEST['size'])): ?>
+ <?php if($v['id']==$_REQUEST['size']): ?>
+ selected
+ <?php endif; ?>
+ <?php endif; ?>
+ > <?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?> </option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ <select class="form-control" name="code" id="">
+ <option value="">-- Tìm theo mã--</option>
+ <?php $__currentLoopData = $tagsCode; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $v): $loop = $this->incrementLoopIndices();  ?>
+ <option value="<?php echo \htmlentities($v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ <?php if(isset($_REQUEST['code'])): ?>
+ <?php if($v['id']==$_REQUEST['code']): ?>
+ selected
+ <?php endif; ?>
+ <?php endif; ?>
+ > <?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?> </option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ <select class="form-control" name="type" id="">
+ <option value="">-- Loại xe--</option>
+ <?php $__currentLoopData = $tagsType; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $v): $loop = $this->incrementLoopIndices();  ?>
+ <option value="<?php echo \htmlentities($v['id']??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ <?php if(isset($_REQUEST['type'])): ?>
+ <?php if($v['id']==$_REQUEST['type']): ?>
+ selected
+ <?php endif; ?>
+ <?php endif; ?>
+ > <?php echo \htmlentities($v['name'.$lang]??'', ENT_QUOTES, 'UTF-8', false); ?> </option>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ <button>TÌM KIẾM</button>
+ </form>
+ </div>
+ <div class="product-box">
+ <div class="title-main">
+ <span><?php echo \htmlentities($titleMain??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </div>
+ <?php if($product->isNotEmpty()): ?>
+ <div class="grid-product">
+ <?php $__currentLoopData = $product; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php  $this->startComponent('component.itemProduct', ['product' => $v]); ?>
+ <?php echo $this->renderComponent(); ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <?php echo $product->appends(request()->query())->links(); ?>
+
+ <?php else: ?>
+ <div class="alert alert-warning w-100" role="alert">
+ <strong><?=__('web.chuacapnhatdulieu')?></strong>
+ </div>
+ <?php endif; ?>
+ </div>
+ </div>
+ 
+ </div>
+</section>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>

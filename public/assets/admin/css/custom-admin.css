@@ -1,0 +1,38 @@
+/* Custom Admin Styles - Fix modal z-index issue */
+
+/* Fix modal z-index to be higher than admin menu */
+.modal {
+    --bs-modal-zindex: 1101 !important;
+    z-index: 1101 !important;
+}
+
+.modal-backdrop {
+    z-index: 1100 !important;
+}
+
+/* Ensure modal dialog has proper z-index */
+.modal-dialog {
+    z-index: 1102 !important;
+}
+
+/* Fix for image manager modal specifically */
+#imageManagerModal {
+    z-index: 1101 !important;
+}
+
+#imageManagerModal .modal-dialog {
+    z-index: 1102 !important;
+}
+
+/* Additional fix for any overlay issues */
+#imageManagerModal .modal-backdrop {
+    z-index: 1100 !important;
+}
+
+/* Ensure modal content is properly layered */
+.modal-content {
+    position: relative;
+    z-index: 1;
+}
+
+

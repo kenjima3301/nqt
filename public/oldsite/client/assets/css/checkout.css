@@ -1,0 +1,33 @@
+.sub-title {
+    font-size: 14px;
+    color: rgba(144, 163, 191, 1);
+    ;
+}
+
+.card .card-footer a{
+    color: white;
+}
+
+.card .card-footer a:hover{
+    color: black;
+}
+
+.card .card-footer{
+    background-color: #35A25B;
+}
+
+.back-ground {
+    background-color: #35A25B;
+}
+
+.keep-buying a:hover{
+    background-color: #35A25B; 
+    color: black;
+}
+
+#cart-total{
+    /* position: absolute; */
+    margin-top: -10px;
+    font-size: 14px;
+    /* margin-left: 3px; */
+}

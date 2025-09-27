@@ -4,110 +4,101 @@ $information = \App\Models\Menu::find(4);
 $menus = \App\Models\Menu::where('status', 'public')->get();
 $aboutus = \App\Models\Menu::find(14);
 @endphp 
-<footer class="pt-3 " style="background: #35A25B;">
-  <div class="container">
-    <div class="row mt-4 mb">
-      <div class="col-lg-6">
-        <a href="{{route('index')}}"><img src="{{ asset('client/assets/img/logo.png') }}" alt="Your logo" class="img-fluid" width="15%"></a>
-        <div class="footer-info">
-          @php
-          $footer_dia_chi = $contents->filter(function($item) {
-                                  return $item->key == 'footer_dia_chi';
-                              })->first();
-          @endphp
-          <p><i class="fa-light fa-location-dot" style="color:#fff"></i> {{$footer_dia_chi->name_show()}}</p>
-          @php
-          $footer_mst = $contents->filter(function($item) {
-                                  return $item->key == 'footer_mst';
-                              })->first();
-          @endphp
-          <p><i class="fa-light fa-rectangle-code"  style="color:#fff"></i> {{$footer_mst->name_show()}}</p>
-          @php
-          $footer_email = $contents->filter(function($item) {
-                                  return $item->key == 'footer_email';
-                              })->first();
-          @endphp
-          <p><i class="fa-light fa-envelope"  style="color:#fff"></i> {{$footer_email->name_show()}}</p>
-          @php
-          $footer_dien_thoai = $contents->filter(function($item) {
-                                  return $item->key == 'footer_dien_thoai';
-                              })->first();
-          @endphp
-          <p><i class="fa-light fa-phone"  style="color:#fff"></i> {{$footer_dien_thoai->name_show()}}</p>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="row">
-            <div class="menu-footer col-lg-4 col-md-6">
-          @php
-          $footer_ve_chung_toi= $contents->filter(function($item) {
-                                  return $item->key == 'footer_ve_chung_toi';
-                              })->first();
-          @endphp
-                <h5>{{$footer_ve_chung_toi->name_show()}}</h5>
-                <ul class="list-unstyled">
-                  @php
-                  $footer_ve_nqt = $contents->filter(function($item) {
-                                          return $item->key == 'footer_ve_nqt';
-                                      })->first();
-                  @endphp
-                    <li><a href="{{url('/ve-nqt')}}" class="nav-link">{{$footer_ve_nqt->name_show()}}</a></li>
-                    @if(count($aboutus->posts) > 0)
-                      @foreach($aboutus->posts as $post)
-                      <li><a href="{{url('blog/'.$post->slug)}}" class="nav-link">{{$post->title_show()}}</a></li>
-                      @endforeach
-                    @endif
-                </ul>
+<!-- Footer -->
+<footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-center mb-1">
+                        <a href="{{route('index')}}" class="inline-block"><img src="{{ asset('/upload/photo/bien-hieu-cty-1-1740488494.png') }}" alt="NQT" class="h-10"></a>
+                    </div>
+                    @php
+                      $footer_dia_chi = $contents->filter(function($item) { return $item->key == 'footer_dia_chi'; })->first();
+                      $footer_mst = $contents->filter(function($item) { return $item->key == 'footer_mst'; })->first();
+                      $footer_email = $contents->filter(function($item) { return $item->key == 'footer_email'; })->first();
+                      $footer_dien_thoai = $contents->filter(function($item) { return $item->key == 'footer_dien_thoai'; })->first();
+                    @endphp
+                    <ul class="space-y-2 text-gray-300">
+                        @if($footer_dia_chi)<li><i class="fa-light fa-location-dot mr-2"></i> {{$footer_dia_chi->name_show()}}</li>@endif
+                        @if($footer_mst)<li><i class="fa-light fa-rectangle-code mr-2"></i> {{$footer_mst->name_show()}}</li>@endif
+                        @if($footer_email)<li><i class="fa-light fa-envelope mr-2"></i> {{$footer_email->name_show()}}</li>@endif
+                        @if($footer_dien_thoai)<li><i class="fa-light fa-phone mr-2"></i> {{$footer_dien_thoai->name_show()}}</li>@endif
+                    </ul>
+                </div>
+                <div class="text-center">
+                    @php
+                      $footer_ve_chung_toi= $contents->filter(function($item) { return $item->key == 'footer_ve_chung_toi'; })->first();
+                      $footer_ve_nqt = $contents->filter(function($item) { return $item->key == 'footer_ve_nqt'; })->first();
+                    @endphp
+                    <h4 class="text-lg font-semibold mb-4">{{$footer_ve_chung_toi->name_show() ?? 'Về chúng tôi'}}</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        @if($footer_ve_nqt)<li><a href="{{url('/ve-nqt')}}" class="hover:text-white">{{$footer_ve_nqt->name_show()}}</a></li>@endif
+                        @if(count($aboutus->posts) > 0)
+                          @foreach($aboutus->posts as $post)
+                            <li><a href="{{url('blog/'.$post->slug)}}" class="hover:text-white">{{$post->title_show()}}</a></li>
+                          @endforeach
+                        @endif
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-lg font-semibold mb-4">Chính sách</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="#" class="hover:text-white">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="hover:text-white">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách đổi trả</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách giao hàng</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách thanh toán</a></li>
+                        <li><a href="#" class="hover:text-white">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-lg font-semibold mb-4">Trazano</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        @foreach($menus as $tranzano)
+                          @if($tranzano->parent_id == 8)
+                            <li><a @if($tranzano->link != '') href="{{url($tranzano->link)}}" @endif class="hover:text-white">{{$tranzano->name_show()}}</a></li>
+                          @endif
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-            <div class="menu-footer col-lg-4 col-md-6">
-          @php
-          $footer_thong_tin = $contents->filter(function($item) {
-                                  return $item->key == 'footer_thong_tin';
-                              })->first();
-          @endphp
-                <h5>{{$footer_thong_tin->name_show()}}</h5>
-                <ul class="list-unstyled">
-                    @if(count($information->posts) > 0)
-                      @foreach($information->posts as $post)
-                      <li><a href="{{url('blog/'.$post->slug)}}" class="nav-link">{{$post->title_show()}}</a></li>
-                      @endforeach
-                    @endif
-                </ul>
-            </div>
-            <div class="menu-footer col-lg-4 col-md-6">
-                <h5>Trazano</h5>
-                <ul class="list-unstyled">
-                  @foreach($menus as $tranzano)
-                    @if($tranzano->parent_id == 8)
-                    <li><a @if($tranzano->link != '') href="{{url($tranzano->link)}}" @endif class="nav-link">{{$tranzano->name_show()}}</a></li>
-                    @endif
-                    @endforeach
-                </ul>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; {{ date('Y') }} NQT. Tất cả quyền được bảo lưu.</p>
             </div>
         </div>
-      </div>
-      <div class="col-lg-4 footer-info">
-        
-      </div>
+    </footer>
+
+    <!-- Floating Chat -->
+    <div class="chat-float">
+        <div class="flex flex-col space-y-2">
+            @php
+              $footer_facebook_chat = $contents->filter(function($item) { return $item->key == 'footer_facebook_chat'; })->first();
+              $footer_zalo_chat = $contents->filter(function($item) { return $item->key == 'footer_zalo_chat'; })->first();
+            @endphp
+            @if($footer_facebook_chat && $footer_facebook_chat->name)
+            <a class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center" href="{{$footer_facebook_chat->name}}" target="_blank" rel="noopener">
+                <i class="fab fa-facebook-messenger"></i>
+            </a>
+            @endif
+            @if($footer_zalo_chat && $footer_zalo_chat->name)
+            <a class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center" href="{{$footer_zalo_chat->name}}" target="_blank" rel="noopener">
+                <img src="{{ asset('assets/images/zalo.png') }}" class="w-6 h-6" alt="Zalo">
+            </a>
+            @endif
+            <!-- Google Map Button -->
+            <a class="bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center" href="https://maps.google.com" target="_blank" rel="noopener">
+                <i class="fas fa-map-marker-alt"></i>
+            </a>
+            <!-- Facebook Page Button -->
+            <a class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center" href="https://www.facebook.com/share/1BRJf23dJd/?mibextid=wwXIfr" target="_blank" rel="noopener">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <!-- TikTok Button -->
+            <a class="bg-black text-white p-3 rounded-full shadow-lg hover:bg-gray-800 flex items-center justify-center" href="https://www.tiktok.com/@lopxengocquyetthang" target="_blank" rel="noopener">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
     </div>
-  </div>
-          @php
-          $footer_facebook_chat = $contents->filter(function($item) {
-                                  return $item->key == 'footer_facebook_chat';
-                              })->first();
-          @endphp
-  <a href="{{$footer_facebook_chat->name ?? ''}}">
-  <div style="border: none; visibility: visible; bottom: 122px; right: 52px; position: fixed; width: 60px; z-index: 2147483644; height: 60px; top: auto; width: 60px; height: 60px; background-color: #0A7CFF; display: flex; justify-content: center; align-items: center; border-radius:60px">
-    <svg width="36" height="36" viewBox="0 0 36 36"><path fill="white" d="M1 17.99C1 8.51488 8.42339 1.5 18 1.5C27.5766 1.5 35 8.51488 35 17.99C35 27.4651 27.5766 34.48 18 34.48C16.2799 34.48 14.6296 34.2528 13.079 33.8264C12.7776 33.7435 12.4571 33.767 12.171 33.8933L8.79679 35.3828C7.91415 35.7724 6.91779 35.1446 6.88821 34.1803L6.79564 31.156C6.78425 30.7836 6.61663 30.4352 6.33893 30.1868C3.03116 27.2287 1 22.9461 1 17.99ZM12.7854 14.8897L7.79161 22.8124C7.31238 23.5727 8.24695 24.4295 8.96291 23.8862L14.327 19.8152C14.6899 19.5398 15.1913 19.5384 15.5557 19.8116L19.5276 22.7905C20.7193 23.6845 22.4204 23.3706 23.2148 22.1103L28.2085 14.1875C28.6877 13.4272 27.7531 12.5704 27.0371 13.1137L21.673 17.1847C21.3102 17.4601 20.8088 17.4616 20.4444 17.1882L16.4726 14.2094C15.2807 13.3155 13.5797 13.6293 12.7854 14.8897Z"></path></svg>
-  </div>
-  </a>
-          @php
-          $footer_zalo_chat = $contents->filter(function($item) {
-                                  return $item->key == 'footer_zalo_chat';
-                              })->first();
-          @endphp
-  <a href="{{$footer_zalo_chat->name}}">
-  <img style="border: none; visibility: visible; bottom: 52px; right: 52px; position: fixed; width: 55px; z-index: 2147483644; height: 55px; top: auto;" src="{{ asset('assets/images/zalo.png') }}">
-  </a>
-<script src="https://sp.zalo.me/plugins/sdk.js"> </script> 
-</footer>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b030eb3db5f33',t:'MTc1ODgwODQ1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
