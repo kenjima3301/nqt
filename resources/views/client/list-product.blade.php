@@ -177,9 +177,15 @@
                                         <!-- Price -->
                                         <div class="flex justify-between items-center">
                                             <div class="text-lg font-bold text-green-600">
-                                                {{number_format($tyre->price, 0, '', ',')}}đ
+                                                @if($tyre->price == 0)
+                                                    Liên hệ 0934541313
+                                                @else
+                                                    {{number_format($tyre->price, 0, '', ',')}}đ
+                                                @endif
                                             </div>
-                                            <span class="text-sm text-gray-500">/ Lốp</span>
+                                            @if($tyre->price != 0)
+                                                <span class="text-sm text-gray-500">/ Lốp</span>
+                                            @endif
                                         </div>
 
                                         <!-- Action Button -->

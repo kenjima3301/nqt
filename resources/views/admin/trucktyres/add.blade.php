@@ -611,6 +611,23 @@ $(function () {
     setTimeout(() => alert.alert('close'), 3500);
   }
 
+  function addPreviewOnly(file, $inputElement) {
+    let today = new Date();
+    let time = today.getTime() + Math.floor(Math.random()*1000);
+    let box = $('<div class="box-image"></div>');
+    box.append('<img src="' + URL.createObjectURL(file) + '" alt="' + (file.name||'') + '" class="picture-box">');
+    box.append('<div class="wrap-btn-delete"><span data-id="' + time + '" class="btn-delete-image">×</span></div>');
+    $(".list-images").append(box);
+    
+    // Show the preview container when first image is added
+    if ($(".list-images .box-image").length === 1) {
+      $(".list-images").show();
+    }
+
+    // gán id duy nhất cho input này để có thể xóa theo preview
+    $inputElement.removeAttr('id').attr('id', time);
+  }
+
   function addPreviewAndCloneInput(file) {
     let today = new Date();
     let time = today.getTime() + Math.floor(Math.random()*1000);
@@ -633,7 +650,10 @@ $(function () {
   }
 
   function currentFilesCount() {
-    return $('.list-input-hidden-upload input[type=file]').length - 1; // input cuối cùng là trống
+    // Đếm số input có file (không tính input trống)
+    return $('.list-input-hidden-upload input[type=file]').filter(function() {
+      return this.files.length > 0;
+    }).length;
   }
 
   function handleFiles(files, $sourceInput) {
@@ -659,12 +679,15 @@ $(function () {
         showError('Vượt quá số lượng tối đa ' + MAX_FILES + ' ảnh.');
         break;
       }
+      
       // Gắn file vào input file nguồn (nếu input này trống)
       if ($sourceInput && $sourceInput[0].files.length === 0) {
         // Tạo DataTransfer để gán 1 file vào input
         const dt = new DataTransfer();
         dt.items.add(f);
         $sourceInput[0].files = dt.files;
+        // Chỉ tạo preview, không tạo input mới
+        addPreviewOnly(f, $sourceInput);
       } else {
         // Tạo một input mới và gán file
         const $newInput = $('<input multiple accept="image/*" type="file" name="filenames[]" class="myfrm form-control hidden">');
@@ -672,9 +695,25 @@ $(function () {
         dt.items.add(f);
         $newInput[0].files = dt.files;
         $('.list-input-hidden-upload').append($newInput);
+        // Tạo preview và gán ID cho input này
+        addPreviewOnly(f, $newInput);
       }
-      addPreviewAndCloneInput(f);
       total++;
+    }
+    
+    // Đảm bảo luôn có một input trống để sẵn sàng cho lần upload tiếp theo
+    ensureEmptyInput();
+  }
+  
+  function ensureEmptyInput() {
+    // Kiểm tra xem có input trống nào không
+    const emptyInputs = $('.list-input-hidden-upload input[type=file]').filter(function() {
+      return this.files.length === 0 && $(this).attr('id') === 'file_upload';
+    });
+    
+    // Nếu không có input trống, tạo một cái mới
+    if (emptyInputs.length === 0) {
+      $('.list-input-hidden-upload').append('<input multiple accept="image/*" type="file" name="filenames[]" id="file_upload" class="myfrm form-control hidden">');
     }
   }
 
@@ -746,9 +785,13 @@ $(function () {
     if (source === 'upload') {
       $('#uploadSection').show();
       $('#serverImagesSection').hide();
+      // Clear any existing server image inputs when switching to upload
+      $('input[name="server_images[]"]').remove();
     } else {
       $('#uploadSection').hide();
       $('#serverImagesSection').show();
+      // Clear any existing server image inputs to prevent duplicates
+      $('input[name="server_images[]"]').remove();
     }
   });
   
@@ -808,18 +851,28 @@ $(function () {
   
   // Override form submission to include server images
   $('form').on('submit', function(e) {
-    // Validate that at least one image source is selected
-    const hasNewUploads = $('input[name="filenames[]"]').length > 1; // > 1 because there's always one empty input
-    const hasServerImages = selectedServerImages.length > 0;
+    const imageSource = $('input[name="imageSource"]:checked').val();
     
-    if (!hasNewUploads && !hasServerImages) {
-      e.preventDefault();
-      showError('Vui lòng chọn ít nhất một ảnh để thêm lốp xe.');
-      return false;
-    }
+    // Clear any existing hidden server image inputs to prevent duplicates
+    $('input[name="server_images[]"]').remove();
     
-    // Clear existing file inputs if using server images
-    if ($('input[name="imageSource"]:checked').val() === 'existing') {
+    // Validate based on selected image source
+    if (imageSource === 'upload') {
+      const hasNewUploads = currentFilesCount() > 0; // Sử dụng hàm đếm file chính xác
+      if (!hasNewUploads) {
+        e.preventDefault();
+        showError('Vui lòng chọn ít nhất một ảnh để upload.');
+        return false;
+      }
+    } else if (imageSource === 'existing') {
+      const hasServerImages = selectedServerImages.length > 0;
+      if (!hasServerImages) {
+        e.preventDefault();
+        showError('Vui lòng chọn ít nhất một ảnh từ máy chủ.');
+        return false;
+      }
+      
+      // Clear file inputs and add server images
       $('input[name="filenames[]"]').remove();
       
       // Add hidden inputs for server images

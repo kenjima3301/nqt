@@ -55,10 +55,12 @@ class Tyre extends Model
   
   public function features_show(){
         if(session()->get('language')=='en'){
-            return $this->tyre_features_en;
+            // If English is requested, return English if available, otherwise fallback to Vietnamese
+            return !empty(trim($this->tyre_features_en ?? '')) ? $this->tyre_features_en : ($this->tyre_features ?? '');
         }
         else{
-            return $this->tyre_features;
+            // If Vietnamese is requested, return Vietnamese if available, otherwise fallback to English
+            return !empty(trim($this->tyre_features ?? '')) ? $this->tyre_features : ($this->tyre_features_en ?? '');
         }
     }
     

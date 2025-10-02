@@ -27,7 +27,21 @@ class HomeController extends Controller
         ->get();
       $promotions = \App\Models\Promotion::select('*')->groupBy('promotions.tyre_id')->take(12)->get();
       $sectioncontents = \App\Models\SectionContent::all();
-      return view('client.index', ['new_products'=> $new_products,'best_products' => $best_products,'promotions' => $promotions,'sectioncontents' => $sectioncontents] );
+      
+      // Add filter data for homepage search form
+      $models = Modelcar::all();
+      $brands = Brand::all();
+      $sizes = TyreDimention::select('size')->where('status', 'public')->distinct('size')->get();
+      
+      return view('client.index', [
+        'new_products'=> $new_products,
+        'best_products' => $best_products,
+        'promotions' => $promotions,
+        'sectioncontents' => $sectioncontents,
+        'models' => $models,
+        'brands' => $brands,
+        'sizes' => $sizes
+      ]);
     }
 
     public function listProduct() {
@@ -83,14 +97,31 @@ class HomeController extends Controller
       $models = Modelcar::all();
       $brands = Brand::all();
       $contents = \App\Models\SectionContent::all();
-      $tyres = Tyre::join('tyre_dimentions', 'tyres.id', '=', 'tyre_dimentions.tyre_id')
-              ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%')
-              ->where('tyres.model_id', $request->model)
-              ->where('tyres.brand_id', $request->brand)
-              ->where('tyres.status', 'public')
+      
+      // Build query with optional filters
+      $query = Tyre::query();
+      
+      // Join with tyre_dimentions if size filter is applied
+      if (!empty($request->size)) {
+          $query->join('tyre_dimentions', 'tyres.id', '=', 'tyre_dimentions.tyre_id')
+                ->where('tyre_dimentions.size', 'like', '%'. $request->size . '%');
+      }
+      
+      // Apply model filter if provided
+      if (!empty($request->model)) {
+          $query->where('tyres.model_id', $request->model);
+      }
+      
+      // Apply brand filter if provided  
+      if (!empty($request->brand)) {
+          $query->where('tyres.brand_id', $request->brand);
+      }
+      
+      $tyres = $query->where('tyres.status', 'public')
               ->with(['images', 'brand', 'model', 'drive', 'structure'])
               ->distinct('tyres.id')
               ->get('tyres.*');
+              
       $sizes = TyreDimention::select('size')->where('status', 'public')->distinct('size')->get();
       return view('client.list-product', [
           'models' => $models,

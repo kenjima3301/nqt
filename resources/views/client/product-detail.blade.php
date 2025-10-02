@@ -20,6 +20,9 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border-radius: 15px;
         overflow: hidden;
+        opacity: 0.9;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(2px);
     }
     .search-sidebar {
         background: #fff;
@@ -38,23 +41,6 @@
     }
     .product-image-container:hover img {
         transform: scale(1.05);
-    }
-    .size-badge {
-        display: inline-block;
-        padding: 8px 16px;
-        margin: 4px;
-        background: #f8f9fa;
-        border: 2px solid #e9ecef;
-        border-radius: 25px;
-        text-decoration: none;
-        color: #495057;
-        transition: all 0.3s ease;
-    }
-    .size-badge:hover, .size-badge.active {
-        background: #35A25B;
-        color: white;
-        border-color: #35A25B;
-        text-decoration: none;
     }
     .product-info-card {
         background: #fff;
@@ -252,22 +238,22 @@
         <!-- Right Product Detail -->
         <div class="col-lg-9 col-md-8 col-sm-12">
             <div class="product-detail-card">
-                <div class="row">
+                <div class="row d-flex align-items-stretch">
                     <!-- Product Images -->
-                    <div class="col-lg-6">
-                        <div class="product-image-container p-4">
+                    <div class="col-lg-6 d-flex">
+                        <div class="product-image-container p-3 w-100">
                             <ul id="lightSlider" class="text-center">
                                 <!-- Thumbnail Image First -->
                                 @if($tyre->thumbnail_image)
                                     <li data-thumb="{{asset($tyre->thumbnail_image)}}" class="text-center">
-                                        <img class="mx-auto d-block img-fluid" id="myImgThumbnail" src="{{asset($tyre->thumbnail_image)}}" style="max-height: 400px; max-width: 100%; border-radius: 10px;">
+                                        <img class="mx-auto d-block img-fluid product-main-image" id="myImgThumbnail" src="{{asset($tyre->thumbnail_image)}}" style="max-height: 500px; max-width: 100%; border-radius: 15px; cursor: pointer; transition: transform 0.3s ease;">
                                     </li>
                                 @endif
                                 
                                 <!-- Tyre Images -->
                                 @foreach ($tyre->images as $image)
                                     <li data-thumb="{{asset($image->image)}}" class="text-center">
-                                        <img class="mx-auto d-block img-fluid" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="max-height: 400px; max-width: 100%; border-radius: 10px;">
+                                        <img class="mx-auto d-block img-fluid product-main-image" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="max-height: 500px; max-width: 100%; border-radius: 15px; cursor: pointer; transition: transform 0.3s ease;">
                                     </li>
                                 @endforeach
                                 
@@ -276,7 +262,7 @@
                                     <!-- Show images for selected size only -->
                                     @foreach($sizedetail->images as $image)
                                         <li data-thumb="{{asset($image->image)}}" class="text-center">
-                                            <img class="mx-auto d-block img-fluid" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="max-height: 400px; max-width: 100%; border-radius: 10px;">
+                                            <img class="mx-auto d-block img-fluid product-main-image" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="max-height: 500px; max-width: 100%; border-radius: 15px; cursor: pointer; transition: transform 0.3s ease;">
                                         </li>
                                     @endforeach
                                 @else
@@ -284,31 +270,18 @@
                                     @foreach($tyre_sizes as $sizeimage)
                                         @foreach($sizeimage->images as $image)
                                             <li data-thumb="{{asset($image->image)}}" class="text-center">
-                                                <img class="mx-auto d-block img-fluid" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="max-height: 400px; max-width: 100%; border-radius: 10px;">
+                                                <img class="mx-auto d-block img-fluid product-main-image" id="myImg{{$image->id}}" src="{{asset($image->image)}}" style="max-height: 500px; max-width: 100%; border-radius: 15px; cursor: pointer; transition: transform 0.3s ease;">
                                             </li>
                                         @endforeach
                                     @endforeach
                                 @endif
                             </ul>
-                            
-                            <!-- Size Selection -->
-                            <div class="mt-4">
-                                <h6 class="mb-3">Chọn kích thước:</h6>
-                                <div class="d-flex flex-wrap">
-                                    @foreach($tyre_sizes as $size)
-                                    <a class="size-badge @if(isset($sizedetail) && $size->id == $sizedetail->id) active @endif" 
-                                       href="{{url('lop-xe-tai/'.$tyre->id.'/'.$size->id)}}">
-                                        {{$size->size}}
-                                    </a>
-                                    @endforeach
-                                </div>
-                            </div>
                         </div>
                     </div>
                     
                     <!-- Product Information -->
-                    <div class="col-lg-6">
-                        <div class="product-info-card">
+                    <div class="col-lg-6 d-flex">
+                        <div class="product-info-card w-100">
                             <!-- Product Title -->
                             <h2 class="mb-3 text-primary">{{$tyre->brand->name}} {{$tyre->name}}</h2>
                             <p class="text-muted mb-4">
@@ -316,20 +289,33 @@
                             </p>
                             
                             <!-- Product Features -->
+                            @php
+                            // Use features_show() method to get appropriate language content
+                            $featuresContent = $tyre->features_show();
+                            // If Vietnamese is empty but English exists, use English
+                            if (empty(trim($featuresContent)) && !empty(trim($tyre->tyre_features_en))) {
+                                $featuresContent = $tyre->tyre_features_en;
+                            }
+                            @endphp
+                            
+                            @if(!empty(trim($featuresContent)))
                             <div class="mb-4">
                                 <h5 class="mb-3">Đặc điểm nổi bật:</h5>
                                 @php
-                                $features = preg_split("/\r\n|\n|\r/", $tyre->tyre_features);
+                                $features = preg_split("/\r\n|\n|\r/", $featuresContent);
                                 @endphp
                                 <ul class="feature-list">
                                     @foreach($features as $feature)
-                                    <li>
-                                        <i class="fas fa-check-circle text-success me-2"></i> 
-                                        {{trim($feature)}}
-                                    </li>
+                                        @if(!empty(trim($feature)))
+                                        <li>
+                                            <i class="fas fa-check-circle text-success me-2"></i> 
+                                            {{trim($feature)}}
+                                        </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
+                            @endif
                             
                             <!-- Installation Position -->
                             @if($tyre->install_position_image != null)
@@ -405,12 +391,24 @@
                                 
                                 <td class="price-highlight">
                                     @if(isset($size->promotion))
-                                        <span class="text-success">{{number_format(intval($size->promotion->promotion_price), 0, '', ',')}}đ</span>
-                                        <span class="price-old">{{number_format(intval($size->price), 0, '', ',')}}đ</span>
+                                        @if($size->promotion->promotion_price == 0)
+                                            <span class="text-success">Liên hệ 0934541313</span>
+                                        @else
+                                            <span class="text-success">{{number_format(intval($size->promotion->promotion_price), 0, '', ',')}}đ</span>
+                                        @endif
+                                        @if($size->price != 0)
+                                            <span class="price-old">{{number_format(intval($size->price), 0, '', ',')}}đ</span>
+                                        @endif
                                     @else
-                                        {{number_format(intval($size->price), 0, '', ',')}}đ
+                                        @if($size->price == 0)
+                                            Liên hệ 0934541313
+                                        @else
+                                            {{number_format(intval($size->price), 0, '', ',')}}đ
+                                        @endif
                                     @endif
-                                    <small class="text-muted d-block">/ {{$size->unit}}</small>
+                                    @if((!isset($size->promotion) && $size->price != 0) || (isset($size->promotion) && $size->promotion->promotion_price != 0))
+                                        <small class="text-muted d-block">/ {{$size->unit}}</small>
+                                    @endif
                                 </td>
                                 
                                 @php
@@ -496,23 +494,30 @@
                         flex-direction: column;
                     }
                     
+                    .product-detail-card .row.d-flex.align-items-stretch {
+                        align-items: normal;
+                    }
+                    
+                    .product-detail-card .col-lg-6.d-flex {
+                        display: block !important;
+                    }
+                    
                     .product-image-container {
                         margin-bottom: 20px;
                     }
                 }
 
                 @media (max-width: 768px) {
-                    .size-badge {
-                        font-size: 0.9em;
-                        padding: 6px 12px;
-                    }
-                    
                     .spec-table {
                         font-size: 0.9em;
                     }
                     
                     .related-product-card .card-body {
                         padding: 15px;
+                    }
+                    
+                    .product-main-image {
+                        max-height: 350px !important;
                     }
                 }
 
@@ -544,6 +549,38 @@
 
                 .btn-add-cart:hover::before {
                     left: 100%;
+                }
+
+                /* Enhanced product image styles */
+                .product-main-image:hover {
+                    transform: scale(1.02);
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+                }
+
+                .product-image-container {
+                    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+                    border-radius: 20px;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                
+                .product-info-card {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                }
+
+                /* Improved modal styles */
+                .modal {
+                    backdrop-filter: blur(5px);
+                    background-color: rgba(0,0,0,0.95);
+                }
+
+                .modal-content {
+                    border-radius: 15px;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
                 }
             </style>
             <!-- Review Section -->
@@ -679,7 +716,11 @@
                                 
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="price-highlight">
-                                        {{number_format($relatedtypre->price, 0, '', ',')}}đ
+                                        @if($relatedtypre->price == 0)
+                                            Liên hệ 0934541313
+                                        @else
+                                            {{number_format($relatedtypre->price, 0, '', ',')}}đ
+                                        @endif
                                     </span>
                                     <a href="{{url('lop-xe-tai/'.$relatedtypre->id)}}" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-eye"></i> Xem
@@ -725,8 +766,10 @@
 .modal-content {
   margin: auto;
   display: block;
-  width: 100%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 1200px;
+  max-height: 90vh;
+  object-fit: contain;
 }
 
 /* Caption of Modal Image */

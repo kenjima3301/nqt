@@ -86,7 +86,7 @@ $aboutus = \App\Models\Menu::find(14);
             </a>
             @endif
             <!-- Google Map Button -->
-            <a class="bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center" href="https://maps.google.com" target="_blank" rel="noopener">
+            <a class="bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center" href="https://maps.app.goo.gl/3MXgvYAoSSc5nvoy6" target="_blank" rel="noopener">
                 <i class="fas fa-map-marker-alt"></i>
             </a>
             <!-- Facebook Page Button -->

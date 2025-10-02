@@ -177,7 +177,7 @@
                       <span class="badge bg-gradient-success">{{$dimention->total}}</span>
                     </td>
                     <td class="text-sm text-center">
-                      <span class="text-success font-weight-bold">{{number_format($dimention->price)}} VNĐ</span>
+                      <span class="text-success font-weight-bold">{{number_format((float)$dimention->price)}} VNĐ</span>
                     </td>
                     <td class="text-sm text-center">
                       <span class="badge bg-gradient-{{$dimention->status == 'public' ? 'success' : 'secondary'}}">

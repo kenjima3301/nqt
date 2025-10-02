@@ -57,9 +57,15 @@
                     </span>
                   </div>
                   <div class="d-flex justify-content-end gap-1 mt-2" style="font-size:12px;">
-                    <span style="color:#35A25B; font-weight:700;">{{number_format($promotion->promotion_price, 0, '', ',')}}đ</span>
-                    <span style="text-decoration-line: line-through; color:#ae2b2b">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span>
-                    <span>/ Lốp</span>
+                    @if($promotion->promotion_price == 0)
+                      <span style="color:#35A25B; font-weight:700;">Liên hệ 0934541313</span>
+                    @else
+                      <span style="color:#35A25B; font-weight:700;">{{number_format($promotion->promotion_price, 0, '', ',')}}đ</span>
+                      @if($promotion->tyre->price != 0)
+                        <span style="text-decoration-line: line-through; color:#ae2b2b">{{number_format($promotion->tyre->price, 0, '', ',')}}đ</span>
+                      @endif
+                      <span>/ Lốp</span>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -95,7 +101,11 @@
                   <h4 class="card-title m-0" id="ten-lop" style="color:#2b2b2b; font-size:13px; font-weight:700; line-height:1.3">{{$new->brand->name}} {{$new->name}}</h4>
                   <span class="card-text" id='sub_info' style="font-size: 11px; color:#666; display:block; margin-top:2px;">@if(isset($new->drive)){{$new->drive->name}} @endif {{$new->model->name}} {{$new->structure->name ?? ''}}</span>
                   <div class="d-flex justify-content-end mt-2" style="font-size:12px; color:#2b2b2b;">
-                    {{number_format($new->price, 0, '', ',')}}đ / Lốp
+                    @if($new->price == 0)
+                      Liên hệ 0934541313
+                    @else
+                      {{number_format($new->price, 0, '', ',')}}đ / Lốp
+                    @endif
                   </div>
                 </div>
               </div>
@@ -132,7 +142,11 @@
                 @if(isset($best->drive)){{$best->drive->name}} @endif {{$best->model->name}} {{$best->structure->name ?? ''}}
               </span>
               <div class="d-flex justify-content-end mt-2" style="font-size:12px; color:#2b2b2b;">
-                {{number_format($best->price, 0, '', ',')}}đ / Lốp
+                @if($best->price == 0)
+                  Liên hệ 0934541313
+                @else
+                  {{number_format($best->price, 0, '', ',')}}đ / Lốp
+                @endif
               </div>
             </div>
           </div>
@@ -146,54 +160,54 @@
   .card:hover { transform: translateY(-2px); transition: transform .2s ease; }
 </style> --}}
 
-<!-- Advanced Search -->
+    <!-- Advanced Search -->
 <section class="bg-green-50 py-6">
         <div class="container mx-auto px-4">
             <div class="bg-white rounded-lg shadow-md p-6">
                 <h3 class="text-lg font-semibold mb-4 text-gray-800">Tìm kiếm lốp xe nâng cao</h3>
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Mã gai</label>
-                        <select class="w-full border border-gray-300 rounded-md px-3 py-2">
-                            <option>Chọn mã gai</option>
-                            <option>185/65R15</option>
-                            <option>195/65R15</option>
-                            <option>205/55R16</option>
-                        </select>
+                <form method="POST" action="{{url('tim-lop-xe-filter')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Kích thước</label>
+                            <select name="size" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Chọn kích thước</option>
+                                @if(isset($sizes))
+                                    @foreach($sizes as $size)
+                                        <option value="{{$size->size}}">{{$size->size}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Loại xe</label>
+                            <select name="model" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Chọn loại xe</option>
+                                @if(isset($models))
+                                    @foreach($models as $model)
+                                        <option value="{{$model->id}}">{{$model->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Thương hiệu</label>
+                            <select name="brand" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Chọn thương hiệu</option>
+                                @if(isset($brands))
+                                    @foreach($brands as $brand)
+                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 font-medium transition-colors duration-200">
+                                <i class="fas fa-search mr-2"></i>Tìm lốp xe
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Kích thước</label>
-                        <select class="w-full border border-gray-300 rounded-md px-3 py-2">
-                            <option>Chọn kích thước</option>
-                            <option>15 inch</option>
-                            <option>16 inch</option>
-                            <option>17 inch</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Loại xe</label>
-                        <select class="w-full border border-gray-300 rounded-md px-3 py-2">
-                            <option>Chọn loại xe</option>
-                            <option>Xe ô tô</option>
-                            <option>Xe máy</option>
-                            <option>Xe tải</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Thương hiệu</label>
-                        <select class="w-full border border-gray-300 rounded-md px-3 py-2">
-                            <option>Chọn thương hiệu</option>
-                            <option>Michelin</option>
-                            <option>Bridgestone</option>
-                            <option>Dunlop</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button class="w-full bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 font-medium">
-                            <i class="fas fa-search mr-2"></i>Tìm lốp xe
-                        </button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>
@@ -213,17 +227,9 @@
             </div>
             <div class="carousel-item">
               <img class="d-block w-100 slide-image" src="{{ asset('/upload/photo/slide_02.jpg') }}" alt="Slide 2" loading="lazy">
-              <!-- <div class="carousel-caption d-none d-md-block text-center w-100" style="background: rgba(0,0,0,0.5); padding: 25px; border-radius: 15px; backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); left: 0; right: 0; margin: 0 auto; max-width: 90%;">
-                <h3 class="font-weight-bold text-white mb-3" style="font-size: 2.1rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.9); transform: translateZ(10px);">Kho xưởng hiện đại</h3>
-                <p class="text-white mb-0" style="font-size: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); transform: translateZ(5px);">Hệ thống kho bãi và xưởng sản xuất tiên tiến</p>
-              </div> -->
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100 slide-image" src="{{ asset('/upload/photo/slide_03_2.jpg') }}" alt="Slide 3" loading="lazy">
-              <!-- <div class="carousel-caption d-none d-md-block w-100" style="background: rgba(0,0,0,0.5); padding: 25px; border-radius: 15px; backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); left: 0; right: 0; margin: 0 auto; max-width: 90%;">
-                <h3 class="font-weight-bold text-white mb-3" style="font-size: 2.1rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.9); transform: translateZ(10px);">Hệ thống đại lý toàn quốc</h3>
-                <p class="text-white mb-0" style="font-size: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); transform: translateZ(5px);">Dễ dàng tìm và lắp đặt</p>
-              </div> -->
+              <img class="d-block w-100 slide-image" src="{{ asset('/upload/photo/slide_03.jpg') }}" alt="Slide 3" loading="lazy">
             </div>
           </div>
           <a class="carousel-control-prev" href="#homepageCarousel" role="button" data-slide="prev" style="background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); border-radius: 0 15px 15px 0; width: 60px; height: 80px; top: 50%; transform: translateY(-50%); left: 0; display: flex; align-items: center; justify-content: center;">
@@ -252,7 +258,13 @@
                     <div class="p-4">
                         <h3 class="font-semibold text-lg mb-1 text-gray-800">{{ $new->brand->name }} {{ $new->name }}</h3>
                         <p class="text-gray-600 text-sm mb-2">@if(isset($new->drive)){{ $new->drive->name }} @endif {{ $new->model->name }} {{ $new->structure->name ?? '' }}</p>
-                        <p class="text-green-600 font-semibold mb-3">{{ number_format($new->price, 0, '', ',') }}đ / Lốp</p>
+                        <p class="text-green-600 font-semibold mb-3">
+                            @if($new->price == 0)
+                                Liên hệ 0934541313
+                            @else
+                                {{ number_format($new->price, 0, '', ',') }}đ / Lốp
+                            @endif
+                        </p>
                         <a href="{{ url('lop-xe-tai/'.$new->id) }}" class="w-full inline-block text-center bg-green-600 text-white py-2 rounded hover:bg-green-700">Xem chi tiết</a>
                     </div>
                 </div>
@@ -279,7 +291,13 @@
                     <div class="p-4">
                         <h3 class="font-semibold text-lg mb-1 text-gray-800">{{ $best->brand->name }} {{ $best->name }}</h3>
                         <p class="text-gray-600 text-sm mb-2">@if(isset($best->drive)){{ $best->drive->name }} @endif {{ $best->model->name }} {{ $best->structure->name ?? '' }}</p>
-                        <p class="text-green-600 font-semibold mb-3">{{ number_format($best->price, 0, '', ',') }}đ / Lốp</p>
+                        <p class="text-green-600 font-semibold mb-3">
+                            @if($best->price == 0)
+                                Liên hệ 0934541313
+                            @else
+                                {{ number_format($best->price, 0, '', ',') }}đ / Lốp
+                            @endif
+                        </p>
                         <a href="{{ url('lop-xe-tai/'.$best->id) }}" class="w-full inline-block text-center bg-green-600 text-white py-2 rounded hover:bg-green-700">Xem chi tiết</a>
                     </div>
                 </div>
