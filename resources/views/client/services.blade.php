@@ -1,124 +1,199 @@
 @extends ('client.layouts.master')
-@section('title', 'Công ty Cổ phần Ngọc Quyết Thắng | Nhà nhập khẩu các loại lốp xe uy tín và chất lượng')
+@section('title', 'Dịch vụ - Công ty Cổ phần Ngọc Quyết Thắng')
 @section('content')
 
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-green-600 to-green-700 py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Dịch vụ của chúng tôi</h1>
+        <p class="text-xl text-green-100 max-w-2xl mx-auto">
+            Chúng tôi cung cấp các dịch vụ chuyên nghiệp về lốp xe với chất lượng cao và giá cả hợp lý
+        </p>
+    </div>
+</section>
 
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-6 mt-2 mb-tg-0 order-2 order-lg-1">
-            <ul class="nav nav-tabs flex-column">
-              <li class="nav-item" data-aos="fade-up">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">
-                  <h4>Modi sit est</h4>
-                  <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2" data-aos="fade-up" data-aos-delay="100">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">
-                  <h4>Unde praesentium sed</h4>
-                  <p>Voluptas vel esse repudiandae quo excepturi.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2" data-aos="fade-up" data-aos-delay="200">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">
-                  <h4>Pariatur explicabo vel</h4>
-                  <p>Velit veniam ipsa sit nihil blanditiis mollitia natus.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2" data-aos="fade-up" data-aos-delay="300">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">
-                  <h4>Nostrum qui quasi</h4>
-                  <p>Ratione hic sapiente nostrum doloremque illum nulla praesentium id</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <figure>
-                  <img src="{{ asset('trazano/gallery-1.jpg') }}" alt="" class="img-fluid">
-                </figure>
-              </div>
-              <div class="tab-pane" id="tab-2">
-                <figure>
-                  <img src="{{ asset('trazano/gallery-2.jpg') }}" alt="" class="img-fluid">
-                </figure>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <figure>
-                  <img src="{{ asset('trazano/gallery-3.jpg') }}" alt="" class="img-fluid">
-                </figure>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <figure>
-                  <img src="{{ asset('trazano/gallery-4.jpg') }}" alt="" class="img-fluid">
-                </figure>
-              </div>
+<!-- Services Grid -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        @if($services->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($services as $service)
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    @if($service->image)
+                        <div class="h-48 bg-cover bg-center" style="background-image: url('{{ asset($service->image) }}')"></div>
+                    @else
+                        <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                            @if($service->icon)
+                                <i class="{{ $service->icon }} text-4xl text-white"></i>
+                            @else
+                                <i class="fas fa-cogs text-4xl text-white"></i>
+                            @endif
+                        </div>
+                    @endif
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">{{ $service->title_show() }}</h3>
+                        <p class="text-gray-600 mb-4">{{ $service->description_show() }}</p>
+                        
+                        @if($service->content_show())
+                            <button class="text-green-600 hover:text-green-700 font-medium" onclick="openServiceModal({{ $service->id }})">
+                                Xem chi tiết <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
             </div>
-          </div>
+        @else
+            <!-- Default Services when no data -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-tire text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Bán lốp xe chính hãng</h3>
+                        <p class="text-gray-600 mb-4">Cung cấp các loại lốp xe chính hãng từ các thương hiệu uy tín như Trazano, Golden Crown với giá cả cạnh tranh.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <i class="fas fa-tools text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Lắp đặt và thay lốp</h3>
+                        <p class="text-gray-600 mb-4">Dịch vụ lắp đặt và thay lốp xe chuyên nghiệp với đội ngũ kỹ thuật viên có kinh nghiệm.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Cân bằng lốp xe</h3>
+                        <p class="text-gray-600 mb-4">Dịch vụ cân bằng lốp xe giúp xe chạy êm ái và tăng tuổi thọ của lốp xe.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-shipping-fast text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Giao hàng tận nơi</h3>
+                        <p class="text-gray-600 mb-4">Dịch vụ giao hàng tận nơi nhanh chóng trong khu vực Hà Nội và các tỉnh lân cận.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-48 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                        <i class="fas fa-phone-alt text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Tư vấn chuyên nghiệp</h3>
+                        <p class="text-gray-600 mb-4">Đội ngũ chuyên gia tư vấn giúp bạn chọn lựa loại lốp phù hợp nhất với nhu cầu sử dụng.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-4xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Bảo hành chính hãng</h3>
+                        <p class="text-gray-600 mb-4">Tất cả sản phẩm đều được bảo hành chính hãng theo tiêu chuẩn của nhà sản xuất.</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-8 text-gray-800">Liên hệ với chúng tôi</h2>
+        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            Để được tư vấn và hỗ trợ tốt nhất, hãy liên hệ với chúng tôi qua các kênh sau:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div class="text-center">
+                <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-phone text-white text-xl"></i>
+                </div>
+                <h3 class="font-semibold mb-2">Hotline</h3>
+                <p class="text-green-600 font-medium">093 454 1313</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-envelope text-white text-xl"></i>
+                </div>
+                <h3 class="font-semibold mb-2">Email</h3>
+                <p class="text-green-600 font-medium">nqt3999@gmail.com</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                </div>
+                <h3 class="font-semibold mb-2">Địa chỉ</h3>
+                <p class="text-gray-600">Phường Dĩ An, Thành phố Hồ Chí Minh</p>
+            </div>
         </div>
-
-      </div>
-    </section><!-- End Features Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        
+        <div class="mt-8">
+            <a href="{{ route('contactus') }}" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors duration-200 inline-block">
+                Liên hệ ngay
+            </a>
         </div>
+    </div>
+</section>
 
-        <div class="row">
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in">
-            <div class="icon-box icon-box-pink">
-              <div class="icon"><i class="bx bxl-dribbble"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+<!-- Service Detail Modal -->
+@if($services->count() > 0)
+<div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modalTitle" class="text-2xl font-bold text-gray-800"></h3>
+                    <button onclick="closeServiceModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div id="modalContent" class="prose max-w-none"></div>
             </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box icon-box-cyan">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box icon-box-green">
-              <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box icon-box-blue">
-              <div class="icon"><i class="bx bx-world"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
-            </div>
-          </div>
-
         </div>
+    </div>
+</div>
 
-      </div>
-    </section><!-- End Services Section -->
+<script>
+const services = @json($services);
 
-  
-  </main><!-- End #main -->
-  <script src="https://bootstrapmade.com/assets/js/demo.js?v=5.0"></script>
-  <script src="https://bootstrapmade.com/assets/vendor/aos/aos.js"></script>
-  <script src="https://bootstrapmade.com/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://bootstrapmade.com/assets/vendor/glightbox/js/glightbox.min.jss"></script>
-  <script src="https://bootstrapmade.com/assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="https://bootstrapmade.com/demo/templates/Scaffold/assets/js/main.js"></script>
-  <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v2b4487d741ca48dcbadcaf954e159fc61680799950996" integrity="sha512-D/jdE0CypeVxFadTejKGTzmwyV10c1pxZk/AqjJuZbaJwGMyNHY3q/mTPWqMUnFACfCTunhZUVcd4cV78dK1pQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;7ba19c60cd9f0796&quot;,&quot;token&quot;:&quot;68c5ca450bae485a842ff76066d69420&quot;,&quot;version&quot;:&quot;2023.3.0&quot;,&quot;si&quot;:100}" crossorigin="anonymous"></script>
+function openServiceModal(serviceId) {
+    const service = services.find(s => s.id === serviceId);
+    if (service) {
+        document.getElementById('modalTitle').textContent = service.title{{ session()->get('language') == 'en' ? '_en' : '' }} || service.title;
+        document.getElementById('modalContent').innerHTML = service.content{{ session()->get('language') == 'en' ? '_en' : '' }} || service.content;
+        document.getElementById('serviceModal').classList.remove('hidden');
+    }
+}
+
+function closeServiceModal() {
+    document.getElementById('serviceModal').classList.add('hidden');
+}
+
+// Close modal when clicking outside
+document.getElementById('serviceModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeServiceModal();
+    }
+});
+</script>
+@endif
+
 @endsection

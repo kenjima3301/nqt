@@ -51,103 +51,46 @@ $ten_tim_kiem = \App\Models\SectionContent::where('key','ten_tim_kiem')->first()
                 <nav class="hidden lg:flex items-center justify-center space-x-8 flex-1">
                 @foreach ($menus as $menu)
                     @if($menu->parent_id == '')
-                        @if($menu->level == 1 && $menu->name_show() != 'Sản phẩm')
+                        @if($menu->children->count() > 0)
                             <div class="relative group">
-                                <button class="text-gray-700 hover:text-green-600 font-medium flex items-center text-lg">
-                                    {{$menu->name_show()}} <i class="fas fa-chevron-down ml-1"></i>
-                                </button>
+                                @if(!empty($menu->link) || $menu->name_show() == 'Sản phẩm')
+                                    <a href="{{ $menu->getUrl() }}" class="text-gray-700 hover:text-green-600 font-medium flex items-center text-lg">
+                                        {{$menu->name_show()}} <i class="fas fa-chevron-down ml-1"></i>
+                                    </a>
+                                @else
+                                    <button class="text-gray-700 hover:text-green-600 font-medium flex items-center text-lg">
+                                        {{$menu->name_show()}} <i class="fas fa-chevron-down ml-1"></i>
+                                    </button>
+                                @endif
                                 <div class="absolute top-full left-0 mt-2 min-w-[12rem] bg-white rounded shadow-lg hidden group-hover:block z-[60] pt-2">
-                                    @foreach ($menus as $sub1)
-                                        @if($sub1->parent_id == $menu->id)
-                                            @if($menu->level == 1)
-                                                <div class="relative group/sub">
-                                                    <a class="block px-4 py-2 hover:bg-gray-100">{{$sub1->name_show()}}</a>
-                                                    <div class="absolute top-0 left-full mt-0 min-w-[12rem] bg-white rounded shadow-lg hidden group-hover/sub:block z-[70] pt-2">
-                                                        @foreach ($menus as $sub2)
-                                                            @if($sub2->parent_id == $sub1->id)
-                                                                <a class="block px-4 py-2 hover:bg-gray-100" 
-                                                                   @if($sub2->link != '') 
-                                                                       href="{{url($sub2->link)}}" 
-                                                                   @elseif($sub2->name_show() == 'Trang chủ')
-                                                                       href="{{route('index')}}"
-                                                                   @elseif($sub2->name_show() == 'Sản phẩm')
-                                                                       href="{{route('list-product')}}"
-                                                                   @elseif($sub2->name_show() == 'Dịch vụ')
-                                                                       href="{{route('services')}}"
-                                                                   @elseif($sub2->name_show() == 'Tin tức')
-                                                                       href="{{route('posts', ['slug' => 'tin-tuc'])}}"
-                                                                   @elseif($sub2->name_show() == 'Liên hệ')
-                                                                       href="{{route('contactus')}}"
-                                                                   @elseif($sub2->name_show() == 'Về NQT')
-                                                                       href="{{route('nqt')}}"
-                                                                   @elseif($sub2->name_show() == 'Về Trazano')
-                                                                       href="{{route('trazano')}}"
-                                                                   @elseif($sub2->name_show() == 'Khuyến mãi')
-                                                                       href="{{route('promotion')}}"
-                                                                   @else
-                                                                       href="{{url('ve-trazano')}}"
-                                                                   @endif>
-                                                                   {{$sub2->name_show()}}
-                                                                </a>
-                                                            @endif
-                                                        @endforeach
-                                                    </div>
+                                    @foreach ($menu->children as $child)
+                                        @if($child->children->count() > 0)
+                                            <div class="relative group/sub">
+                                                <a href="{{ $child->getUrl() }}" class="block px-4 py-2 hover:bg-gray-100">{{$child->name_show()}}</a>
+                                                <div class="absolute top-0 left-full mt-0 min-w-[12rem] bg-white rounded shadow-lg hidden group-hover/sub:block z-[70] pt-2">
+                                                    @foreach ($child->children as $grandchild)
+                                                        <a href="{{ $grandchild->getUrl() }}" class="block px-4 py-2 hover:bg-gray-100">
+                                                            {{$grandchild->name_show()}}
+                                                        </a>
+                                                    @endforeach
                                                 </div>
-                                            @else
-                                                <a class="block px-4 py-2 hover:bg-gray-100" 
-                                                   @if($sub1->link != '') 
-                                                       href="{{url($sub1->link)}}" 
-                                                   @elseif($sub1->name_show() == 'Trang chủ')
-                                                       href="{{route('index')}}"
-                                                   @elseif($sub1->name_show() == 'Sản phẩm')
-                                                       href="{{route('list-product')}}"
-                                                   @elseif($sub1->name_show() == 'Dịch vụ')
-                                                       href="{{route('services')}}"
-                                                   @elseif($sub1->name_show() == 'Tin tức')
-                                                       href="{{route('posts', ['slug' => 'tin-tuc'])}}"
-                                                   @elseif($sub1->name_show() == 'Liên hệ')
-                                                       href="{{route('contactus')}}"
-                                                   @elseif($sub1->name_show() == 'Về NQT')
-                                                       href="{{route('nqt')}}"
-                                                   @elseif($sub1->name_show() == 'Về Trazano')
-                                                       href="{{route('trazano')}}"
-                                                   @elseif($sub1->name_show() == 'Khuyến mãi')
-                                                       href="{{route('promotion')}}"
-                                                   @endif>
-                                                   {{$sub1->name_show()}}
-                                                </a>
-                                            @endif
+                                            </div>
+                                        @else
+                                            <a href="{{ $child->getUrl() }}" class="block px-4 py-2 hover:bg-gray-100">
+                                                {{$child->name_show()}}
+                                            </a>
                                         @endif
                                     @endforeach
-                                    @if(count($menu->posts) > 0)
+                                    @if($menu->posts->count() > 0)
                                         @foreach($menu->posts as $post)
-                                            <a @if($post->slug != '') href="{{url('blog/'.$post->slug)}}" @endif class="block px-4 py-2 hover:bg-gray-100">{{$post->title_show()}}</a>
+                                            <a href="{{url('blog/'.$post->slug)}}" class="block px-4 py-2 hover:bg-gray-100">{{$post->title_show()}}</a>
                                         @endforeach
                                     @endif
                                 </div>
                             </div>
                         @else
-                            <a class="text-gray-700 hover:text-green-600 font-medium text-lg text-center" 
-                               @if($menu->link != '') 
-                                   href="{{url($menu->link)}}" 
-                               @elseif($menu->name_show() == 'Trang chủ')
-                                   href="{{route('index')}}"
-                               @elseif($menu->name_show() == 'Sản phẩm')
-                                   href="{{route('list-product')}}"
-                               @elseif($menu->name_show() == 'Dịch vụ')
-                                   href="{{route('services')}}"
-                               @elseif($menu->name_show() == 'Tìm đại lý' || $menu->name_show() == 'Tin tức')
-                                   href="{{route('posts', ['slug' => 'tin-tuc'])}}"
-                               @elseif($menu->name_show() == 'Liên hệ')
-                                   href="{{route('contactus')}}"
-                               @elseif($menu->name_show() == 'Về NQT')
-                                   href="{{route('nqt')}}"
-                               @elseif($menu->name_show() == 'Về Trazano')
-                                   href="{{route('trazano')}}"
-                               @elseif($menu->name_show() == 'Khuyến mãi')
-                                   href="{{route('promotion')}}"
-                               @endif>
-                               {{$menu->name_show() == 'Tìm đại lý' ? 'Tin tức' : $menu->name_show()}}
+                            <a href="{{ $menu->getUrl() }}" class="text-gray-700 hover:text-green-600 font-medium text-lg text-center">
+                               {{ $menu->name_show() }}
                             </a>
                         @endif
                     @endif
@@ -180,18 +123,20 @@ $ten_tim_kiem = \App\Models\SectionContent::where('key','ten_tim_kiem')->first()
         <!-- Mobile Menu -->
         <div class="mobile-menu fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-50 lg:hidden">
             <div class="p-4">
-                <div class="flex justify-between items-center mb-6">
-                    <div class="text-xl font-bold text-green-600">TireShop</div>
+                <div class="flex justify-between items-center ml-4 mb-3">
+                    <img src="{{ asset('upload/photo/bien-hieu-cty-1-1740488494.png') }}" alt="Logo công ty" class="w-32 md:w-48 lg:w-64 h-auto transition-all duration-300">
                     <button onclick="toggleMobileMenu()">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
                 <nav class="space-y-4">
-                    <a href="{{route('index')}}" class="block text-gray-700 hover:text-green-600">Trang chủ</a>
-                    <a href="{{route('list-product')}}" class="block text-gray-700 hover:text-green-600">Sản phẩm</a>
-                    <a href="{{route('services')}}" class="block text-gray-700 hover:text-green-600">Dịch vụ</a>
-                    <a href="{{route('posts', ['slug' => 'tin-tuc'])}}" class="block text-gray-700 hover:text-green-600">Tin tức</a>
-                    <a href="{{route('contactus')}}" class="block text-gray-700 hover:text-green-600">Liên hệ</a>
+                    @foreach ($menus as $menu)
+                        @if($menu->parent_id == '')
+                            <a href="{{ $menu->getUrl() }}" class="block text-gray-700 hover:text-green-600">
+                                {{ $menu->name_show() }}
+                            </a>
+                        @endif
+                    @endforeach
 
                 @if( auth()->check() )
                     @if(Auth::user()->hasRole('client'))

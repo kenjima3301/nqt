@@ -313,7 +313,7 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-800">Tin tức mới nhất</h2>
-                <a href="#" class="text-green-600 hover:text-green-700 font-medium">
+                <a href="{{ route('news-list') }}" class="text-green-600 hover:text-green-700 font-medium">
                     Xem tất cả <i class="fas fa-arrow-right ml-1"></i>
                 </a>
             </div>

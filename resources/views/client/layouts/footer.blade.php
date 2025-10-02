@@ -70,35 +70,150 @@ $aboutus = \App\Models\Menu::find(14);
 
     <!-- Floating Chat -->
     <div class="chat-float">
-        <div class="flex flex-col space-y-2">
+        <!-- Desktop: Always show all buttons -->
+        <div class="desktop-chat-buttons hidden md:flex flex-col space-y-2">
             @php
               $footer_facebook_chat = $contents->filter(function($item) { return $item->key == 'footer_facebook_chat'; })->first();
               $footer_zalo_chat = $contents->filter(function($item) { return $item->key == 'footer_zalo_chat'; })->first();
             @endphp
             @if($footer_facebook_chat && $footer_facebook_chat->name)
-            <a class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center" href="{{$footer_facebook_chat->name}}" target="_blank" rel="noopener">
+            <a class="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-all duration-300" href="{{$footer_facebook_chat->name}}" target="_blank" rel="noopener" title="Facebook Messenger">
                 <i class="fab fa-facebook-messenger"></i>
             </a>
             @endif
             @if($footer_zalo_chat && $footer_zalo_chat->name)
-            <a class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center" href="{{$footer_zalo_chat->name}}" target="_blank" rel="noopener">
+            <a class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center transition-all duration-300" href="{{$footer_zalo_chat->name}}" target="_blank" rel="noopener" title="Zalo">
                 <img src="{{ asset('assets/images/zalo.png') }}" class="w-6 h-6" alt="Zalo">
             </a>
             @endif
             <!-- Google Map Button -->
-            <a class="bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center" href="https://maps.app.goo.gl/3MXgvYAoSSc5nvoy6" target="_blank" rel="noopener">
+            <a class="bg-red-500 text-white p-3 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center transition-all duration-300" href="https://maps.app.goo.gl/3MXgvYAoSSc5nvoy6" target="_blank" rel="noopener" title="Vị trí trên bản đồ">
                 <i class="fas fa-map-marker-alt"></i>
             </a>
             <!-- Facebook Page Button -->
-            <a class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center" href="https://www.facebook.com/share/1BRJf23dJd/?mibextid=wwXIfr" target="_blank" rel="noopener">
+            <a class="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center transition-all duration-300" href="https://www.facebook.com/share/1BRJf23dJd/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook Page">
                 <i class="fab fa-facebook-f"></i>
             </a>
             <!-- TikTok Button -->
-            <a class="bg-black text-white p-3 rounded-full shadow-lg hover:bg-gray-800 flex items-center justify-center" href="https://www.tiktok.com/@lopxengocquyetthang" target="_blank" rel="noopener">
+            <a class="bg-black text-white p-3 rounded-full shadow-lg hover:bg-gray-800 flex items-center justify-center transition-all duration-300" href="https://www.tiktok.com/@lopxengocquyetthang" target="_blank" rel="noopener" title="TikTok">
                 <i class="fab fa-tiktok"></i>
             </a>
         </div>
+
+        <!-- Mobile: Collapsible menu -->
+        <div class="mobile-chat-container md:hidden">
+            <!-- Chat Menu (appears above toggle button) -->
+            <div class="mobile-chat-menu hidden">
+                <div class="flex flex-col-reverse space-y-reverse space-y-2 mb-3">
+                    @if($footer_facebook_chat && $footer_facebook_chat->name)
+                    <a class="mobile-chat-item bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center transition-all duration-300" href="{{$footer_facebook_chat->name}}" target="_blank" rel="noopener" title="Facebook Messenger">
+                        <i class="fab fa-facebook-messenger text-sm"></i>
+                    </a>
+                    @endif
+                    @if($footer_zalo_chat && $footer_zalo_chat->name)
+                    <a class="mobile-chat-item bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center transition-all duration-300" href="{{$footer_zalo_chat->name}}" target="_blank" rel="noopener" title="Zalo">
+                        <img src="{{ asset('assets/images/zalo.png') }}" class="w-4 h-4" alt="Zalo">
+                    </a>
+                    @endif
+                    <!-- Google Map Button -->
+                    <a class="mobile-chat-item bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600 flex items-center justify-center transition-all duration-300" href="https://maps.app.goo.gl/3MXgvYAoSSc5nvoy6" target="_blank" rel="noopener" title="Vị trí trên bản đồ">
+                        <i class="fas fa-map-marker-alt text-sm"></i>
+                    </a>
+                    <!-- Facebook Page Button -->
+                    <a class="mobile-chat-item bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 flex items-center justify-center transition-all duration-300" href="https://www.facebook.com/share/1BRJf23dJd/?mibextid=wwXIfr" target="_blank" rel="noopener" title="Facebook Page">
+                        <i class="fab fa-facebook-f text-sm"></i>
+                    </a>
+                    <!-- TikTok Button -->
+                    <a class="mobile-chat-item bg-black text-white p-2 rounded-full shadow-lg hover:bg-gray-800 flex items-center justify-center transition-all duration-300" href="https://www.tiktok.com/@lopxengocquyetthang" target="_blank" rel="noopener" title="TikTok">
+                        <i class="fab fa-tiktok text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Main Toggle Button (mobile only) -->
+            <div class="mobile-chat-toggle bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 flex items-center justify-center cursor-pointer transition-all duration-300" onclick="toggleMobileChatMenu()">
+                <i class="fas fa-comments mobile-chat-icon"></i>
+                <i class="fas fa-times mobile-close-icon hidden"></i>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function toggleMobileChatMenu() {
+            const chatMenu = document.querySelector('.mobile-chat-menu');
+            const chatIcon = document.querySelector('.mobile-chat-icon');
+            const closeIcon = document.querySelector('.mobile-close-icon');
+            const toggleBtn = document.querySelector('.mobile-chat-toggle');
+            
+            if (chatMenu.classList.contains('hidden')) {
+                // Show menu
+                chatMenu.classList.remove('hidden');
+                chatIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                toggleBtn.classList.add('bg-red-500', 'hover:bg-red-600');
+                toggleBtn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                
+                // Animate items from bottom to top
+                const items = document.querySelectorAll('.mobile-chat-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.style.transform = 'translateY(0) scale(1)';
+                        item.style.opacity = '1';
+                    }, index * 100);
+                });
+            } else {
+                // Hide menu
+                chatMenu.classList.add('hidden');
+                chatIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                toggleBtn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                toggleBtn.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                
+                // Reset items
+                const items = document.querySelectorAll('.mobile-chat-item');
+                items.forEach(item => {
+                    item.style.transform = 'translateY(20px) scale(0)';
+                    item.style.opacity = '0';
+                });
+            }
+        }
+
+        // Initialize mobile chat items with hidden state
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.mobile-chat-item');
+            items.forEach(item => {
+                item.style.transform = 'translateY(20px) scale(0)';
+                item.style.opacity = '0';
+                item.style.transition = 'all 0.3s ease';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileContainer = document.querySelector('.mobile-chat-container');
+            if (mobileContainer && !mobileContainer.contains(event.target)) {
+                const chatMenu = document.querySelector('.mobile-chat-menu');
+                const chatIcon = document.querySelector('.mobile-chat-icon');
+                const closeIcon = document.querySelector('.mobile-close-icon');
+                const toggleBtn = document.querySelector('.mobile-chat-toggle');
+                
+                if (chatMenu && !chatMenu.classList.contains('hidden')) {
+                    chatMenu.classList.add('hidden');
+                    chatIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    toggleBtn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                    toggleBtn.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                    
+                    // Reset items
+                    const items = document.querySelectorAll('.mobile-chat-item');
+                    items.forEach(item => {
+                        item.style.transform = 'translateY(20px) scale(0)';
+                        item.style.opacity = '0';
+                    });
+                }
+            }
+        });
+    </script>
 
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'984b030eb3db5f33',t:'MTc1ODgwODQ1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 

@@ -38,6 +38,46 @@
             right: 20px;
             z-index: 1000;
         }
+        
+        /* Mobile specific styles */
+        @media (max-width: 768px) {
+            .chat-float {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .mobile-chat-toggle {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .mobile-chat-item {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .mobile-chat-menu {
+                margin-bottom: 10px;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .chat-float {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .mobile-chat-toggle {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .mobile-chat-item {
+                width: 36px;
+                height: 36px;
+            }
+        }
         .product-card:hover {
             transform: translateY(-5px);
             transition: transform 0.3s ease;

@@ -11,6 +11,8 @@ use App\Models\Brand;
 use App\Models\TyreDimention;
 use App\Models\TyreMadein;
 use App\Models\Posts;
+use App\Models\Service;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -213,7 +215,9 @@ class HomeController extends Controller
     }
     
     public function services() {
-      return view('client.services');
+      $services = Service::active()->orderBy('order')->get();
+      $sectioncontents = \App\Models\SectionContent::where('key', 'LIKE', '%dich_vu%')->get();
+      return view('client.services', compact('services', 'sectioncontents'));
     }
     
     public function trazano() {
@@ -231,12 +235,45 @@ class HomeController extends Controller
     }
     
     public function posts($slug) {
-      $post = Posts::where('slug', $slug)->first();
+      $post = Posts::where('slug', $slug)->with('category')->first();
+      if (!$post) {
+          abort(404);
+      }
       return view('client.post', ['post' => $post]);
+    }
+    
+    public function newsList(Request $request) {
+      $posts = Posts::where('status', 'published')
+                   ->with('category')
+                   ->orderBy('created_at', 'desc')
+                   ->paginate(12);
+      $categories = Category::active()->orderBy('order')->get();
+      return view('client.news-list', compact('posts', 'categories'));
+    }
+    
+    public function newsByCategory($categorySlug, Request $request) {
+      $category = Category::where('slug', $categorySlug)->active()->first();
+      if (!$category) {
+          abort(404);
+      }
+      
+      $posts = Posts::where('status', 'published')
+                   ->where('category_id', $category->id)
+                   ->with('category')
+                   ->orderBy('created_at', 'desc')
+                   ->paginate(12);
+      $categories = Category::active()->orderBy('order')->get();
+      
+      return view('client.news-list', compact('posts', 'categories', 'category'));
     }
     
     public function promotion() {
       return view('client.promotion');
+    }
+    
+    public function faq() {
+      // Có thể thêm logic để load FAQ từ database sau này
+      return view('client.faq');
     }
     
     public function contactus() {

@@ -18,11 +18,16 @@ class Posts extends Model
           'content',
           'content_en',
           'status',
-          'menu'
+          'menu',
+          'category_id'
       ];
   
     public function type(): HasOne {
       return $this->hasOne(PostType::class, 'id', 'type_id');
+  }
+  
+  public function category() {
+      return $this->belongsTo(Category::class);
   }
   
   public function title_show(){

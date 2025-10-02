@@ -5,7 +5,7 @@
 <!-- Hero Section -->
 <section class="bg-white py-0">
     <div class="w-full">
-        <img src="{{ asset('/upload/photo/san-pham-1727711865.jpg') }}" alt="Banner Sản phẩm" class="w-full object-cover" style="height:420px; object-position: center top;">
+        <img src="{{ asset('/upload/photo/san-pham-1727711865.jpg') }}" alt="Banner Sản phẩm" class="product-banner-image w-full" loading="lazy">
     </div>
 </section>
 
@@ -301,4 +301,75 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<style>
+/* Responsive Product Banner Styles */
+.product-banner-image {
+    height: 486px;
+    object-fit: cover;
+    object-position: center top;
+    width: 100%;
+    display: block;
+}
+
+/* Mobile devices (up to 768px) */
+@media (max-width: 768px) {
+    .product-banner-image {
+        height: 300px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+/* Small mobile devices (up to 480px) */
+@media (max-width: 480px) {
+    .product-banner-image {
+        height: 250px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+/* Large screens (1200px and up) */
+@media (min-width: 1200px) {
+    .product-banner-image {
+        height: 600px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+/* Extra large screens (1400px and up) */
+@media (min-width: 1400px) {
+    .product-banner-image {
+        height: 700px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+/* Ultra wide screens (1600px and up) */
+@media (min-width: 1600px) {
+    .product-banner-image {
+        height: 800px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+/* Fallback for very small screens */
+@media (max-width: 320px) {
+    .product-banner-image {
+        height: 200px;
+        object-fit: cover;
+        object-position: center top;
+    }
+}
+
+/* Ensure banner doesn't break layout */
+.product-banner-image {
+    max-width: 100%;
+    height: auto;
+}
+</style>
 @endsection
